@@ -1,0 +1,25 @@
+<div>
+	
+	<div class="leftSection"">Previous Balance:</div>
+	<div class="rightSection"">
+		<input class="formInput" ng-value="es.client.balanceAmount" title="~Balance Amount~" readonly="readonly" placeholder="Not Applicable"/> {{es.balanceStr}}
+	</div>
+	
+	<div class="leftSection">Paid Amount:</div>
+	<div class="rightSection">
+		<input required="required" type="number" min="0" ng-minlength="2" maxlength="7" class="formInput" ng-model="es.payment.paidAmount" title="~Paid Amount~" /> 
+	</div>
+
+	<div class="leftSection">Paid On:</div>
+	<div class="rightSection">
+		<input required="required" datepicker-popup is-open="es.payment.paidOn.opened" ng-click="es.payment.paidOn.opened = true" class="formInput" type="text" ng-model="es.payment.paidOn" readonly="readonly" /> 
+		Mode: 
+		<select required class="formInput" ng-model="es.payment.pymtMode" title="~Payment Mode~" ng-options="values for values in es.pymtModeList">
+		</select>
+	</div>
+	
+	<div class="leftSection">Details:</div>
+	<div class="rightSection">
+		<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.payment.details" title="~Details~" size="70" />
+	</div>
+</div>

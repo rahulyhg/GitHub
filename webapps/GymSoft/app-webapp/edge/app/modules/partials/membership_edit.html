@@ -1,0 +1,41 @@
+
+<div>
+	<div class="leftSection"">Current End Date:</div>
+	<div class="rightSection"">
+		<input class="formInput" placeholder="Not Applicable" ng-value="es.client.membershipEndDate | date: 'yyyy-MM-dd' " title="~End Date~" readonly="readonly" /> 
+	</div>
+	
+	<div class="leftSection">Package:</div>
+	<div class="rightSection">
+		<select required class="formInput" ng-model="es.membership.package" title="~Package~" ng-options="value as value.name for value in es.allPackages" ng-change="es.setToDate()">
+		</select>
+	</div>
+
+	<div class="leftSection">From Date:</div>
+	<div class="rightSection">
+		<input required="required" datepicker-popup is-open="es.membership.fromDate.opened" ng-click="es.membership.fromDate.opened = true" class="formInput" type="text" ng-change="es.setToDate()" ng-model="es.membership.fromDate" /> 
+	</div>
+
+	<div class="leftSection">To Date:</div>
+ 	<div class="rightSection">
+ 		<input required="required" type="text" class="formInput" ng-model="es.membership.toDate" readonly="readonly" />
+	</div>
+
+	<div class="leftSection">Total Amount:</div>
+	<div class="rightSection">
+		<input required="required" type="text" min="1" class="formInput" ng-model="es.membership.totalAmount" readonly="readonly" />
+	</div>
+
+	<div class="leftSection">Discount:</div>
+	<div class="rightSection">
+		<input required="required" type="number" min="0" max="es.membership.totalAmount" class="formInput" ng-model="es.membership.discountAmount" title="~Discount Amount~" ng-change="es.setEffective()" /> 
+		Effective: <input required="required" type="text" class="formInput" ng-model="es.membership.effectiveAmount" readonly="readonly" />
+	</div>
+
+	<div class="leftSection"">Collection By:</div>
+	<div class="rightSection"">
+		<select required="required" class="formInput" ng-model="es.membership.collectionBy" title="~Collection By~" ng-options="value as value.display for value in es.allEmployees" >
+		</select>
+	</div>
+	
+</div>

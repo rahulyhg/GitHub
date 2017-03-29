@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<div class="headerStripLeft">
+		<!-- <img src="edge/appCore/modules/layout/images/om.png" class="omImage"/> -->
+		<!-- <img src="edge/appCore/modules/layout/images/krishna.jpg" class="krishnaImage"/> -->
+		<span><img src="edge/appCore/modules/layout/images/menuTrigger.png" class="menuTrigger" id="menuTriggerId" ng-click="es.hideMenu = ! es.hideMenu"/></span> 
+	</div>
+	<div class="headerStripMenu">
+		<div ng-show="es.loggedInUserId">
+			<!-- <span class="headerStripMenuItem"> Welcome {{es.loggedInUserId}} ! </span> <font color="gray">|</font> -->
+			<span class="headerStripMenuItem" ng-click="es.openMyProfile()"> My Profile<!--  <img src="edge/appCore/modules/layout/images/person.png" class="icon"/> --></span> <font color="gray">|</font>
+			<!-- <span class="headerStripMenuItem" ng-click="es.openPopup('FORGOT_PWD_POP_UP')"> Change Password </span> <font color="gray">|</font> -->
+			<span class="headerStripMenuItem"> <a href="logout"> Sign Out<!--  <img src="edge/appCore/modules/layout/images/signout.png" class="icon"/>  --></a> </span>
+			<span>&nbsp;&nbsp;</span>
+		</div>
+		<div ng-hide="es.loggedInUserId">
+			<!-- <span class="headerStripMenuItem"> Forgot Password? <img src="edge/appCore/modules/layout/images/forgot.png" class="icon"/> </span> <font color="gray">|</font> -->
+			<span class="headerStripMenuItem" ng-click="es.openPopup('SIGN_IN_POP_UP')"> Log In <!-- <img src="edge/appCore/modules/layout/images/person.png" class="icon"/> --> </span> 
+			<!-- <font color="gray"> / </font> -->
+			<!-- <span class="headerStripMenuItem" ng-click="es.openPopup('SIGN_UP_POP_UP')"> Sign Up </span>  -->
+			<span>&nbsp;&nbsp;</span>
+		</div>	
+				
+	</div>
+</body>
+</html>

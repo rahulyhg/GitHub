@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<body>	
+	<div class="menuInnerClass">
+	<span ng-repeat="menuItem in es.menuMap">		
+			<!-- <span ng-show="menuItem.icon"><img ng-src="{{menuItem.icon}}" class="icon"/>&nbsp;</span> -->
+			<span class="menuItem" ng-class="{activeMenu : es.isSelectedMenu(menuItem)}" ng-click="es.setSelectedMenu(menuItem)">{{menuItem.title}}</span>
+		
+	</span>
+	</div>
+</body>
+</html>

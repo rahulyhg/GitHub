@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+	<query>
+		<key>key1</key>
+		<value><![CDATA[
+					select where a < 10 
+					and b > 5
+				]]>
+		</value>
+	</query>
+	<query>
+		<key>CHECK_IF_EXISTING_USER</key>
+		<value><![CDATA[
+					from SignUpEntity
+					where emailId = '$user.emailId'
+				]]>
+		</value>
+	</query>
+</queries>

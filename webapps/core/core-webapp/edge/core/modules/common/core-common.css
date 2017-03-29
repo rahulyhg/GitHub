@@ -1,0 +1,16 @@
+
+.alertsOuterClass{
+	width: 100%;
+}
+
+.alertsClass{
+	position: fixed;
+	opacity: 0.95;
+	right: 5%;
+	top: 15%;
+	z-index: 99;
+}
+
+.imageClass{
+	border-radius: 10px;
+}

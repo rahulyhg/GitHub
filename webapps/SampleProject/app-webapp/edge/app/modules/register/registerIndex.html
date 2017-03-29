@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Saat-Phere : Register</title>
+</head>
+<body>
+	<div class="registrationDiv padding5px">
+		<!-- <div>
+			<H3> <span class="registerTitle"> Registration Form </span> </H3><br>
+		</div> -->
+		<form action="/contextRoot/unsecured/register" method="post" name="myForm">
+  	
+		   	<div>
+				<div ng-include="'edge/app/modules/partials/personal_edit.html'" />
+			</div>								
+		    <div><br></div>
+		    
+		    <div>
+				<div ng-include="'edge/app/modules/partials/family_edit.html'" />
+			</div>
+		    <div><br></div>
+		    
+		    <div>
+				<div ng-include="'edge/app/modules/partials/secure_edit.html'" />
+			</div>
+		    <div><br><br></div>
+		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input class="formButton" name="submit" type="button" value="Register" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input class="formButton" name="submit" type="button" value="Register" ng-show="myForm.$valid" ng-click="es.register()"/>
+		    </div>			    
+		    <div><br><br></div>
+		    <div><br><br></div>	
+		    	    
+		</form>
+	</div>
+</body>
+</html>

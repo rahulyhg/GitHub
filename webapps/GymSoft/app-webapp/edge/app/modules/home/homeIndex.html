@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+</head>
+<body>
+	<div class="homeDiv padding5px"> 
+		<div>	
+		   	<div ng-if="es.loggedInRole == 'ROLE_SUPER_ADMIN'">
+		   		<div ng-include="'edge/app/modules/home/guestIndex.html'" />
+			</div>
+		</div>
+	 	<div>	
+		   	<div ng-if="!es.loggedInUserId">
+		   		<div ng-include="'edge/app/modules/home/guestIndex.html'" />
+			</div>
+		</div>
+		<div>
+			<div ng-if="es.loggedInUserId">
+		   		<div ng-include="'edge/app/modules/home/userIndex.html'" />
+		   	</div>
+		</div>
+	</div>
+</body>
+</html>

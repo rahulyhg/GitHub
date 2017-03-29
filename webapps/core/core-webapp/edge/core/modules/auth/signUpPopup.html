@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+</head>
+<body>
+	<div class="edgeApp popupDiv">
+		<div><h4>Account Creation Form</h4></div>
+		
+		<div>Please fill in below details and then click on Submit : </div>	
+		<div class="form-group">
+	      <label>Gender:</label>
+	      <input required="required" type="radio" ng-model="es.signUpForm.gender" value="M">Male &nbsp;&nbsp;
+	      <input required="required" type="radio" ng-model="es.signUpForm.gender" value="F">Female &nbsp;&nbsp;
+	    </div>		
+		<div class="form-group">
+	      <label>Email Address:</label>
+	      <input required="required" type="email" ng-model="es.signUpForm.emailId" class="form-control" placeholder="Email Address...">
+	    </div>
+		<!-- <div class="form-group">
+	      <label>Password:</label>
+	      <input required="required" type="password" ng-model="es.signUpForm.pwd" class="form-control" placeholder="Enter Password...">
+	    </div>	
+		<div class="form-group">
+	      <label>Confirm Password:</label>
+	      <input required="required" type="password" ng-model="es.signUpForm.confirmPwd" class="form-control" placeholder="Enter Password...">
+	    </div> -->
+	    <div class="form-group">
+	      <button type="button" class="btn btn-info" ng-click="es.signUp()">Submit</button>
+	      <button type="button" class="btn btn-info" ng-click="es.closePopup('SIGN_UP_POP_UP')">Cancel</button>
+	    </div>	    
+	    <!-- <div class="form-group">
+	    	<button type="button" class="btn btn-info" ng-click="es.openPopup('SIGN_IN_POP_UP')">SignIn</button>
+	    </div>
+	    <div class="form-group">
+	    	<button type="button" class="btn btn-info" ng-click="es.openPopup('SIGN_UP_POP_UP')">SignUp</button>
+	    </div>
+	  </div> -->	
+</body>
+</html>
+

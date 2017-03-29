@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Clients</title>
+</head>
+<body ng-init="es.initClients()">
+	<div class="addClientDiv padding5px" ng-init="es.initClients()"> 
+	
+		<form method="POST" action="server/secured/uploadProfilePic" enctype="multipart/form-data" id="fileUploadForm">
+			<div class="leftSection">Profile Pic:</div>
+			<div class="rightSection">
+				<input class="formInput" type="file" name="fielUploadfile" ng-model="es.fileUploadfile" title="~File~" size="70" />
+				<input class="formInput" type="text" name="fileUploadId" ng-model="es.fileUploadId" title="~Id~" size="70"/>
+				<input class="formInput" type="text" name="fileUploadType" ng-model="es.fileUploadType" title="~Typ~" size="70"/>
+				<input type="submit" value="Submit" class="btn btn-info"/>
+			</div>		    
+		</form>
+		
+		<div><br><br></div>
+		
+		<form action="/contextRoot/secured/saveClient" method="post" name="myForm">
+  			<div><br><br></div>
+  			<div>
+		   		<div ng-include="'edge/app/modules/partials/client_edit.html'" />
+		   	</div>
+		   	
+  			<h3>
+				<U>Membership Details:</U>
+			</h3>
+			
+		   	<div>
+		   		<div ng-include="'edge/app/modules/partials/membership_edit.html'" />
+			</div>
+			
+			<h3>
+				<U>Payment Details:</U>
+			</h3>
+			
+			<div>
+		   		<div ng-include="'edge/app/modules/partials/payment_edit.html'" />
+			</div>
+		    <div><br><br></div>
+		    		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input required="required" class="btn btn-info" name="submit" type="button" value="Save All" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save All" ng-show="myForm.$valid" ng-click="es.saveClient()"/>
+		        <input class="btn btn-info" type="button" value="Save Only Client (Enquiry) " ng-click="es.saveEnquiry()"/>
+		    </div>	
+		    <div><br><br></div>
+		</form>
+		
+	</div>
+	<div>
+	    <div id="allClientsGrid" ui-grid="es.clientsGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+Publisher ID: pub-5490097527994610
+
+App ID: ca-app-pub-5490097527994610~8413963888
+
+GREasyAd
+
+https://firebase.google.com/docs/android/setup
+
+https://firebase.google.com/docs/admob/android/interstitial?hl=en_US
+
+https://firebase.google.com/docs/admob/android/download?hl=en_US

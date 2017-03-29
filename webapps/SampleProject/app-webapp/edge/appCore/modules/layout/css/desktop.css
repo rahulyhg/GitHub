@@ -1,0 +1,73 @@
+
+.headerStripClass {
+	margin: 0 auto;
+	width: 950px;	
+}
+
+.headerClass {
+	margin: 0 auto;
+	width: 950px;
+}
+
+.menuTrigger{
+  display: none;	
+}
+
+.menuClass {
+	margin: 0 auto;
+	width: 950px;
+}
+
+.bodyClass {
+	margin: 0 auto;
+	width: 950px;
+}
+
+.siteLogo{
+	position: absolute;
+	z-index: 90;
+	top: -30px;
+	width: 270px;	
+}
+
+.menuOuterClass {
+	position: absolute;
+	top: 60px;
+	width: 100%;
+	height: 30px;
+}
+
+.menuClass {
+	text-align: right;
+	height: 30px;
+	z-index: 1;
+}
+
+#homePageContent{
+	text-align: center;
+	display: inline-block;
+	width: 255px;
+}
+
+#homePageImage{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 30px;
+	width: 650px;
+	border-radius: 5px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+	float: right;
+}
+
+.footerClass {
+	margin: 0 auto;
+	width: 970px;
+	min-height: 500px;
+	color: #947353;
+	padding: 5px;
+	z-index: 1;
+}
+
+.formLabel{
+	width: 200px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Payments</title>
+</head>
+<body>
+	<div class="addPaymentDiv padding5px" ng-init="es.initPayments()">
+		<form action="/contextRoot/secured/savePayment" method="post" name="myForm">
+  			<div><br><br>
+  			
+  			<h3>
+				<U>Payment Details:</U>
+			</h3>
+			
+			<div class="leftSection"">Existing Client:</div>
+			<div class="rightSection"">
+				<select class="formInput" ng-model="es.client" title="~Client~" ng-options="value as value.display for value in es.allClients" placeholder="New Client"
+						ng-change="es.clientSelected()">
+				</select>
+			</div>
+	
+			<div>
+		   		<div ng-include="'edge/app/modules/partials/payment_edit.html'" />
+			</div>
+			
+		    <div><br><br></div>
+		    		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input required="required" class="btn btn-info" name="submit" type="button" value="Save Payment" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save Payment" ng-show="myForm.$valid" ng-click="es.savePayment()"/>
+		    </div>			    
+		    <div><br><br></div>
+		</form>
+		
+	</div>
+	<div>
+		<input required="required" class="btn btn-info" name="submit" type="button" value="Approve Payment ( #{{es.payment.paymentId}} ) - {{es.payment.paidAmount}}" ng-click="es.approvePayment()"/>
+	</div>
+	<div><br></div>
+	<div>
+	    <div id="allPaymentsGrid" ui-grid="es.paymentsGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
+	</div>
+</body>
+</html>

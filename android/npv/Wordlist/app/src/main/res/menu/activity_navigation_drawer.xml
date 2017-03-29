@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_hard"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Hard Words" />
+        <item
+            android:id="@+id/nav_easy"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Easy Words" />
+        <item
+            android:id="@+id/nav_skip"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Skip Words" />
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="All Words" />
+    </group>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/nav_subscription"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Manage Subscription" />
+            <item
+                android:id="@+id/nav_howToStudy"
+                android:icon="@drawable/ic_menu_send"
+                android:title="How To Study" />
+            <item
+                android:id="@+id/nav_aboutUs"
+                android:icon="@drawable/ic_menu_send"
+                android:title="About Us" />
+        </menu>
+    </item>
+
+</menu>

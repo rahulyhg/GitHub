@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Expenses</title>
+</head>
+<body>
+	<div class="addExpenseDiv padding5px" ng-init="es.initExpenses()">
+		<form action="/contextRoot/secured/saveExpense" method="post" name="myForm">
+  			<div><br><br>
+			<div>
+		<h3>
+			<U>Expense Details:</U>
+		</h3>
+		
+		<div class="leftSection">Amount:</div>
+		<div class="rightSection">
+			<input required="required" type="number" min="1" ng-minlength="1" maxlength="7" class="formInput" ng-model="es.expense.paidAmount" title="~Paid Amount~" /> 
+		</div>
+	
+		<div class="leftSection">Expense On:</div>
+		<div class="rightSection">
+			<input required="required" datepicker-popup is-open="es.expense.paidOn.opened" ng-click="es.expense.paidOn.opened = true" class="formInput" type="text" ng-model="es.expense.paidOn" readonly="readonly" /> 
+			Mode: 
+			<select required class="formInput" ng-model="es.expense.pymtMode" title="~Expense Mode~" ng-options="values for values in es.pymtModeList">
+			</select>
+		</div>
+
+		<div class="leftSection">Details:</div>
+		<div class="rightSection">
+			<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.expense.details" title="~Details~" size="70" />
+		</div>
+	</div>
+			
+		    <div><br><br></div>
+		    		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input required="required" class="btn btn-info" name="submit" type="button" value="Save Expense" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save Expense" ng-show="myForm.$valid" ng-click="es.saveExpense()"/>
+		    </div>			    
+		    <div><br><br></div>
+		</form>
+		
+	</div>
+	<div>
+	    <div id="allExpensesGrid" ui-grid="es.expensesGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
+	</div>
+</body>
+</html>

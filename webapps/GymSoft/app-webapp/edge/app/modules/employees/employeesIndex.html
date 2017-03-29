@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employees</title>
+</head>
+<body>
+	<div class="addEmployeeDiv padding5px" ng-init="es.initEmployees()">
+		<form action="/contextRoot/secured/saveEmployee" method="post" name="myForm">
+			<div>
+				<br>
+				<br>
+				<div>
+					<h3>
+						<U>Employee Details:</U>
+					</h3>
+
+					<div class="leftSection"">Existing Employee:</div>
+					<div class="rightSection"">
+						<select class="formInput" ng-model="es.employee" title="~Client~" ng-options="value as value.display for value in es.allEmployees" ></select>
+					</div>
+	
+					<div class="leftSection">Name:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="es.employee.name" title="~Full Name~" size="70" />
+					</div>
+
+					<div class="leftSection">Gender:</div>
+					<div class="rightSection">
+						<select required class="formInput" ng-model="es.employee.gender" title="~Gender~" ng-options="values for values in es.genderList">
+						</select>
+						<!-- ng-options = "item.server as item.client group by item.group for item in es.genderList" : Worked -->
+					</div>
+
+					<div class="leftSection">Phone Number:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="10" maxlength="10" ng-maxlength="10" class="formInput" type="tel" ng-model="es.employee.phone" title="~Phone Number~" size="15" />
+					</div>
+
+					<div class="leftSection">Email Id:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="100" ng-maxlength="50" class="formInput" type="email" ng-model="es.employee.emailId" title="~Email Address~" size="70" />
+					</div>
+
+					<div class="leftSection">Address:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.employee.address" title="~Address~" size="70" />
+					</div>
+					
+					<div class="leftSection">Status:</div>
+					<div class="rightSection">
+						<select required class="formInput" ng-model="es.employee.status" title="~Status~" ng-options="values for values in es.statusList">
+						</select>
+					</div>
+					<h3>
+						<U>Account Details:</U>
+					</h3>
+					
+					<div class="leftSection">Account Number:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="es.employee.accountNumber" title="~Account Number~" size="70" />
+					</div>
+					
+					<div class="leftSection">IFS Code:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="10" ng-maxlength="10" class="formInput" type="text" ng-model="es.employee.ifscCode" title="~IFSC Code~" size="70" />
+					</div>
+					
+					<div class="leftSection">Branch Name:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="es.employee.branchName" title="~Branch Name~" size="70" />
+					</div>
+					
+					<div class="leftSection">Branch Address:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.employee.branchAddress" title="~Branch Address~" size="70" />
+					</div>
+					
+				</div>
+
+				<div>
+					<br>
+					<br>
+				</div>
+
+				<div>
+					<span ng-show="!myForm.$valid">
+						<H5>*** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5> <input required="required" class="btn btn-info" name="submit" type="button" value="Save Employee" disbaled="true" title="Some input values are missing or invalid. (Marked with red text or '*' sign)" style="cursor: not-allowed;" />
+					</span> <input required="required" class="btn btn-info" name="submit" type="button" value="Save Employee" ng-show="myForm.$valid" ng-click="es.saveEmployee()" />
+				</div>
+				<div>
+					<br>
+					<br>
+				</div>
+		</form>
+
+	</div>
+	<div>
+		<div id="allEmployeesGrid" ui-grid="es.employeesGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
+	</div>
+</body>
+</html>

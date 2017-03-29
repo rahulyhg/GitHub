@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Attendances</title>
+</head>
+<body>
+	<div class="addAttendanceDiv padding5px" ng-init="es.initAttendances()">
+		<form action="/contextRoot/secured/saveAttendance" method="post" name="myForm">
+			<div>
+				<br>
+				<br>
+				<div>
+					<h3>
+						<U>Attendance Details:</U>
+					</h3>
+
+					<div class="leftSection">Attendance Id:</div>
+					<div class="rightSection">
+						<input required="required" readonly="readonly" class="formInput" type="text" ng-model="es.attendance.attendanceId" />
+					</div>
+
+					<div class="leftSection"">Employee:</div>
+					<div class="rightSection"">
+						<select class="formInput" ng-model="es.attendance.employee" title="~Employee~" ng-options="value as value.display for value in es.allEmployees"
+							ng-change="es.setAttendanceId()" >
+						</select>
+					</div>
+
+					<div class="leftSection">Attendance On:</div>
+					<div class="rightSection">
+						<input required="required" datepicker-popup is-open="es.attendance.attendanceOn.opened" ng-click="es.attendance.attendanceOn.opened = true" class="formInput" type="text" ng-model="es.attendance.attendanceOn" 
+							ng-change="es.setAttendanceId()"
+						/>
+					</div>
+
+					<div class="leftSection">CheckIn Hr (24Hrs):</div>
+					<div class="rightSection">
+						<input type="number" min="0" max="23" class="formInput" ng-model="es.attendance.checkInHr" title="~Check In (24 Hr Format)~" />
+					</div>
+
+					<div class="leftSection">CheckOut Hr (24Hrs):</div>
+					<div class="rightSection">
+						<input type="number" min="0" max="23" class="formInput" ng-model="es.attendance.checkOutHr" title="~Check Out (24 Hr Format)~" />
+					</div>
+
+					<div class="leftSection">Details:</div>
+					<div class="rightSection">
+						<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.attendance.details" title="~Details~" size="70" />
+					</div>
+
+					<div>
+						<br>
+						<br>
+					</div>
+
+					<div>
+						<span ng-show="!myForm.$valid">
+							<H5>*** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5> <input required="required" class="btn btn-info" name="submit" type="button" value="Save Attendance" disbaled="true" title="Some input values are missing or invalid. (Marked with red text or '*' sign)" style="cursor: not-allowed;" />
+						</span> <input required="required" class="btn btn-info" name="submit" type="button" value="Save Attendance" ng-show="myForm.$valid" ng-click="es.saveAttendance()" />
+					</div>
+					<div>
+						<br>
+						<br>
+					</div>
+		</form>
+
+	</div>
+	<div>
+		<div id="allAttendancesGrid" ui-grid="es.attendancesGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Clients</title>
+</head>
+<body>
+	<div class="addReportsDiv padding5px" ng-init="es.initReports()">
+		<div><br><br></div>
+		<div><br><br></div>
+		<h3>
+			Memberships:
+		</h3>
+		<div>
+			<div ng-repeat="row in es.membershipsReport">
+				{{row}}
+			</div>
+		</div>
+		
+		
+		<h3>
+			Payments:
+		</h3>		
+		<div>
+			<div ng-repeat="row in es.paymentsReport">
+				{{row}}
+			</div>
+		</div>
+		
+		<h3>
+			Attendances:
+		</h3>	
+		<div>
+			<div ng-repeat="row in es.attendancesReport">
+				{{row}}
+			</div>
+		</div>
+		
+		<h3>
+			Expenses:
+		</h3>	
+		<div>
+			<div ng-repeat="row in es.expensesReport">
+				{{row}}
+			</div>
+		</div>
+		
+	</div>	
+</body>
+</html>

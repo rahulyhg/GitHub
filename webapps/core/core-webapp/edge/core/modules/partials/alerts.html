@@ -1,0 +1,24 @@
+<div class="alertsOuterClass" >
+	<div class="alertsClass" >
+	  	<alert ng-repeat="alert in es.alerts" type="{{alert.type}}" close="es.closeAlert($index)">
+		  	<div ng-show="alert.header">{{alert.header}}</div>
+		  	<div ng-show="! alert.header"> Some Error while Processing.</div>
+		  	<div>
+			  	<ul>
+			  		<li ng-repeat="msg in alert.messages">{{msg}}</li>
+			  	</ul>
+			</div>
+			<div>
+			  	<ul>
+			  		<li ng-repeat="error in alert.errors">{{error}}</li>
+			  	</ul>
+			</div>
+			<div ng-show="alert.errorHtml">
+				<div> <button class='btn btn-default' ng-click="alert.showErrorDetails = !alert.showErrorDetails">Show / Hide Details</button></div>
+				<div ng-show="alert.showErrorDetails" style="font-style: italic; text-decoration: underline;"><br>Please mail us below details, so that we can resolve this issue at earliest. Thank You!</div>
+				<div ng-show="alert.showErrorDetails"><p ng-bind-html="alert.errorHtml | unsafe"></p></div>
+			</div>	 
+			<div>{{alert.footer}}</div> 		
+	  	</alert>
+	</div>	
+</div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Packages</title>
+</head>
+<body>
+	<div class="addPackageDiv padding5px" ng-init="es.initPackages()">
+		<form action="/contextRoot/secured/savePackage" method="post" name="myForm">
+  			<div><br><br>
+			<div>
+		<h3>
+			<U>Package Details:</U>
+		</h3>
+		
+		<div class="leftSection"">Existing Package:</div>
+		<div class="rightSection"">
+			<select class="formInput" ng-model="es.package" title="~Package~" ng-options="value as value.display for value in es.allPackages" >
+			</select>
+		</div>
+		
+		<div class="leftSection">Name:</div>
+		<div class="rightSection">
+			<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.package.name" title="~Package Name~" size="70" />
+		</div>
+		
+		<div class="leftSection">Months:</div>
+		<div class="rightSection">
+			<input type="number" min="1" max="24" class="formInput" ng-model="es.package.months" title="~Months~" /> 
+		</div>
+		
+		<div class="leftSection">Price:</div>
+		<div class="rightSection">
+			<input required="required" type="number" min="0" ng-minlength="2" maxlength="7" class="formInput" ng-model="es.package.price" title="~Price~" /> 
+		</div>
+		
+		<div class="leftSection">Status:</div>
+		<div class="rightSection">
+			<select required class="formInput" ng-model="es.package.status" title="~Status~" ng-options="values for values in es.statusList">
+			</select>
+		</div>
+		
+	</div>
+			
+	<div><br><br></div>
+		    		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input required="required" class="btn btn-info" name="submit" type="button" value="Save Package" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save Package" ng-show="myForm.$valid" ng-click="es.savePackage()"/>
+		    </div>			    
+		    <div><br><br></div>
+		</form>
+		
+	</div>
+	<div>
+	    <div id="allPackagesGrid" ui-grid="es.packagesGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection ></div>
+	</div>
+</body>
+</html>

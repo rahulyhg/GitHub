@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Invoice</title>
+</head>
+<body >
+	<div class="edgeApp popupDiv" id="invoiceDiv"> 
+		
+		<div style="text-align: center;">
+			Invoice as On <B>{{es.invoice.invoiceDate  | date:'yyyy-MM-dd' }} </B> <br>
+		</div>
+		<div><br></div>		
+		<div>
+			<div style="float:  left; display: inline; width: 35%;">
+				<img src="edge/appCore/modules/layout/images/siteLogo.jpg" style="width: 150px;" />
+			</div>
+			<div style="text-align:  right; display: inline-block; width: 60%; padding-top: 20px">
+				<B> {{es.invoice.gym.name}}</B><br>
+					{{es.invoice.gym.address}}<br>
+					P: {{es.invoice.gym.phone}}<br>
+					E: {{es.invoice.gym.emailId}}<br>
+			</div>
+		</div>
+		<hr style="border-bottom: dotted 1px #8B0000;">
+		<div>
+			<B>{{es.invoice.client.name}}</B> - ( Client Id: {{es.invoice.client.clientId}} ) <br>
+		</div>
+		<div>
+			<div style="text-align:  left; display: inline-block; width: 50%">
+				{{es.invoice.client.address}}<br>
+				P: {{es.invoice.client.phone}}<br>
+				E: {{es.invoice.client.emailId}}<br>
+			</div>
+			<div style="text-align:  right; display: inline-block; width: 45%">
+				Total Amount:  <B> {{es.invoice.client.totalAmount}}/- </B><br>
+				Paid Amount: <B> {{es.invoice.client.paidAmount}}/- </B> <br>
+				Balance Amount: <B>{{es.invoice.client.balanceAmount}}/- </B> <br>
+			</div>
+		</div>
+		<div>
+			<B>Membership Ends On </B>{{es.invoice.client.membershipEndDate | date:'yyyy-MM-dd'}}<br>
+			<B>Last Payment On </B>{{es.invoice.client.lastPaidOn | date:'yyyy-MM-dd'}}<br>
+		</div>
+		<hr style="border-bottom: dotted 1px #8B0000;">
+		
+		<h3>Membership Details:</h3>
+		<div ng-repeat="membership in es.invoice.memberships">
+			<div>
+				<div>
+					<B>{{membership.packageName}} - ( Membership Id : {{membership.membershipId}} ) </B>  <br>
+				</div>
+				<div style="text-align:  left; display: inline-block; width: 50%">
+					From: {{membership.fromDate | date:'yyyy-MM-dd'}} <br>
+					To: {{membership.toDate | date:'yyyy-MM-dd'}} <br>
+				</div>
+				<div style="text-align:  right; display: inline-block; width: 45%">
+					Total Amount: {{membership.totalAmount}}/- <br>
+					Discount Amount: {{membership.discountAmount}}/- <br>
+					Effective Amount: {{membership.effectiveAmount}}/- <br>
+					Collection By: {{membership.collectionByName}} <br>
+				</div>
+			</div>
+			<div><br></div>
+		</div>
+		<hr style="border-bottom: dotted 1px #8B0000;">
+		
+		<h3>Payment Details:</h3>
+		<div ng-repeat="payment in es.invoice.payments">
+			<div>
+				<div>
+					<B> Received Rs. {{payment.paidAmount}}/- </B> through  {{payment.pymtMode}} On {{payment.paidOn | date:'yyyy-MM-dd'}}  ( Id: {{payment.paymentId}} ) <br>
+				</div>
+				<div style="text-align:  left; display: inline-block; width: 90%">
+					Details: {{payment.details}} <br>
+					Created By: {{payment.createdBy}} on {{payment.createdOn | date:'yyyy-MM-dd'}}	<br>
+					
+				</div>
+			</div>
+			<div><br></div>
+		</div>
+		<hr style="border-bottom: dotted 1px #8B0000;">
+		<div><br></div>
+		<h5>Please Sign (On Every Page):</h5><br>
+		<div>
+			<div style="text-align:  left; display: inline-block; width: 30%">
+				({{es.invoice.client.name}})
+			</div>
+			<div style="text-align:  left; display: inline-block; width: 30%">
+				( Operator )<br>
+			</div>
+			<div style="text-align:  left; display: inline-block; width: 30%">
+				( Authority )<br>
+			</div>
+		</div>
+		<div><br></div>
+		<div style="text-align: right; width: 100%">
+		 	<input class="btn btn-info" type="button" value="Print" ng-click="es.printDiv('invoiceDiv')"/>
+		</div>
+		
+	</div>
+</body>
+</html>

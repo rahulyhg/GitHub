@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/firstlayer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/back_5"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:text="Word List"
+            android:paddingLeft="20dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <!-- Editext for Search -->
+
+    <EditText
+        android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstlayer"
+        android:hint="..Word / Root / Meaning.."
+        android:inputType="textVisiblePassword" />
+
+    <LinearLayout
+        android:id="@+id/secondlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/inputSearch"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:choiceMode="singleChoice"
+                android:divider="#a3a3a3"
+                android:dividerHeight="1dp"
+                android:listSelector="#dcdcdc" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/prev"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"
+                    android:text="&lt;"
+                    android:textSize="15dp"/>
+
+                <ToggleButton
+                    android:id="@+id/toggle_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textOff="Show"
+                    android:textOn="Hide"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"
+                    />
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Find"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/readButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Read"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"/>
+
+                <Button
+                    android:id="@+id/stopButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pause"
+                    android:textSize="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:textColor="@android:color/white"
+                    android:text="&gt;"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/side_index"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="#c3c3c3"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

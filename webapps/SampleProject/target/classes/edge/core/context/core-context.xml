@@ -1,0 +1,123 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- Component Scanning is to enable bean declaration using annotations -->
+	<context:component-scan base-package="edge" />
+	<mvc:annotation-driven />
+	
+	<import resource="classpath:edge/app/context/app-context.xml"/>
+	<import resource="classpath:edge/appCore/context/appCore-context.xml"/>
+	<!-- Spring Security Starts -->	
+	<import resource="classpath:edge/appCore/context/security-context.xml"/>
+	<!-- Spring Security Starts -->
+		
+	<bean id="jsonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+	
+	<bean id="jsonViewResolver" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+		<property name="objectMapper" ref="jsonObjectMapper" />
+	</bean>
+				
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="html" value="text/html" />											
+			</map>
+		</property>
+
+		<property name="defaultViews">
+			<list>		
+				<ref bean ="jsonViewResolver" />
+			</list>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+
+	</bean>
+	
+	<!--  Hibernate Starts -->	
+		<tx:annotation-driven />
+		
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	 		<property name="driverClassName" value="${database.driverClassName}" />
+			<property name="url" value="${database.url}" />
+			<property name="username" value="${database.username}" />
+			<property name="password" value="${database.password}" />
+		</bean> 
+			
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	        <property name="dataSource" ref="dataSource" />
+	        <property name="configLocation">
+	            <value>classpath:edge/appCore/context/hibernate.cfg.xml</value>
+	        </property>
+	        <property name="configurationClass">
+	            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+	        </property>
+	        <property name="hibernateProperties">
+	            <props>
+	                <prop key="hibernate.dialect">${database.dialect}</prop>
+	                <prop key="hibernate.show_sql">${database.show_sql}</prop>
+	                <prop key="hibernate.hbm2ddl.auto">${database.hbm2ddl.auto}</prop>
+	            </props>
+	        </property>
+	    </bean> 
+	    
+		 <bean id="namedDataSource" class="org.apache.commons.dbcp.BasicDataSource" >  
+		  <property name="driverClassName" value="${database.driverClassName}"></property>  
+		  <property name="url" value="${database.url}"></property>  
+		  <property name="username" value="${database.username}"></property>  
+		  <property name="password" value="${database.password}"></property>  
+		  <property name="maxActive" value="${database.maxActive}"></property>  
+		</bean>  
+	    
+	
+	    <bean id="transactionManager"
+	        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	        <property name="sessionFactory" ref="sessionFactory" />
+	    </bean>  	
+	    
+		<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" >  
+			<constructor-arg ref="namedDataSource"/>
+		</bean>
+
+	<!--  Hibernate Ends -->
+	
+	<!-- Mail Start -->
+	<bean id="AppMailSender" class="edge.core.modules.mailSender.AppMailSender"></bean>
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${mail.smtp.host}"/>
+		<property name="port" value="${mail.smtp.port}"/>
+		<property name="username" value="${mail.smtp.username}"/>
+		<property name="password" value="${mail.smtp.password}"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- Mail End -->
+	
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath"><value>classpath:edge/appCore/templates</value></property>
+	</bean>
+	
+</beans>

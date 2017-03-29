@@ -1,0 +1,20 @@
+<div><hr width="100%"></div>
+<div>
+	<H3>Search By Id:</H3>
+	<input type="text" ng-model="es.searchId" placeholder="~Profile Id~" class="formInput"/> 
+	<button class="formButton" type="button" ng-click="es.searchById()">Search</button>
+</div>
+<div><hr width="100%"></div>
+<div>
+	<H3>Quick Search:</H3>
+	<ul>
+		<li><span class="savedSearchLink" ng-click="es.openSavedSearch('LAST_SAVED')">Last Saved</span></li>
+		<li><span class="savedSearchLink" ng-click="es.openSavedSearch('ACCEPTED')">Accepted Profiles</span></li>
+		<li><span class="savedSearchLink" ng-click="es.openSavedSearch('REJECTED')">Rejected Profiles</span></li>
+		<li><span class="savedSearchLink" ng-click="es.openSavedSearch('IGNORED')">Ignored Profiles</span></li>
+	</ul>
+</div>
+<div><hr width="100%"></div>
+<div>
+	<H3>Advanced Search:</H3>
+</div>

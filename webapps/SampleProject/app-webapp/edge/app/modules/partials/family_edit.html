@@ -1,0 +1,50 @@
+<div>
+  <h3><U>Family:</U></h3>
+  
+  	<div class="leftSection">Residence: </div>
+    <div class="rightSection">
+		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.familyResidingAtCity" placeholder="~City~" size="20"  />
+		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.familyResidingAtState" placeholder="~State~" size="20"  />
+		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.familyResidingAtCountry" placeholder="~Country~" size="20" />
+   	</div>
+   		
+   	<div class="leftSection">Native Place: </div>
+    <div class="rightSection">
+		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.nativeCity" placeholder="~City~" size="20"  />
+		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.nativeState" placeholder="~State~" size="20"  />
+		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="es.editProfile.nativeCountry" placeholder="~Country~" size="20" />
+   	</div>
+ 
+ 	<div class="leftSection">Siblings: </div>
+    <div class="rightSection">
+    	<div class="rightSectionSub">	
+    		Brothers: 
+    		<select required class="formInput shortInput" ng-model="es.editProfile.brothers"
+			  ng-options = "values for values in es.siblingsList">
+			</select> 
+    		
+    		(Married: 
+			<select required class="formInput shortInput" ng-model="es.editProfile.marriedBrothers"
+			  ng-options = "values for values in es.siblingsList">
+			</select> 
+			)
+    	</div>
+    	<div class="rightSectionSub">	
+    		Sisters: 
+    		<select required class="formInput shortInput" ng-model="es.editProfile.sisters"
+			  ng-options = "values for values in es.siblingsList">
+			</select> 
+    		
+    		(Married: 
+			<select required class="formInput shortInput" ng-model="es.editProfile.marriedSisters"
+			  ng-options = "values for values in es.siblingsList">
+			</select> 
+			)
+    	</div>
+    </div>
+ 
+    <div class="leftSection">Wealth: </div>			  	
+  	<div class="rightSection">
+  		<input maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="es.editProfile.wealth" title="Wealth" size="70" />
+  	</div>
+</div>
