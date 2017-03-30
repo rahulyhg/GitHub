@@ -1,3 +1,13 @@
+
+.ajax-loading{
+   		text-align: center;
+        opacity: 0.3;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index:2000;
+}
+
 hr {
 	border-top: 1px dotted;
 	color: #947353;
