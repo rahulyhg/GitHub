@@ -2,6 +2,8 @@ package edge.app.modules.clients;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import edge.app.modules.memberships.Membership;
 import edge.app.modules.payments.Payment;
 
@@ -22,5 +24,7 @@ public interface ClientsService {
 	NewClient saveAll(NewClient newClient, String loggedInId) throws Exception;
 
 	Client saveReminder(Client client, String loggedInId) throws Exception;
+
+	void uploadProfilePic(int clientId, String loggedInId, MultipartFile file) throws Exception;
 
 }

@@ -6,18 +6,6 @@
 </head>
 <body ng-init="es.initClients()">
 	<div class="addClientDiv padding5px" ng-init="es.initClients()"> 
-	
-		<form method="POST" action="server/secured/uploadProfilePic" enctype="multipart/form-data" id="fileUploadForm">
-			<div class="leftSection">Profile Pic:</div>
-			<div class="rightSection">
-				<input class="formInput" type="file" name="fielUploadfile" ng-model="es.fileUploadfile" title="~File~" size="70" />
-				<input class="formInput" type="text" name="fileUploadId" ng-model="es.fileUploadId" title="~Id~" size="70"/>
-				<input class="formInput" type="text" name="fileUploadType" ng-model="es.fileUploadType" title="~Typ~" size="70"/>
-				<input type="submit" value="Submit" class="btn btn-info"/>
-			</div>		    
-		</form>
-		
-		<div><br><br></div>
 		
 		<form action="/contextRoot/secured/saveClient" method="post" name="myForm">
   			<div><br><br></div>

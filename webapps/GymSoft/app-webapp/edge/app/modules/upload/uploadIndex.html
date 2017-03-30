@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Uploads</title>
+</head>
+<body>
+	<div class="addUploadDiv padding5px" ng-init="es.initUploads()">
+		<h3>
+			Profile Pic
+		</h3>
+		<div>
+			<form method="POST" action="server/secured/uploadProfilePic.json" enctype="multipart/form-data" id="fileUploadForm">
+				<div class="leftSection">Client Id:</div>
+				<div class="rightSection">
+					<input class="formInput" type="text" name="clientId" title="~Id~" size="70"/>
+				</div>		    
+				<div class="leftSection">Profile Pic:</div>
+				<div class="rightSection">
+					<input class="formInput" type="file" name="profilePic" title="~File~" size="70" />
+					<input type="submit" value="Upload" class="btn btn-info"/>
+				</div>	
+			</form>
+		</div>	
+	
+	</div>
+</body>
+</html>

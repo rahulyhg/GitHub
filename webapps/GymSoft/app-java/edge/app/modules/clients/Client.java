@@ -69,6 +69,9 @@ public class Client extends EdgeEntity{
 	@Column(nullable = false, length = 100)
 	private String reminderAbout;
 	
+	@Column(nullable = false, length = 200)
+	private String profilePic="NotAvailable";
+	
 	@Transient
 	private String comment;
 	
@@ -276,6 +279,14 @@ public class Client extends EdgeEntity{
 	
 	public String getComment() {
 		return comment;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 	
 	/*

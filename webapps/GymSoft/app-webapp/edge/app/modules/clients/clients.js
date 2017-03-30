@@ -13,7 +13,7 @@ var initClients = function initClients($scope, $http){
 var initializeClientsGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.clientsGridOptions = { 
 									enableFiltering: true, enableRowSelection: true,
-									columnDefs: [{field:'clientId'},{field:'name'},{field:'gender'},{field:'phone'},{field:'emailId'},
+									columnDefs: [{field:'clientId'},{field:'name'},{field:'gender'},{field:'phone'},{field:'emailId'},{field:'profilePic'},
 									             {field:'balanceAmount', cellFilter: "currency:''"},
 									             {field:'lastPaidOn', cellFilter: "date:'yyyy-MM-dd'"},
 									             {field:'membershipEndDate', cellFilter: "date:'yyyy-MM-dd'"},
@@ -31,7 +31,6 @@ var initializeClientsGrid = function initializeClientGrid($scope, $http){
 	    };
 
 };
-
 
 /*var addEnquiry = function addEnquiry($scope, $http){	
 	startAjax('SAVE_ENQUIRY', $scope);

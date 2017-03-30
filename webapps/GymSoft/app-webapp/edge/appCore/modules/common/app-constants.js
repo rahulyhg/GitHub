@@ -31,9 +31,9 @@ var menuMap = {
 		templateUrl : "edge/app/modules/attendances/attendancesIndex.html",
 		icon : ""
 	},
-	"6BULK_UPLOAD" : {
-		id : "BULK_UPLOAD",
-		title : "Bulk Upload",
+	"6UPLOAD" : {
+		id : "UPLOAD",
+		title : "Upload",
 		templateUrl : "edge/app/modules/upload/uploadIndex.html",
 		icon : ""
 	},

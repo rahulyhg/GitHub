@@ -1,9 +1,5 @@
 package edge.app.modules.clients;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,22 +48,30 @@ private static final Logger logger = LoggerFactory.getLogger(ClientsController.c
 		return clientsService;
 	}
 	
-	@RequestMapping(value={"/secured/uploadProfilePic"})
-	public EdgeResponse<String> uploadProfilePic(@RequestParam("fileUploadFile") MultipartFile file, 
-			@RequestParam("fileUploadId") String fileUploadId,
-			@RequestParam("fileUploadType") String fileUploadType) {
+	/*@RequestMapping(value={"/secured/uploadProfilePic"})
+	public void uploadProfilePic(@RequestParam("profilePic") MultipartFile file, 
+			@RequestParam("clientId") String clientId,
+			Principal principal, HttpServletResponse httpServletResponse) {
 	
 		try {
-		
-			// Get the file and save it somewhere
-			byte[] bytes = file.getBytes();
-			System.out.println(fileUploadId);
-			System.out.println(fileUploadType);
-			Path path = Paths.get("images/" + file.getOriginalFilename());
-			Files.write(path, bytes);
-		
-		} catch (IOException e) {
+			clientsService.uploadProfilePic(Integer.valueOf(clientId), principal.getName(), file);
+			 httpServletResponse.setHeader("Location", "index.html");
+		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}*/
+	
+	@RequestMapping(value={"/secured/uploadProfilePic"})
+	public EdgeResponse<String> uploadProfilePic(@RequestParam("profilePic") MultipartFile file, 
+			@RequestParam("clientId") String clientId,
+			Principal principal) {
+	
+		try {
+			clientsService.uploadProfilePic(Integer.valueOf(clientId), principal.getName(), file);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return EdgeResponse.createErrorResponse(null, "Error while uploading..", e.getMessage(), null);
 		}
 		return EdgeResponse.createDataResponse("Success", " File uploaded Succcesfully " );
 	}
