@@ -23,7 +23,7 @@ import edge.core.utils.CoreDateUtils;
 @Entity
 @Table(
 		name = "MEMBERSHIPS",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"clientId", "packageName", "fromDate"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"clientId", "packageName", "fromDate","systemId"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Membership extends EdgeEntity{

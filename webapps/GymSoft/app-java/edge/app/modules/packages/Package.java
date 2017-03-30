@@ -18,10 +18,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "PACKAGES",
-		uniqueConstraints = {
-             @UniqueConstraint(columnNames = "name"),
-             @UniqueConstraint(columnNames = "months")
-        }
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"systemId", "name"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Package extends EdgeEntity{

@@ -17,10 +17,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "EMPLOYEES",
-		uniqueConstraints = {
-                @UniqueConstraint(columnNames = "phone"),
-                @UniqueConstraint(columnNames = "emailId")
-        }
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"systemId", "emailId"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee extends EdgeEntity{

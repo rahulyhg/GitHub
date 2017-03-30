@@ -74,12 +74,14 @@ public class AppMailSender implements InitializingBean{
 	
 	public static void sendEmail(final String systemName, final String systemAddress, final String subject, final String text, final String[] toAddresses, final String[] ccAddresses) throws Exception {
 		
+		if(systemAddress == null || systemAddress.contains("@test.com")){
+			// No need to drop mails for Test Gym
+			return;
+		}
+		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				String subjectEdit = subject;
-				if(systemAddress == null || systemAddress.contains("@test.com")){
-					subjectEdit = "TEST MESSAGE: " + subjectEdit;
-				}
 				subjectEdit = systemName + " - " + subjectEdit;
 				
 				String content = text + "<br><br>Reagrds,<br>" + systemName + "<br>" + systemAddress + "<br><br><br>Powered by <a href='" + INSTANCE.siteUrl + "'>" + INSTANCE.appName + "</a>";

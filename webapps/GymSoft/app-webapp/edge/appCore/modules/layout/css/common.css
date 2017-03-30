@@ -1,6 +1,8 @@
 
 .ajax-loading{
    		text-align: center;
+   		background-color: gray;
+   		vertical-align: middle;
         opacity: 0.3;
         height: 100%;
         position: absolute;

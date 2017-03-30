@@ -16,7 +16,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "EXPENSES",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"expenseId", "paidOn", "pymtMode"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"expenseId", "paidOn", "pymtMode","paidAmount","systemId"})}
 )
 public class Expense extends EdgeEntity{
 
