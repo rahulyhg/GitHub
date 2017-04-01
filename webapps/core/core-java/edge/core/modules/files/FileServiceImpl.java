@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,5 +69,22 @@ public class FileServiceImpl implements FileService{
 		}
 		Files.write(path, file.getBytes());
 		updateEntity(entityId, entityName, columnName, parentId, entityId + "." + getFileExtension(file));
+	}
+	
+	@Override
+	@Transactional
+	public File getFile(String entityName, String columnName, Integer entityId, String loggedInId) {
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		
+		String query= " select " + columnName + " from "+ entityName 
+				+ " where parentId = " + parentId 
+				+ " and " + entityName.toLowerCase() + "Id = " + entityId; 
+		
+		List list = commonHibernateDao.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).list();
+		String fileName = "";
+		if(list != null && list.size() == 1){
+			fileName = (String) list.get(0);
+		}
+		return new File(baseDirectory + File.separatorChar + parentId + File.separatorChar + columnName + File.separatorChar + fileName);
 	}
 }

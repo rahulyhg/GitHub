@@ -1,4 +1,9 @@
 
+.profilePic{
+	border: 2px inset;
+	padding: 3px;
+}
+
 .ajax-loading{
    		text-align: center;
    		background-color: gray;
