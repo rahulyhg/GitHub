@@ -16,7 +16,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "EXPENSES",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"expenseId", "paidOn", "pymtMode","paidAmount","systemId"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"expenseId", "paidOn", "pymtMode","paidAmount","parentId"})}
 )
 public class Expense extends EdgeEntity{
 
@@ -51,7 +51,7 @@ public class Expense extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 	
 	public int getExpenseId() {
 		return expenseId;
@@ -112,12 +112,12 @@ public class Expense extends EdgeEntity{
 		this.updatedOn = new Date();
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public Date getCreatedOn() {

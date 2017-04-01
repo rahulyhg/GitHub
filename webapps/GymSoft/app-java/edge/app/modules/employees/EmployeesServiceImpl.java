@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.gyms.GymsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
+import edge.core.modules.parents.ParentsService;
 
 @WebService
 @Component
@@ -21,17 +21,17 @@ public class EmployeesServiceImpl implements EmployeesService {
 	private CommonHibernateDao commonHibernateDao;
 
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@Override
 	@Transactional
 	public Employee saveEmployee(Employee employee, String loggedInId) {
 		try{
-			int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_ADMIN);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
 			
 			employee.setCreatedBy(loggedInId);
 			employee.setUpdatedBy(loggedInId);
-			employee.setSystemId(systemId);
+			employee.setParentId(parentId);
 			
 			commonHibernateDao.saveOrUpdate(employee);
 		}catch(Exception ex){
@@ -43,21 +43,21 @@ public class EmployeesServiceImpl implements EmployeesService {
 
 	@Override
 	public List<Employee> getActiveEmployees(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Employee where systemId = '" + systemId +"' and status = 'Active' order by name ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Employee where parentId = '" + parentId +"' and status = 'Active' order by name ");
 	}
 
 	@Override
 	public List<Employee> getAllEmployees(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Employee where systemId = '" + systemId +"' order by name ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Employee where parentId = '" + parentId +"' order by name ");
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

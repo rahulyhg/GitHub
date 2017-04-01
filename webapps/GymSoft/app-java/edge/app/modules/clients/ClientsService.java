@@ -13,9 +13,9 @@ public interface ClientsService {
 
 	List<Client> getAllClients(String loggedInId);
 
-	Client updateClientAsPerMembership(Membership membership, String loggedInId, int systemId);
+	Client updateClientAsPerMembership(Membership membership, String loggedInId, int parentId);
 
-	Client updateClientAsPerPayment(Payment payment, String loggedInId, int systemId) throws Exception;
+	Client updateClientAsPerPayment(Payment payment, String loggedInId, int parentId) throws Exception;
 
 	Invoice generateInvoice(int clientId, String loggedInId) throws Exception;
 

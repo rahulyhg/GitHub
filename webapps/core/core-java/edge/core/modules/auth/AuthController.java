@@ -1,9 +1,7 @@
 package edge.core.modules.auth;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.mailSender.EventDetails;
-import edge.core.utils.SpringQueriesUtil;
 
 @Controller
 public class AuthController {

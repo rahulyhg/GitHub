@@ -1,4 +1,4 @@
-package edge.app.modules.gyms;
+package edge.core.modules.parents;
 
 import java.util.Date;
 
@@ -16,17 +16,17 @@ import edge.core.modules.common.EdgeEntity;
 
 @Entity
 @Table(
-		name = "GYMS", 
+		name = "PARENTS", 
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"emailId"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Gym extends EdgeEntity{
+public class Parent extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int gymId;
+	private int parentId;
 	
 	@Column(nullable = false, length = 100)
 	private String name;
@@ -67,12 +67,12 @@ public class Gym extends EdgeEntity{
 	@Column(nullable = false)
 	private Date updatedOn;
 	
-	public int getGymId() {
-		return gymId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setGymId(int gymId) {
-		this.gymId = gymId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getName() {
@@ -167,7 +167,7 @@ public class Gym extends EdgeEntity{
 	}
 
 	public String getDisplay(){
-		return name + " : " + emailId  + " : " + gymId ;
+		return name + " : " + emailId  + " : " + parentId ;
 	}
 
 	public Date getFromDate() {

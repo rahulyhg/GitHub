@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ExpensesService {
 
-	Expense saveExpense(Expense gym, String loggedInId);
+	Expense saveExpense(Expense parent, String loggedInId);
 
 	List<Expense> getAllExpenses(String loggedInId);
 

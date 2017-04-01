@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EmployeesService {
 
-	Employee saveEmployee(Employee gym, String loggedInId);
+	Employee saveEmployee(Employee parent, String loggedInId);
 
 	List<Employee> getAllEmployees(String loggedInId);
 

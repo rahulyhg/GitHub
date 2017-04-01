@@ -72,25 +72,25 @@ public class AppMailSender implements InitializingBean{
 		sendEmail(signUpEntity.getProfileId(), signUpEntity.getEmailId(), dataObject, eventDetails);
 	}
 	
-	public static void sendEmail(final String systemName, final String systemAddress, final String subject, final String text, final String[] toAddresses, final String[] ccAddresses) throws Exception {
+	public static void sendEmail(final String parentName, final String parentAddress, final String subject, final String text, final String[] toAddresses, final String[] ccAddresses) throws Exception {
 		
-		if(systemAddress == null || systemAddress.contains("@test.com")){
-			// No need to drop mails for Test Gym
+		if(parentAddress == null || parentAddress.contains("@test.com")){
+			// No need to drop mails for Test Parent
 			return;
 		}
 		
 		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				String subjectEdit = subject;
-				subjectEdit = systemName + " - " + subjectEdit;
+				subjectEdit = parentName + " - " + subjectEdit;
 				
-				String content = text + "<br><br>Reagrds,<br>" + systemName + "<br>" + systemAddress + "<br><br><br>Powered by <a href='" + INSTANCE.siteUrl + "'>" + INSTANCE.appName + "</a>";
+				String content = text + "<br><br>Reagrds,<br>" + parentName + "<br>" + parentAddress + "<br><br><br>Powered by <a href='" + INSTANCE.siteUrl + "'>" + INSTANCE.appName + "</a>";
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
 				message.setFrom(INSTANCE.fromAddress);	
 				
 				message.setTo(toAddresses);
 				message.setCc(ccAddresses);
-				message.setReplyTo(systemAddress);
+				message.setReplyTo(parentAddress);
 				
 				String[] bccAddresses = new String[]{INSTANCE.fromAddress};
 				message.setBcc(bccAddresses);

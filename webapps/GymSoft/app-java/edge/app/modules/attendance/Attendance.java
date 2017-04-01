@@ -55,7 +55,7 @@ public class Attendance extends EdgeEntity{
 	private String updatedBy;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 
 	@Column(nullable = false, updatable=false)
 	private Date createdOn;
@@ -134,12 +134,12 @@ public class Attendance extends EdgeEntity{
 		this.updatedOn = new Date();
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getDetails() {

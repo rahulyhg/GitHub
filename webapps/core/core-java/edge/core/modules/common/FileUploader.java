@@ -39,7 +39,7 @@ public class FileUploader{
 	    }
 	}
 
-	public static String uploadFile(int systemId, int entityId, String uploadType, MultipartFile file) throws IOException {
+	public static String uploadFile(int parentId, int entityId, String uploadType, MultipartFile file) throws IOException {
 		String filePath = INSTANCE.baseDirectory + File.separatorChar + uploadType + File.separatorChar + entityId + "." + getFileExtension(file);
 		Path path = Paths.get(filePath);
 		Path parentDir = path.getParent();

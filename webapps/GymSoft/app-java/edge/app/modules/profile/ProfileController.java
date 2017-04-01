@@ -1,8 +1,8 @@
 package edge.app.modules.profile;
 
 import java.security.Principal;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.gyms.GymsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
+import edge.core.modules.parents.ParentsService;
 
 @WebService
 @Component
@@ -21,17 +21,17 @@ public class ExpensesServiceImpl implements ExpensesService {
 	private CommonHibernateDao commonHibernateDao;
 
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@Override
 	@Transactional
 	public Expense saveExpense(Expense expense, String loggedInId) {
 		try{
-			int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_ADMIN);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
 			
 			expense.setCreatedBy(loggedInId);
 			expense.setUpdatedBy(loggedInId);
-			expense.setSystemId(systemId);
+			expense.setParentId(parentId);
 			
 			commonHibernateDao.save(expense);
 		}catch(Exception ex){
@@ -43,15 +43,15 @@ public class ExpensesServiceImpl implements ExpensesService {
 
 	@Override
 	public List<Expense> getAllExpenses(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Expense where systemId = '" + systemId +"'");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Expense where parentId = '" + parentId +"'");
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

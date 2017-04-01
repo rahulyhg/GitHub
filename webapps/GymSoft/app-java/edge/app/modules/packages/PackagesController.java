@@ -10,17 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edge.app.modules.gyms.GymsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
+import edge.core.modules.parents.ParentsService;
 
 @Controller
 public class PackagesController {
@@ -31,7 +29,7 @@ private static final Logger logger = LoggerFactory.getLogger(PackagesController.
 	private PackagesService packagesService;
 	
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -88,11 +86,11 @@ private static final Logger logger = LoggerFactory.getLogger(PackagesController.
 		this.packagesService = packagesService;
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

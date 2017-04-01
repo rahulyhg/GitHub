@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import edge.app.modules.clients.Client;
@@ -23,7 +22,7 @@ import edge.core.utils.CoreDateUtils;
 @Entity
 @Table(
 		name = "MEMBERSHIPS",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"clientId", "packageName", "fromDate","systemId"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"clientId", "packageName", "fromDate","parentId"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Membership extends EdgeEntity{
@@ -79,7 +78,7 @@ public class Membership extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 	
 	public int getMembershipId() {
 		return membershipId;
@@ -175,12 +174,12 @@ public class Membership extends EdgeEntity{
 		this.clientId = clientId;
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public Date getCreatedOn() {

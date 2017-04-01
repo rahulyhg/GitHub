@@ -17,7 +17,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "EMPLOYEES",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"systemId", "emailId"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"parentId", "emailId"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Employee extends EdgeEntity{
@@ -71,7 +71,7 @@ public class Employee extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -156,12 +156,12 @@ public class Employee extends EdgeEntity{
 		this.updatedOn = new Date();
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getGender() {

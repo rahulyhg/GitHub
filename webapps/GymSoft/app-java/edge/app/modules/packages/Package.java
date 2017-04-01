@@ -18,7 +18,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "PACKAGES",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"systemId", "name"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"parentId", "name"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Package extends EdgeEntity{
@@ -54,7 +54,7 @@ public class Package extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 
 	public int getPackageId() {
 		return packageId;
@@ -91,12 +91,12 @@ public class Package extends EdgeEntity{
 		this.updatedOn = new Date();
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getDisplay(){

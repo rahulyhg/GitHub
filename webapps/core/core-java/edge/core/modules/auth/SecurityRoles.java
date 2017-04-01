@@ -1,12 +1,12 @@
-package edge.appCore.modules.auth;
+package edge.core.modules.auth;
 
 public enum SecurityRoles {
 	SUPER_ADMIN ("ROLE_SUPER_ADMIN"),
 	ADMIN  ("ROLE_ADMIN"),
 	USER  ("ROLE_USER"),
 	
-	GYM_OPERATOR  ("GYM_OPERATOR"),
-	GYM_ADMIN  ("GYM_ADMIN");
+	PARENT_OPERATOR  ("PARENT_OPERATOR"),
+	PARENT_ADMIN  ("PARENT_ADMIN");
 	
 	private String roleDescription;
 	

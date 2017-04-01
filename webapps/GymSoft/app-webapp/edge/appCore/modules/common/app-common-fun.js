@@ -25,22 +25,22 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		if(confirm(confirmationMsg))  addPackage($scope, $http);
 	};
 	
-	// GYMS
+	// PARENTS
 	
-	$scope.es.initGyms = function () {
-		initGyms($scope, $http);
+	$scope.es.initParents = function () {
+		initParents($scope, $http);
 	};
 	
-	$scope.es.loadGyms = function () {
-		loadGyms($scope, $http);
+	$scope.es.loadParents = function () {
+		loadParents($scope, $http);
 	};
 	
-	$scope.es.addGym = function () {
-		if(confirm(confirmationMsg))  addGym($scope, $http);
+	$scope.es.addParent = function () {
+		if(confirm(confirmationMsg))  addParent($scope, $http);
 	};
 	
-	$scope.es.updateGym = function () {
-		if(confirm(confirmationMsg))  updateGym($scope, $http);
+	$scope.es.updateParent = function () {
+		if(confirm(confirmationMsg))  updateParent($scope, $http);
 	};
 	
 	// CLIENTS

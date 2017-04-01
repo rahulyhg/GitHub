@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PackagesService {
 
-	Package savePackage(Package gym, String loggedInId);
+	Package savePackage(Package parent, String loggedInId);
 
 	List<Package> getAllPackages(String loggedInId);
 	

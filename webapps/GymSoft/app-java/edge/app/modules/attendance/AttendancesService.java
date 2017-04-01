@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface AttendancesService {
 
-	Attendance saveAttendance(Attendance gym, String loggedInId);
+	Attendance saveAttendance(Attendance parent, String loggedInId);
 
 	List<Attendance> getAllAttendances(String loggedInId);
 

@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.gyms.GymsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
+import edge.core.modules.parents.ParentsService;
 
 @WebService
 @Component
@@ -21,17 +21,17 @@ public class AtteandancesServiceImpl implements AttendancesService {
 	private CommonHibernateDao commonHibernateDao;
 
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@Override
 	@Transactional
 	public Attendance saveAttendance(Attendance attendance, String loggedInId) {
 		try{
-			int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
 			
 			attendance.setCreatedBy(loggedInId);
 			attendance.setUpdatedBy(loggedInId);
-			attendance.setSystemId(systemId);
+			attendance.setParentId(parentId);
 			
 			if(attendance.getCheckOutHr() != 0 && attendance.getCheckInHr() != 0){
 				attendance.setHoursWorked(attendance.getCheckOutHr() - attendance.getCheckInHr());
@@ -49,15 +49,15 @@ public class AtteandancesServiceImpl implements AttendancesService {
 
 	@Override
 	public List<Attendance> getAllAttendances(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Attendance where systemId = '" + systemId +"' order by attendanceOn desc, checkInHr desc");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Attendance where parentId = '" + parentId +"' order by attendanceOn desc, checkInHr desc");
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

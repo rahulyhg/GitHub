@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PaymentsService {
 
-	Payment savePayment(Payment gym, String loggedInId);
+	Payment savePayment(Payment parent, String loggedInId);
 
 	List<Payment> getAllPayments(String loggedInId);
 

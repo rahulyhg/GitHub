@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edge.app.modules.common.AppConstants;
-import edge.app.modules.gyms.Gym;
-import edge.app.modules.gyms.GymsService;
 import edge.app.modules.memberships.Membership;
 import edge.app.modules.memberships.MembershipsService;
 import edge.app.modules.payments.Payment;
 import edge.app.modules.payments.PaymentsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.common.FileUploader;
 import edge.core.modules.mailSender.AppMailSender;
+import edge.core.modules.parents.Parent;
+import edge.core.modules.parents.ParentsService;
 import edge.core.utils.CoreDateUtils;
 
 @WebService
@@ -39,7 +39,7 @@ public class ClientsServiceImpl implements ClientsService {
 	private PaymentsService paymentService;
 	
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@Override
 	@Transactional
@@ -65,10 +65,10 @@ public class ClientsServiceImpl implements ClientsService {
 	@Transactional
 	public Client saveClient(Client client, String loggedInId) {
 		try{
-			int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
 			
 			client.setUpdatedBy(loggedInId);			
-			client.setSystemId(systemId);
+			client.setParentId(parentId);
 			
 			if(client.getClientId() == 0){
 				client.setCreatedBy(loggedInId);
@@ -93,7 +93,7 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	@Transactional
 	public Client saveReminder(Client client, String loggedInId) throws Exception {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
 		
 		long count = CoreDateUtils.getDaysBetweenDates(client.getReminderOn(), new Date());
 		if(count > AppConstants.MAX_DAYS_NEXT_REMINDER || count < 1){
@@ -101,7 +101,7 @@ public class ClientsServiceImpl implements ClientsService {
 		}
 		
 		client.setUpdatedBy(loggedInId);			
-		client.setSystemId(systemId);
+		client.setParentId(parentId);
 		
 		String comment = 	" Comment: " + client.getComment()
 							+ "<br> Next Reminder after " + count + " days On " + CoreDateUtils.dateToStandardSting(client.getReminderOn()) + " about " + client.getReminderAbout();
@@ -116,19 +116,19 @@ public class ClientsServiceImpl implements ClientsService {
 
 	@Override
 	public List<Client> getAllReminders(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Client where systemId = '" + systemId +"' and reminderOn <= current_date order by reminderOn desc ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and reminderOn <= current_date order by reminderOn desc ");
 	}
 	
 	@Override
 	public List<Client> getAllClients(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Client where systemId = '" + systemId +"' order by name ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' order by name ");
 	}
 
 	@Override
-	public Client updateClientAsPerMembership(Membership membership, String loggedInId, int systemId) {
-		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where systemId = '" + systemId +"' and clientId = " + membership.getClientId()).get(0);
+	public Client updateClientAsPerMembership(Membership membership, String loggedInId, int parentId) {
+		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + membership.getClientId()).get(0);
 		client.setUpdatedBy(membership.getUpdatedBy());
 		client.setBalanceAmount(client.getBalanceAmount().add(membership.getEffectiveAmount()));
 		client.setTotalAmount(client.getTotalAmount().add(membership.getEffectiveAmount()));
@@ -145,8 +145,8 @@ public class ClientsServiceImpl implements ClientsService {
 	}
 
 	@Override
-	public Client updateClientAsPerPayment(Payment payment, String loggedInId, int systemId) throws Exception {
-		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where systemId = '" + systemId +"' and clientId = " + payment.getClientId()).get(0);
+	public Client updateClientAsPerPayment(Payment payment, String loggedInId, int parentId) throws Exception {
+		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + payment.getClientId()).get(0);
 		client.setLastPaidOn(payment.getPaidOn());
 		client.setBalanceAmount(client.getBalanceAmount().subtract(payment.getPaidAmount()));
 		client.setPaidAmount(client.getPaidAmount().add(payment.getPaidAmount()));
@@ -177,8 +177,8 @@ public class ClientsServiceImpl implements ClientsService {
 	
 	@Override
 	public void uploadProfilePic(int clientId, String loggedInId, MultipartFile file) throws Exception {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		String uploadPath = FileUploader.uploadFile(systemId, clientId, "ProfilePic", file);
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		String uploadPath = FileUploader.uploadFile(parentId, clientId, "ProfilePic", file);
 		
 		Client client = commonHibernateDao.getEntityById(Client.class, clientId);
 		client.setProfilePic(uploadPath);
@@ -186,43 +186,43 @@ public class ClientsServiceImpl implements ClientsService {
 	}
 	
 	private void sendActivityThroughMail(Client client, String loggedInId) throws Exception {
-		Gym gym = commonHibernateDao.getEntityById(Gym.class, client.getSystemId());
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
 		String today = CoreDateUtils.dateToStandardSting(new Date());
 		String subject = "Activity As On " + today + " : " + client.getName();
 		String text = "<B> Activity Log For Client : " + client.getName() + "</B> <br> <br>" + client.getActivity();
 		String[] toAddresses = new String[]{client.getEmailId()};
-		String[] ccAddresses = new String[]{gym.getEmailId(), loggedInId};
+		String[] ccAddresses = new String[]{parent.getEmailId(), loggedInId};
 		
-		AppMailSender.sendEmail(gym.getName(), gym.getEmailId(), subject, text, toAddresses, ccAddresses);
+		AppMailSender.sendEmail(parent.getName(), parent.getEmailId(), subject, text, toAddresses, ccAddresses);
 	}
 	
 	private void notifyPayment(Client client, Payment payment, String loggedInId) throws Exception {
-		Gym gym = commonHibernateDao.getEntityById(Gym.class, client.getSystemId());
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
 		String today = CoreDateUtils.dateToStandardSting(new Date());
 		String subject = "Invoice #" + payment.getPaymentId() +" - " + today + " : " + client.getName() + " - Received " + payment.getPaidAmount() + " on " + CoreDateUtils.dateToStandardSting(payment.getPaidOn()) + " through " + payment.getPymtMode();
 		String text = "<B> Activity Log For Client : " + client.getName() + "</B> <br> <br>" + client.getActivity();
 		String[] toAddresses = new String[]{client.getEmailId()};
-		String[] ccAddresses = new String[]{gym.getEmailId(), loggedInId};
+		String[] ccAddresses = new String[]{parent.getEmailId(), loggedInId};
 		
-		AppMailSender.sendEmail(gym.getName(), gym.getEmailId(), subject, text, toAddresses, ccAddresses);
+		AppMailSender.sendEmail(parent.getName(), parent.getEmailId(), subject, text, toAddresses, ccAddresses);
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 
 	@Override
 	public Invoice generateInvoice(int clientId, String loggedInId) throws Exception {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where systemId = '" + systemId + "' and clientId = '" + clientId + "'").get(0);
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId + "' and clientId = '" + clientId + "'").get(0);
 		List<Membership> memberships = commonHibernateDao.getHibernateTemplate().find("from Membership where clientId = '" + clientId + "' order by fromDate " );
 		List<Payment> payments = commonHibernateDao.getHibernateTemplate().find("from Payment where clientId = '" + clientId + "' order by paidOn " );
-		Gym gym = (Gym) commonHibernateDao.getHibernateTemplate().find("from Gym where gymId = '" + systemId + "'" ).get(0);
-		Invoice invoice = new Invoice(client, memberships, payments, gym);
+		Parent parent = (Parent) commonHibernateDao.getHibernateTemplate().find("from Parent where parentId = '" + parentId + "'" ).get(0);
+		Invoice invoice = new Invoice(client, memberships, payments, parent);
 		sendActivityThroughMail(client, loggedInId);
 		return invoice;
 		

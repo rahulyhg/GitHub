@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.gyms.GymsService;
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
+import edge.core.modules.parents.ParentsService;
 
 @WebService
 @Component
@@ -21,17 +21,17 @@ public class PackagesServiceImpl implements PackagesService {
 	private CommonHibernateDao commonHibernateDao;
 
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@Override
 	@Transactional
 	public Package savePackage(Package packagei, String loggedInId) {
 		try{
-			int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_ADMIN);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
 			
 			packagei.setCreatedBy(loggedInId);
 			packagei.setUpdatedBy(loggedInId);
-			packagei.setSystemId(systemId);
+			packagei.setParentId(parentId);
 			commonHibernateDao.saveOrUpdate(packagei);
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -42,21 +42,21 @@ public class PackagesServiceImpl implements PackagesService {
 
 	@Override
 	public List<Package> getActivePackages(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Package where systemId = '" + systemId +"' and status = 'Active' order by months desc, name ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Package where parentId = '" + parentId +"' and status = 'Active' order by months desc, name ");
 	}
 	
 	@Override
 	public List<Package> getAllPackages(String loggedInId) {
-		int systemId = gymsService.getSystemId(loggedInId, SecurityRoles.GYM_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Package where systemId = '" + systemId +"' order by months desc, name ");
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return commonHibernateDao.getHibernateTemplate().find("from Package where parentId = '" + parentId +"' order by months desc, name ");
 	}
 
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

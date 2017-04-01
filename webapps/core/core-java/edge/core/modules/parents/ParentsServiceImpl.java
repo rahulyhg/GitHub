@@ -1,4 +1,4 @@
-package edge.app.modules.gyms;
+package edge.core.modules.parents;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -11,14 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.appCore.modules.auth.SecurityRoles;
 import edge.core.exception.AppException;
 import edge.core.modules.auth.AuthService;
+import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
 	
 @WebService
 @Component
-public class GymsServiceImpl implements GymsService {
+public class ParentsServiceImpl implements ParentsService {
 
 	@Autowired
 	private CommonHibernateDao commonHibernateDao;
@@ -27,62 +27,62 @@ public class GymsServiceImpl implements GymsService {
 	private AuthService authService;
 	
 	@Override
-	public Gym addGym(Gym gym) {
+	public Parent addParent(Parent parent) {
 		try{
-			gym.setFromDate(DateUtils.addDays(new Date(), -1));
+			parent.setFromDate(DateUtils.addDays(new Date(), -1));
 			
 			Calendar cal = Calendar.getInstance(); 
 			cal.add(Calendar.MONTH, 3);
-			gym.setToDate(cal.getTime());
-			gym.setAdmins(gym.getAdmins() + "," + gym.getEmailId());
+			parent.setToDate(cal.getTime());
+			parent.setAdmins(parent.getAdmins() + "," + parent.getEmailId());
 			
-			authService.signUpUsers(gym.getOperators().split(","));
-			authService.signUpUsers(gym.getAdmins().split(","));
+			authService.signUpUsers(parent.getOperators().split(","));
+			authService.signUpUsers(parent.getAdmins().split(","));
 			
-			commonHibernateDao.save(gym);
+			commonHibernateDao.save(parent);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
 			throw new AppException(ex, ex.getMessage());
 		}
-		return gym;
+		return parent;
 	}
 	
 	@Override
-	public Gym updateGym(Gym gym, String loggedInId) {
+	public Parent updateParent(Parent parent, String loggedInId) {
 		try{
-			gym.setUpdatedBy(loggedInId);
+			parent.setUpdatedBy(loggedInId);
 			
-			authService.signUpUsers(gym.getOperators().split(","));
-			authService.signUpUsers(gym.getAdmins().split(","));
+			authService.signUpUsers(parent.getOperators().split(","));
+			authService.signUpUsers(parent.getAdmins().split(","));
 			
-			commonHibernateDao.update(gym);
+			commonHibernateDao.update(parent);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			throw new AppException(ex, ex.getMessage());
 		}
-		return gym;
+		return parent;
 	}
 
 	@Override
-	public List<Gym> getAllGyms() {
-		return commonHibernateDao.getHibernateTemplate().loadAll(Gym.class);
+	public List<Parent> getAllParents() {
+		return commonHibernateDao.getHibernateTemplate().loadAll(Parent.class);
 	}
 
 	@Override
-	public int getSystemId(String loggedInId, SecurityRoles role) {
+	public int getParentId(String loggedInId, SecurityRoles role) {
 		String query = "";
 		switch(role){
-			case GYM_OPERATOR: query = "from Gym where operators like '%," + loggedInId + ",%' OR admins like '%," + loggedInId + ",%'"; break; 
-			case GYM_ADMIN: query = "from Gym where admins like '%," + loggedInId + ",%'"; break;
+			case PARENT_OPERATOR: query = "from Parent where operators like '%," + loggedInId + ",%' OR admins like '%," + loggedInId + ",%'"; break; 
+			case PARENT_ADMIN: query = "from Parent where admins like '%," + loggedInId + ",%'"; break;
 		}
 		query += " and fromDate <= current_date and toDate >= current_date ";
-		List<Gym> gyms = commonHibernateDao.getHibernateTemplate().find(query);
-		if(gyms == null || gyms.size() != 1){
+		List<Parent> parents = commonHibernateDao.getHibernateTemplate().find(query);
+		if(parents == null || parents.size() != 1){
 			throw new AppException(null, "Unauthorized Access");
 		}
 		
-		return gyms.get(0).getGymId();
+		return parents.get(0).getParentId();
 	}
 
 	@Override

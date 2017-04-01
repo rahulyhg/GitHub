@@ -14,7 +14,6 @@ import javax.persistence.UniqueConstraint;
 
 import edge.app.modules.clients.Client;
 import edge.app.modules.common.AppConstants;
-import edge.app.modules.employees.Employee;
 import edge.core.modules.common.EdgeEntity;
 import edge.core.utils.CoreDateUtils;
 
@@ -66,7 +65,7 @@ public class Payment extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 	
 	public int getPaymentId() {
 		return paymentId;
@@ -138,12 +137,12 @@ public class Payment extends EdgeEntity{
 		this.updatedOn = new Date();
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public int getClientId() {

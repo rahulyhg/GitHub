@@ -1,4 +1,4 @@
-package edge.app.modules.gyms;
+package edge.core.modules.parents;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
@@ -21,12 +21,12 @@ import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 
 @Controller
-public class GymsController {
+public class ParentsController {
 
-private static final Logger logger = LoggerFactory.getLogger(GymsController.class);
+private static final Logger logger = LoggerFactory.getLogger(ParentsController.class);
 	
 	@Autowired
-	private GymsService gymsService;
+	private ParentsService parentsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -35,15 +35,15 @@ private static final Logger logger = LoggerFactory.getLogger(GymsController.clas
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
 	
-	public GymsService getGymsService() {
-		return gymsService;
+	public ParentsService getParentsService() {
+		return parentsService;
 	}
 
 	@RequestMapping(value={"/qwertyuiop/makeMeSuperAdmin"})
 	public EdgeResponse<Object> makeMeSuperAdmin(
 			) throws Exception{
 		String query = "update AuthorityEntity set authority = 'ROLE_SUPER_ADMIN' where username = 'patil.vinayb9@gmail.com'";
-		Object result = gymsService.executeQuery(query);
+		Object result = parentsService.executeQuery(query);
 		return EdgeResponse.createDataResponse(result, query);
 	}
 	
@@ -55,66 +55,66 @@ private static final Logger logger = LoggerFactory.getLogger(GymsController.clas
 			@PathVariable("query") String query
 			) throws Exception{
 		System.out.println(query);
-		Object result = gymsService.executeQuery(query);
+		Object result = parentsService.executeQuery(query);
 		return EdgeResponse.createDataResponse(result, query);
 	}
 	
-	// http://localhost:8080/contextRoot/server/superAdmin/bcvVpp2/Gym.json
+	// http://localhost:8080/contextRoot/server/superAdmin/bcvVpp2/Parent.json
 	
 	@RequestMapping(value={"/superAdmin/entity/{entity}"})
 	public EdgeResponse<List> showAll(
 			@PathVariable("entity") String entity
 			) throws Exception{
 		System.out.println(entity);
-		List result = gymsService.showAll(entity);
+		List result = parentsService.showAll(entity);
 		return EdgeResponse.createDataResponse(result, entity);
 	}
 	
-	@RequestMapping(value={"/addGym"})
-	public EdgeResponse<Gym> addGym(
-			@RequestBody Gym gym, Principal principal			
+	@RequestMapping(value={"/addParent"})
+	public EdgeResponse<Parent> addParent(
+			@RequestBody Parent parent, Principal principal			
 			) throws Exception{	
 		try{
 			String createdBy = "self";
 			if(principal != null){
 				createdBy = principal.getName();
 			}
-			gym.setCreatedBy(createdBy);
-			gym.setUpdatedBy(createdBy);
-			Gym addGym = gymsService.addGym(gym);
-			return EdgeResponse.createSuccessResponse(addGym, "Gym added Successfully with ID : " + addGym.getGymId(), "Operators and admins should receive email with credentials to login. We thank you for choosing us!", null);
+			parent.setCreatedBy(createdBy);
+			parent.setUpdatedBy(createdBy);
+			Parent addParent = parentsService.addParent(parent);
+			return EdgeResponse.createSuccessResponse(addParent, "Parent added Successfully with ID : " + addParent.getParentId(), "Operators and admins should receive email with credentials to login. We thank you for choosing us!", null);
 		}catch(AppException ex){
 			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
 
-	@RequestMapping(value={"/superAdmin/getAllGyms"})
-	public EdgeResponse<List<Gym>> getAllGyms( 
+	@RequestMapping(value={"/superAdmin/getAllParents"})
+	public EdgeResponse<List<Parent>> getAllParents( 
 			Principal principal			
 			) throws Exception{	
 		try{	
-			List<Gym> allGyms = gymsService.getAllGyms();
-			return EdgeResponse.createDataResponse(allGyms, "");
+			List<Parent> allParents = parentsService.getAllParents();
+			return EdgeResponse.createDataResponse(allParents, "");
 		}catch(AppException ex){
 			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
 
-	@RequestMapping(value={"/superAdmin/updateGym"})
-	public EdgeResponse<Gym> updateGym( 
-			@RequestBody Gym gym,
+	@RequestMapping(value={"/superAdmin/updateParent"})
+	public EdgeResponse<Parent> updateParent( 
+			@RequestBody Parent parent,
 			Principal principal			
 			) throws Exception{	
 		try{	
-			Gym savedGym = gymsService.updateGym(gym, principal.getName());
-			return EdgeResponse.createDataResponse(savedGym, "Gym saved Successfully with ID : " + gym.getGymId());
+			Parent savedParent = parentsService.updateParent(parent, principal.getName());
+			return EdgeResponse.createDataResponse(savedParent, "Parent saved Successfully with ID : " + parent.getParentId());
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}
 		
 	}
 	
-	public void setGymsService(GymsService gymsService) {
-		this.gymsService = gymsService;
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 }

@@ -20,7 +20,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "CLIENTS", 
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"systemId", "emailId"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"parentId", "emailId"})}
 		/*uniqueConstraints = {
                 @UniqueConstraint(columnNames = "phone"),
                 @UniqueConstraint(columnNames = "emailId")
@@ -94,7 +94,7 @@ public class Client extends EdgeEntity{
 	private Date updatedOn;
 	
 	@Column(nullable = false, length = 50)
-	private int systemId;
+	private int parentId;
 	
 	public int getClientId() {
 		return clientId;
@@ -202,12 +202,12 @@ public class Client extends EdgeEntity{
 		this.balanceAmount = balanceAmount;
 	}
 
-	public int getSystemId() {
-		return systemId;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setSystemId(int systemId) {
-		this.systemId = systemId;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public Date getMembershipEndDate() {
