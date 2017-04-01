@@ -45,6 +45,26 @@
 		</form>
 		
 	</div>
+	<div class="addProfilePicDiv padding5px popupDiv" ng-show="es.client.clientId">
+		<h3>
+			Upload Profile Pic For : {{es.client.name}}
+		</h3>
+		<div>
+			<form method="POST" action="server/secured/uploadFile.json" enctype="multipart/form-data" id="fileUploadForm">
+				<div class="rightSection" ng-hide="true">
+					<input class="formInput" type="text" name="entityId" ng-model="es.client.clientId" />
+					<input class="formInput" type="text" name="entityName" value="Client" />
+					<input class="formInput" type="text" name="columnName" value="profilePic" />
+				</div>		    
+				<div class="leftSection">JPEG File (&lt; 1 MB):</div>
+				<div class="rightSection">
+					<input class="formInput" type="file" name="file" title="~File~" size="70" />
+				</div>	
+				<input type="submit" value="Upload" class="btn btn-info"/>
+			</form>
+		</div>	
+	</div>
+	<div><br><br></div>
 	<div>
 	    <div id="allClientsGrid" ui-grid="es.clientsGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>
 	</div>

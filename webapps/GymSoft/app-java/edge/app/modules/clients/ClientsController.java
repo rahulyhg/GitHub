@@ -14,8 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import edge.app.modules.memberships.MembershipsService;
 import edge.app.modules.payments.PaymentsService;
@@ -46,34 +44,6 @@ private static final Logger logger = LoggerFactory.getLogger(ClientsController.c
 	
 	public ClientsService getClientsService() {
 		return clientsService;
-	}
-	
-	/*@RequestMapping(value={"/secured/uploadProfilePic"})
-	public void uploadProfilePic(@RequestParam("profilePic") MultipartFile file, 
-			@RequestParam("clientId") String clientId,
-			Principal principal, HttpServletResponse httpServletResponse) {
-	
-		try {
-			clientsService.uploadProfilePic(Integer.valueOf(clientId), principal.getName(), file);
-			 httpServletResponse.setHeader("Location", "index.html");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-	
-	@RequestMapping(value={"/secured/uploadProfilePic"})
-	public EdgeResponse<String> uploadProfilePic(@RequestParam("profilePic") MultipartFile file, 
-			@RequestParam("clientId") String clientId,
-			Principal principal) {
-	
-		try {
-			clientsService.uploadProfilePic(Integer.valueOf(clientId), principal.getName(), file);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return EdgeResponse.createErrorResponse(null, "Error while uploading..", e.getMessage(), null);
-		}
-		return EdgeResponse.createDataResponse("Success", " File uploaded Succcesfully " );
 	}
 
 	@RequestMapping(value={"/secured/saveReminder"})

@@ -9,7 +9,6 @@ import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import edge.app.modules.common.AppConstants;
 import edge.app.modules.memberships.Membership;
@@ -19,7 +18,6 @@ import edge.app.modules.payments.PaymentsService;
 import edge.core.exception.AppException;
 import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
-import edge.core.modules.common.FileUploader;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.parents.Parent;
 import edge.core.modules.parents.ParentsService;
@@ -173,16 +171,6 @@ public class ClientsServiceImpl implements ClientsService {
 		notifyPayment(client, payment, loggedInId);
 		
 		return client;
-	}
-	
-	@Override
-	public void uploadProfilePic(int clientId, String loggedInId, MultipartFile file) throws Exception {
-		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		String uploadPath = FileUploader.uploadFile(parentId, clientId, "ProfilePic", file);
-		
-		Client client = commonHibernateDao.getEntityById(Client.class, clientId);
-		client.setProfilePic(uploadPath);
-		saveClient(client, loggedInId);
 	}
 	
 	private void sendActivityThroughMail(Client client, String loggedInId) throws Exception {
