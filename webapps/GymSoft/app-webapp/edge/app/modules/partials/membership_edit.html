@@ -7,7 +7,7 @@
 	
 	<div class="leftSection">Package:</div>
 	<div class="rightSection">
-		<select required class="formInput" ng-model="es.membership.package" title="~Package~" ng-options="value as value.name for value in es.allPackages" ng-change="es.setToDate()">
+		<select required class="formInput" ng-model="es.membership.package" title="~Package~" ng-options="value as value.display for value in es.allPackages" ng-change="es.setToDate()">
 		</select>
 	</div>
 

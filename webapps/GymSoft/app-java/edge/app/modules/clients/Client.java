@@ -164,7 +164,7 @@ public class Client extends EdgeEntity{
 	}
 	
 	public String getDisplay(){
-		return name + " : " + emailId  + " : " + clientId ;
+		return name + " : " + emailId  + " : " + clientId + " ~~~ ";
 	}
 
 	public BigDecimal getTotalAmount() {

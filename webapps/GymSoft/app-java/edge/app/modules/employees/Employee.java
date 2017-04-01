@@ -173,7 +173,7 @@ public class Employee extends EdgeEntity{
 	}
 	
 	public String getDisplay(){
-		return name + " : " + employeeId;
+		return name + " : " + employeeId + " ~~~ ";
 	}
 
 	public Date getCreatedOn() {

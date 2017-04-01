@@ -167,7 +167,7 @@ public class Parent extends EdgeEntity{
 	}
 
 	public String getDisplay(){
-		return name + " : " + emailId  + " : " + parentId ;
+		return name + " : " + emailId  + " : " + parentId + " ~~~ " ;
 	}
 
 	public Date getFromDate() {
