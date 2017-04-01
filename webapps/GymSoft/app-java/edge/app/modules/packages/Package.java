@@ -100,7 +100,7 @@ public class Package extends EdgeEntity{
 	}
 
 	public String getDisplay(){
-		return name + " : " + packageId;
+		return name + " : " + price + "/-";
 	}
 
 	public String getName() {

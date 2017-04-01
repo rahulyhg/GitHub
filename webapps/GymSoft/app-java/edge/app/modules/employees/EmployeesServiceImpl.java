@@ -27,7 +27,7 @@ public class EmployeesServiceImpl implements EmployeesService {
 	@Transactional
 	public Employee saveEmployee(Employee employee, String loggedInId) {
 		try{
-			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
 			
 			employee.setCreatedBy(loggedInId);
 			employee.setUpdatedBy(loggedInId);

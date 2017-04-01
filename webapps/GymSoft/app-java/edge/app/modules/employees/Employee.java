@@ -53,7 +53,7 @@ public class Employee extends EdgeEntity{
 	private String ifscCode;
 
 	@Column(nullable = false, length = 100)
-	private String branchName;
+	private String bankName;
 	
 	@Column(nullable = false, length = 200)
 	private String branchAddress;
@@ -119,14 +119,6 @@ public class Employee extends EdgeEntity{
 
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
-	}
-
-	public String getBranchName() {
-		return branchName;
-	}
-
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
 	}
 
 	public String getAddress() {
@@ -206,6 +198,14 @@ public class Employee extends EdgeEntity{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 	
 }

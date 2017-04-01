@@ -27,7 +27,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 	@Transactional
 	public Expense saveExpense(Expense expense, String loggedInId) {
 		try{
-			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
+			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
 			
 			expense.setCreatedBy(loggedInId);
 			expense.setUpdatedBy(loggedInId);

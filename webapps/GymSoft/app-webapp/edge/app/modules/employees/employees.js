@@ -11,7 +11,7 @@ var initializeEmployeesGrid = function initializeClientGrid($scope, $http){
 	$scope.es.employeesGridOptions = { 
 									enableFiltering: true, enableRowSelection: true,
 									columnDefs: [{field:'employeeId'},{field:'name'},{field:'phone'},{field:'emailId'},
-									             {field:'accountNumber'},{field:'ifscCode'},{field:'branchName'},{field:'branchAddress'},{field:'status'},
+									             {field:'accountNumber'},{field:'ifscCode'},{field:'bankName'},{field:'branchAddress'},{field:'status'},
 									             ]
 								 };
 	$scope.es.employeesGridOptions.onRegisterApi = function(gridApi){

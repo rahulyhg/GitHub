@@ -82,7 +82,7 @@ private static final Logger logger = LoggerFactory.getLogger(ParentsController.c
 			parent.setCreatedBy(createdBy);
 			parent.setUpdatedBy(createdBy);
 			Parent addParent = parentsService.addParent(parent);
-			return EdgeResponse.createSuccessResponse(addParent, "Parent added Successfully with ID : " + addParent.getParentId(), "Operators and admins should receive email with credentials to login. We thank you for choosing us!", null);
+			return EdgeResponse.createSuccessResponse(addParent, "Entry added Successfully with ID : " + addParent.getParentId(), "Operators and admins should receive email with credentials to login. We thank you for choosing us!", null);
 		}catch(AppException ex){
 			return EdgeResponse.createExceptionResponse(ex);
 		}
@@ -107,7 +107,7 @@ private static final Logger logger = LoggerFactory.getLogger(ParentsController.c
 			) throws Exception{	
 		try{	
 			Parent savedParent = parentsService.updateParent(parent, principal.getName());
-			return EdgeResponse.createDataResponse(savedParent, "Parent saved Successfully with ID : " + parent.getParentId());
+			return EdgeResponse.createDataResponse(savedParent, "Entry saved Successfully with ID : " + parent.getParentId());
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}
