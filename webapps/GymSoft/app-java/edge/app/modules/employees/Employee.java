@@ -49,7 +49,7 @@ public class Employee extends EdgeEntity{
 	@Column(nullable = false, length = 30)
 	private String accountNumber;
 	
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 15)
 	private String ifscCode;
 
 	@Column(nullable = false, length = 100)
