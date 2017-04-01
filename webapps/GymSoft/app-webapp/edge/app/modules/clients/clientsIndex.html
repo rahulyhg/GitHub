@@ -50,7 +50,7 @@
 			Upload Profile Pic For : {{es.client.name}}
 		</h3>
 		<div>
-			<form method="POST" action="server/secured/uploadFile.json" enctype="multipart/form-data" id="fileUploadForm">
+			<form method="POST" action="server/secured/uploadFile" enctype="multipart/form-data" id="fileUploadForm">
 				<div class="rightSection" ng-hide="true">
 					<input class="formInput" type="text" name="entityId" ng-model="es.client.clientId" />
 					<input class="formInput" type="text" name="entityName" value="Client" />

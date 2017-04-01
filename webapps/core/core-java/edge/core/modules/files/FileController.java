@@ -21,6 +21,25 @@ public class FileController {
 	private FileService fileService;
 
 	@RequestMapping(value={"/secured/uploadFile"})
+	@ResponseBody
+	public String uploadFile(
+			@RequestParam("entityId") String entityId,
+			@RequestParam("entityName") String entityName,
+			@RequestParam("columnName") String columnName,
+			@RequestParam("file") MultipartFile file,
+			Principal principal) {
+	
+		try {
+			fileService.uploadFile(Integer.valueOf(entityId),entityName,columnName, file, principal.getName());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  "Error while uploading... \n" + e.getStackTrace();
+		}
+		return "File Uploaded Successfully...";
+	}
+	
+	/*@RequestMapping(value={"/secured/uploadFile"})
 	public EdgeResponse<String> uploadFile(
 			@RequestParam("entityId") String entityId,
 			@RequestParam("entityName") String entityName,
@@ -36,7 +55,7 @@ public class FileController {
 			return EdgeResponse.createErrorResponse(null, "Error while uploading..", e.getMessage(), null);
 		}
 		return EdgeResponse.createDataResponse("Success", " File uploaded Succcesfully " );
-	}
+	}*/
 	
 	@RequestMapping(value = "/secured/files/{entityName}/{columnName}/{entityId}", method = RequestMethod.GET)
 	@ResponseBody
