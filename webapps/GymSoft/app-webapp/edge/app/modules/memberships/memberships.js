@@ -37,7 +37,7 @@ var initializeMembershipGrid = function initializeClientGrid($scope, $http){
 var addMembership = function addMembership($scope, $http){	
 	startAjax('SAVE_MEMBERSHIP', $scope);
 	$scope.es.membership.client = $scope.es.client;
-	$scope.es.membership.packageName = $scope.es.membership.package.name;
+	$scope.es.membership.packageName = $scope.es.membership.selectedPackage.name;
 	$http.post('server/secured/saveMembership.json', $scope.es.membership ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('SAVE_MEMBERSHIP', $scope, data, status, headers, config);
@@ -65,9 +65,9 @@ var loadMemberships = function loadMemberships($scope, $http){
 
 var setToDate  = function setToDate($scope, $http) {
   date = moment($scope.es.membership.fromDate);
-  date = date.add($scope.es.membership.package.months,'months').format('YYYY-MM-DD');
+  date = date.add($scope.es.membership.selectedPackage.months,'months').format('YYYY-MM-DD');
   $scope.es.membership.toDate = date;
-  $scope.es.membership.totalAmount=$scope.es.membership.package.price;
+  $scope.es.membership.totalAmount=$scope.es.membership.selectedPackage.price;
   $scope.es.membership.paidOn = moment().format('YYYY-MM-DD');
 };
 

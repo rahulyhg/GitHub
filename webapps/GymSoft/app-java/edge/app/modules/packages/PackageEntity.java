@@ -21,7 +21,7 @@ import edge.core.modules.common.EdgeEntity;
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"parentId", "name"})}
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Package extends EdgeEntity{
+public class PackageEntity extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,9 @@ public class Package extends EdgeEntity{
 	
 	@Column(nullable = false)
 	private BigDecimal price;
+	
+	@Column(nullable = false)
+	private BigDecimal maxDiscount;
 	
 	@Column(nullable = false, length = 20)
 	private String status;
@@ -141,5 +144,13 @@ public class Package extends EdgeEntity{
 
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	public BigDecimal getMaxDiscount() {
+		return maxDiscount;
+	}
+
+	public void setMaxDiscount(BigDecimal maxDiscount) {
+		this.maxDiscount = maxDiscount;
 	}
 }

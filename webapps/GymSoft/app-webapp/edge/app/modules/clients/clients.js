@@ -78,7 +78,7 @@ var addClient = function addClient($scope, $http){
 	startAjax('SAVE_CLIENT', $scope);
 	$scope.es.newClient = {};
 	$scope.es.newClient.client=$scope.es.client;
-	$scope.es.membership.packageName = $scope.es.membership.package.name;
+	$scope.es.membership.packageName = $scope.es.membership.selectedPackage.name;
 	$scope.es.newClient.membership=$scope.es.membership;	
 	$scope.es.newClient.payment=$scope.es.payment;
 	$http.post('server/secured/saveClient.json', $scope.es.newClient ).

@@ -32,7 +32,9 @@ public class MembershipsServiceImpl implements MembershipsService {
 	public Membership saveMembership(Membership membership, String loggedInId) {
 		try{
 			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-			
+			if(membership.getSelectedPackage().getMaxDiscount().compareTo(membership.getDiscountAmount()) == -1){
+				throw new AppException(null, "Discount offered should be less than " + membership.getSelectedPackage().getMaxDiscount());
+			}
 			membership.setParentId(parentId);
 			membership.setCreatedBy(loggedInId);
 			membership.setUpdatedBy(loggedInId);

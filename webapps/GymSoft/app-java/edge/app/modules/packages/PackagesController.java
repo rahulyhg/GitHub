@@ -43,24 +43,24 @@ private static final Logger logger = LoggerFactory.getLogger(PackagesController.
 	}
 
 	@RequestMapping(value={"/secured/savePackage"})
-	public EdgeResponse<Package> addPackage(
-			@RequestBody Package packagei, Principal principal			
+	public EdgeResponse<PackageEntity> addPackage(
+			@RequestBody PackageEntity packagei, Principal principal			
 			) throws Exception{	
 		try{
-			Package addPackage = packagesService.savePackage(packagei, principal.getName());
-			return EdgeResponse.createDataResponse(addPackage, "Package added Successfully with ID : " + addPackage.getPackageId());
+			PackageEntity addPackage = packagesService.savePackage(packagei, principal.getName());
+			return EdgeResponse.createDataResponse(addPackage, "PackageEntity added Successfully with ID : " + addPackage.getPackageId());
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}
 	}
 	
 	@RequestMapping(value={"/secured/getActivePackages"})
-	public EdgeResponse<List<Package>> getActivePackages( 
+	public EdgeResponse<List<PackageEntity>> getActivePackages( 
 			Principal principal			
 			) throws Exception{	
 		
 		try{	
-			List<Package> allPackages = packagesService.getActivePackages(principal.getName());
+			List<PackageEntity> allPackages = packagesService.getActivePackages(principal.getName());
 			return EdgeResponse.createDataResponse(allPackages, "");
 				
 		}catch(AppException ae){
@@ -69,12 +69,12 @@ private static final Logger logger = LoggerFactory.getLogger(PackagesController.
 	}
 	
 	@RequestMapping(value={"/secured/getAllPackages"})
-	public EdgeResponse<List<Package>> getAllPackages( 
+	public EdgeResponse<List<PackageEntity>> getAllPackages( 
 			Principal principal			
 			) throws Exception{	
 		
 		try{	
-			List<Package> allPackages = packagesService.getAllPackages(principal.getName());
+			List<PackageEntity> allPackages = packagesService.getAllPackages(principal.getName());
 			return EdgeResponse.createDataResponse(allPackages, "");
 				
 		}catch(AppException ae){

@@ -9,7 +9,7 @@ var initializePackagesGrid = function initializeClientGrid($scope, $http){
 	$scope.es.packagesGridOptions = { 
 									enableFiltering: true, enableRowSelection: true,
 									columnDefs: [{field:'packageId'},{field:'name'},{field:'months'},
-									             {field:'price', cellFilter: "currency:''"},
+									             {field:'price', cellFilter: "currency:''"},{field:'maxDiscount', cellFilter: "currency:''"},
 												 {field:'status'},
 									             {field:'updatedOn', cellFilter: "date:'yyyy-MM-dd'"}
 									             ]

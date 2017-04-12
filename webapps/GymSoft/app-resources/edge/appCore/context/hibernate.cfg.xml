@@ -17,7 +17,7 @@
        <mapping class="edge.app.modules.expenses.Expense" />
        <mapping class="edge.app.modules.attendance.Attendance" />
        <mapping class="edge.app.modules.employees.Employee" />
-       <mapping class="edge.app.modules.packages.Package" />
+       <mapping class="edge.app.modules.packages.PackageEntity" />
        
     </session-factory> 
 </hibernate-configuration>

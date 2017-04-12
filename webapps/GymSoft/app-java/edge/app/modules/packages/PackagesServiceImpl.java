@@ -25,7 +25,7 @@ public class PackagesServiceImpl implements PackagesService {
 
 	@Override
 	@Transactional
-	public Package savePackage(Package packagei, String loggedInId) {
+	public PackageEntity savePackage(PackageEntity packagei, String loggedInId) {
 		try{
 			int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
 			
@@ -41,15 +41,15 @@ public class PackagesServiceImpl implements PackagesService {
 	}
 
 	@Override
-	public List<Package> getActivePackages(String loggedInId) {
+	public List<PackageEntity> getActivePackages(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Package where parentId = '" + parentId +"' and status = 'Active' order by months desc, name ");
+		return commonHibernateDao.getHibernateTemplate().find("from PackageEntity where parentId = '" + parentId +"' and status = 'Active' order by months desc, name ");
 	}
 	
 	@Override
-	public List<Package> getAllPackages(String loggedInId) {
+	public List<PackageEntity> getAllPackages(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Package where parentId = '" + parentId +"' order by months desc, name ");
+		return commonHibernateDao.getHibernateTemplate().find("from PackageEntity where parentId = '" + parentId +"' order by months desc, name ");
 	}
 
 	public ParentsService getParentsService() {

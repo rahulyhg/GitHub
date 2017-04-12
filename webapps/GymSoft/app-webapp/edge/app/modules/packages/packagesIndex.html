@@ -34,6 +34,11 @@
 			<input required="required" type="number" min="0" ng-minlength="2" maxlength="7" class="formInput" ng-model="es.package.price" title="~Price~" /> 
 		</div>
 		
+		<div class="leftSection">Max Discount:</div>
+		<div class="rightSection">
+			<input required="required" type="number" min="0" maxlength="7" class="formInput" ng-model="es.package.maxDiscount" title="~Max Discount~" /> 
+		</div>
+		
 		<div class="leftSection">Status:</div>
 		<div class="rightSection">
 			<select required class="formInput" ng-model="es.package.status" title="~Status~" ng-options="values for values in es.statusList">

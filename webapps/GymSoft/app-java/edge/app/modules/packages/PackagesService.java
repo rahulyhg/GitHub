@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface PackagesService {
 
-	Package savePackage(Package parent, String loggedInId);
+	PackageEntity savePackage(PackageEntity parent, String loggedInId);
 
-	List<Package> getAllPackages(String loggedInId);
+	List<PackageEntity> getAllPackages(String loggedInId);
 	
-	List<Package> getActivePackages(String loggedInId);
+	List<PackageEntity> getActivePackages(String loggedInId);
 
 }

@@ -10,12 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import edge.app.modules.clients.Client;
 import edge.app.modules.employees.Employee;
+import edge.app.modules.packages.PackageEntity;
 import edge.core.modules.common.EdgeEntity;
 import edge.core.utils.CoreDateUtils;
 
@@ -43,6 +45,9 @@ public class Membership extends EdgeEntity{
 	
 	@Column(nullable = false, length = 50)
 	private String packageName;
+
+	@Transient
+	private PackageEntity selectedPackage;
 	
 	@Column(nullable = false)
 	private Date fromDate;
@@ -219,8 +224,16 @@ public class Membership extends EdgeEntity{
 	
 	public String toComment() {
 		return membershipId + "; C: " + getCollectionByName() + " - U: " + getUpdatedBy()
-				+ "<br>      Package: " + packageName + " ( " + CoreDateUtils.dateToStandardSting(fromDate) + " - " + CoreDateUtils.dateToStandardSting(toDate)  + " ) "
+				+ "<br>      PackageEntity: " + packageName + " ( " + CoreDateUtils.dateToStandardSting(fromDate) + " - " + CoreDateUtils.dateToStandardSting(toDate)  + " ) "
 				+ "<br>      Amount: " + totalAmount + " - " + discountAmount + " = " + effectiveAmount;
+	}
+
+	public PackageEntity getSelectedPackage() {
+		return selectedPackage;
+	}
+
+	public void setSelectedPackage(PackageEntity selectedPackage) {
+		this.selectedPackage = selectedPackage;
 	}
 
 }
