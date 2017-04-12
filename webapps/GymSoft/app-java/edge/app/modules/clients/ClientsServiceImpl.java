@@ -115,7 +115,7 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public List<Client> getAllReminders(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and reminderOn <= current_date order by reminderOn desc ");
+		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and reminderOn <= current_date order by reminderOn ");
 	}
 	
 	@Override
@@ -157,8 +157,7 @@ public class ClientsServiceImpl implements ClientsService {
 			client.setReminderAbout("Renewal");
 			
 		}else{
-			Date today = new Date();
-			client.setReminderOn(DateUtils.addDays(today, 20));
+			client.setReminderOn(DateUtils.addDays(payment.getPaidOn(), 20));
 			client.setReminderAbout("Balance Due");
 		}
 		String comment = 

@@ -50,7 +50,7 @@ public class MembershipsServiceImpl implements MembershipsService {
 	@Override
 	public List<Membership> getAllMemberships(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Membership where parentId = '" + parentId +"'");
+		return commonHibernateDao.getHibernateTemplate().find("from Membership where parentId = '" + parentId +"' order by fromDate desc ");
 	}
 
 	public ClientsService getClientsService() {

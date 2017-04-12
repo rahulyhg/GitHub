@@ -44,7 +44,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 	@Override
 	public List<Expense> getAllExpenses(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Expense where parentId = '" + parentId +"'");
+		return commonHibernateDao.getHibernateTemplate().find("from Expense where parentId = '" + parentId +"' order by paidOn desc ");
 	}
 
 	public ParentsService getParentsService() {
