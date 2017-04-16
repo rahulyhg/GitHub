@@ -36,6 +36,9 @@ public class Client extends EdgeEntity{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int clientId;
 	
+	@Column(nullable = false, length = 50)
+	private String oldClientId;
+	
 	@Column(nullable = false, length = 100)
 	private String name;
 	
@@ -287,6 +290,16 @@ public class Client extends EdgeEntity{
 
 	public void setProfilePic(String profilePic) {
 		this.profilePic = profilePic;
+	}
+
+	public String getOldClientId() {
+		return oldClientId;
+	}
+
+	public void setOldClientId(String oldClientId) {
+		if(oldClientId != null){
+			this.oldClientId = oldClientId.trim();
+		}
 	}
 	
 	/*

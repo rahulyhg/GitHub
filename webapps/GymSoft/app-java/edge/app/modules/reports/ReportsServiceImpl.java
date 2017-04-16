@@ -32,7 +32,7 @@ public class ReportsServiceImpl implements ReportsService {
 		GregorianCalendar from = new GregorianCalendar();
 		from.add(Calendar.MONTH, -12);
 
-		String queryString = "select year(fromDate), month(fromDate), collectionByName, packageName, sum(effectiveAmount) as collection from Membership where parentId= " + parentId +
+		String queryString = "select year(fromDate), month(fromDate), collectionByName, packageName, count(membershipId), sum(effectiveAmount) as collection from Membership where parentId= " + parentId +
 				             "  group by year(fromDate), month(fromDate), collectionByName, packageName " +
 				             "  order by year(fromDate) desc, month(fromDate) desc, collectionByName, packageName ";
 		
@@ -49,7 +49,7 @@ public class ReportsServiceImpl implements ReportsService {
 		GregorianCalendar from = new GregorianCalendar();
 		from.add(Calendar.MONTH, -12);
 
-		String queryString = "select year(paidOn), month(paidOn), pymtMode, sum(paidAmount) as collection from Payment where parentId= " + parentId +
+		String queryString = "select year(paidOn), month(paidOn), pymtMode, count(paymentId), sum(paidAmount) as collection from Payment where parentId= " + parentId +
 				             "  group by year(paidOn),month(paidOn), pymtMode " +
 				             "  order by year(paidOn) desc, month(paidOn) desc, pymtMode ";
 		
@@ -91,7 +91,7 @@ public class ReportsServiceImpl implements ReportsService {
 		GregorianCalendar from = new GregorianCalendar();
 		from.add(Calendar.MONTH, -12);
 
-		String queryString = "select year(paidOn), month(paidOn), pymtMode, sum(paidAmount) as collection from Expense where parentId= " + parentId +
+		String queryString = "select year(paidOn), month(paidOn), pymtMode, count(expenseId), sum(paidAmount) as collection from Expense where parentId= " + parentId +
 				             "  group by year(paidOn),month(paidOn), pymtMode " +
 				             "  order by year(paidOn) desc, month(paidOn) desc, pymtMode ";
 		

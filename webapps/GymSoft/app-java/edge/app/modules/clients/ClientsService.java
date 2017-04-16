@@ -23,4 +23,10 @@ public interface ClientsService {
 
 	Client saveReminder(Client client, String loggedInId) throws Exception;
 
+	String uploadClientsFile(String loggedInId);
+
+	String uploadMembershipsFile(String loggedInId);
+
+	Client getClientByOldClientId(String oldClientId, int parentId);
+
 }

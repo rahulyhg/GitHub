@@ -7,21 +7,15 @@
 <body>
 	<div class="addUploadDiv padding5px" ng-init="es.initUploads()">
 		<h3>
-			Profile Pic
+			Upload Clients
 		</h3>
-		<div>
-			<form method="POST" action="server/secured/uploadProfilePic.json" enctype="multipart/form-data" id="fileUploadForm">
-				<div class="leftSection">Client Id:</div>
-				<div class="rightSection">
-					<input class="formInput" type="text" name="clientId" title="~Id~" size="70"/>
-				</div>		    
-				<div class="leftSection">Profile Pic:</div>
-				<div class="rightSection">
-					<input class="formInput" type="file" name="profilePic" title="~File~" size="70" />
-					<input type="submit" value="Upload" class="btn btn-info"/>
-				</div>	
-			</form>
-		</div>	
+		<form method="POST" action="server/secured/uploadClientsFile" enctype="multipart/form-data" id="fileUploadForm">
+			<div class="leftSection">Clients File:</div>
+			<div class="rightSection">
+				<input class="formInput" type="file" name="file" title="~File~" size="70" />
+			</div>	
+			<input type="submit" value="Upload Clients" class="btn btn-info"/>
+		</form>
 	
 	</div>
 </body>

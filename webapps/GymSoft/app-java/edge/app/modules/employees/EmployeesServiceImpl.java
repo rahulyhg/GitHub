@@ -60,4 +60,9 @@ public class EmployeesServiceImpl implements EmployeesService {
 	public void setParentsService(ParentsService parentsService) {
 		this.parentsService = parentsService;
 	}
+
+	@Override
+	public Employee getEmployeeById(int id, int parentId) {
+		return (Employee) commonHibernateDao.getHibernateTemplate().find("from Employee where parentId = '" + parentId +"' and employeeId = " + id).get(0);
+	}
 }

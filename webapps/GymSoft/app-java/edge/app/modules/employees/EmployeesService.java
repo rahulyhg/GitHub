@@ -10,4 +10,6 @@ public interface EmployeesService {
 
 	List<Employee> getActiveEmployees(String loggedInId);
 
+	Employee getEmployeeById(int id, int parentId);
+
 }

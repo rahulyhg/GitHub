@@ -1,5 +1,6 @@
 package edge.app.modules.clients;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.common.AppConstants;
+import edge.app.modules.employees.EmployeesService;
 import edge.app.modules.memberships.Membership;
 import edge.app.modules.memberships.MembershipsService;
 import edge.app.modules.payments.Payment;
@@ -22,6 +24,7 @@ import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.parents.Parent;
 import edge.core.modules.parents.ParentsService;
 import edge.core.utils.CoreDateUtils;
+import edge.core.utils.EdgeUtils;
 
 @WebService
 @Component
@@ -38,27 +41,103 @@ public class ClientsServiceImpl implements ClientsService {
 	
 	@Autowired
 	private ParentsService parentsService;
+	
+	@Autowired
+	private EmployeesService employeesService;
 
 	@Override
-	@Transactional
-	public NewClient saveAll(NewClient newClient, String loggedInId) throws Exception {
-		Client client = newClient.getClient();
-		Membership membership = newClient.getMembership();
-		Payment payment = newClient.getPayment();
+	public String uploadMembershipsFile(String loggedInId) {
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		StringBuilder retValue = new StringBuilder();
 		
-		saveClient(client, loggedInId);
+		String message= "";
+		for(String membershipStr : EdgeUtils.memberships){
+			
+			try{
+				String[] splitCsv = EdgeUtils.splitCsv(membershipStr);
+				
+				Client client = getClientByOldClientId(splitCsv[0], parentId);
+				message = splitCsv[0] + ", ";
+				
+				Membership membership = new Membership();
+				
+				membership.setPackageName(splitCsv[2]);
+				membership.setFromDate(CoreDateUtils.parseDate(splitCsv[3]));
+				membership.setToDate(CoreDateUtils.parseDate(splitCsv[4]));
+				membership.setTotalAmount(new BigDecimal(splitCsv[6]));
+				membership.setDiscountAmount(new BigDecimal(0));
+				membership.setEffectiveAmount(new BigDecimal(splitCsv[6]));
+				membership.setCollectionByName("System Enetered");
+				membership.setCollectionBy(employeesService.getEmployeeById(11, parentId));
+				
+				Payment payment = new Payment();				
+				payment.setPaidAmount(new BigDecimal(splitCsv[8]));
+				payment.setPaidOn(CoreDateUtils.parseDate(splitCsv[5]));
+				payment.setPymtMode("Old Transfer");
+				payment.setDetails("Old Client : " + splitCsv[0]);
+				
+				NewClient newClient = new NewClient();
+				newClient.setClient(client);
+				newClient.setMembership(membership);
+				newClient.setPayment(payment);
+				
+				saveAll(newClient, loggedInId);
+				
+			}catch(Exception ex){
+				ex.printStackTrace();
+				retValue.append(ex.getMessage() + " : " + message);
+			}
+		}
 		
-		// MEMBERSHIP
-		membership.setClient(client);
-		membershipsService.saveMembership(membership, loggedInId);
-		
-		// PAYMENT
-		payment.setClient(client);
-		paymentService.savePayment(payment, loggedInId);
-		
-		return newClient;
+		return retValue.toString();
 	}
 	
+	@Override
+	public Client getClientByOldClientId(String oldClientId, int parentId) {
+		return (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and oldClientId = '" + oldClientId + "'").get(0);
+	}
+
+	@Override
+	public String uploadClientsFile(String loggedInId) {
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		int counter = 0;
+		StringBuilder retValue = new StringBuilder();
+		
+		String message= "";
+		for(String clientStr : EdgeUtils.clients){
+			
+			try{
+				String[] splitCsv = EdgeUtils.splitCsv(clientStr);
+				Client client = new Client();
+				message = splitCsv[0] + ", ";
+				client.setOldClientId(splitCsv[0]);
+				client.setName(splitCsv[1]);
+				client.setGender(splitCsv[2]);
+				client.setPhone(splitCsv[3]);
+				client.setEmailId(splitCsv[4]);
+				client.setAddress(splitCsv[5]);
+				
+				client.setUpdatedBy(loggedInId);			
+				client.setParentId(parentId);
+				client.setCreatedBy(loggedInId);
+
+				Date today = new Date();
+				client.setReminderOn(DateUtils.addDays(today, 5));
+				client.setReminderAbout("Enquiry");
+				client.setComment("  New Client Added.");
+				client.addComment("     " + client.getComment(), loggedInId);
+				
+				commonHibernateDao.save(client);
+				counter ++;
+			}catch(Exception ex){
+				ex.printStackTrace();
+				retValue.append(message);
+			}
+		}
+		
+		return retValue.toString();
+	}
+		
 	@Override
 	@Transactional
 	public Client saveClient(Client client, String loggedInId) {
@@ -86,6 +165,26 @@ public class ClientsServiceImpl implements ClientsService {
 			throw new AppException(ex, ex.getMessage());
 		}
 		return client;
+	}
+
+	@Override
+	@Transactional
+	public NewClient saveAll(NewClient newClient, String loggedInId) throws Exception {
+		Client client = newClient.getClient();
+		Membership membership = newClient.getMembership();
+		Payment payment = newClient.getPayment();
+		
+		saveClient(client, loggedInId);
+		
+		// MEMBERSHIP
+		membership.setClient(client);
+		membershipsService.saveMembership(membership, loggedInId);
+		
+		// PAYMENT
+		payment.setClient(client);
+		paymentService.savePayment(payment, loggedInId);
+		
+		return newClient;
 	}
 	
 	@Override
@@ -121,7 +220,7 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public List<Client> getAllClients(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' order by name ");
+		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' order by updatedOn ");
 	}
 
 	@Override
@@ -215,9 +314,14 @@ public class ClientsServiceImpl implements ClientsService {
 		
 	}
 	
+	
+	
 	public static void main(String[] args) {
-		String str = "first line \n second line";
-		System.out.println(str.replace("\n", "<br>"));
+		String text = "ATF967,Shubham Sunil More - ATF967,Male,7715084700,ssmore97@gmail.com,\"002, sangam chs, Plot 53 - A , Sec - 21 , Kharghar\",Active";
+		String[] split = EdgeUtils.splitCsv(text);
+		for(String s:split) {
+		    System.out.println(s);
+		}
 	}
 
 }

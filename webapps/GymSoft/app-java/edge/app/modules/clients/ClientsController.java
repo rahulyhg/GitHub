@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edge.app.modules.memberships.MembershipsService;
 import edge.app.modules.payments.PaymentsService;
@@ -63,6 +64,36 @@ private static final Logger logger = LoggerFactory.getLogger(ClientsController.c
 			retValue = EdgeResponse.createErrorResponse(client, ex.getMessage(), null, null);
 		}
 		return retValue;
+	}
+	
+	// http://apps4gym.in/contextRoot/server/secured/uploadClientsFile.json
+	@RequestMapping(value={"/secured/uploadClientsFile"})
+	@ResponseBody
+	public String uploadClientsFile( Principal principal) {
+	
+		try {
+			String message = clientsService.uploadClientsFile(principal.getName());
+			return " Clients Uploaded Successfully except... " + message;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  "Error while uploading... \n" + e.getStackTrace();
+		}
+	}
+	
+	// http://apps4gym.in/contextRoot/server/secured/uploadMembershipsFile.json
+	@RequestMapping(value={"/secured/uploadMembershipsFile"})
+	@ResponseBody
+	public String uploadMembershipsFile( Principal principal) {
+	
+		try {
+			String message = clientsService.uploadMembershipsFile(principal.getName());
+			return " Memberships Uploaded Successfully except... " + message;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  "Error while uploading... \n" + e.getStackTrace();
+		}
 	}
 	
 	@RequestMapping(value={"/secured/saveEnquiry"})
