@@ -196,8 +196,30 @@ public class AuthServiceImpl implements AuthService{
 					"Password Updated Successfully.");
 	}
 
+
+	@SuppressWarnings("unchecked")
 	@Override
-	public String getLoggedInRole(String loggedInId) {
+	public UserViewModel getLoggedInUser(String loggedInId) {
+		
+		UserViewModel userViewModel = new UserViewModel();
+		
+		userViewModel.setUserName(loggedInId);
+		userViewModel.setRole(getLoggedInRole(loggedInId));
+		
+		@SuppressWarnings("unchecked")
+		List<SignUpEntity> userData = commonHibernateDao.getHibernateTemplate().find("from SignUpEntity where username='" + loggedInId + "'");
+		if(userData != null && userData.size() == 1){
+			SignUpEntity signUpEntity = userData.get(0);
+			userViewModel.setEmailId(signUpEntity.getEmailId());
+			userViewModel.setEnabled(signUpEntity.getEnabled());
+			userViewModel.setProfileId(signUpEntity.getProfileId());
+			userViewModel.setGender(signUpEntity.getGender());
+		}
+		
+		return userViewModel;
+	}
+	
+	private String getLoggedInRole(String loggedInId) {
 		List<AuthorityEntity> auths = commonHibernateDao.getHibernateTemplate().find("from AuthorityEntity where username='" + loggedInId + "'");
 		if(auths != null && auths.size() == 1){
 			return auths.get(0).getAuthority();

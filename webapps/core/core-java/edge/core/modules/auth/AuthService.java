@@ -13,7 +13,7 @@ public interface AuthService {
 
 	String sendVerificationCode(String emailId);
 	
-	String getLoggedInRole(String loggedInId);
+	UserViewModel getLoggedInUser(String loggedInId);
 
 	void signUpUsers(String[] emailIds);
 

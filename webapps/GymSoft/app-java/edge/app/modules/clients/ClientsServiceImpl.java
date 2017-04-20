@@ -220,7 +220,7 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public List<Client> getAllClients(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' order by updatedOn ");
+		return commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' order by updatedOn desc ");
 	}
 
 	@Override

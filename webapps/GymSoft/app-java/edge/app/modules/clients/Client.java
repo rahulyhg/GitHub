@@ -36,7 +36,7 @@ public class Client extends EdgeEntity{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int clientId;
 	
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String oldClientId;
 	
 	@Column(nullable = false, length = 100)

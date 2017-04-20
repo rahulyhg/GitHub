@@ -66,27 +66,29 @@ public class AuthController {
 	}
 	
 	@RequestMapping(value={"/unsecured/auth/getLoggedInUser"})
-	public EdgeResponse<String> getLoggedInUser(
+	public EdgeResponse<UserViewModel> getLoggedInUser(
 			Principal principal			
 			){
+		UserViewModel userViewModel = null;
 		if(principal != null){
-			return EdgeResponse.createDataResponse(principal.getName(), null);
+			userViewModel = authService.getLoggedInUser(principal.getName());
 		}else{
-			return EdgeResponse.createDataResponse("", null);
+			userViewModel = new UserViewModel();
 		}
 		
+		return EdgeResponse.createDataResponse(userViewModel, null);
 	}
-	
+		
 	@RequestMapping(value={"/unsecured/auth/getLoggedInRole"})
 	public EdgeResponse<String> getLoggedInRole(
 			Principal principal			
 			){
+		String role = "";
 		if(principal != null){
-			return EdgeResponse.createDataResponse(authService.getLoggedInRole(principal.getName()), null);
-		}else{
-			return EdgeResponse.createDataResponse("", null);
+			UserViewModel userViewModel = authService.getLoggedInUser(principal.getName());
+			role = userViewModel.getRole();
 		}
-		
+		return EdgeResponse.createDataResponse(role, null);
 	}
 	
 	@RequestMapping(value={"/unsecured/authFailed"})

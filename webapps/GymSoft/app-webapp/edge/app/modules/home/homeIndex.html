@@ -12,12 +12,12 @@
 			</div>
 		</div>
 	 	<div>	
-		   	<div ng-if="!es.loggedInUserId">
+		   	<div ng-if="!es.loggedInUser.userName">
 		   		<div ng-include="'edge/app/modules/home/guestIndex.html'" />
 			</div>
 		</div>
 		<div>
-			<div ng-if="es.loggedInUserId">
+			<div ng-if="es.loggedInUser.userName">
 		   		<div ng-include="'edge/app/modules/home/userIndex.html'" />
 		   	</div>
 		</div>
