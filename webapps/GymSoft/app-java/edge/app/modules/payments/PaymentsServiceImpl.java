@@ -50,7 +50,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 	@Override
 	public List<Payment> getAllPayments(String loggedInId) {
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		return commonHibernateDao.getHibernateTemplate().find("from Payment where parentId = '" + parentId +"' order by paidOn desc ");
+		return commonHibernateDao.getHibernateTemplate().find("from Payment where parentId = '" + parentId +"' order by updatedOn desc ");
 	}
 
 	public ParentsService getParentsService() {

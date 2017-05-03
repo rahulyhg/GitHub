@@ -46,6 +46,9 @@ public class Payment extends EdgeEntity{
 	@Column(nullable = false, length = 20)
 	private String pymtMode;
 	
+	@Column(nullable = false, length = 50)
+	private String referenceNo;
+	
 	@Column(nullable = false, length = 200)
 	private String details;
 
@@ -182,6 +185,14 @@ public class Payment extends EdgeEntity{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getReferenceNo() {
+		return referenceNo;
+	}
+
+	public void setReferenceNo(String referenceNo) {
+		this.referenceNo = referenceNo;
 	}
 	
 }

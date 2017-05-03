@@ -226,15 +226,21 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public Client updateClientAsPerMembership(Membership membership, String loggedInId, int parentId) {
 		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + membership.getClientId()).get(0);
+		
+		BigDecimal prevBalanceAmount = client.getBalanceAmount();
+		BigDecimal effectiveAmount = membership.getEffectiveAmount();
+		BigDecimal newBalanceAmount = prevBalanceAmount.add(effectiveAmount);
+		
 		client.setUpdatedBy(membership.getUpdatedBy());
-		client.setBalanceAmount(client.getBalanceAmount().add(membership.getEffectiveAmount()));
-		client.setTotalAmount(client.getTotalAmount().add(membership.getEffectiveAmount()));
+		client.setBalanceAmount(newBalanceAmount);
+		client.setTotalAmount(client.getTotalAmount().add(effectiveAmount));
 		if(client.getMembershipEndDate() == null || membership.getToDate().after(client.getMembershipEndDate())){
 			client.setMembershipEndDate(membership.getToDate());
 		}
+		
 		String comment = 
-				    "  Membership Added : " + membership.toComment() 
-				+ "<br>      Balance : " + client.getTotalAmount() + " - " + client.getPaidAmount() + " = " + client.getBalanceAmount();
+				"  Membership Added : " + membership.toComment() 
+				+ "<br>      Balance : " + prevBalanceAmount + " + " + effectiveAmount + " = " + newBalanceAmount;
 		
 		client.addComment(comment, loggedInId);		
 		saveClient(client, loggedInId);
@@ -244,11 +250,16 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public Client updateClientAsPerPayment(Payment payment, String loggedInId, int parentId) throws Exception {
 		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + payment.getClientId()).get(0);
-		client.setLastPaidOn(payment.getPaidOn());
-		client.setBalanceAmount(client.getBalanceAmount().subtract(payment.getPaidAmount()));
-		client.setPaidAmount(client.getPaidAmount().add(payment.getPaidAmount()));
+	
+		BigDecimal balanceAmount = client.getBalanceAmount();
+		BigDecimal paidAmount = payment.getPaidAmount();
+		BigDecimal newBalanceAmount = balanceAmount.subtract(paidAmount);
 		
-		int signum = client.getBalanceAmount().signum();
+		client.setLastPaidOn(payment.getPaidOn());
+		client.setBalanceAmount(newBalanceAmount);
+		client.setPaidAmount(client.getPaidAmount().add(paidAmount));
+		
+		int signum = balanceAmount.signum();
 		if(signum == 0){
 			// If Balance is Zero
 			Date today = new Date();
@@ -261,7 +272,7 @@ public class ClientsServiceImpl implements ClientsService {
 		}
 		String comment = 
 					    "  Payment Added : " + payment.toComment() 
-					+ "<br>      Balance : " + client.getTotalAmount() + " - " + client.getPaidAmount() + " = " + client.getBalanceAmount();
+					+ "<br>      Balance : " + balanceAmount + " - " + paidAmount + " = " + newBalanceAmount;
 		
 		client.addComment(comment, loggedInId);
 		saveClient(client, loggedInId);

@@ -3,7 +3,7 @@ var initDropDowns = function($scope){
 
 	$scope.es.genderList =  ['Female','Male'];
 	
-	$scope.es.pymtModeList =  ['Cash','MSwipe','Cheque','Online'];
+	$scope.es.pymtModeList =  ['Card','Cheque','Paytm','Online','Cash','Other'];
 	
 	$scope.es.statusList =  ['Draft','Active','Inactive'];
 	

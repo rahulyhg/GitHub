@@ -16,6 +16,7 @@ var initializePaymentsGrid = function initializeClientGrid($scope, $http){
 									             {field:'paidAmount', cellFilter: "currency:''"},
 									             {field:'paidOn', cellFilter: "date:'yyyy-MM-dd'"},
 									             {field:'pymtMode'},
+									             {field:'referenceNo'},
 									             {field:'details'},
 									             {field:'status'}
 									                 ]

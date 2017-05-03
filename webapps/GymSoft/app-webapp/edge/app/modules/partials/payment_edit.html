@@ -18,8 +18,13 @@
 		</select>
 	</div>
 	
+	<div class="leftSection">Card/Cheque No:</div>
+	<div class="rightSection">
+		<input required="required" type="text" size="70" maxlength="40" class="formInput" ng-model="es.payment.referenceNo" placeholder="Last 4 Digits for Card; Cheque Number for Cheque; and 0 for Others">
+	</div>
+	
 	<div class="leftSection">Details:</div>
 	<div class="rightSection">
-		<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.payment.details" title="~Details~" size="70" />
+		<input required="required" ng-minlength="3" maxlength="200" ng-maxlength="200" class="formInput" type="text" ng-model="es.payment.details" placeholder="Autorization Id / Transaction Id / Relevant Details" size="70" />
 	</div>
 </div>
