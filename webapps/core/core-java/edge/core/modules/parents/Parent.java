@@ -96,7 +96,11 @@ public class Parent extends EdgeEntity{
 	}
 
 	public void setOperators(String operators) {
-		this.operators = "," + operators.replace(" ", "") + ",";
+		operators = operators.replace(" ", "");
+		char charAt = operators.charAt(0);
+		if(charAt != ','){
+			this.operators = "," + operators + ",";
+		}
 	}
 
 	public String getAdmins() {
@@ -104,7 +108,11 @@ public class Parent extends EdgeEntity{
 	}
 
 	public void setAdmins(String admins) {
-		this.admins =  "," + admins.replace(" ", "") + ",";
+		admins = admins.replace(" ", "");
+		char charAt = admins.charAt(0);
+		if(charAt != ','){
+			this.admins = "," + admins + ",";
+		}
 	}
 
 	public String getLogo() {

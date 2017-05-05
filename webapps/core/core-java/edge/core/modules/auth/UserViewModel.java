@@ -1,6 +1,7 @@
 package edge.core.modules.auth;
 
 
+
 public class UserViewModel {
 
 	private String userName;

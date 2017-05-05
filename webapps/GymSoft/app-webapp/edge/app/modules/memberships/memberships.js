@@ -10,7 +10,7 @@ var initMemberships = function initMemberships($scope, $http){
 
 var initializeMembershipGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.membershipsGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'membershipId'},{field:'client.name'},{field:'packageName'},
 									             {field:'fromDate', cellFilter: "date:'yyyy-MM-dd'"},
 									             {field:'toDate', cellFilter: "date:'yyyy-MM-dd'"},

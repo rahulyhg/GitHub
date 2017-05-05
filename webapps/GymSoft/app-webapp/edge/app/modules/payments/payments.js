@@ -10,7 +10,7 @@ var initPayments = function initPayments($scope, $http){
 
 var initializePaymentsGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.paymentsGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'paymentId'},
 									             {field:'client.name', name:'Client'},
 									             {field:'paidAmount', cellFilter: "currency:''"},

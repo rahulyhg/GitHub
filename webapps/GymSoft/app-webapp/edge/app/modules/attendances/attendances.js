@@ -8,7 +8,7 @@ var initAttendances = function initAttendances($scope, $http){
 
 var initializeAttendancesGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.attendancesGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'attendanceId'}, {name: 'Employee', field:'employee.display'}, 
 									             {field:'attendanceOn', cellFilter: "date:'yyyy-MM-dd'"},{field:'checkInHr'},{field:'checkOutHr'},{field:'hoursWorked'},{field:'details'},
 									             {field:'updatedOn', cellFilter: "date:'yyyy-MM-dd'"}

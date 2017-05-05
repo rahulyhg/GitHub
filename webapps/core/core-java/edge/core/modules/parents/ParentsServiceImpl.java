@@ -1,5 +1,6 @@
 package edge.core.modules.parents;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,9 +28,13 @@ public class ParentsServiceImpl implements ParentsService {
 	private AuthService authService;
 	
 	@Override
-	public Parent addParent(Parent parent) {
+	@Transactional
+	public Parent addParent(Parent parent, String createdBy) {
 		try{
 			parent.setFromDate(DateUtils.addDays(new Date(), -1));
+			
+			parent.setCreatedBy(createdBy);
+			parent.setUpdatedBy(createdBy);
 			
 			Calendar cal = Calendar.getInstance(); 
 			cal.add(Calendar.MONTH, 3);
@@ -40,6 +45,13 @@ public class ParentsServiceImpl implements ParentsService {
 			authService.signUpUsers(parent.getAdmins().split(","));
 			
 			commonHibernateDao.save(parent);
+			
+			ParentData parentData = new ParentData();
+			parentData.setParentId(parent.getParentId());
+			parentData.setDeskCashBalance(new BigDecimal(0));
+			parentData.setCreatedBy(createdBy);
+			parentData.setUpdatedBy(createdBy);
+			commonHibernateDao.save(parentData);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -57,6 +69,7 @@ public class ParentsServiceImpl implements ParentsService {
 			authService.signUpUsers(parent.getAdmins().split(","));
 			
 			commonHibernateDao.update(parent);
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 			throw new AppException(ex, ex.getMessage());
@@ -64,6 +77,12 @@ public class ParentsServiceImpl implements ParentsService {
 		return parent;
 	}
 
+	@Override
+	public  ParentData getParentData(String loggedInId) {
+		int parentId = getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		return (ParentData) commonHibernateDao.getHibernateTemplate().find("from ParentData where parentId = '" + parentId +"' ").get(0);
+	}
+	
 	@Override
 	public List<Parent> getAllParents() {
 		return commonHibernateDao.getHibernateTemplate().loadAll(Parent.class);

@@ -7,6 +7,24 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		register($scope, $http);
 	};
 
+	// CASH TRANSACTIONS
+	
+	$scope.es.initCashTransactions = function () {
+		initCashTransactions($scope, $http);
+	};
+	
+	$scope.es.loadAllCashTransactions = function () {
+		loadAllCashTransactions($scope, $http);
+	};
+
+	$scope.es.saveCashTransaction = function () {
+		if(confirm(confirmationMsg))  addCashTransaction($scope, $http);
+	};
+	
+	$scope.es.approveCashTransaction = function () {
+		if(confirm(confirmationMsg))  approveCashTransaction($scope, $http);
+	};
+		
 	// PACKAGES
 	
 	$scope.es.initPackages = function () {

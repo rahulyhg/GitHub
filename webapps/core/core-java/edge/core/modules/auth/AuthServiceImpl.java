@@ -21,6 +21,7 @@ import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.mailSender.EventDetails;
+import edge.core.modules.parents.ParentsService;
 import edge.core.utils.SpringQueriesUtil;
 
 @WebService
@@ -30,7 +31,10 @@ public class AuthServiceImpl implements AuthService{
 	private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 	
 	@Autowired
-	CommonHibernateDao commonHibernateDao;
+	private CommonHibernateDao commonHibernateDao;
+	
+	@Autowired
+	private ParentsService parentsService;
 	
 	@Override
 	public EdgeResponse<SignUpEntity> signUp(SignUpEntity signUpEntity) {
@@ -216,6 +220,7 @@ public class AuthServiceImpl implements AuthService{
 			userViewModel.setGender(signUpEntity.getGender());
 		}
 		
+		//ParentData parentData = parentsService.getParentData(loggedInId);		
 		return userViewModel;
 	}
 	
@@ -238,6 +243,14 @@ public class AuthServiceImpl implements AuthService{
 				signUp(signUpEntity);
 			}
 		}
+	}
+
+	public ParentsService getParentsService() {
+		return parentsService;
+	}
+
+	public void setParentsService(ParentsService parentsService) {
+		this.parentsService = parentsService;
 	}
 
 }

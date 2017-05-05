@@ -9,7 +9,7 @@ var initParents = function initParents($scope, $http){
 
 var initializeParentsGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.parentsGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'parentId'},
 									             {field:'name'},
 									             {field:'phone'},

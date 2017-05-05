@@ -9,7 +9,7 @@ var initEmployees = function initEmployees($scope, $http){
 
 var initializeEmployeesGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.employeesGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'employeeId'},{field:'name'},{field:'phone'},{field:'emailId'},
 									             {field:'accountNumber'},{field:'ifscCode'},{field:'bankName'},{field:'branchAddress'},{field:'status'},
 									             ]

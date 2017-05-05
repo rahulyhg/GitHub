@@ -7,7 +7,7 @@ var initExpenses = function initExpenses($scope, $http){
 
 var initializeExpensesGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.expensesGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'expenseId'},{field:'details'},
 									             {field:'paidAmount', cellFilter: "currency:''"},
 									             {field:'pymtMode'},

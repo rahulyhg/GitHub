@@ -31,10 +31,10 @@ var menuMap = {
 		templateUrl : "edge/app/modules/attendances/attendancesIndex.html",
 		icon : ""
 	},
-	"6UPLOAD" : {
-		id : "UPLOAD",
-		title : "Upload",
-		templateUrl : "edge/app/modules/upload/uploadIndex.html",
+	"6CASH_TRANSACTIONS" : {
+		id : "CASH_TRANSACTIONS",
+		title : "Desk Cash",
+		templateUrl : "edge/app/modules/cashTransactions/cashTransactionsIndex.html",
 		icon : ""
 	},
 	"7EMPLOYEES" : {

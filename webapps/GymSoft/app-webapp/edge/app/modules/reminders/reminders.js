@@ -7,7 +7,7 @@ var initReminders = function initReminders($scope, $http){
 
 var initializeRemindersGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.remindersGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'clientId'},{field:'name'},{field:'phone'},{field:'emailId'},
 									             {field:'balanceAmount', cellFilter: "currency:''"},
 									             {field:'lastPaidOn', cellFilter: "date:'yyyy-MM-dd'"},

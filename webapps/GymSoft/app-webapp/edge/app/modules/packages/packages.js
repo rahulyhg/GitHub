@@ -7,7 +7,7 @@ var initPackages = function initPackages($scope, $http){
 
 var initializePackagesGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.packagesGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'packageId'},{field:'name'},{field:'months'},
 									             {field:'price', cellFilter: "currency:''"},{field:'maxDiscount', cellFilter: "currency:''"},
 												 {field:'status'},

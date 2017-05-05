@@ -14,10 +14,12 @@
        <mapping class="edge.app.modules.memberships.Membership" />
        <mapping class="edge.app.modules.payments.Payment" />
        <mapping class="edge.core.modules.parents.Parent" />
+       <mapping class="edge.core.modules.parents.ParentData" />
        <mapping class="edge.app.modules.expenses.Expense" />
        <mapping class="edge.app.modules.attendance.Attendance" />
        <mapping class="edge.app.modules.employees.Employee" />
        <mapping class="edge.app.modules.packages.PackageEntity" />
+       <mapping class="edge.app.modules.cashTransactions.CashTransaction" />
        
     </session-factory> 
 </hibernate-configuration>

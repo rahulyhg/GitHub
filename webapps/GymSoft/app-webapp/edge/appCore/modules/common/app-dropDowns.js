@@ -7,4 +7,6 @@ var initDropDowns = function($scope){
 	
 	$scope.es.statusList =  ['Draft','Active','Inactive'];
 	
+	$scope.es.cashTransactionType =  ['Bank Deposit','Expense','Other'];
+	
 };

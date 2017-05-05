@@ -12,7 +12,7 @@ var initClients = function initClients($scope, $http){
 
 var initializeClientsGrid = function initializeClientGrid($scope, $http){	
 	$scope.es.clientsGridOptions = { 
-									enableFiltering: true, enableRowSelection: true,
+									enableFiltering: true, enableRowSelection: true, multiSelect: false,
 									columnDefs: [{field:'clientId'},{field:'name'},{field:'gender'},{field:'phone'},{field:'emailId'},{field:'profilePic'},
 									             {field:'balanceAmount', cellFilter: "currency:''"},
 									             {field:'lastPaidOn', cellFilter: "date:'yyyy-MM-dd'"},

@@ -6,7 +6,7 @@ import edge.core.modules.auth.SecurityRoles;
 
 public interface ParentsService {
 
-	Parent addParent(Parent parent);
+	Parent addParent(Parent parent, String createdBy);
 
 	List<Parent> getAllParents();
 
@@ -17,5 +17,7 @@ public interface ParentsService {
 	List showAll(String entity);
 
 	Parent updateParent(Parent parent, String loggedInId);
+
+	ParentData getParentData(String loggedInId);
 
 }
