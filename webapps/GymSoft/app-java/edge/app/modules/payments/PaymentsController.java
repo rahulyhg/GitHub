@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edge.app.modules.common.AppConstants;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -57,6 +58,9 @@ private static final Logger logger = LoggerFactory.getLogger(PaymentsController.
 			@RequestBody Payment payment, Principal principal			
 			) throws Exception{	
 		try{
+			if(payment.getPymtMode().equalsIgnoreCase("cash")){
+				payment.setStatus(AppConstants.EntityStatus.SYSTEM.getStatus());
+			}
 			Payment addPayment = paymentsService.savePayment(payment, principal.getName());
 			return EdgeResponse.createDataResponse(addPayment, "Payment added Successfully with ID : " + addPayment.getPaymentId());
 			

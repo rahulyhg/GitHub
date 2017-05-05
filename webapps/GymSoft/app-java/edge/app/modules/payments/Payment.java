@@ -173,7 +173,7 @@ public class Payment extends EdgeEntity{
 	}
 
 	public String toComment() {
-		return paymentId + " - U: " + getUpdatedBy()
+		return " #" + paymentId + " - U: " + getUpdatedBy()
 				+ "<br>      Received " + paidAmount + " on " + CoreDateUtils.dateToStandardSting(paidOn) + " through " + pymtMode;
 				//+ "<br>      " + details
 				//+ "<br>      Created By " + getUpdatedBy()

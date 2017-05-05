@@ -6,7 +6,7 @@ public class AppConstants {
 	
 	public static enum EntityStatus{
 		
-		DRAFT("Draft"), ACTIVE("Active"), INACTIVE("Inactive"), APPROVED("Approved");
+		DRAFT("Draft"), ACTIVE("Active"), INACTIVE("Inactive"), APPROVED("Approved"), SYSTEM("System");
 		
 		private String status;
 		

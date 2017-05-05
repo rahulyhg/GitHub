@@ -47,6 +47,7 @@ public class CashTransactionsServiceImpl implements CashTransactionsService {
 			
 			cashTransaction.setTransactionType("Payment");
 			cashTransaction.setAmount(payment.getPaidAmount());
+			cashTransaction.setStatus(AppConstants.EntityStatus.SYSTEM.getStatus());
 			cashTransaction.setDetails(payment.getClient().getName() +  " :: " + payment.getPaymentId());
 			
 			BigDecimal newBalance =  parentData.getDeskCashBalance().add(cashTransaction.getAmount());

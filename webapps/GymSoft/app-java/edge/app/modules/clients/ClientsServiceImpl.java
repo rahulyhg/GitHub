@@ -201,12 +201,15 @@ public class ClientsServiceImpl implements ClientsService {
 		client.setParentId(parentId);
 		
 		String comment = 	" Comment: " + client.getComment()
+							+ "<br> Membership Ends On: " + client.getMembershipEndDate()
+							+ "<br> Last Payment Date: " + client.getLastPaidOn()
+							+ "<br> Balance: " + client.getBalanceAmount()
 							+ "<br> Next Reminder after " + count + " days On " + CoreDateUtils.dateToStandardSting(client.getReminderOn()) + " about " + client.getReminderAbout();
 		
 		client.addComment(comment, loggedInId);		
 		commonHibernateDao.saveOrUpdate(client);
 		
-		sendActivityThroughMail(client, loggedInId);
+		sendActivityThroughMail("Reminder", client, loggedInId);
 		
 		return client;
 	}
@@ -282,10 +285,10 @@ public class ClientsServiceImpl implements ClientsService {
 		return client;
 	}
 	
-	private void sendActivityThroughMail(Client client, String loggedInId) throws Exception {
+	private void sendActivityThroughMail(String subjectInp, Client client, String loggedInId) throws Exception {
 		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
 		String today = CoreDateUtils.dateToStandardSting(new Date());
-		String subject = "Activity As On " + today + " : " + client.getName();
+		String subject = subjectInp + " : " + today + " : " + client.getName();
 		String text = "<B> Activity Log For Client : " + client.getName() + "</B> <br> <br>" + client.getActivity();
 		String[] toAddresses = new String[]{client.getEmailId()};
 		String[] ccAddresses = new String[]{parent.getEmailId(), loggedInId};
@@ -320,7 +323,7 @@ public class ClientsServiceImpl implements ClientsService {
 		List<Payment> payments = commonHibernateDao.getHibernateTemplate().find("from Payment where clientId = '" + clientId + "' order by paidOn " );
 		Parent parent = (Parent) commonHibernateDao.getHibernateTemplate().find("from Parent where parentId = '" + parentId + "'" ).get(0);
 		Invoice invoice = new Invoice(client, memberships, payments, parent);
-		sendActivityThroughMail(client, loggedInId);
+		sendActivityThroughMail("Activity", client, loggedInId);
 		return invoice;
 		
 	}
