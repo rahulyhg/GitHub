@@ -1,5 +1,6 @@
 package edge.app.modules.cashTransactions;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edge.app.modules.payments.Payment;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -50,6 +50,17 @@ private static final Logger logger = LoggerFactory.getLogger(CashTransactionsCon
 		try{
 			CashTransaction addCashTransaction = cashTransactionsService.saveCashTransaction(cashTransactioni, principal.getName());
 			return EdgeResponse.createDataResponse(addCashTransaction, "CashTransaction added Successfully with ID : " + addCashTransaction.getCashTransactionId());
+		}catch(AppException ae){
+			return EdgeResponse.createExceptionResponse(ae);
+		}
+	}
+
+	@RequestMapping(value={"/secured/getCurrentDeskCashBalance"})
+	public EdgeResponse<BigDecimal> getCurrentDeskCashBalance(
+			Principal principal			
+			) throws Exception{	
+		try{
+			return EdgeResponse.createDataResponse(parentsService.getParentData(principal.getName()).getDeskCashBalance(),"");
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}

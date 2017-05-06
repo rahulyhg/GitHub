@@ -41,6 +41,10 @@ public class PaymentsServiceImpl implements PaymentsService {
 			payment.setCreatedBy(loggedInId);
 			payment.setUpdatedBy(loggedInId);
 			payment.setParentId(parentId);
+			if(payment.getPymtMode().equalsIgnoreCase("cash")){
+				payment.setStatus(AppConstants.EntityStatus.SYSTEM.getStatus());
+			}
+			
 			commonHibernateDao.save(payment);
 			
 			clientsService.updateClientAsPerPayment(payment, loggedInId, parentId);			

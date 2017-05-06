@@ -58,9 +58,6 @@ private static final Logger logger = LoggerFactory.getLogger(PaymentsController.
 			@RequestBody Payment payment, Principal principal			
 			) throws Exception{	
 		try{
-			if(payment.getPymtMode().equalsIgnoreCase("cash")){
-				payment.setStatus(AppConstants.EntityStatus.SYSTEM.getStatus());
-			}
 			Payment addPayment = paymentsService.savePayment(payment, principal.getName());
 			return EdgeResponse.createDataResponse(addPayment, "Payment added Successfully with ID : " + addPayment.getPaymentId());
 			

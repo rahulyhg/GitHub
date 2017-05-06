@@ -8,11 +8,18 @@
 	<div class="addCashTransactionDiv padding5px" ng-init="es.initCashTransactions()">
 		<form action="/contextRoot/secured/saveCashTransaction" method="post" name="myForm">
   			<div><br><br>
-			<div>
+			</div>
+		
 		<h3>
-			<U>Cash Transaction Details:</U>
+			<U>Cash Transaction Details:</U><br>
 		</h3>
 		
+		<h5><B>
+			** Current Balance : {{es.deskCashBalance | currency:''}}
+		</h5></B>
+		
+		<div><br></div>
+	
 		<div class="leftSection">Type:</div>
 		<div class="rightSection">
 			<select required class="formInput" ng-model="es.cashTransaction.transactionType" title="~Transaction Type~" ng-options="values for values in es.cashTransactionType">

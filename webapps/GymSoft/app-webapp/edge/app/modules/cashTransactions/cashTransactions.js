@@ -1,6 +1,7 @@
 
 var initCashTransactions = function initCashTransactions($scope, $http){
 	initializeCashTransactionsGrid($scope, $http);
+	getCurrentDeskCashBalance($scope, $http);
 	$scope.es.cashTransaction = {};
 	$scope.es.loadAllCashTransactions();
 };
@@ -27,12 +28,25 @@ var initializeCashTransactionsGrid = function initializeClientGrid($scope, $http
 	    };
 };
 
+var getCurrentDeskCashBalance = function addCashTransaction($scope, $http){	
+	startAjax('GET_CURRENT_DESK_CASH_BALANCE', $scope);
+	$http.post('server/secured/getCurrentDeskCashBalance.json' ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('GET_CURRENT_DESK_CASH_BALANCE', $scope, data, status, headers, config);
+    	$scope.es.deskCashBalance = data.edgeResponse.responseData;
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('GET_CURRENT_DESK_CASH_BALANCE', $scope, data, status, headers, config);
+    });
+};
+
 var addCashTransaction = function addCashTransaction($scope, $http){	
 	startAjax('SAVE_CASH_TRANSACTION', $scope);
 	$http.post('server/secured/saveCashTransaction.json', $scope.es.cashTransaction ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('SAVE_CASH_TRANSACTION', $scope, data, status, headers, config);
     	loadAllCashTransactions($scope, $http);
+    	getCurrentDeskCashBalance($scope, $http);
     	$scope.es.cashTransaction = {};
     }).
     error(function(data, status, headers, config) {
