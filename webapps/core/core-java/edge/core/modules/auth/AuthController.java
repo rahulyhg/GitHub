@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.mailSender.EventDetails;
+import edge.core.modules.parents.ParentsService;
 
 @Controller
 public class AuthController {
@@ -24,6 +25,9 @@ public class AuthController {
 
 	@Autowired
 	private AuthService authService;
+
+	@Autowired
+	private ParentsService  parentsService;
 	
 	@RequestMapping(value={"/unsecured/auth/signUp"})
 	public EdgeResponse<SignUpEntity> signUp(
@@ -72,6 +76,7 @@ public class AuthController {
 		UserViewModel userViewModel = null;
 		if(principal != null){
 			userViewModel = authService.getLoggedInUser(principal.getName());
+			userViewModel.setAppRole(parentsService.getRole(principal.getName()));
 		}else{
 			userViewModel = new UserViewModel();
 		}

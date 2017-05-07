@@ -17,10 +17,10 @@ import edge.app.modules.memberships.Membership;
 import edge.app.modules.memberships.MembershipsService;
 import edge.app.modules.payments.Payment;
 import edge.app.modules.payments.PaymentsService;
+import edge.appCore.modules.mailSender.GymSoftMailSender;
 import edge.core.exception.AppException;
 import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
-import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.parents.Parent;
 import edge.core.modules.parents.ParentsService;
 import edge.core.utils.CoreDateUtils;
@@ -123,7 +123,7 @@ public class ClientsServiceImpl implements ClientsService {
 
 				Date today = new Date();
 				client.setReminderOn(DateUtils.addDays(today, 5));
-				client.setReminderAbout("Enquiry");
+				client.setReminderAbout(AppConstants.Reminder.ENQUIRY.getDescription());
 				client.setComment("  New Client Added.");
 				client.addComment("     " + client.getComment(), loggedInId);
 				
@@ -152,7 +152,7 @@ public class ClientsServiceImpl implements ClientsService {
 				// NEW CLIENT CASE - SET ENQUIRY FLAG
 				Date today = new Date();
 				client.setReminderOn(DateUtils.addDays(today, 5));
-				client.setReminderAbout("Enquiry");
+				client.setReminderAbout(AppConstants.Reminder.ENQUIRY.getDescription());
 				client.setComment("  New Client Added.");
 				client.addComment("     " + client.getComment(), loggedInId);	
 			}else{
@@ -201,15 +201,22 @@ public class ClientsServiceImpl implements ClientsService {
 		client.setParentId(parentId);
 		
 		String comment = 	" Comment: " + client.getComment()
-							+ "<br> Membership Ends On: " + client.getMembershipEndDate()
-							+ "<br> Last Payment Date: " + client.getLastPaidOn()
+							+ "<br> Membership Ends On: " +  CoreDateUtils.dateToStandardSting(client.getMembershipEndDate())
+							+ "<br> Last Payment Date: " + CoreDateUtils.dateToStandardSting(client.getLastPaidOn())
 							+ "<br> Balance: " + client.getBalanceAmount()
 							+ "<br> Next Reminder after " + count + " days On " + CoreDateUtils.dateToStandardSting(client.getReminderOn()) + " about " + client.getReminderAbout();
 		
 		client.addComment(comment, loggedInId);		
 		commonHibernateDao.saveOrUpdate(client);
 		
-		sendActivityThroughMail("Reminder", client, loggedInId);
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
+		String subject = "Reminder (" + client.getReminderAbout() + ") - Next Reminder after " + count + " days On " + CoreDateUtils.dateToStandardSting(client.getReminderOn());
+
+		if(client.getReminderAbout().equals(AppConstants.Reminder.BALANCE.getDescription())){
+			GymSoftMailSender.notifyClient(subject, parent, client, loggedInId);
+		}else{
+			GymSoftMailSender.notifyGym(subject, parent, client, loggedInId);
+		}
 		
 		return client;
 	}
@@ -253,7 +260,6 @@ public class ClientsServiceImpl implements ClientsService {
 	@Override
 	public Client updateClientAsPerPayment(Payment payment, String loggedInId, int parentId) throws Exception {
 		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + payment.getClientId()).get(0);
-	
 		BigDecimal balanceAmount = client.getBalanceAmount();
 		BigDecimal paidAmount = payment.getPaidAmount();
 		BigDecimal newBalanceAmount = balanceAmount.subtract(paidAmount);
@@ -265,48 +271,53 @@ public class ClientsServiceImpl implements ClientsService {
 		int signum = balanceAmount.signum();
 		if(signum == 0){
 			// If Balance is Zero
-			Date today = new Date();
 			client.setReminderOn(DateUtils.addDays(client.getMembershipEndDate(), -15));
-			client.setReminderAbout("Renewal");
+			client.setReminderAbout(AppConstants.Reminder.RENEWAL.getDescription());
 			
 		}else{
 			client.setReminderOn(DateUtils.addDays(payment.getPaidOn(), 20));
-			client.setReminderAbout("Balance Due");
+			client.setReminderAbout(AppConstants.Reminder.BALANCE.getDescription());
 		}
 		String comment = 
-					    "  Payment Added : " + payment.toComment() 
-					+ "<br>      Balance : " + balanceAmount + " - " + paidAmount + " = " + newBalanceAmount;
+				"  Payment Added : " + payment.toComment() 
+				+ "<br>      Balance : " + balanceAmount + " - " + paidAmount + " = " + newBalanceAmount;
 		
 		client.addComment(comment, loggedInId);
 		saveClient(client, loggedInId);
-
-		notifyPayment(client, payment, loggedInId);
 		
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
+		String subject = "Invoice #" + payment.getPaymentId() + " - Received " + payment.getPaidAmount() + " on " + CoreDateUtils.dateToStandardSting(payment.getPaidOn()) + " through " + payment.getPymtMode();
+		GymSoftMailSender.notifyClient(subject, parent, client, loggedInId);
 		return client;
 	}
 	
-	private void sendActivityThroughMail(String subjectInp, Client client, String loggedInId) throws Exception {
-		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
-		String today = CoreDateUtils.dateToStandardSting(new Date());
-		String subject = subjectInp + " : " + today + " : " + client.getName();
-		String text = "<B> Activity Log For Client : " + client.getName() + "</B> <br> <br>" + client.getActivity();
-		String[] toAddresses = new String[]{client.getEmailId()};
-		String[] ccAddresses = new String[]{parent.getEmailId(), loggedInId};
+	@Override
+	public Client updateClientAsPerRejectedPayment(Payment payment, String loggedInId, int parentId) throws Exception {
+		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + payment.getClientId()).get(0);
+		BigDecimal balanceAmount = client.getBalanceAmount();
+		BigDecimal paidAmount = payment.getPaidAmount();
+		BigDecimal newBalanceAmount = balanceAmount.add(paidAmount);
 		
-		AppMailSender.sendEmail(parent.getName(), parent.getEmailId(), subject, text, toAddresses, ccAddresses);
+		client.setBalanceAmount(newBalanceAmount);
+		client.setPaidAmount(client.getPaidAmount().subtract(paidAmount));
+		
+		client.setReminderOn(new Date());
+		client.setReminderAbout(AppConstants.Reminder.PAYMENT_REJECTED.getDescription());
+		
+		String comment = 
+				"  Payment Rejected  - Details : " + payment.toComment() 
+				+ "<br>      Balance : " + balanceAmount + " + " + paidAmount + " = " + newBalanceAmount;
+		
+		client.addComment(comment, loggedInId);
+		saveClient(client, loggedInId);
+		
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
+		String subject = "Payment Rejected #" + payment.getPaymentId() + " - " + payment.getPaidAmount() + " on " + CoreDateUtils.dateToStandardSting(payment.getPaidOn()) + " through " + payment.getPymtMode();
+		GymSoftMailSender.notifyClient(subject, parent, client, loggedInId);
+	
+		return client;
 	}
 	
-	private void notifyPayment(Client client, Payment payment, String loggedInId) throws Exception {
-		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
-		String today = CoreDateUtils.dateToStandardSting(new Date());
-		String subject = "Invoice #" + payment.getPaymentId() +" - " + today + " : " + client.getName() + " - Received " + payment.getPaidAmount() + " on " + CoreDateUtils.dateToStandardSting(payment.getPaidOn()) + " through " + payment.getPymtMode();
-		String text = "<B> Activity Log For Client : " + client.getName() + "</B> <br> <br>" + client.getActivity();
-		String[] toAddresses = new String[]{client.getEmailId()};
-		String[] ccAddresses = new String[]{parent.getEmailId(), loggedInId};
-		
-		AppMailSender.sendEmail(parent.getName(), parent.getEmailId(), subject, text, toAddresses, ccAddresses);
-	}
-
 	public ParentsService getParentsService() {
 		return parentsService;
 	}
@@ -323,12 +334,10 @@ public class ClientsServiceImpl implements ClientsService {
 		List<Payment> payments = commonHibernateDao.getHibernateTemplate().find("from Payment where clientId = '" + clientId + "' order by paidOn " );
 		Parent parent = (Parent) commonHibernateDao.getHibernateTemplate().find("from Parent where parentId = '" + parentId + "'" ).get(0);
 		Invoice invoice = new Invoice(client, memberships, payments, parent);
-		sendActivityThroughMail("Activity", client, loggedInId);
-		return invoice;
 		
+		GymSoftMailSender.notifyClient("Activity", parent, client, loggedInId);
+		return invoice;
 	}
-	
-	
 	
 	public static void main(String[] args) {
 		String text = "ATF967,Shubham Sunil More - ATF967,Male,7715084700,ssmore97@gmail.com,\"002, sangam chs, Plot 53 - A , Sec - 21 , Kharghar\",Active";

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>AllTransactions</title>
+</head>
+<body>
+	<div class="addAllTransactionDiv padding5px" ng-init="es.initAllTransactions()">
+		<form action="/contextRoot/secured/saveAllTransaction" method="post" name="myForm">
+  			<div><br><br>
+			</div>
+		
+		<h3>
+			<U>Transaction Details:</U><br>
+		</h3>
+		
+		<h5><B>
+			** Desk Balance : {{es.parentData.deskCashBalance | currency:''}}
+		</h5></B>
+		
+		<div>	
+		   	<div ng-if="es.loggedInUser.appRole == 'PARENT_ADMIN'">
+		   		<B>** All Balance : {{es.parentData.allBalance | currency:''}}</B>
+			</div>
+		</div>
+		
+		<div><br></div>
+	
+		<div class="leftSection">Type:</div>
+		<div class="rightSection">
+			<select required class="formInput" ng-model="es.allTransaction.transactionType" title="~Transaction Type~" ng-options="values for values in es.allTransactionType">
+			</select>
+		</div>
+		
+		<div class="leftSection">Amount:</div>
+		<div class="rightSection">
+			<input required="required" type="number" min="0" ng-minlength="2" maxlength="7" class="formInput" ng-model="es.allTransaction.amount" title="~Amount~" /> 
+		</div>
+		
+		<div class="leftSection">Details:</div>
+		<div class="rightSection">
+			<input required="required" ng-minlength="3" maxlength="97" ng-maxlength="97" class="formInput" type="text" ng-model="es.allTransaction.details" title="~Details~" size="70" />
+		</div>
+		
+	</div>
+			
+	<div><br><br></div>
+		    		    
+		    <div>
+		        <span ng-show="!myForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '*' sign).</H5>
+		        	<input required="required" class="btn btn-info" name="submit" type="button" value="Save Transaction" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save AllTransaction" ng-show="myForm.$valid" ng-click="es.saveAllTransaction()"/>
+		    </div>			    
+		    <div><br><br></div>
+		</form>
+		
+	</div>
+	
+	<div>
+		<input required="required" class="btn btn-info" name="submit" type="button" value="Approve ( #{{es.allTransaction.allTransactionId}} ) - {{es.allTransaction.details}}" ng-click="es.approveAllTransaction()"/>
+	</div>
+	
+	<div>
+	    <div id="allAllTransactionsGrid" ui-grid="es.allTransactionsGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection ></div>
+	</div>
+</body>
+</html>

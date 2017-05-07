@@ -1,4 +1,4 @@
-package edge.app.modules.cashTransactions;
+package edge.app.modules.allTransactions;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,24 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import edge.core.modules.common.EdgeEntity;
+import edge.core.utils.CoreDateUtils;
 
 @Entity
 @Table(
-		name = "CASH_TRANSACTIONS"
+		name = "ALL_TRANSACTIONS"
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CashTransaction extends EdgeEntity{
+public class AllTransaction extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int cashTransactionId;
+	private int allTransactionId;
 	
 	@Column(nullable = false, length = 50)
 	private String transactionType;
@@ -38,16 +38,22 @@ public class CashTransaction extends EdgeEntity{
 	private String details;
 	
 	@Column(nullable = false, length = 10)
-	private String mode;
-	
-	@Column(nullable = false)
-	private BigDecimal balance;
+	private String mode;  // Credit / Debit
 	
 	@Column(nullable = false, length = 10)
-	private String status = "Draft";
+	private String deskTransactionFlag;  // Yes / No
+	
+	@Column(nullable = false)
+	private BigDecimal allBalance;
+	
+	@Column(nullable = false)
+	private BigDecimal deskCashBalance;
+	
+	@Column(nullable = false, length = 10)
+	private String status;
 	
 	@Column(nullable = false, updatable=false)
-	private Date transactiondate;
+	private Date transactionDate;
 
 	@Column(nullable = false, length = 100, updatable=false)
 	private String createdBy;
@@ -64,12 +70,12 @@ public class CashTransaction extends EdgeEntity{
 	@Column(nullable = false, length = 50)
 	private int parentId;
 
-	public int getCashTransactionId() {
-		return cashTransactionId;
+	public int getAllTransactionId() {
+		return allTransactionId;
 	}
 
-	public void setCashTransactionId(int cashTransactionId) {
-		this.cashTransactionId = cashTransactionId;
+	public void setAllTransactionId(int allTransactionId) {
+		this.allTransactionId = allTransactionId;
 	}
 
 	public String getCreatedBy() {
@@ -123,20 +129,12 @@ public class CashTransaction extends EdgeEntity{
 		this.amount = amount;
 	}
 
-	public BigDecimal getBalance() {
-		return balance;
-	}
-
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
-
-	public Date getTransactiondate() {
-		return transactiondate;
+	public Date getTransactionDate() {
+		return transactionDate;
 	}
 
 	public void setTransactionDate(Date transactiondate) {
-		this.transactiondate = transactiondate;
+		this.transactionDate = transactiondate;
 	}
 
 	public String getDetails() {
@@ -169,6 +167,42 @@ public class CashTransaction extends EdgeEntity{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+	}
+
+	public String toComment() {
+		return " #" + allTransactionId + " - U: " + getUpdatedBy()
+				+ "<br>      Transaction Date: " + CoreDateUtils.dateToStandardSting(transactionDate)
+				+ "<br>      Transaction Type: " + transactionType
+				+ "<br>      Mode: " + mode
+				+ "<br>      Transaction Amount: " + amount
+				+ "<br>      Desk Cash Balance: " + deskCashBalance
+				+ "<br>      All Balance: " + allBalance
+				+ "<br>      Details: " + details;
+				
+	}
+
+	public BigDecimal getAllBalance() {
+		return allBalance;
+	}
+
+	public void setAllBalance(BigDecimal allBalance) {
+		this.allBalance = allBalance;
+	}
+
+	public BigDecimal getDeskCashBalance() {
+		return deskCashBalance;
+	}
+
+	public void setDeskCashBalance(BigDecimal deskCashBalance) {
+		this.deskCashBalance = deskCashBalance;
+	}
+
+	public String getDeskTransactionFlag() {
+		return deskTransactionFlag;
+	}
+
+	public void setDeskTransactionFlag(String deskTransactionFlag) {
+		this.deskTransactionFlag = deskTransactionFlag;
 	}
 	
 }

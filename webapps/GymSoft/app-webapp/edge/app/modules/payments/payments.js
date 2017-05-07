@@ -50,7 +50,7 @@ var addPayment = function addPayment($scope, $http){
 };
 
 
-var approvePayment = function addPayment($scope, $http){	
+var approvePayment = function approvePayment($scope, $http){	
 	startAjax('APPROVE_PAYMENT', $scope);
 	$scope.es.payment.client = $scope.es.client;
 	$http.post('server/secured/approvePayment.json', $scope.es.payment ).
@@ -63,6 +63,24 @@ var approvePayment = function addPayment($scope, $http){
     }).
     error(function(data, status, headers, config) {
     	handleAjaxError('APPROVE_PAYMENT', $scope, data, status, headers, config);
+    });
+};
+
+
+var rejectPayment = function rejectPayment($scope, $http){	
+	startAjax('REJECT_PAYMENT', $scope);
+	$scope.es.payment.client = $scope.es.client;
+	$scope.es.payment.rejectReason = $scope.es.paymentRejectReason;
+	$http.post('server/secured/rejectPayment.json', $scope.es.payment ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('REJECT_PAYMENT', $scope, data, status, headers, config);
+    	$scope.es.balanceStr = "";
+    	$scope.es.payment = {};
+    	$scope.es.loadClients();
+    	$scope.es.loadPayments();
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('REJECT_PAYMENT', $scope, data, status, headers, config);
     });
 };
 

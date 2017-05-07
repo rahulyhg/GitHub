@@ -28,6 +28,9 @@ public class ParentData extends EdgeEntity{
 	
 	@Column(nullable = false)
 	private BigDecimal deskCashBalance;
+	
+	@Column(nullable = false)
+	private BigDecimal allBalance;
 		
 	@Column(nullable = false, length = 100, updatable=false)
 	private String createdBy;
@@ -90,6 +93,14 @@ public class ParentData extends EdgeEntity{
 
 	public void setDeskCashBalance(BigDecimal deskCashBalance) {
 		this.deskCashBalance = deskCashBalance;
+	}
+
+	public BigDecimal getAllBalance() {
+		return allBalance;
+	}
+
+	public void setAllBalance(BigDecimal allBalance) {
+		this.allBalance = allBalance;
 	}
 	
 }

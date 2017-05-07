@@ -224,7 +224,7 @@ public class Membership extends EdgeEntity{
 	
 	public String toComment() {
 		return " #" + membershipId + "; C: " + getCollectionByName() + " - U: " + getUpdatedBy()
-				+ "<br>      PackageEntity: " + packageName + " ( " + CoreDateUtils.dateToStandardSting(fromDate) + " - " + CoreDateUtils.dateToStandardSting(toDate)  + " ) "
+				+ "<br>      Package: " + packageName + " ( " + CoreDateUtils.dateToStandardSting(fromDate) + " - " + CoreDateUtils.dateToStandardSting(toDate)  + " ) "
 				+ "<br>      Amount: " + totalAmount + " - " + discountAmount + " = " + effectiveAmount;
 	}
 

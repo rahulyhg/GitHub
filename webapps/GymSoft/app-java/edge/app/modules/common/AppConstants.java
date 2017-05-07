@@ -6,7 +6,7 @@ public class AppConstants {
 	
 	public static enum EntityStatus{
 		
-		DRAFT("Draft"), ACTIVE("Active"), INACTIVE("Inactive"), APPROVED("Approved"), SYSTEM("System");
+		DRAFT("Draft"), ACTIVE("Active"), INACTIVE("Inactive"), APPROVED("Approved"), REJECTED("Rejected"), SYSTEM("System");
 		
 		private String status;
 		
@@ -16,6 +16,22 @@ public class AppConstants {
 		
 		public String getStatus() {
 			return status;
+		}
+		
+	}
+	
+	public static enum Reminder{
+		
+		ENQUIRY("Enquiry"), BALANCE("Balance Due"), RENEWAL("Renewal"), PAYMENT_REJECTED("Payment Rejected");
+		
+		private String description;
+		
+		private Reminder(String description) {
+			this.description = description;
+		}
+		
+		public String getDescription() {
+			return description;
 		}
 		
 	}

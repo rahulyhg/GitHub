@@ -9,20 +9,20 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 
 	// CASH TRANSACTIONS
 	
-	$scope.es.initCashTransactions = function () {
-		initCashTransactions($scope, $http);
+	$scope.es.initAllTransactions = function () {
+		initAllTransactions($scope, $http);
 	};
 	
-	$scope.es.loadAllCashTransactions = function () {
-		loadAllCashTransactions($scope, $http);
+	$scope.es.loadAllAllTransactions = function () {
+		loadAllAllTransactions($scope, $http);
 	};
 
-	$scope.es.saveCashTransaction = function () {
-		if(confirm(confirmationMsg))  addCashTransaction($scope, $http);
+	$scope.es.saveAllTransaction = function () {
+		if(confirm(confirmationMsg))  addAllTransaction($scope, $http);
 	};
 	
-	$scope.es.approveCashTransaction = function () {
-		if(confirm(confirmationMsg))  approveCashTransaction($scope, $http);
+	$scope.es.approveAllTransaction = function () {
+		if(confirm(confirmationMsg))  approveAllTransaction($scope, $http);
 	};
 		
 	// PACKAGES
@@ -119,6 +119,10 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 
 	$scope.es.approvePayment = function () {
 		if(confirm(confirmationMsg))  approvePayment($scope, $http);
+	};
+
+	$scope.es.rejectPayment = function () {
+		if(confirm(confirmationMsg))  rejectPayment($scope, $http);
 	};
 	
 	// EXPENSES

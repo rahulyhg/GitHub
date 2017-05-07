@@ -29,4 +29,6 @@ public interface ClientsService {
 
 	Client getClientByOldClientId(String oldClientId, int parentId);
 
+	Client updateClientAsPerRejectedPayment(Payment payment, String loggedInId, int parentId) throws Exception;
+
 }

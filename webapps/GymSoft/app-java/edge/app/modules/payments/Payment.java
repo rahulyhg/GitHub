@@ -51,6 +51,9 @@ public class Payment extends EdgeEntity{
 	
 	@Column(nullable = false, length = 200)
 	private String details;
+	
+	@Column(length = 100)
+	private String rejectReason;
 
 	@Column(nullable = false, length = 20)
 	private String status = AppConstants.EntityStatus.DRAFT.getStatus();
@@ -174,8 +177,8 @@ public class Payment extends EdgeEntity{
 
 	public String toComment() {
 		return " #" + paymentId + " - U: " + getUpdatedBy()
-				+ "<br>      Received " + paidAmount + " on " + CoreDateUtils.dateToStandardSting(paidOn) + " through " + pymtMode;
-				//+ "<br>      " + details
+				+ "<br>      Received " + paidAmount + " on " + CoreDateUtils.dateToStandardSting(paidOn) + " through " + pymtMode + " - #" + referenceNo
+				+ "<br>      Details: " + details;
 				//+ "<br>      Created By " + getUpdatedBy()
 	}
 
@@ -193,6 +196,14 @@ public class Payment extends EdgeEntity{
 
 	public void setReferenceNo(String referenceNo) {
 		this.referenceNo = referenceNo;
+	}
+
+	public String getRejectReason() {
+		return rejectReason;
+	}
+
+	public void setRejectReason(String rejectReason) {
+		this.rejectReason = rejectReason;
 	}
 	
 }

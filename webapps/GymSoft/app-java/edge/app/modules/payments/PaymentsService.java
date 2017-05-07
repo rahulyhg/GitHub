@@ -10,4 +10,6 @@ public interface PaymentsService {
 
 	Payment approvePayment(int paymentId, String loggedInId);
 
+	Payment rejectPayment(int paymentId, String rejectReason, String loggedInId) throws Exception;
+
 }

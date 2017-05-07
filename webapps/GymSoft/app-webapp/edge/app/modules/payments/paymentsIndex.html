@@ -43,6 +43,10 @@
 	<div>
 		<input required="required" class="btn btn-info" name="submit" type="button" value="Approve Payment ( #{{es.payment.paymentId}} ) - {{es.payment.paidAmount}}" ng-click="es.approvePayment()"/>
 	</div>
+	<div>
+		<input ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="es.paymentRejectReason" title="~Reject Reason~" placeholder="Reject Reason" size="40" />
+		<input required="required" class="btn btn-info" type="button" value="Reject Payment ( #{{es.payment.paymentId}} ) - {{es.payment.paidAmount}}" ng-click="es.rejectPayment()"/>
+	</div>
 	<div><br></div>
 	<div>
 	    <div id="allPaymentsGrid" ui-grid="es.paymentsGridOptions" class="grid" ui-grid-resize-columns ui-grid-selection></div>

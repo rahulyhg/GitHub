@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.cashTransactions.CashTransactionsService;
+import edge.app.modules.allTransactions.AllTransactionsService;
 import edge.app.modules.clients.ClientsService;
 import edge.app.modules.common.AppConstants;
 import edge.core.exception.AppException;
@@ -30,7 +30,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 	private ParentsService parentsService;
 	
 	@Autowired
-	private CashTransactionsService cashTransactionsService;
+	private AllTransactionsService allTransactionsService;
 
 	@Override
 	@Transactional
@@ -48,7 +48,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 			commonHibernateDao.save(payment);
 			
 			clientsService.updateClientAsPerPayment(payment, loggedInId, parentId);			
-			cashTransactionsService.addCashTransactionAsPerPayment(payment, loggedInId);
+			allTransactionsService.addAllTransactionAsPerPayment(payment, loggedInId);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -80,11 +80,23 @@ public class PaymentsServiceImpl implements PaymentsService {
 		return payment;
 	}
 
-	public CashTransactionsService getCashTransactionsService() {
-		return cashTransactionsService;
+	@Override
+	public Payment rejectPayment(int paymentId, String rejectReason, String loggedInId) throws Exception {
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
+		Payment payment = (Payment) commonHibernateDao.getHibernateTemplate().find("from Payment where parentId = '" + parentId +"' and paymentId = " + paymentId).get(0);
+		payment.setStatus(AppConstants.EntityStatus.REJECTED.getStatus());
+		commonHibernateDao.update(payment);
+		
+		clientsService.updateClientAsPerRejectedPayment(payment, loggedInId, parentId);
+		
+		return payment;
 	}
 
-	public void setCashTransactionsService(CashTransactionsService cashTransactionsService) {
-		this.cashTransactionsService = cashTransactionsService;
+	public AllTransactionsService getAllTransactionsService() {
+		return allTransactionsService;
+	}
+
+	public void setAllTransactionsService(AllTransactionsService allTransactionsService) {
+		this.allTransactionsService = allTransactionsService;
 	}
 }

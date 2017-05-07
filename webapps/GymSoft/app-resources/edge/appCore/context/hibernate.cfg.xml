@@ -19,7 +19,7 @@
        <mapping class="edge.app.modules.attendance.Attendance" />
        <mapping class="edge.app.modules.employees.Employee" />
        <mapping class="edge.app.modules.packages.PackageEntity" />
-       <mapping class="edge.app.modules.cashTransactions.CashTransaction" />
+       <mapping class="edge.app.modules.allTransactions.AllTransaction" />
        
     </session-factory> 
 </hibernate-configuration>

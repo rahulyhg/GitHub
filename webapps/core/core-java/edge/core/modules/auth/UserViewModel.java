@@ -10,6 +10,8 @@ public class UserViewModel {
 	
 	private String role;
 	
+	private String appRole;
+	
 	private Boolean enabled;	
 	
 	private String profileId;
@@ -62,6 +64,14 @@ public class UserViewModel {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getAppRole() {
+		return appRole;
+	}
+
+	public void setAppRole(String appRole) {
+		this.appRole = appRole;
 	}
 	
 }

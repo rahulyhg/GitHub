@@ -103,6 +103,23 @@ public class ParentsServiceImpl implements ParentsService {
 		
 		return parents.get(0).getParentId();
 	}
+	
+
+	@Override
+	public String getRole(String loggedInId) {
+		String query = "from Parent where admins like '%," + loggedInId + ",%'";
+		List<Parent> parents = commonHibernateDao.getHibernateTemplate().find(query);
+		if(parents != null && parents.size() == 1){
+			return SecurityRoles.PARENT_ADMIN.getRoleDescription();
+		}
+		query = "from Parent where operators like '%," + loggedInId + ",%'"; 
+		parents = commonHibernateDao.getHibernateTemplate().find(query);
+		if(parents != null && parents.size() == 1){
+			return SecurityRoles.PARENT_OPERATOR.getRoleDescription();
+		}
+		
+		return "";
+	}
 
 	@Override
 	@Transactional

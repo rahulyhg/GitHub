@@ -52,6 +52,20 @@ private static final Logger logger = LoggerFactory.getLogger(PaymentsController.
 		}
 		
 	}
+
+	@RequestMapping(value={"/secured/rejectPayment"})
+	public EdgeResponse<Payment> rejectPayment(
+			@RequestBody Payment payment, Principal principal			
+			) throws Exception{	
+		try{
+			Payment addPayment = paymentsService.rejectPayment(payment.getPaymentId(), payment.getRejectReason(), principal.getName());
+			return EdgeResponse.createDataResponse(addPayment, "Payment rejected Successfully with ID : " + addPayment.getPaymentId());
+			
+		}catch(AppException ae){
+			return EdgeResponse.createExceptionResponse(ae);
+		}
+		
+	}
 	
 	@RequestMapping(value={"/secured/savePayment"})
 	public EdgeResponse<Payment> addPayment(

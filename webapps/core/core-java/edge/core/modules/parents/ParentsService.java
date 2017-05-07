@@ -20,4 +20,6 @@ public interface ParentsService {
 
 	ParentData getParentData(String loggedInId);
 
+	String getRole(String loggedInId);
+
 }
