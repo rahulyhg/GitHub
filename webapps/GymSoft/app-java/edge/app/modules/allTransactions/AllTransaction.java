@@ -37,7 +37,7 @@ public class AllTransaction extends EdgeEntity{
 	@Column(nullable = false, length = 100)
 	private String details;
 	
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 30)
 	private String mode;  // Credit / Debit
 	
 	@Column(nullable = false, length = 10)

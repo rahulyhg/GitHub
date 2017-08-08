@@ -38,7 +38,7 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 
 	@Override
 	@Transactional
-	public AllTransaction addAllTransactionAsPerPayment(Payment payment, String loggedInId) throws Exception {
+	public AllTransaction addTransactionAsPerPayment(Payment payment, String loggedInId) throws Exception {
 		
 		AllTransaction allTransaction = null;
 		
@@ -50,7 +50,6 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 		allTransaction.setUpdatedBy(loggedInId);
 		allTransaction.setParentId(parentId);
 		allTransaction.setTransactionDate(new Date());			
-		allTransaction.setMode("Credit");
 		
 		allTransaction.setTransactionType("Payment-" + payment.getPymtMode());
 		allTransaction.setAmount(payment.getPaidAmount());
@@ -59,7 +58,7 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 		
 		BigDecimal currDeskCashBalance = parentData.getDeskCashBalance();
 		BigDecimal currAllBalance = parentData.getAllBalance();		
-		BigDecimal transactionAmt = allTransaction.getAmount();			
+		BigDecimal transactionAmt = payment.getPaidAmount();			
 		BigDecimal newBalance =  null;
 		String subject = null;
 		
@@ -106,6 +105,56 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 		return allTransaction;
 	}
 	
+	@Override
+	@Transactional
+	public AllTransaction addTransactionAsPerRejectedPayment(Payment payment, String loggedInId) throws Exception {
+		
+		AllTransaction allTransaction = null;
+		
+		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		ParentData parentData = parentsService.getParentData(loggedInId);
+		
+		allTransaction = new AllTransaction();
+		allTransaction.setCreatedBy(loggedInId);
+		allTransaction.setUpdatedBy(loggedInId);
+		allTransaction.setParentId(parentId);
+		allTransaction.setTransactionDate(new Date());			
+		
+		allTransaction.setTransactionType("Rejected Payment-" + payment.getPymtMode());
+		allTransaction.setAmount(payment.getPaidAmount());
+		allTransaction.setStatus(AppConstants.EntityStatus.SYSTEM.getStatus());
+		allTransaction.setDetails(payment.getClient().getName() +  " :: " + payment.getPaymentId());
+		
+		BigDecimal currDeskCashBalance = parentData.getDeskCashBalance();
+		BigDecimal currAllBalance = parentData.getAllBalance();		
+		BigDecimal transactionAmt = payment.getPaidAmount();			
+		BigDecimal newBalance =  null;
+		String subject = null;
+		
+		// Desk Balance Will remain Unaffected
+		parentData.setDeskCashBalance(currDeskCashBalance);
+		allTransaction.setDeskCashBalance(currDeskCashBalance);
+		
+		// Bank balance will Decrease
+		newBalance =  currAllBalance.subtract(transactionAmt); 
+		parentData.setAllBalance(newBalance);
+		allTransaction.setAllBalance(newBalance);
+		
+		allTransaction.setDeskTransactionFlag("No");
+		allTransaction.setMode("Bank-Debit");
+		
+		subject = " Payment (" + payment.getPymtMode() + ") Rejected - New Bank Balance - " + newBalance + " (" + currAllBalance  + " - " + transactionAmt + ") ";
+		
+		commonHibernateDao.save(allTransaction);
+		commonHibernateDao.save(parentData);
+		
+		Client client = (Client) commonHibernateDao.getHibernateTemplate().find("from Client where parentId = '" + parentId +"' and clientId = " + payment.getClientId()).get(0);
+		Parent parent = commonHibernateDao.getEntityById(Parent.class, client.getParentId());
+		
+		GymSoftMailSender.notifyGym(subject, parent, client, loggedInId);
+		
+		return allTransaction;
+	}
 
 	@Override
 	@Transactional
@@ -137,7 +186,7 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 			BigDecimal transactionAmt = allTransaction.getAmount();
 			String subject = null;
 			
-			if(allTransaction.getTransactionType().equalsIgnoreCase("Bank Deposit")){
+			if(allTransaction.getTransactionType().equalsIgnoreCase("Desk To Bank")){
 				
 				// Desk Cash Balance will Decrease
 				BigDecimal newDeskCashBalance = currDeskCashBalance.subtract(transactionAmt);
@@ -152,7 +201,7 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 				allTransaction.setDeskTransactionFlag("Yes");
 				allTransaction.setMode("Desk-to-Bank");
 				
-				subject = "Bank Deposit - Desk Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " - " + transactionAmt + ")";
+				subject = "Desk To Bank - Desk Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " - " + transactionAmt + ")";
 				subject += " - Bank Balance " + newAllBalance;
 				
 			}else if(allTransaction.getTransactionType().equalsIgnoreCase("Desk Expense")){
@@ -169,7 +218,43 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 				allTransaction.setDeskTransactionFlag("Yes");
 				allTransaction.setMode("Desk-Debit");
 				
-				subject = "Desk Expense - New Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " - " + transactionAmt + ")";
+				subject = "Desk Expense - Desk Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " - " + transactionAmt + ")";
+				subject += " - Bank Balance " + currAllBalance;
+				
+			}else if(allTransaction.getTransactionType().equalsIgnoreCase("Credit To Desk")){
+				
+				// Desk Cash Balance will Increase
+				BigDecimal newDeskCashBalance = currDeskCashBalance.add(transactionAmt);
+				parentData.setDeskCashBalance(newDeskCashBalance);
+				allTransaction.setDeskCashBalance(newDeskCashBalance);	
+				
+				// All Balance will remain unaffected
+				allTransaction.setAllBalance(currAllBalance);
+				parentData.setAllBalance(currAllBalance);
+				
+				allTransaction.setDeskTransactionFlag("Yes");
+				allTransaction.setMode("Desk-Credit");
+				
+				subject = "Credit To Desk - Desk Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " + " + transactionAmt + ")";
+				subject += " - Bank Balance " + currAllBalance;
+				
+			}if(allTransaction.getTransactionType().equalsIgnoreCase("Bank To Desk")){
+				
+				// Desk Cash Balance will Increase
+				BigDecimal newDeskCashBalance = currDeskCashBalance.add(transactionAmt);
+				parentData.setDeskCashBalance(newDeskCashBalance);
+				allTransaction.setDeskCashBalance(newDeskCashBalance);
+				
+				// Bank Balance Will Decrease
+				BigDecimal newAllBalance = currAllBalance.subtract(transactionAmt);
+				parentData.setAllBalance(newAllBalance);
+				allTransaction.setAllBalance(newAllBalance);
+				
+				allTransaction.setDeskTransactionFlag("Yes");
+				allTransaction.setMode("Bank-to-Desk");
+				
+				subject = "Desk To Bank - Desk Balance - " + newDeskCashBalance + " (" + currDeskCashBalance  + " + " + transactionAmt + ")";
+				subject += " - Bank Balance " + newAllBalance;
 				
 			}else if(allTransaction.getTransactionType().equalsIgnoreCase("Bank Expense")){
 				
@@ -185,7 +270,25 @@ public class AllTransactionsServiceImpl implements AllTransactionsService {
 				allTransaction.setDeskTransactionFlag("No");
 				allTransaction.setMode("Bank-Debit");
 				
-				subject = "Bank Expense - New Balance - " + newAllBalance + " (" + currAllBalance  + " - " + transactionAmt + ")";
+				subject = "Bank Expense - Bank Balance - " + newAllBalance + " (" + currAllBalance  + " - " + transactionAmt + ")";
+				subject += " - Desk Balance " + currDeskCashBalance;
+				
+			}else if(allTransaction.getTransactionType().equalsIgnoreCase("Credit To Bank")){
+				
+				// Desk  Cash will remain unaffected
+				allTransaction.setDeskCashBalance(currDeskCashBalance);
+				parentData.setDeskCashBalance(currDeskCashBalance);
+				
+				// Bank Balance will Increase
+				BigDecimal newAllBalance = currAllBalance.add(transactionAmt);
+				parentData.setAllBalance(newAllBalance);
+				allTransaction.setAllBalance(newAllBalance);	
+				
+				allTransaction.setDeskTransactionFlag("No");
+				allTransaction.setMode("Bank-Credit");
+				
+				subject = "Credit To Bank - Bank Balance - " + newAllBalance + " (" + currAllBalance  + " - " + transactionAmt + ")";
+				subject += " - Desk Balance " + currDeskCashBalance;
 				
 			}
 			

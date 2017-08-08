@@ -59,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(PaymentsController.
 			) throws Exception{	
 		try{
 			Payment addPayment = paymentsService.rejectPayment(payment.getPaymentId(), payment.getRejectReason(), principal.getName());
-			return EdgeResponse.createDataResponse(addPayment, "Payment rejected Successfully with ID : " + addPayment.getPaymentId());
+			return EdgeResponse.createDataResponse(addPayment, "Payment #" + addPayment.getPaymentId() + " rejected Successfully" );
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);

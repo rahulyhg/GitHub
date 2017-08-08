@@ -305,7 +305,8 @@ public class ClientsServiceImpl implements ClientsService {
 		client.setReminderAbout(AppConstants.Reminder.PAYMENT_REJECTED.getDescription());
 		
 		String comment = 
-				"  Payment Rejected  - Details : " + payment.toComment() 
+				"  Payment Rejected  - #" + payment.getPaymentId()  + " - U: " + payment.getUpdatedBy()
+				+ "<br>      Reason : " + payment.getRejectReason()
 				+ "<br>      Balance : " + balanceAmount + " + " + paidAmount + " = " + newBalanceAmount;
 		
 		client.addComment(comment, loggedInId);

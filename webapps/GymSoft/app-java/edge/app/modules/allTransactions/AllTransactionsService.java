@@ -10,8 +10,10 @@ public interface AllTransactionsService {
 
 	List<AllTransaction> getAllTransactions(String loggedInId);
 
-	AllTransaction addAllTransactionAsPerPayment(Payment payment, String loggedInId) throws Exception;
+	AllTransaction addTransactionAsPerPayment(Payment payment, String loggedInId) throws Exception;
 
 	AllTransaction approveAllTransaction(int allTransactionId, String name);
+
+	AllTransaction addTransactionAsPerRejectedPayment(Payment payment, String loggedInId) throws Exception;
 
 }

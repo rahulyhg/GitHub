@@ -48,7 +48,7 @@ public class PaymentsServiceImpl implements PaymentsService {
 			commonHibernateDao.save(payment);
 			
 			clientsService.updateClientAsPerPayment(payment, loggedInId, parentId);			
-			allTransactionsService.addAllTransactionAsPerPayment(payment, loggedInId);
+			allTransactionsService.addTransactionAsPerPayment(payment, loggedInId);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -82,12 +82,19 @@ public class PaymentsServiceImpl implements PaymentsService {
 
 	@Override
 	public Payment rejectPayment(int paymentId, String rejectReason, String loggedInId) throws Exception {
+		
+		if(rejectReason == null || rejectReason.trim().length() == 0){
+			throw new AppException(null, "Please enter valid Reject Reason.");
+		}
+		
 		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_ADMIN);
 		Payment payment = (Payment) commonHibernateDao.getHibernateTemplate().find("from Payment where parentId = '" + parentId +"' and paymentId = " + paymentId).get(0);
+		payment.setRejectReason(rejectReason);		
 		payment.setStatus(AppConstants.EntityStatus.REJECTED.getStatus());
 		commonHibernateDao.update(payment);
 		
 		clientsService.updateClientAsPerRejectedPayment(payment, loggedInId, parentId);
+		allTransactionsService.addTransactionAsPerRejectedPayment(payment, loggedInId);
 		
 		return payment;
 	}

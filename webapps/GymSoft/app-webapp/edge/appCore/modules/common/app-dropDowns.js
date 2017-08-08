@@ -7,6 +7,10 @@ var initDropDowns = function($scope){
 	
 	$scope.es.statusList =  ['Draft','Active','Inactive'];
 	
-	$scope.es.allTransactionType =  ['Bank Deposit','Desk Expense','Bank Expense'];
+	$scope.es.allTransactionType =  [ 'Desk To Bank','Desk Expense','Credit To Desk'];
+	
+	$scope.es.allTransactionTypeAdmin =  [ 'Desk To Bank','Desk Expense','Credit To Desk'
+	                                      	
+	                                      ,'Bank To Desk', 'Bank Expense', 'Credit To Bank'];
 	
 };

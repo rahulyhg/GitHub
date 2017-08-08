@@ -20,7 +20,7 @@
 		
 		<div>	
 		   	<div ng-if="es.loggedInUser.appRole == 'PARENT_ADMIN'">
-		   		<B>** All Balance : {{es.parentData.allBalance | currency:''}}</B>
+		   		<B>** Bank Balance : {{es.parentData.allBalance | currency:''}}</B>
 			</div>
 		</div>
 		
@@ -28,8 +28,14 @@
 	
 		<div class="leftSection">Type:</div>
 		<div class="rightSection">
-			<select required class="formInput" ng-model="es.allTransaction.transactionType" title="~Transaction Type~" ng-options="values for values in es.allTransactionType">
-			</select>
+			<div ng-if="es.loggedInUser.appRole == 'PARENT_ADMIN'">
+				<select required class="formInput" ng-model="es.allTransaction.transactionType" title="~Transaction Type~" ng-options="values for values in es.allTransactionTypeAdmin">
+				</select>
+			</div>
+			<div ng-if="es.loggedInUser.appRole != 'PARENT_ADMIN'">
+				<select required class="formInput" ng-model="es.allTransaction.transactionType" title="~Transaction Type~" ng-options="values for values in es.allTransactionType">
+				</select>
+			</div>
 		</div>
 		
 		<div class="leftSection">Amount:</div>
@@ -54,7 +60,7 @@
 					  style="cursor: not-allowed;"
 					/>
 		        </span>
-		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save AllTransaction" ng-show="myForm.$valid" ng-click="es.saveAllTransaction()"/>
+		        <input required="required" class="btn btn-info" name="submit" type="button" value="Save Transaction" ng-show="myForm.$valid" ng-click="es.saveAllTransaction()"/>
 		    </div>			    
 		    <div><br><br></div>
 		</form>
