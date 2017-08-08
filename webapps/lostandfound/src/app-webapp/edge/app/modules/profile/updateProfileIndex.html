@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Lost And Found : {{es.editProfile.profileId}}</title>
+</head>
+<body>
+	<div class="registrationDiv padding5px">
+		<form name="updateForm">
+		   	<div>
+				<div ng-include="'edge/app/modules/partials/personal_edit.html'" />
+			</div>								
+		    <div><br></div>
+		    
+		    <div>
+				<div ng-include="'edge/app/modules/partials/family_edit.html'" />
+			</div>
+		    <div><br></div>
+		    
+		    <div>
+				<div ng-include="'edge/app/modules/partials/secure_edit.html'" />
+			</div>
+		    
+		    <div><br><br></div>
+			
+			 <div>
+		        <span ng-show="!updateForm.$valid">
+		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '**' sign).</H5>
+		        	<input class="formButton" name="submit" type="button" value="Update Profile" disbaled="true" 
+					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
+					  style="cursor: not-allowed;"
+					/>
+		        </span>
+		        <input class="formButton" name="submit" type="button" value="Update Profile" ng-show="updateForm.$valid" ng-click="es.updateMyProfile()"/>
+		    </div>
+
+		    <div><br><br></div>
+		    <div><br><br></div>		    
+		</form>
+	</div>
+</body>
+</html>
