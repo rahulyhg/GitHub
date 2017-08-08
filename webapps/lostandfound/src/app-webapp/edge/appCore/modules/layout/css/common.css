@@ -47,7 +47,8 @@ hr {
 }
 
 .headerStripOuterClass {
-	border: dotted 2px;
+	border-bottom: dotted 2px;
+	border-top: dotted 2px;
 	border-color: silver;
 	position: absolute;
 	top: 10px;
