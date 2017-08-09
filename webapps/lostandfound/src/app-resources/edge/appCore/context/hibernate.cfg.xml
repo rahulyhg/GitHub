@@ -10,5 +10,6 @@
        <mapping class="edge.core.modules.auth.AuthorityEntity" />
        <mapping class="edge.app.modules.profile.ProfileDetails" />
        <mapping class="edge.app.modules.profile.SecureProfileDetails" />
+       <mapping class="edge.app.modules.lost.LostRequest" />
     </session-factory> 
 </hibernate-configuration>

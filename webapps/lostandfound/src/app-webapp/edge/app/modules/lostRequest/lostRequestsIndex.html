@@ -27,23 +27,23 @@
 				<i><B>Tell us something more about what you lost.. </B></i><br><br>
 				<div class="leftSection">Type:</div>
 				<div class="rightSection">
-					<input required="required" type="radio" ng-model="es.lost.type" title="~Type~" value="UNIQUE_ID" 
-					  ng-click="es.lost.uniqueId=''; es.lost.uniqueIdType='';es.lost.description='NONE';"
+					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="UNIQUE_ID" 
+					  ng-click="es.lostRequest.uniqueId=''; es.lostRequest.uniqueIdType='';es.lostRequest.description='NONE';"
 					>
 					It has unique identifier <i> ( like PAN / PASSPORT / AADHAR / DL etc. ) </i> <br><br>
 					
-					<input required="required" type="radio" ng-model="es.lost.type" title="~Type~" value="LOST_AND_FOUND_ID" >
+					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="LOST_AND_FOUND_ID" >
 					It has "LOST AND FOUND TAG" attached <a href="">What is this?</a><br><br>
 					
-					<input required="required" type="radio" ng-model="es.lost.type" title="~Type~" value="NONE" 
-						ng-click="es.lost.uniqueId='NONE'; es.lost.uniqueIdType='NONE';es.lost.description=''"
+					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="NONE" 
+						ng-click="es.lostRequest.uniqueId='NONE'; es.lostRequest.uniqueIdType='NONE';es.lostRequest.description=''"
 					>
 					It has no identifier<br><br>
 				</div>
 			</div>
 			
 			<div>
-			   	<div ng-show="es.lost.type=='UNIQUE_ID'" class="lostItemDetails">
+			   	<div ng-show="es.lostRequest.idType=='UNIQUE_ID'" class="lostItemDetails">
 					<div>
 						Awesome, let us know the unique identification details. We would courier the item as soon as someone finds it.<br><br>					
 					</div>
@@ -51,21 +51,21 @@
 					<div>
 						<div class="leftSection">ID Type:</div>
 						<div class="rightSection">
-							<select required class="formInput" ng-model="es.lost.uniqueIdType" title="~Unique Id Type~" ng-options="values for values in es.uniqueIdTypeList" >
+							<select required class="formInput" ng-model="es.lostRequest.uniqueIdType" title="~Unique Id Type~" ng-options="values for values in es.uniqueIdTypeList" >
 							</select>
 						</div>
 					</div>
 					<div>
-						<div class="leftSection">ID:</div>
+						<div class="leftSection">ID Value:</div>
 						<div class="rightSection">
-							<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lost.uniqueId" title="~Unique Id~" >
+							<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="50" ng-maxlength="50" type="text" ng-model="es.lostRequest.uniqueId" title="~Unique Id~" >
 						</div>
 					</div>	
 				</div>	
 			</div>
 			
 			<div>
-				<div ng-show="es.lost.type=='LOST_AND_FOUND_ID'" class="lostItemDetails">
+				<div ng-show="es.lostRequest.idType=='LOST_AND_FOUND_ID'" class="lostItemDetails">
 					Great Job!! you did by tagging your belonging with "LOST AND FOUND TAG". You don't need to do anything as such. As soon as someone reports that they found this item, we would deliver it to your doorstep.<br><br>
 					
 					Be Relaxed and Enjoy!!
@@ -74,7 +74,7 @@
 			</div>
 			
 			<div>
-				<div ng-show="es.lost.type=='NONE'" class="lostItemDetails">
+				<div ng-show="es.lostRequest.idType=='NONE'" class="lostItemDetails">
 					<div>
 							Err!! If you had created "LOST AND FOUND TAG" earlier and attached this tag with your belonging, It would have been so much easier to search your belonging.<br><br>
 							
@@ -83,7 +83,7 @@
 					
 					<div class="leftSection">Description:</div>
 					<div class="rightSection">
-						<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lost.description" title="~Description~" >
+						<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="250" ng-maxlength="250" type="text" ng-model="es.lostRequest.description" title="~Description~" >
 					</div>
 							
 				</div>
@@ -96,7 +96,7 @@
 				
 				<div class="leftSection">Name:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lost.addressName" title="~ Address Name~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lostRequest.fullName" title="~ Full Name ~" >
 				</div>
 				
 				<div class="leftSection">Address:</div>
@@ -105,42 +105,42 @@
 				
 				<div class="leftSection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Line 1:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lost.addressLine1" title="~ Address Line1 ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lostRequest.addressLine1" title="~ Address Line1 ~" >
 				</div>
 				
 				<div class="leftSection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Line 2:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lost.addressLine2" title="~ Address Line2 ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.lostRequest.addressLine2" title="~ Address Line2 ~" >
 				</div>
 				
 				<div class="leftSection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lost.addressCity" title="~ Address City ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lostRequest.addressCity" title="~ Address City ~" >
 				</div>
 				
 				<div class="leftSection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;State:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lost.addressState" title="~ Address State ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lostRequest.addressState" title="~ Address State ~" >
 				</div>
 				
 				<div class="leftSection">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lost.addressCountry" title="~ Address Country ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.lostRequest.addressCountry" title="~ Address Country ~" >
 				</div>
 				
 				<div class="leftSection">Phone:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="10" maxlength="10" ng-maxlength="10" type="text" ng-model="es.lost.addressPhone" title="~ Phone Number ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="10" maxlength="10" ng-maxlength="10" type="text" ng-model="es.lostRequest.addressPhone" title="~ Phone Number ~" >
 				</div>
 				
 				<div class="leftSection">Alternate Phone:</div>
 				<div class="rightSection">
-					<input class="formInput" ng-minlength="0" size="70" maxlength="10" ng-maxlength="10" type="text" ng-model="es.lost.addressPhone" title="~ Alternate Phone Number ~" >
+					<input class="formInput" ng-minlength="0" size="70" maxlength="10" ng-maxlength="10" type="text" ng-model="es.lostRequest.addressAltPhone" title="~ Alternate Phone Number ~" >
 				</div>
 				
 				<div class="leftSection">Email Id:</div>
 				<div class="rightSection">
-					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="email" ng-model="es.lost.addressEmail" title="~ Email Id ~" >
+					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="email" ng-model="es.lostRequest.addressEmail" title="~ Email Id ~" >
 				</div>
 			</div>
 				    
@@ -152,7 +152,7 @@
 					  style="cursor: not-allowed;"
 					/>
 		        </span>
-		        <input class="btn btn-info" name="submit" type="button" value="Sumbit" ng-show="myForm.$valid" ng-click="es.lost()"/>
+		        <input class="btn btn-info" name="submit" type="button" value="Sumbit" ng-show="myForm.$valid" ng-click="es.saveLostRequest()"/>
 		    </div>			    
 		    <div><br><br></div>
 		    <div><br><br></div>	

@@ -11,19 +11,19 @@ var menuMap = {
 	"2LOST" : {
 		id : "LOST",
 		title : "Lost",
-		templateUrl : "edge/app/modules/lost/lostIndex.html",
+		templateUrl : "edge/app/modules/lostRequest/lostRequestsIndex.html",
 		icon : ""
 	},
 	"3FOUND" : {
 		id : "FOUND",
 		title : "Found",
-		templateUrl : "edge/app/modules/search/searchIndex.html",
-		icon : "edge/appCore/modules/layout/images/proposal.png"
+		templateUrl : "edge/app/modules/foundRequest/foundRequestsIndex.html",
+		icon : ""
 	},
-	"4EVENTS" : {
-		id : "EVENTS",
-		title : "Events",
-		templateUrl : "edge/app/modules/events/eventsIndex.html",
+	"4DONATE" : {
+		id : "DONATE",
+		title : "Donate",
+		templateUrl : "edge/app/modules/donate/donateIndex.html",
 		icon : ""
 	}
 };
