@@ -1,4 +1,4 @@
-package edge.app.modules.lost;
+package edge.app.modules.lostRequest;
 
 
 public interface LostRequestsService {

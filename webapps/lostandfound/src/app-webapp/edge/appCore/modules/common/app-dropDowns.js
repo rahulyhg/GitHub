@@ -1,6 +1,6 @@
 
 var initDropDowns = function($scope){
 
-	$scope.es.uniqueIdTypeList =  ['Passport','PAN','Aadhar','Driving Licence','Other'];
+	$scope.es.uniqueIdTypeList =  ['PASSPORT','PAN','AADHAR','DRIVING_LICENSE','OTHER'];
 	
 };

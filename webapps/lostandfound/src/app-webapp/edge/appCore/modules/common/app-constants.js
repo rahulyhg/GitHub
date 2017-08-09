@@ -20,7 +20,13 @@ var menuMap = {
 		templateUrl : "edge/app/modules/foundRequest/foundRequestsIndex.html",
 		icon : ""
 	},
-	"4DONATE" : {
+	"4TRACK" : {
+		id : "TRACK",
+		title : "Track",
+		templateUrl : "edge/app/modules/track/trackIndex.html",
+		icon : ""
+	},
+	"5DONATE" : {
 		id : "DONATE",
 		title : "Donate",
 		templateUrl : "edge/app/modules/donate/donateIndex.html",

@@ -21,6 +21,12 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.saveLostRequest = function () {
 		saveLostRequest($scope, $http);
 	};
+
+	// FOUND REQUEST 
+	
+	$scope.es.saveFoundRequest = function () {
+		saveFoundRequest($scope, $http);
+	};
 };	
 	
 var openMyProfile = function($scope, $http){

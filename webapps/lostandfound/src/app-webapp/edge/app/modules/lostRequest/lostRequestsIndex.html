@@ -28,17 +28,29 @@
 				<div class="leftSection">Type:</div>
 				<div class="rightSection">
 					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="UNIQUE_ID" 
-					  ng-click="es.lostRequest.uniqueId=''; es.lostRequest.uniqueIdType='';es.lostRequest.description='NONE';"
+					  ng-click="
+					  es.lostRequest.uniqueId=''; es.lostRequest.uniqueIdType='';
+					  es.lostRequest.description='NONE';es.lostRequest.city='NONE';es.lostRequest.month=1;es.lostRequest.year=3000;es.lostRequest.brandName='NONE';
+					  
+					  "
 					>
 					It has unique identifier <i> ( like PAN / PASSPORT / AADHAR / DL etc. ) </i> <br><br>
 					
 					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="LOST_AND_FOUND_ID" 
-					 ng-click="es.lostRequest.uniqueId=''; es.lostRequest.uniqueIdType='';es.lostRequest.description='';"
+					 ng-click="
+					 es.lostRequest.uniqueId=''; es.lostRequest.uniqueIdType='';
+					 es.lostRequest.description='';es.lostRequest.city='';es.lostRequest.month=0;es.lostRequest.year=0;es.lostRequest.brandName='';
+					 
+					 "
 					>
 					It has "LOST AND FOUND TAG" attached <a href="">What is this?</a><br><br>
 					
 					<input required="required" type="radio" ng-model="es.lostRequest.idType" title="~Type~" value="NONE" 
-						ng-click="es.lostRequest.uniqueId='NONE'; es.lostRequest.uniqueIdType='NONE';es.lostRequest.description=''"
+						ng-click="
+						  es.lostRequest.uniqueId='NONE'; es.lostRequest.uniqueIdType='NONE';
+						  es.lostRequest.description='';es.lostRequest.city='';es.lostRequest.month=0;es.lostRequest.year=0;es.lostRequest.brandName='';
+					 
+					    "
 					>
 					It has no identifier<br><br>
 				</div>
@@ -81,6 +93,26 @@
 							Err!! If you had created "LOST AND FOUND TAG" earlier and attached this tag with your belonging, It would have been so much easier to search your belonging.<br><br>
 							
 							Nevertheless, let us know bit more about it, we would try and find the same..
+					</div>
+					
+					<div class="leftSection">Month:</div>
+					<div class="rightSection">
+						<input type="number" min="1" max="12" class="formInput" ng-model="es.lostRequest.month" title="~ Month in which you lost it ~" >
+					</div>
+					
+					<div class="leftSection">Year:</div>
+					<div class="rightSection">
+						<input type="number" min="2017" max="3000" class="formInput" ng-model="es.lostRequest.year" title="~ Year in which you lost it ~" >
+					</div>
+					
+					<div class="leftSection">City:</div>
+					<div class="rightSection">
+						<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="50" ng-maxlength="50" type="text" ng-model="es.lostRequest.city" title="~ City where you lost it ~" >
+					</div>
+					
+					<div class="leftSection">Brand Name:</div>
+					<div class="rightSection">
+						<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="50" ng-maxlength="50" type="text" ng-model="es.lostRequest.brandName" title="~ Brand Name ~" >
 					</div>
 					
 					<div class="leftSection">Description:</div>

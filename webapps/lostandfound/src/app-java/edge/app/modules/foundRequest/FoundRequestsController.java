@@ -1,4 +1,4 @@
-package edge.app.modules.lost;
+package edge.app.modules.foundRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,17 +13,19 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 
 @Controller
-public class LostRequestsController {
+public class FoundRequestsController {
 
-	private static final Logger logger = LoggerFactory.getLogger(LostRequestsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FoundRequestsController.class);
 	
 	@Autowired
-	private LostRequestsService lostRequestsService;
+	private FoundRequestsService foundRequestsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -32,17 +34,17 @@ public class LostRequestsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
 	
-	public LostRequestsService getLostRequestsService() {
-		return lostRequestsService;
+	public FoundRequestsService getFoundRequestsService() {
+		return foundRequestsService;
 	}
 
-	@RequestMapping(value={"/unsecured/saveLostRequest"})
-	public EdgeResponse<LostRequest> addLostRequest(
-			@RequestBody LostRequest lostRequest		
+	@RequestMapping(value={"/unsecured/saveFoundRequest"})
+	public EdgeResponse<FoundRequest> addFoundRequest(
+			@RequestBody FoundRequest foundRequest		
 			) throws Exception{	
 		try{
-			LostRequest addLostRequest = lostRequestsService.saveLostRequest(lostRequest);
-			return EdgeResponse.createDataResponse(addLostRequest, "LostRequest added Successfully with ID : " + addLostRequest.getLostRequestId());
+			FoundRequest addFoundRequest = foundRequestsService.saveFoundRequest(foundRequest);
+			return EdgeResponse.createDataResponse(addFoundRequest, "FoundRequest added Successfully with ID : " + addFoundRequest.getFoundRequestId());
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
@@ -50,20 +52,20 @@ public class LostRequestsController {
 		
 	}
 	
-	@RequestMapping(value={"/unsecured/getLostRequest"})
-	public EdgeResponse<LostRequest> getLostRequest( 
-			int lostRequestId
+	@RequestMapping(value={"/unsecured/getFoundRequest"})
+	public EdgeResponse<FoundRequest> getFoundRequest( 
+			int foundRequestId
 			) throws Exception{	
 		try{	
-			LostRequest lostRequest = lostRequestsService.getLostRequest(lostRequestId);
-			return EdgeResponse.createDataResponse(lostRequest, "");
+			FoundRequest foundRequest = foundRequestsService.getFoundRequest(foundRequestId);
+			return EdgeResponse.createDataResponse(foundRequest, "");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}
 	}
 	
-	public void setLostRequestsService(LostRequestsService lostRequestsService) {
-		this.lostRequestsService = lostRequestsService;
+	public void setFoundRequestsService(FoundRequestsService foundRequestsService) {
+		this.foundRequestsService = foundRequestsService;
 	}
 }

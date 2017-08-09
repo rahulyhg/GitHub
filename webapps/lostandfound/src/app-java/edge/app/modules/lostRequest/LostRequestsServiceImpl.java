@@ -1,15 +1,21 @@
-package edge.app.modules.lost;
+package edge.app.modules.lostRequest;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import edge.app.modules.common.Utils;
+import edge.app.modules.mail.EventDetailsEnum;
 import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
+import edge.core.modules.mailSender.AppMailSender;
 
 @WebService
 @Component
@@ -24,10 +30,20 @@ public class LostRequestsServiceImpl implements LostRequestsService {
 		try{
 			
 			Date current = new Date();
-			lostRequest.setCreatedOn(current );
+			lostRequest.setCreatedOn(current);
 			lostRequest.setUpdatedOn(current);
+			lostRequest.setMatchingKey(Utils.deriveMatchingKey(lostRequest));
 			
 			commonHibernateDao.save(lostRequest);
+			
+			Map<String, Object> dataObject = new HashMap<String, Object>();
+			dataObject.put("lostRequest", lostRequest);
+			
+			AppMailSender.sendEmail(String.valueOf("ID: " + lostRequest.getLostRequestId()), lostRequest.getAddressEmail(), dataObject , EventDetailsEnum.LOST_REQUEST_SAVED);
+			
+		}catch(DataIntegrityViolationException ex){
+			ex.printStackTrace();
+			throw new AppException(ex, "Similar request already exists");
 		}catch(Exception ex){
 			ex.printStackTrace();
 			throw new AppException(ex, ex.getMessage());
@@ -39,5 +55,5 @@ public class LostRequestsServiceImpl implements LostRequestsService {
 	public LostRequest getLostRequest(int lostRequestId) {
 		return commonHibernateDao.getEntityById(LostRequest.class, lostRequestId);
 	}
-
+	
 }
