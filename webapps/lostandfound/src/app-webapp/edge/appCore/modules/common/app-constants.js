@@ -23,7 +23,7 @@ var menuMap = {
 	"4TRACK" : {
 		id : "TRACK",
 		title : "Track",
-		templateUrl : "edge/app/modules/track/trackIndex.html",
+		templateUrl : "edge/app/modules/trackRequest/trackRequestsIndex.html",
 		icon : ""
 	},
 	"5DONATE" : {

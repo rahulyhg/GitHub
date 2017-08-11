@@ -16,4 +16,6 @@ public interface FoundRequestsService {
 
 	List<LostRequest> searchMatchingRequests(FoundRequest foundRequest) throws Exception;
 
+	List<FoundRequest> searchMatchingRequestsAsPerLFI(String lostAndFoundId) throws Exception;
+
 }

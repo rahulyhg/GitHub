@@ -81,6 +81,11 @@ public class FoundRequestsServiceImpl implements FoundRequestsService {
 		case LOST_AND_FOUND_ID:
 			if(foundRequests != null && foundRequests.size() == 1){
 				matchFound(lostRequest, foundRequests.get(0));
+			}else{
+				Map<String, Object> dataObject = new HashMap<String, Object>();
+				dataObject.put("lostRequest", lostRequest);
+				
+				AppMailSender.sendEmail("" + lostRequest.getLostRequestId(),lostRequest.getAddressEmail(), dataObject, EventDetailsEnum.MATCH_NOT_FOUND);
 			}
 			break;
 		case NONE:
@@ -89,7 +94,27 @@ public class FoundRequestsServiceImpl implements FoundRequestsService {
 		
 		return foundRequests;
 	}
-	
+
+	@Override
+	public List<FoundRequest> searchMatchingRequestsAsPerLFI(String lostAndFoundId) throws Exception {
+
+		String query = " from FoundRequest where lostAndFoundId = '" + lostAndFoundId + "'";
+		List<FoundRequest> foundRequests = commonHibernateDao.getHibernateTemplate().find(query);
+		
+		if(foundRequests != null && foundRequests.size() == 1){
+			matchFound(lostAndFoundId, foundRequests.get(0));
+		}else{
+			Map<String, Object> dataObject = new HashMap<String, Object>();
+			AppMailSender.sendEmail(lostAndFoundId,"patil.vinayb9@gmail.com", dataObject, EventDetailsEnum.MATCH_NOT_FOUND_LFI);
+		}
+		
+		return foundRequests;
+	}
+
+	private void matchFound(String lostAndFoundId, FoundRequest foundRequest) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public List<LostRequest> searchMatchingRequests(FoundRequest foundRequest) throws Exception {

@@ -27,6 +27,16 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.saveFoundRequest = function () {
 		saveFoundRequest($scope, $http);
 	};
+	
+	// TRACK REQUEST 
+
+	$scope.es.searchMatchingReqAsPerLRI = function () {
+		searchMatchingReqAsPerLRI($scope, $http);
+	};
+	
+	$scope.es.searchMatchingReqAsPerLFI = function () {
+		searchMatchingReqAsPerLFI($scope, $http);
+	};
 };	
 	
 var openMyProfile = function($scope, $http){

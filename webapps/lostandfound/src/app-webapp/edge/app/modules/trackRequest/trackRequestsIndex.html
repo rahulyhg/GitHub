@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Lost And Found : Found</title>
+</head>
+<body>
+	<div class="foundDiv padding5px">
+			
+		   	<div>
+				<h3>
+					Track Request:
+				</h3>
+			</div>
+			
+			
+			<div><i>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can search for the relevant Found Request as per either 'Lost Request Id' or as per your 'Lost And Found Id' created earlier.
+				Due to security reasons and to avoid fake instances, we would be sending only probable matches only to the mentioned email address in the requests.
+								
+			</i></div>
+			
+			<div><br></div>
+						
+		   	<div>
+				<div>
+					<B>Search As Per Lost Request Id:</B><br><br>					
+				</div>
+				
+				<div>
+					<div class="leftSection">Lost Request Id:</div>
+					<div class="rightSection">
+						<input class="formInput" size="70" type="text" ng-model="es.search.lostRequestId" title="~Unique Id~" >
+					</div>
+				</div>
+				<div>
+					<div class="leftSection"></div>
+					<div class="rightSection">
+						 <input class="btn btn-info" name="submit" type="button" value="Send me details over mail" ng-click="es.searchMatchingReqAsPerLRI()"/>
+					</div>
+				</div>	
+			</div>	
+			
+			<div><br></div>
+						
+		   	<div>
+				<div>
+					<B>Search As Per LOST AND FOUND TAG:</B><br><br>					
+				</div>
+				
+				<div>
+					<div class="leftSection">Lost And Found Id:</div>
+					<div class="rightSection">
+						<input class="formInput" size="70" type="text" ng-model="es.search.lostAndFoundId" title="~Unique Id~" >
+					</div>
+				</div>
+				<div>
+					<div class="leftSection"></div>
+					<div class="rightSection">
+						 <input class="btn btn-info" name="submit" type="button" value="Send me details over mail" ng-click="es.searchMatchingReqAsPerLFI()"/>
+					</div>
+				</div>	
+			</div>	
+				    
+		   		    
+		    <div><br><br></div>
+		    <div><br><br></div>	
+		    	    
+		</form>
+	</div>
+</body>
+</html>
