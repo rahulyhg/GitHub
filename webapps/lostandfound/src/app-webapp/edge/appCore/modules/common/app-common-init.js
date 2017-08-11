@@ -1,7 +1,7 @@
 
 function appInitVar($scope, $http, $modal, $log, $sce){
 	
-	$scope.es.selectedPage = menuMap["4TRACK"];
+	$scope.es.selectedPage = menuMap["3FOUND"];
 	$scope.es.showFound = 'C';
 	$scope.es.searchedProfiles = {};
 	$scope.es.editProfile = {};
