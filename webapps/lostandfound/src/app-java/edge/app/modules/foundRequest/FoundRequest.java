@@ -18,7 +18,7 @@ import edge.core.modules.common.EdgeEntity;
 @Entity
 @Table(
 		name = "FOUNDREQUESTS",
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"addressPhone", "idType"})}
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"addressEmail", "matchingKey"})}
 )
 public class FoundRequest extends EdgeEntity{
 
@@ -27,6 +27,9 @@ public class FoundRequest extends EdgeEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int foundRequestId;
+
+	@Column(nullable = true, length = 50)
+	private int lostdRequestId;
 	
 	@Column(nullable = false, length = 50)
 	private String idType; // With ID / LOST AND FOUND TAG / NONE
@@ -59,10 +62,10 @@ public class FoundRequest extends EdgeEntity{
 	private String fullName;
 	
 	@Column(nullable = false, length = 50)
-	private RequestStatusEnum status = RequestStatusEnum.UNMATCHED;
+	private String status = RequestStatusEnum.UNMATCHED.name();
 
-	@Column(length = 10)
-	private String addressPhone;
+	@Column(nullable = true, length = 10)
+	private String addressPhone = "";
 	
 	@Column(nullable = false, length = 100)
 	private String addressEmail;
@@ -145,11 +148,11 @@ public class FoundRequest extends EdgeEntity{
 	}
 
 	public RequestStatusEnum getStatus() {
-		return status;
+		return RequestStatusEnum.valueOf(status);
 	}
 
 	public void setStatus(RequestStatusEnum status) {
-		this.status = status;
+		this.status = status.name();
 	}
 
 	public String getFullName() {
@@ -214,6 +217,14 @@ public class FoundRequest extends EdgeEntity{
 
 	public void setLostAndFoundId(String lostAndFoundId) {
 		this.lostAndFoundId = lostAndFoundId;
+	}
+
+	public int getLostdRequestId() {
+		return lostdRequestId;
+	}
+
+	public void setLostdRequestId(int lostdRequestId) {
+		this.lostdRequestId = lostdRequestId;
 	}
 	
 }

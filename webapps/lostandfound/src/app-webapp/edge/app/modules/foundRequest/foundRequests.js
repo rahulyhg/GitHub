@@ -32,7 +32,7 @@ var saveFoundRequest = function addFoundRequest($scope, $http){
 	$http.post('server/unsecured/saveFoundRequest.json', $scope.es.foundRequest ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('SAVE_FOUND_REQUEST', $scope, data, status, headers, config);
-    	loadFoundRequests($scope, $http);
+    	//loadFoundRequests($scope, $http);
     	$scope.es.foundRequest = {};
     }).
     error(function(data, status, headers, config) {

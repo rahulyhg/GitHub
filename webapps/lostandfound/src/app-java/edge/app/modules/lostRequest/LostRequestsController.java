@@ -44,7 +44,8 @@ public class LostRequestsController {
 			) throws Exception{	
 		try{
 			LostRequest addLostRequest = lostRequestsService.saveLostRequest(lostRequest);
-			return EdgeResponse.createDataResponse(addLostRequest, "LostRequest added Successfully with ID : " + addLostRequest.getLostRequestId());
+			return EdgeResponse.createDataResponse(addLostRequest, "Lost Request submitted Successfully with ID : '" + addLostRequest.getLostRequestId() 
+					+ "'. Please check mail for further details. Thank You!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);

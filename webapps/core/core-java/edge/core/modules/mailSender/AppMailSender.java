@@ -1,5 +1,6 @@
 package edge.core.modules.mailSender;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -114,13 +115,20 @@ public class AppMailSender implements InitializingBean{
 	}
 	
 	public static void sendEmail(final String identifier, final String emailId, final Map<String, Object> dataObject, final EventDetails eventDetails) throws Exception {
+		sendEmail(identifier, new String[]{emailId}, dataObject, eventDetails);
+	}
+	
+	public static void sendEmail(final String identifier, final String[] emailIds, final Map<String, Object> dataObject, final EventDetails eventDetails) throws Exception {
 		try{
 			 final String subject = INSTANCE.getSubject(identifier, eventDetails);
 			 final MimeMessagePreparator preparator = new MimeMessagePreparator() {
 					public void prepare(MimeMessage mimeMessage) throws Exception {
 						MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-						message.setFrom(INSTANCE.fromAddress);						
-						message.setTo(new String[]{emailId, INSTANCE.fromAddress});
+						message.setFrom(INSTANCE.fromAddress);
+						
+						String[] toList = addElement(emailIds, INSTANCE.fromAddress);
+						
+						message.setTo(toList);
 						message.setSubject(subject);
 						
 						dataObject.put("appEmailAddress", INSTANCE.appEmailAddress);
@@ -149,9 +157,15 @@ public class AppMailSender implements InitializingBean{
 		}
 	}
 	
+	public static String[] addElement(String[] a, String e) {
+	    a  = Arrays.copyOf(a, a.length + 1);
+	    a[a.length - 1] = e;
+	    return a;
+	}
+	
 	protected String getSubject(
 			String identifier, EventDetails eventDetails) {
-		return getAppName() + " - [" + identifier +"] - " + eventDetails.getSubject() + " - " + new Date();
+		return getAppName() + " - " + eventDetails.getSubject() + " - [" + identifier +"]" + " - " + new Date();
 	}
 
 	public static void main(String[] args) throws Exception {

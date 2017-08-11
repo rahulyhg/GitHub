@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -44,7 +42,8 @@ public class FoundRequestsController {
 			) throws Exception{	
 		try{
 			FoundRequest addFoundRequest = foundRequestsService.saveFoundRequest(foundRequest);
-			return EdgeResponse.createDataResponse(addFoundRequest, "FoundRequest added Successfully with ID : " + addFoundRequest.getFoundRequestId());
+			return EdgeResponse.createDataResponse(addFoundRequest, "Found Request submitted Successfully with ID : '" + addFoundRequest.getFoundRequestId()
+					+ "'. Please check mail for further details. Thank You!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);

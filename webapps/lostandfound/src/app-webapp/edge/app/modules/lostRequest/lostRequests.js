@@ -32,7 +32,7 @@ var saveLostRequest = function addLostRequest($scope, $http){
 	$http.post('server/unsecured/saveLostRequest.json', $scope.es.lostRequest ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('SAVE_LOST_REQUEST', $scope, data, status, headers, config);
-    	loadLostRequests($scope, $http);
+    	//loadLostRequests($scope, $http);
     	$scope.es.lostRequest = {};
     }).
     error(function(data, status, headers, config) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.common.Utils;
+import edge.app.modules.foundRequest.FoundRequestsService;
 import edge.app.modules.mail.EventDetailsEnum;
 import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
@@ -23,6 +24,9 @@ public class LostRequestsServiceImpl implements LostRequestsService {
 
 	@Autowired
 	private CommonHibernateDao commonHibernateDao;
+	
+	@Autowired
+	private FoundRequestsService foundRequestsService;
 
 	@Override
 	@Transactional
@@ -41,6 +45,8 @@ public class LostRequestsServiceImpl implements LostRequestsService {
 			
 			AppMailSender.sendEmail(String.valueOf("ID: " + lostRequest.getLostRequestId()), lostRequest.getAddressEmail(), dataObject , EventDetailsEnum.LOST_REQUEST_SAVED);
 			
+			foundRequestsService.searchMatchingRequests(lostRequest);
+			
 		}catch(DataIntegrityViolationException ex){
 			ex.printStackTrace();
 			throw new AppException(ex, "Similar request already exists");
@@ -54,6 +60,14 @@ public class LostRequestsServiceImpl implements LostRequestsService {
 	@Override
 	public LostRequest getLostRequest(int lostRequestId) {
 		return commonHibernateDao.getEntityById(LostRequest.class, lostRequestId);
+	}
+
+	public FoundRequestsService getFoundRequestsService() {
+		return foundRequestsService;
+	}
+
+	public void setFoundRequestsService(FoundRequestsService foundRequestsService) {
+		this.foundRequestsService = foundRequestsService;
 	}
 	
 }
