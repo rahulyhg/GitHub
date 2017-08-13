@@ -18,19 +18,19 @@
 				<br><I>** On renewal, additional 12 months would be added after your first free three months.</I></H4><br>
 			</div>
 			<div ng-show="es.showAllParents">
-				<div class="leftSection">Existing Parent:</div>
+				<div class="leftSection">Existing Parent</div>:
 				<div class="rightSection">
 					<select class="formInput" ng-model="es.parent" title="~Parent~" ng-options="value as value.display for value in es.allParents" >
 					</select>
 					<input class="btn btn-info" type="button" value="Update" ng-click="es.updateParent()"/>
 				</div>
-				<div class="leftSection">From Date:</div>
+				<div class="leftSection">From Date</div>:
 				<div class="rightSection">
 					<input datepicker-popup is-open="es.parent.fromDate.opened" 
 						ng-click="es.parent.fromDate.opened = true" class="formInput" type="text" 
 						ng-model="es.parent.fromDate" />
 				</div>
-				<div class="leftSection">To Date:</div>
+				<div class="leftSection">To Date</div>:
 				<div class="rightSection">
 					<input datepicker-popup is-open="es.parent.toDate.opened" 
 						ng-click="es.parent.toDate.opened = true" class="formInput" type="text" 

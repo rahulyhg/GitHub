@@ -70,6 +70,9 @@ public class LostRequest extends EdgeEntity{
 	@Column(nullable = false, length = 30)
 	private String addressCity;
 	
+	@Column(nullable = false, length = 10)
+	private String addressZip;
+	
 	@Column(nullable = false, length = 30)
 	private String addressState;
 
@@ -280,6 +283,14 @@ public class LostRequest extends EdgeEntity{
 
 	public void setFoundRequestId(int foundRequestId) {
 		this.foundRequestId = foundRequestId;
+	}
+
+	public String getAddressZip() {
+		return addressZip;
+	}
+
+	public void setAddressZip(String addressZip) {
+		this.addressZip = addressZip;
 	}
 	
 }

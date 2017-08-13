@@ -264,3 +264,7 @@ input.ng-invalid {
 	border: dotted 1px ; border-radius: 5px;
 	padding: 5px;
 }
+
+.subTitle{
+	color: silver;
+}
