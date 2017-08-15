@@ -37,6 +37,13 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.searchMatchingReqAsPerLFI = function () {
 		searchMatchingReqAsPerLFI($scope, $http);
 	};
+	
+	// TAG Creation
+
+	$scope.es.saveTagCreation = function () {
+		saveTagCreation($scope, $http);
+	};
+	
 };	
 	
 var openMyProfile = function($scope, $http){

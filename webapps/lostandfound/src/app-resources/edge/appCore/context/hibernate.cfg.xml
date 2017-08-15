@@ -12,5 +12,7 @@
        <mapping class="edge.app.modules.profile.SecureProfileDetails" />
        <mapping class="edge.app.modules.lostReport.LostReport" />
        <mapping class="edge.app.modules.foundReport.FoundReport" />
+       <mapping class="edge.app.modules.tagCreation.TagCreation" />
+       
     </session-factory> 
 </hibernate-configuration>

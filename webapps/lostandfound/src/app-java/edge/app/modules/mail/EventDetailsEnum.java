@@ -34,4 +34,10 @@ public class EventDetailsEnum {
 			"We apologies but there is no 'Found' report submitted yet! :( We would inform you as soon as we find one.",
 			"MatchNotFoundLFI.html"
 			);
+	
+	public static EventDetails TAG_CREATION_SAVED =
+			new EventDetails(
+			"Congratulations! Your Lost And Found ID has been successfully Created!. :)",
+			"TagCreationSaved.html"
+			);
 }
