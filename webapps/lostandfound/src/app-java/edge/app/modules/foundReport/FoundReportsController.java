@@ -1,4 +1,4 @@
-package edge.app.modules.lostRequest;
+package edge.app.modules.foundReport;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,19 +13,17 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 
 @Controller
-public class LostRequestsController {
+public class FoundReportsController {
 
-	private static final Logger logger = LoggerFactory.getLogger(LostRequestsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FoundReportsController.class);
 	
 	@Autowired
-	private LostRequestsService lostRequestsService;
+	private FoundReportsService foundReportsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -34,18 +32,18 @@ public class LostRequestsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
 	
-	public LostRequestsService getLostRequestsService() {
-		return lostRequestsService;
+	public FoundReportsService getFoundReportsService() {
+		return foundReportsService;
 	}
 
-	@RequestMapping(value={"/unsecured/saveLostRequest"})
-	public EdgeResponse<LostRequest> addLostRequest(
-			@RequestBody LostRequest lostRequest		
+	@RequestMapping(value={"/unsecured/saveFoundReport"})
+	public EdgeResponse<FoundReport> addFoundReport(
+			@RequestBody FoundReport foundReport		
 			) throws Exception{	
 		try{
-			LostRequest addLostRequest = lostRequestsService.saveLostRequest(lostRequest);
-			return EdgeResponse.createDataResponse(addLostRequest, "Lost Request submitted Successfully with ID : '" + addLostRequest.getLostRequestId() 
-					+ "'. Please check mail for further details. Thank You!");
+			FoundReport addFoundReport = foundReportsService.saveFoundReport(foundReport);
+			return EdgeResponse.createDataResponse(addFoundReport, "Found Report submitted Successfully with ID : '" + addFoundReport.getFoundReportId()
+					+ "'. Please check email for further details. Thank You!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
@@ -53,20 +51,20 @@ public class LostRequestsController {
 		
 	}
 	
-	@RequestMapping(value={"/unsecured/getLostRequest"})
-	public EdgeResponse<LostRequest> getLostRequest( 
-			int lostRequestId
+	@RequestMapping(value={"/unsecured/getFoundReport"})
+	public EdgeResponse<FoundReport> getFoundReport( 
+			int foundReportId
 			) throws Exception{	
 		try{	
-			LostRequest lostRequest = lostRequestsService.getLostRequest(lostRequestId);
-			return EdgeResponse.createDataResponse(lostRequest, "");
+			FoundReport foundReport = foundReportsService.getFoundReport(foundReportId);
+			return EdgeResponse.createDataResponse(foundReport, "");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}
 	}
 	
-	public void setLostRequestsService(LostRequestsService lostRequestsService) {
-		this.lostRequestsService = lostRequestsService;
+	public void setFoundReportsService(FoundReportsService foundReportsService) {
+		this.foundReportsService = foundReportsService;
 	}
 }

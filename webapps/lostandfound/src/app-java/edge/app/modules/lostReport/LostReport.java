@@ -1,4 +1,4 @@
-package edge.app.modules.lostRequest;
+package edge.app.modules.lostReport;
 
 import java.util.Date;
 
@@ -11,25 +11,25 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import edge.app.modules.common.IdTypeEnum;
-import edge.app.modules.common.RequestStatusEnum;
+import edge.app.modules.common.ReportStatusEnum;
 import edge.app.modules.common.UniqueIdTypeEnum;
 import edge.core.modules.common.EdgeEntity;
 
 @Entity
 @Table(
-		name = "LOSTREQUESTS",
+		name = "LOSTREPORTS",
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"addressEmail", "matchingKey"})}
 )
-public class LostRequest extends EdgeEntity{
+public class LostReport extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int lostRequestId;
+	private int lostReportId;
 	
 	@Column(nullable = true, length = 50)
-	private int foundRequestId;
+	private int foundReportId;
 	
 	@Column(nullable = false, length = 50)
 	private String idType; // With ID / LOST AND FOUND TAG / NONE
@@ -59,7 +59,7 @@ public class LostRequest extends EdgeEntity{
 	private String fullName;
 	
 	@Column(nullable = false, length = 50)
-	private String status = RequestStatusEnum.UNMATCHED.name();
+	private String status = ReportStatusEnum.UNMATCHED.name();
 
 	@Column(nullable = false, length = 100)
 	private String addressLine1;
@@ -97,15 +97,15 @@ public class LostRequest extends EdgeEntity{
 	@Column(nullable = false)
 	private Date updatedOn;
 
-	public int getLostRequestId() {
-		return lostRequestId;
+	public int getLostReportId() {
+		return lostReportId;
 	}
 
-	public void setLostRequestId(int lostRequestId) {
-		this.lostRequestId = lostRequestId;
+	public void setLostReportId(int lostReportId) {
+		this.lostReportId = lostReportId;
 	}
 	
-	public LostRequest() {
+	public LostReport() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -186,7 +186,9 @@ public class LostRequest extends EdgeEntity{
 	}
 
 	public void setAddressEmail(String addressEmail) {
-		this.addressEmail = addressEmail;
+		if(addressEmail != null){
+			this.addressEmail = addressEmail.trim().toLowerCase();
+		}
 	}
 
 	public Date getCreatedOn() {
@@ -205,11 +207,11 @@ public class LostRequest extends EdgeEntity{
 		this.updatedOn = updatedOn;
 	}
 
-	public RequestStatusEnum getStatus() {
-		return RequestStatusEnum.valueOf(status);
+	public ReportStatusEnum getStatus() {
+		return ReportStatusEnum.valueOf(status);
 	}
 
-	public void setStatus(RequestStatusEnum status) {
+	public void setStatus(ReportStatusEnum status) {
 		this.status = status.name();
 	}
 
@@ -277,12 +279,12 @@ public class LostRequest extends EdgeEntity{
 		this.brandName = brandName;
 	}
 
-	public int getFoundRequestId() {
-		return foundRequestId;
+	public int getFoundReportId() {
+		return foundReportId;
 	}
 
-	public void setFoundRequestId(int foundRequestId) {
-		this.foundRequestId = foundRequestId;
+	public void setFoundReportId(int foundReportId) {
+		this.foundReportId = foundReportId;
 	}
 
 	public String getAddressZip() {

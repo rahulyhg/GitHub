@@ -224,7 +224,7 @@ select {
 	margin-left: 3%;
 	width: 17%;
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .rightSection {
@@ -267,4 +267,8 @@ input.ng-invalid {
 
 .subTitle{
 	color: silver;
+}
+
+.edgeLink{
+	cursor: pointer;
 }

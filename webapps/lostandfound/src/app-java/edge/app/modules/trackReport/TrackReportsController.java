@@ -1,4 +1,4 @@
-package edge.app.modules.trackRequest;
+package edge.app.modules.trackReport;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edge.app.modules.foundRequest.FoundRequestsService;
+import edge.app.modules.foundReport.FoundReportsService;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 
 @Controller
-public class TrackRequestsController {
+public class TrackReportsController {
 
-	private static final Logger logger = LoggerFactory.getLogger(TrackRequestsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TrackReportsController.class);
 	
 	@Autowired
-	private FoundRequestsService foundRequestsService;
+	private FoundReportsService foundReportsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -33,22 +33,22 @@ public class TrackRequestsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
 	
-	public FoundRequestsService getFoundRequestsService() {
-		return foundRequestsService;
+	public FoundReportsService getFoundReportsService() {
+		return foundReportsService;
 	}
 
 	@RequestMapping(value={"/unsecured/searchMatchingReqAsPerLRI"})
 	public EdgeResponse<String> searchMatchingReqAsPerLRI(
-			@RequestBody int lostRequestId	
+			@RequestBody int lostReportId	
 			) throws Exception{	
 		try{
-			foundRequestsService.searchMatchingRequests(lostRequestId);
+			foundReportsService.searchMatchingReports(lostReportId);
 			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}catch(Exception ae){
-			return EdgeResponse.createErrorResponse("","There is no such request.",null,null);
+			return EdgeResponse.createErrorResponse("","There is no such report.",null,null);
 		}
 		
 	}
@@ -58,18 +58,18 @@ public class TrackRequestsController {
 			@RequestBody String lostAndFoundId	
 			) throws Exception{	
 		try{
-			foundRequestsService.searchMatchingRequestsAsPerLFI(lostAndFoundId);
+			foundReportsService.searchMatchingReportsAsPerLFI(lostAndFoundId);
 			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
 		}catch(Exception ae){
-			return EdgeResponse.createErrorResponse("","There is no such request.",null,null);
+			return EdgeResponse.createErrorResponse("","There is no such report.",null,null);
 		}
 		
 	}
 		
-	public void setFoundRequestsService(FoundRequestsService foundRequestsService) {
-		this.foundRequestsService = foundRequestsService;
+	public void setFoundReportsService(FoundReportsService foundReportsService) {
+		this.foundReportsService = foundReportsService;
 	}
 }

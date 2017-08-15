@@ -9,14 +9,14 @@
 			
 		   	<div>
 				<h3>
-					Track Request:
+					Track Report:
 				</h3>
 			</div>
 			
 			
 			<div>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can search for the relevant Found Request as per either 'Lost Request Id' or as per your 'Lost And Found Id' created earlier.
-				Due to security reasons and to avoid fake instances, we would be sending probable matches only to the mentioned email address in the request.
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can search for the relevant Found Report as per either 'Lost Report Id' or as per your 'Lost And Found Id' created earlier.
+				Due to security reasons and to avoid fake instances, we would be sending probable matches only to the mentioned email address in the report.
 								
 			</div>
 			
@@ -24,19 +24,19 @@
 						
 		   	<div>
 				<div>
-					<B>Search As Per Lost Request Id:</B><br><br>					
+					<B>Search As Per Lost Report Id:</B><br><br>					
 				</div>
 				
 				<div>
-					<div class="leftSection">Lost Request Id</div>:
+					<div class="leftSection">Lost Report Id</div>
 					<div class="rightSection">
-						<input class="formInput" size="70" type="text" ng-model="es.search.lostRequestId" title="~Unique Id~" >
+						<input class="formInput" size="70" type="text" ng-model="es.search.lostReportId" title="~Unique Id~" >
 					</div>
 				</div>
 				<div>
 					<div class="leftSection"></div>
 					<div class="rightSection">
-						 <input class="btn btn-info" name="submit" type="button" value="Send me details over mail" ng-click="es.searchMatchingReqAsPerLRI()"/>
+						 <input class="btn btn-info" name="submit" type="button" value="Send me details over email" ng-click="es.searchMatchingReqAsPerLRI()"/>
 					</div>
 				</div>	
 			</div>	
@@ -49,7 +49,7 @@
 				</div>
 				
 				<div>
-					<div class="leftSection">Lost And Found Id</div>:
+					<div class="leftSection">Lost And Found Id</div>
 					<div class="rightSection">
 						<input class="formInput" size="70" type="text" ng-model="es.search.lostAndFoundId" title="~Unique Id~" >
 					</div>
@@ -57,7 +57,7 @@
 				<div>
 					<div class="leftSection"></div>
 					<div class="rightSection">
-						 <input class="btn btn-info" name="submit" type="button" value="Send me details over mail" ng-click="es.searchMatchingReqAsPerLFI()"/>
+						 <input class="btn btn-info" name="submit" type="button" value="Send me details over email" ng-click="es.searchMatchingReqAsPerLFI()"/>
 					</div>
 				</div>	
 			</div>	

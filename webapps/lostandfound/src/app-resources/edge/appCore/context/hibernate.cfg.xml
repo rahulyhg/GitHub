@@ -10,7 +10,7 @@
        <mapping class="edge.core.modules.auth.AuthorityEntity" />
        <mapping class="edge.app.modules.profile.ProfileDetails" />
        <mapping class="edge.app.modules.profile.SecureProfileDetails" />
-       <mapping class="edge.app.modules.lostRequest.LostRequest" />
-       <mapping class="edge.app.modules.foundRequest.FoundRequest" />
+       <mapping class="edge.app.modules.lostReport.LostReport" />
+       <mapping class="edge.app.modules.foundReport.FoundReport" />
     </session-factory> 
 </hibernate-configuration>

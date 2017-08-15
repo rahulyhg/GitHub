@@ -11,19 +11,19 @@ var menuMap = {
 	"2LOST" : {
 		id : "LOST",
 		title : "Lost",
-		templateUrl : "edge/app/modules/lostRequest/lostRequestsIndex.html",
+		templateUrl : "edge/app/modules/lostReport/lostReportsIndex.html",
 		icon : ""
 	},
 	"3FOUND" : {
 		id : "FOUND",
 		title : "Found",
-		templateUrl : "edge/app/modules/foundRequest/foundRequestsIndex.html",
+		templateUrl : "edge/app/modules/foundReport/foundReportsIndex.html",
 		icon : ""
 	},
 	"4TRACK" : {
 		id : "TRACK",
 		title : "Track",
-		templateUrl : "edge/app/modules/trackRequest/trackRequestsIndex.html",
+		templateUrl : "edge/app/modules/trackReport/trackReportsIndex.html",
 		icon : ""
 	},
 	"5DONATE" : {
@@ -46,6 +46,12 @@ var extendedMenuMap = {
 			id : "UPDATEPROFILE",
 			title : "Update Profile",
 			templateUrl : "edge/app/modules/profile/updateProfileIndex.html",
+			icon : ""
+		},
+		"TAG_CREATION" : {
+			id : "TAGCREATION",
+			title : "Tag Creation",
+			templateUrl : "edge/app/modules/tagCreation/tagCreationIndex.html",
 			icon : ""
 		}
 };

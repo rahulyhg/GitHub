@@ -16,19 +16,19 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		searchById($scope, $http);
 	};
 	
-	// LOST REQUEST 
+	// LOST REPORT 
 	
-	$scope.es.saveLostRequest = function () {
-		saveLostRequest($scope, $http);
+	$scope.es.saveLostReport = function () {
+		saveLostReport($scope, $http);
 	};
 
-	// FOUND REQUEST 
+	// FOUND REPORT 
 	
-	$scope.es.saveFoundRequest = function () {
-		saveFoundRequest($scope, $http);
+	$scope.es.saveFoundReport = function () {
+		saveFoundReport($scope, $http);
 	};
 	
-	// TRACK REQUEST 
+	// TRACK REPORT 
 
 	$scope.es.searchMatchingReqAsPerLRI = function () {
 		searchMatchingReqAsPerLRI($scope, $http);

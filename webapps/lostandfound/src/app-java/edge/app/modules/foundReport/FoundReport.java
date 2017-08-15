@@ -1,4 +1,4 @@
-package edge.app.modules.foundRequest;
+package edge.app.modules.foundReport;
 
 import java.util.Date;
 
@@ -11,25 +11,25 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import edge.app.modules.common.IdTypeEnum;
-import edge.app.modules.common.RequestStatusEnum;
+import edge.app.modules.common.ReportStatusEnum;
 import edge.app.modules.common.UniqueIdTypeEnum;
 import edge.core.modules.common.EdgeEntity;
 
 @Entity
 @Table(
-		name = "FOUNDREQUESTS",
+		name = "FOUNDREPORTS",
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"addressEmail", "matchingKey"})}
 )
-public class FoundRequest extends EdgeEntity{
+public class FoundReport extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int foundRequestId;
+	private int foundReportId;
 
 	@Column(nullable = true, length = 50)
-	private int lostdRequestId;
+	private int lostdReportId;
 	
 	@Column(nullable = false, length = 50)
 	private String idType; // With ID / LOST AND FOUND TAG / NONE
@@ -62,7 +62,7 @@ public class FoundRequest extends EdgeEntity{
 	private String fullName;
 	
 	@Column(nullable = false, length = 50)
-	private String status = RequestStatusEnum.UNMATCHED.name();
+	private String status = ReportStatusEnum.UNMATCHED.name();
 
 	@Column(nullable = true, length = 10)
 	private String addressPhone = "";
@@ -79,15 +79,15 @@ public class FoundRequest extends EdgeEntity{
 	@Column(nullable = false)
 	private Date updatedOn;
 
-	public int getFoundRequestId() {
-		return foundRequestId;
+	public int getFoundReportId() {
+		return foundReportId;
 	}
 
-	public void setFoundRequestId(int foundRequestId) {
-		this.foundRequestId = foundRequestId;
+	public void setFoundReportId(int foundReportId) {
+		this.foundReportId = foundReportId;
 	}
 	
-	public FoundRequest() {
+	public FoundReport() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -128,7 +128,9 @@ public class FoundRequest extends EdgeEntity{
 	}
 
 	public void setAddressEmail(String addressEmail) {
-		this.addressEmail = addressEmail;
+		if(addressEmail != null){
+			this.addressEmail = addressEmail.trim().toLowerCase();
+		}
 	}
 
 	public Date getCreatedOn() {
@@ -147,11 +149,11 @@ public class FoundRequest extends EdgeEntity{
 		this.updatedOn = updatedOn;
 	}
 
-	public RequestStatusEnum getStatus() {
-		return RequestStatusEnum.valueOf(status);
+	public ReportStatusEnum getStatus() {
+		return ReportStatusEnum.valueOf(status);
 	}
 
-	public void setStatus(RequestStatusEnum status) {
+	public void setStatus(ReportStatusEnum status) {
 		this.status = status.name();
 	}
 
@@ -219,12 +221,12 @@ public class FoundRequest extends EdgeEntity{
 		this.lostAndFoundId = lostAndFoundId;
 	}
 
-	public int getLostdRequestId() {
-		return lostdRequestId;
+	public int getLostdReportId() {
+		return lostdReportId;
 	}
 
-	public void setLostdRequestId(int lostdRequestId) {
-		this.lostdRequestId = lostdRequestId;
+	public void setLostdReportId(int lostdReportId) {
+		this.lostdReportId = lostdReportId;
 	}
 	
 }

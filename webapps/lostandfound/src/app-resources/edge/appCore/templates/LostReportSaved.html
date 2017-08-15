@@ -2,23 +2,23 @@
 <body style="font-size: large;">
 <pre>
 <div>
-Hi,
+Hi ${lostReport.fullName},
+	
+Your lost report has been successfully saved with id ${lostReport.lostReportId}.
 
-Hurray!! We have found a match. We are happy that we could help you find the missing item.
+As soon as we find any matching 'Found' report, we would email you along with that persons contact details who logs 'Found' report.
 
-You two may contact each other and decide how do you want the item to be transferred.
+You may also track the same by clicking on 'Track' Menu Item on our site, and search for above lost report Id.
 
-In case you two decide to opt for the courier, then let courier service know that this is from 'LostAndFound' service and the <B>receiver (One who submitted Lost Report)</B> would pay for this delivery.
+<B>Be Relaxed! We would try our best to find the missing item.</B> 
 
-In case receiver denies to pay, it will be responsibility of 'LostAndFound' to pay for the charges.
+We hope you would like our service. In case of any concerns please feel free to <a href="mailto:lostandfound.report@gmail.com">drop us an email</a>!
 
 <hr>
-
-Here are the details to facilitate easier communication:
 <H3><B><i>
 Lost Report Details:
 </i></B></H3>
-	
+
 	Name: ${lostReport.fullName}
 	
 	Description : 
@@ -39,26 +39,10 @@ Lost Report Details:
 		Zip/Pin 	: ${lostReport.addressZip}
 		State  		: ${lostReport.addressState}
 		Country  	: ${lostReport.addressCountry}
-		
-<H3><B><i>
-Found Report Details:
-</i></B></H3>
-
-	Name: ${foundReport.fullName}
-	
-	Description : 
-		${lostReport.matchingKey}
-		${lostReport.description}
-	
-	Phone Number: ${foundReport.addressPhone}
-	
-	Email Address: ${foundReport.addressEmail}
-			
-We hope you would like our service. In case of any concerns please feel free to <a href="mailto:lostandfound.report@gmail.com">drop us an email</a>!
-
+ 			
 <hr>
 
-In case we find your item and you are satisfied with our service, please think to 'Donate Us'. 
+In case we find your item and you are satisfied with our service, think to 'Donate Us'. 
 
 <B>We depend on your donations to provide best in class services to you.</B>
 
@@ -76,12 +60,12 @@ You just need to create a 'Lost and Found Id' and attach a visible note to any o
 
 <b><i>In case you find me, please report it on http://lostandfound.report?found=YOUR_ID</i></b>
 
-It is also a free service.
+It is also a free service
 
 <hr>
 
-Good Luck!
-		
+Good Luck In Your Search!
+	
 Thanks and Regards,
 Lost And Found,
 Free service towards Public Welfare

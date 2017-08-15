@@ -1,6 +1,6 @@
 package edge.app.modules.common;
 
-public enum RequestStatusEnum {
+public enum ReportStatusEnum {
 
 	MATCHED,
 	UNMATCHED

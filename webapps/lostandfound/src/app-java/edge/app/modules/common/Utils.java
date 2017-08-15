@@ -1,29 +1,29 @@
 package edge.app.modules.common;
 
-import edge.app.modules.foundRequest.FoundRequest;
-import edge.app.modules.lostRequest.LostRequest;
+import edge.app.modules.foundReport.FoundReport;
+import edge.app.modules.lostReport.LostReport;
 
 public class Utils {
 
-	public static String deriveMatchingKey(LostRequest lostRequest) {
+	public static String deriveMatchingKey(LostReport lostReport) {
 		String returnValue = "";
-		switch(lostRequest.getIdType()){
-		case UNIQUE_ID: returnValue = lostRequest.getUniqueIdType() + "-" + lostRequest.getUniqueId(); break;
+		switch(lostReport.getIdType()){
+		case UNIQUE_ID: returnValue = lostReport.getUniqueIdType() + "-" + lostReport.getUniqueId(); break;
 		case LOST_AND_FOUND_ID: returnValue = ""; break;
 		case NONE:
-				returnValue = lostRequest.getCity()  + "-" + lostRequest.getMonth() + "-" + lostRequest.getYear() + "-" + lostRequest.getBrandName();
+				returnValue = lostReport.getCity()  + "-" + lostReport.getMonth() + "-" + lostReport.getYear() + "-" + lostReport.getBrandName();
 				break;
 		}
 		return returnValue.replace(" ", "").toUpperCase();
 	}
 	
-	public static String deriveMatchingKey(FoundRequest foundRequest) {
+	public static String deriveMatchingKey(FoundReport foundReport) {
 		String returnValue = "";
-		switch(foundRequest.getIdType()){
-		case UNIQUE_ID: returnValue = foundRequest.getUniqueIdType() + "-" + foundRequest.getUniqueId(); break;
-		case LOST_AND_FOUND_ID: returnValue = foundRequest.getLostAndFoundId(); break;
+		switch(foundReport.getIdType()){
+		case UNIQUE_ID: returnValue = foundReport.getUniqueIdType() + "-" + foundReport.getUniqueId(); break;
+		case LOST_AND_FOUND_ID: returnValue = foundReport.getLostAndFoundId(); break;
 		case NONE:
-				returnValue = foundRequest.getCity()  + "-" + foundRequest.getMonth() + "-" + foundRequest.getYear() + "-" + foundRequest.getBrandName();
+				returnValue = foundReport.getCity()  + "-" + foundReport.getMonth() + "-" + foundReport.getYear() + "-" + foundReport.getBrandName();
 				break;
 		}
 		return returnValue.replace(" ", "").toUpperCase();

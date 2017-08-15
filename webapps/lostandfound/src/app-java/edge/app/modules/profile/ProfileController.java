@@ -1,8 +1,8 @@
 package edge.app.modules.profile;
 
 import java.security.Principal;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -61,7 +61,7 @@ public class ProfileController {
 		
 		List<String> errors = profileDetails.validate();
 		if(errors != null && errors.size() != 0){
-			return EdgeResponse.createErrorResponse(profileDetails, "There were below errors while processing your request", "Please try after some time.", errors);
+			return EdgeResponse.createErrorResponse(profileDetails, "There were below errors while processing your report", "Please try after some time.", errors);
 		}else{
 			commonHibernateDao.update(profileDetails);
 			commonHibernateDao.update(profileDetails.getSecure());
