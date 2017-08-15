@@ -103,7 +103,7 @@ hr {
 	cursor: pointer;
 	display: inline-block;
 	padding-top: 15px;
-	min-width: 130px;
+	min-width: 109px;
 	min-height: 40px;
 	text-align: center;
 	border-top: 1px solid;
@@ -151,7 +151,7 @@ hr {
 	border-top-style: dotted;
 	border-color: white;
 	border-width: 1px;
-	background-color: #787878;;
+	background-color: #787878;
 }
 
 .registerTitle {

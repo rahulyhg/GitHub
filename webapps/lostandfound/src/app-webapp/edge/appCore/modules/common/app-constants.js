@@ -31,6 +31,12 @@ var menuMap = {
 		title : "Donate",
 		templateUrl : "edge/app/modules/donate/donateIndex.html",
 		icon : ""
+	},
+	"6ABOUT" : {
+		id : "ABOUT",
+		title : "About",
+		templateUrl : "edge/app/modules/about/aboutIndex.html",
+		icon : ""
 	}
 };
 
