@@ -19,7 +19,6 @@ public class ProfileDetails extends EdgeEntity{
 	private SignUpEntity signUpEntity;
 	
 	@Id
-	
 	@Column(nullable = false, length = 50)
 	private String profileId;
 	

@@ -23,7 +23,7 @@ public class TagCreation extends EdgeEntity{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int tagCreationId;
+	private Long tagCreationId;
 
 	@Column(nullable = false, length = 100)
 	private String fullName;
@@ -67,11 +67,11 @@ public class TagCreation extends EdgeEntity{
 	@Column(nullable = true)
 	private Date updatedOn;
 
-	public int getTagCreationId() {
+	public Long getTagCreationId() {
 		return tagCreationId;
 	}
 
-	public void setTagCreationId(int tagCreationId) {
+	public void setTagCreationId(Long tagCreationId) {
 		this.tagCreationId = tagCreationId;
 	}
 	

@@ -141,7 +141,7 @@ public class FoundReportsServiceImpl implements FoundReportsService {
 		lostReport.setFoundReportId(foundReport.getFoundReportId());
 		lostReport.setStatus(ReportStatusEnum.MATCHED);
 		
-		foundReport.setLostdReportId(lostReport.getFoundReportId());
+		foundReport.setLostReportId(lostReport.getFoundReportId());
 		foundReport.setStatus(ReportStatusEnum.MATCHED);
 		
 		commonHibernateDao.update(lostReport);

@@ -26,10 +26,10 @@ public class FoundReport extends EdgeEntity{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int foundReportId;
+	private Long foundReportId;
 
 	@Column(nullable = true, length = 50)
-	private int lostdReportId;
+	private Long lostReportId;
 	
 	@Column(nullable = false, length = 50)
 	private String idType; // With ID / LOST AND FOUND TAG / NONE
@@ -79,11 +79,11 @@ public class FoundReport extends EdgeEntity{
 	@Column(nullable = false)
 	private Date updatedOn;
 
-	public int getFoundReportId() {
+	public Long getFoundReportId() {
 		return foundReportId;
 	}
 
-	public void setFoundReportId(int foundReportId) {
+	public void setFoundReportId(Long foundReportId) {
 		this.foundReportId = foundReportId;
 	}
 	
@@ -221,12 +221,12 @@ public class FoundReport extends EdgeEntity{
 		this.lostAndFoundId = lostAndFoundId;
 	}
 
-	public int getLostdReportId() {
-		return lostdReportId;
+	public Long getLostReportId() {
+		return lostReportId;
 	}
 
-	public void setLostdReportId(int lostdReportId) {
-		this.lostdReportId = lostdReportId;
+	public void setLostReportId(Long lostReportId) {
+		this.lostReportId = lostReportId;
 	}
 	
 }
