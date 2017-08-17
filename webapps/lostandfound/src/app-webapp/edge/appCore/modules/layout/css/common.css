@@ -20,13 +20,17 @@ hr {
 	color: #947353;
 }
 
+h1, h2, h3, h4, h5{
+	color: rgb(26, 26, 26);	
+}
+
 .grid {
 	font: 15px candara;
 }
 
 .edgeApp {
 	margin: 0;
-	color: rgba(59, 59, 59, 0.901961);
+	color: rgba(40, 40, 40, 0.901961);
 	font: 19px candara;
 }
 
