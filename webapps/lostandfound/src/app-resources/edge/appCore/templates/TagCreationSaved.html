@@ -1,5 +1,5 @@
 <html>
-<body style="font-size: large;">
+<body style="font-size: medium; line-height: 14px;">
 <pre>
 <div>
 Hi ${tagCreation.fullName},
@@ -15,25 +15,28 @@ Be Relaxed! If someone reports lost item with above note, we would inform you im
 We hope you would like our service. In case of any concerns please feel free to <a href="mailto:lostandfound.report@gmail.com">drop us an email</a>!
 
 <hr>
-<H3><B><i>
-Lost and Found Id Details:
-</i></B></H3>
+<H3><B><i>Tag Creation Details:</i></B></H3>
 
-	Name: ${tagCreation.fullName}
+ Name: ${tagCreation.fullName}
 
-	Phone Number: ${tagCreation.addressPhone}
+ Phone Number: ${tagCreation.addressPhone}
+
+ Email Address: ${tagCreation.addressEmail}
+
+ Address:
+
+   Line 1 		: ${tagCreation.addressLine1}
+   Line 2 		: ${tagCreation.addressLine2}
+   City   		: ${tagCreation.addressCity}
+   Zip/Pin		: ${tagCreation.addressZip}
+   State  		: ${tagCreation.addressState}
+   Country		: ${tagCreation.addressCountry}
 	
-	Email Address: ${tagCreation.addressEmail}
-	
-	Address:
-	
-		Line 1 		: ${tagCreation.addressLine1}
-		Line 2 		: ${tagCreation.addressLine2}
-		City   		: ${tagCreation.addressCity}
-		Zip/Pin 	: ${tagCreation.addressZip}
-		State  		: ${tagCreation.addressState}
-		Country  	: ${tagCreation.addressCountry}
- 			
+ Payment Details:
+
+   Transaction Type		: ${tagCreation.transactionType}
+   Transaction Id		: ${tagCreation.transactionId}	
+			
 <hr>
 
 In case you are satisfied with our service, please think to 'Donate Us'. 
