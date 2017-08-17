@@ -48,6 +48,12 @@ public class TagCreation extends EdgeEntity{
 
 	@Column(nullable = true, length = 10)
 	private String addressPhone = "";
+
+	@Column(nullable = false, length = 10)
+	private String transactionType = "";
+	
+	@Column(nullable = false, length = 20)
+	private String transactionId = "";
 	
 	@Column(nullable = true, length = 10)
 	private String addressAltPhone = "";
@@ -167,6 +173,22 @@ public class TagCreation extends EdgeEntity{
 
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 	
 }

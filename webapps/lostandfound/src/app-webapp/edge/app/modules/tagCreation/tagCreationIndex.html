@@ -81,8 +81,64 @@
 				<div class="rightSection">
 					<input class="formInput" placeholder="~ Optional ~" size="70" ng-minlength="3" maxlength="30" ng-maxlength="30" type="text" ng-model="es.tagCreation.addressCountry" title="~ Address Country ~" >
 				</div>
-				
+					
 			</div>
+				
+			<div><br></div>
+			
+			<div style="border: 1px dotted; border-radius:5px; padding: 10px">
+				<div class="leftSection"><B>Help us Survive?</B></div>
+				<div class="rightSection">
+					<input required="required" type="radio" ng-model="es.tagCreation.transactionType" title="~Type~" value="PAID" 
+					  ng-click="
+					  		es.tagCreation.transactionId='';
+					  "
+					>
+					I can pay <B>one time fee of Rs. 30/-</B> for this service, to help this site survive!<br><br>
+					
+					<input required="required" type="radio" ng-model="es.tagCreation.transactionType" title="~Type~" value="FREE" 
+					 ng-click="
+					  		es.tagCreation.transactionId='NOT APPLICABLE';
+					  "
+					>
+					I will think on this later, for now let me create Id for free!<br><br>
+					
+					**<i> This is the only service where we ask for payment to help us survive.</i><br><br>
+				</div>
+				
+				<div ng-show="es.tagCreation.transactionType == 'PAID'">					
+					&nbsp;&nbsp;&nbsp;<B>We Thank You to choose this option. We assure you that these earnings will be used for keeping this site live and for charity purpose only.</B>					
+					<br><br>
+					&nbsp;&nbsp;&nbspPlease make the payment to below account:
+					<br><br>
+					<div>
+						<div class="leftSection">Via UPI</div>
+						<div class="rightSection">
+							lostandfound@axisbank
+						</div>
+					</div>
+					<br>
+					<div>
+						<div class="leftSection">Via NEFT / IMPS</div>
+						<div class="rightSection">
+							Account Number: 	911 0100 211 57439 <br>
+							IFS Code:			UTIB0000004   <span class="subTitle">&nbsp;&nbsp;&nbsp;(<i>Six Times 0</i>)</span>
+						</div>
+					</div>
+					<br>
+					&nbsp;&nbsp;&nbsp;And mention the TransactionId Here: <br>
+					<br>
+				</div>
+				
+				<div class="leftSection">Transaction Id</div>
+				<div class="rightSection">
+					<input class="formInput" required="required" placeholder="Please mention Transaction Id for payment" size="60" ng-minlength="3" maxlength="20" ng-maxlength="20" type="text" 
+					ng-model="es.tagCreation.transactionId" title="~ Address Country ~" >
+				</div>
+			</div>
+			
+			<div><br></div>
+		
 				    
 		    <div>
 		        <span ng-show="!myForm.$valid">
