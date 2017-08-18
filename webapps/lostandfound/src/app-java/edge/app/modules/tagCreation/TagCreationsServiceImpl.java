@@ -56,12 +56,12 @@ public class TagCreationsServiceImpl implements TagCreationsService {
 	}
 
 	@Override
-	public TagCreation getTagCreation(int tagCreationId) {
+	public TagCreation getTagCreation(Long tagCreationId) {
 		return commonHibernateDao.getEntityById(TagCreation.class, tagCreationId);
 	}
 
 	@Override
-	public TagCreation getTagCreation(String addressEmail) {
+	public TagCreation getTagCreationByEmail(String addressEmail) {
 		return (TagCreation) commonHibernateDao.getHibernateTemplate().find(" from TagCreation where addressEmail = '" + addressEmail + "'").get(0);
 	}
 

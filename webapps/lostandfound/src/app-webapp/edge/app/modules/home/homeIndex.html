@@ -5,60 +5,35 @@
 <title>Lost And Found : Home</title>
 </head>
 <body>
-	<div class="homeDiv padding5px">
-		<div>
-			<h3>Never lose your belongings:
-			</h3>
-		</div>
-		
-		<div>
-			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I><B>Never lose anything hence on!</B></I> Secure all your belongings with us! 
-			This is a <B>free</B> service. All you need to do is to create your own 'Lost and Found Id' <i>(takes less than a minute)</i> and add a visible note to all of your belongings which would say: 
-			<br>			
-			<div style="text-align: center; border: 1px dotted purple; border-radius: 5px; "><I>If you find me, please report it on <font color="green">"http://lostandfound.report/found=YOUR_ID"</I></font></div>
-			<br>
-			<span class="edgeLink" ng-click="es.setSelectedMenu(es.extendedMenuMap['TAG_CREATION'])">Click here to create your 'Lost and Found Id' and be worry free.</span>
-			<br><hr style="border: 1px dotted #EAEDED">
-		</div>
-		
-		<div>
-			<h3>Lost Something already?
-			</h3>
-		</div>
-		
-		<div>
-			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I><B>Do not worry!</B> We are here to help you find your missing item.</I> All you need to do is to submit a 'Lost' report here. 
-			As soon as someone submits a <I>matching</I> 'Found' report,we would let you know. And guess what, this too is a <B>free</B> service.
-			<br><hr style="border: 1px dotted #EAEDED">	
-		</div>
-		
-		<div>
-			<h3>Found Something?
-			</h3>
-		</div>
-		
-		<div>
-			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I><B>That's great!</B></I> Can we please request you to submit a 'Found' report here? This is absolutely a <B>free</B> service. 
-			You would not lose anything but definitely would get <B>'Blessings'</B> from us and the owner of the missing item.
-			<br><hr style="border: 1px dotted #EAEDED">	
-		</div>
-		
-		<div>
-			<h3>Help Us Survive?
-			</h3>
-		</div>
-		
-		<div>
-			<br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As you might have noticed, <B>all our services are absolutely free</B>. Though these services are free to you, <B>they are not free to us</B>. 
-			We need funds to keep this site live, but to raise funds, we did not want to charge the needy. We wanted to keep it discretionary and not obligatory to pay for the charges. 
-			So if you like the service and you think we deserve to survive, please think to <span class="edgeLink" ng-click="es.setSelectedMenu(es.menuMap['5DONATE'])">'Donate Us'. Click here to Donate.</span>
-			<br><hr style="border: 1px dotted #EAEDED">	
-		</div>
-		
+	<div>
+		<h1>Welcome!</h1>
 	</div>
+	<div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Losses are painful! We know how it feels when you lose something important, 
+		may it then be your folder with bunch of important documents, Passport, Pan Card or anything else. It becomes almost difficult to get back such things then, 
+		as there is absolutely no way to reach the person who finds your missing item.		
+		<br><br>
+			
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The very purpose of this site is to establish this connection between the person who <B>lost and</B> person who <B>found</B> 
+		the item. 
+		
+		<br><br>
+		
+		Please let us know what you are here for?
+				
+	</div>
+		
+	<div><br><br></div>
+	<div>
+		<span class="home_circle_wrapper"><img ng-click="es.setSelectedMenu(es.menuMap['2LOST'])"
+			class="home_circle" src="edge/appCore/modules/layout/images/home_lost.png" /></span>
+			
+		<span class="home_circle_wrapper"><img ng-click="es.setSelectedMenu(es.menuMap['3FOUND'])"
+			 class="home_circle" src="edge/appCore/modules/layout/images/home_found.png" /></span>
+			 
+		<span class="home_circle_wrapper"><img ng-click="es.setSelectedMenu(es.extendedMenuMap['TAG_CREATION'])"
+			 class="home_circle" src="edge/appCore/modules/layout/images/home_secure.png" /></span>
+	</div>
+	<div><br><hr style="border: 1px dotted #EAEDED"></div>
 </body>
 </html>

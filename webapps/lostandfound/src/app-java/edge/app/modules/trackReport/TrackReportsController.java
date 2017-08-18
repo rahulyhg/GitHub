@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edge.app.modules.foundReport.FoundReportsService;
+import edge.app.modules.matchReport.MatchReportsService;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -22,9 +22,9 @@ import edge.core.modules.common.EdgeResponse;
 public class TrackReportsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TrackReportsController.class);
-	
+
 	@Autowired
-	private FoundReportsService foundReportsService;
+	private MatchReportsService matchReportsService;
 
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -33,16 +33,12 @@ public class TrackReportsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
 	
-	public FoundReportsService getFoundReportsService() {
-		return foundReportsService;
-	}
-
 	@RequestMapping(value={"/unsecured/searchMatchingReqAsPerLRI"})
 	public EdgeResponse<String> searchMatchingReqAsPerLRI(
-			@RequestBody int lostReportId	
+			@RequestBody Long lostReportId	
 			) throws Exception{	
 		try{
-			foundReportsService.searchMatchingReports(lostReportId);
+			matchReportsService.searchMatchingReports(lostReportId);
 			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
 			
 		}catch(AppException ae){
@@ -55,10 +51,10 @@ public class TrackReportsController {
 
 	@RequestMapping(value={"/unsecured/searchMatchingReqAsPerLFI"})
 	public EdgeResponse<String> searchMatchingReqAsPerLFI(
-			@RequestBody String lostAndFoundId	
+			@RequestBody Long lostAndFoundId	
 			) throws Exception{	
 		try{
-			foundReportsService.searchMatchingReportsAsPerLFI(lostAndFoundId);
+			matchReportsService.searchMatchingReportsAsPerLFI(lostAndFoundId);
 			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
 			
 		}catch(AppException ae){
@@ -68,8 +64,13 @@ public class TrackReportsController {
 		}
 		
 	}
-		
-	public void setFoundReportsService(FoundReportsService foundReportsService) {
-		this.foundReportsService = foundReportsService;
+
+	public MatchReportsService getMatchReportsService() {
+		return matchReportsService;
 	}
+
+	public void setMatchReportsService(MatchReportsService matchReportsService) {
+		this.matchReportsService = matchReportsService;
+	}
+		
 }

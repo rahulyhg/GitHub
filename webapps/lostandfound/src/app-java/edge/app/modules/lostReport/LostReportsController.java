@@ -53,7 +53,7 @@ public class LostReportsController {
 	
 	@RequestMapping(value={"/unsecured/getLostReport"})
 	public EdgeResponse<LostReport> getLostReport( 
-			int lostReportId
+			Long lostReportId
 			) throws Exception{	
 		try{	
 			LostReport lostReport = lostReportsService.getLostReport(lostReportId);

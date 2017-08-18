@@ -34,6 +34,11 @@ h1, h2, h3, h4, h5{
 	font: 19px candara;
 }
 
+.home_circle{
+	width: 300px;
+	cursor: pointer;
+}
+
 .siteLogo {
 	border-radius: 20px;
 }

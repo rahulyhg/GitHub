@@ -3,6 +3,13 @@ package edge.app.modules.mail;
 import edge.core.modules.mailSender.EventDetails;
 
 public class EventDetailsEnum {
+	
+	public static EventDetails TAG_CREATION_SAVED =
+			new EventDetails(
+					"Congratulations! Your Lost And Found ID has been successfully Created!. :)",
+					"TagCreationSaved.html"
+					);
+	
 	public static EventDetails LOST_REPORT_SAVED =
 			new EventDetails(
 			"Your Lost Report has been successfully Submitted! We would find it soon.. :)",
@@ -21,23 +28,23 @@ public class EventDetailsEnum {
 			"MatchFound.html"
 			);
 	
+	public static EventDetails MATCH_FOUND_LFI =
+			new EventDetails(
+					"Hurray!! Cogratulations.. We have found a match :). Here are the details.",
+					"MatchFoundLFI.html"
+					);
+	
 
 	public static EventDetails MATCH_NOT_FOUND =
 			new EventDetails(
 			"We apologies but there is no 'Found' report submitted yet! :( We would inform you as soon as we find one.",
 			"MatchNotFound.html"
 			);
-	
+
 
 	public static EventDetails MATCH_NOT_FOUND_LFI =
 			new EventDetails(
 			"We apologies but there is no 'Found' report submitted yet! :( We would inform you as soon as we find one.",
 			"MatchNotFoundLFI.html"
-			);
-	
-	public static EventDetails TAG_CREATION_SAVED =
-			new EventDetails(
-			"Congratulations! Your Lost And Found ID has been successfully Created!. :)",
-			"TagCreationSaved.html"
 			);
 }

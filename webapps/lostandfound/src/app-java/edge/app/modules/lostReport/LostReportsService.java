@@ -5,6 +5,6 @@ public interface LostReportsService {
 
 	LostReport saveLostReport(LostReport lostReport);
 
-	LostReport getLostReport(int lostReportId);
+	LostReport getLostReport(Long lostReportId);
 
 }

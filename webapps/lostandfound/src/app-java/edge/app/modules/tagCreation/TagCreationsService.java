@@ -4,8 +4,8 @@ public interface TagCreationsService {
 
 	TagCreation saveTagCreation(TagCreation tagCreation) throws Exception;
 
-	TagCreation getTagCreation(int tagCreationId);
+	TagCreation getTagCreation(Long tagCreationId);
 
-	TagCreation getTagCreation(String addressEmail);
+	TagCreation getTagCreationByEmail(String addressEmail);
 
 }

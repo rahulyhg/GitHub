@@ -53,7 +53,7 @@ public class FoundReportsController {
 	
 	@RequestMapping(value={"/unsecured/getFoundReport"})
 	public EdgeResponse<FoundReport> getFoundReport( 
-			int foundReportId
+			Long foundReportId
 			) throws Exception{	
 		try{	
 			FoundReport foundReport = foundReportsService.getFoundReport(foundReportId);

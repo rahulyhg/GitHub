@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.common.Utils;
-import edge.app.modules.foundReport.FoundReportsService;
 import edge.app.modules.mail.EventDetailsEnum;
+import edge.app.modules.matchReport.MatchReportsService;
 import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.mailSender.AppMailSender;
@@ -24,9 +24,9 @@ public class LostReportsServiceImpl implements LostReportsService {
 
 	@Autowired
 	private CommonHibernateDao commonHibernateDao;
-	
+
 	@Autowired
-	private FoundReportsService foundReportsService;
+	private MatchReportsService matchReportsService;
 
 	@Override
 	@Transactional
@@ -45,7 +45,7 @@ public class LostReportsServiceImpl implements LostReportsService {
 			
 			AppMailSender.sendEmail(String.valueOf("ID: " + lostReport.getLostReportId()), lostReport.getAddressEmail(), dataObject , EventDetailsEnum.LOST_REPORT_SAVED);
 			
-			foundReportsService.searchMatchingReports(lostReport);
+			matchReportsService.searchMatchingReports(lostReport);
 			
 		}catch(DataIntegrityViolationException ex){
 			ex.printStackTrace();
@@ -58,16 +58,16 @@ public class LostReportsServiceImpl implements LostReportsService {
 	}
 
 	@Override
-	public LostReport getLostReport(int lostReportId) {
+	public LostReport getLostReport(Long lostReportId) {
 		return commonHibernateDao.getEntityById(LostReport.class, lostReportId);
 	}
 
-	public FoundReportsService getFoundReportsService() {
-		return foundReportsService;
+	public MatchReportsService getMatchReportsService() {
+		return matchReportsService;
 	}
 
-	public void setFoundReportsService(FoundReportsService foundReportsService) {
-		this.foundReportsService = foundReportsService;
+	public void setMatchReportsService(MatchReportsService matchReportsService) {
+		this.matchReportsService = matchReportsService;
 	}
 	
 }
