@@ -1,31 +1,22 @@
 
 function appInitFun($scope, $http, $modal, $log, $sce){
-	$scope.es.lost = function () {
-		lost($scope, $http);
-	};
-	
-	$scope.es.openMyProfile = function () {
-		openMyProfile($scope, $http);
-	};
-	
-	$scope.es.updateMyProfile = function () {
-		updateMyProfile($scope, $http);
-	};
-	
-	$scope.es.searchById = function () {
-		searchById($scope, $http);
-	};
+
+	var confirmationMsg = 'Are you sure? Press OK to confirm. ';
 	
 	// LOST REPORT 
 	
 	$scope.es.saveLostReport = function () {
-		saveLostReport($scope, $http);
+		if(confirm(confirmationMsg)) saveLostReport($scope, $http);
 	};
 
 	// FOUND REPORT 
 	
+	$scope.es.initFoundReports = function () {
+		initFoundReports($scope, $http);
+	};
+	
 	$scope.es.saveFoundReport = function () {
-		saveFoundReport($scope, $http);
+		if(confirm(confirmationMsg))  saveFoundReport($scope, $http);
 	};
 	
 	// TRACK REPORT 
@@ -41,20 +32,15 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	// TAG Creation
 
 	$scope.es.saveTagCreation = function () {
-		saveTagCreation($scope, $http);
+		if(confirm(confirmationMsg))  saveTagCreation($scope, $http);
+	};
+
+	$scope.es.sendOTPForTagUpdate = function () {
+		sendOTPForTagUpdate($scope, $http);
+	};
+
+	$scope.es.verifyOTPForTagUpdate = function () {
+		verifyOTPForTagUpdate($scope, $http);
 	};
 	
 };	
-	
-var openMyProfile = function($scope, $http){
-	startAjax('MYPROFILE', $scope);
-	$http.post('server/secured/profile/openMyProfile.json',"").
-    success(function(data, status, headers, config) {
-    	handleAjaxSuccess('MYPROFILE', $scope, data, status, headers, config);
-    	$scope.es.editProfile = data.edgeResponse.responseData;
-    	$scope.es.selectedPage = extendedMenuMap["UPDATE_PROFILE"];    	
-    }).
-    error(function(data, status, headers, config) {
-    	handleAjaxError('MYPROFILE', $scope, data, status, headers, config);
-    });
-};

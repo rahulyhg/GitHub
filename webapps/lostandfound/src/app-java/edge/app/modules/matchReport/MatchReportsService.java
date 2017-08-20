@@ -21,4 +21,8 @@ public interface MatchReportsService {
 
 	void searchMatchingReportsAsPerNone(String matchingKey) throws Exception;
 
+	void verifyAndSearchMatchingReports(Long lostReportId, String emailId) throws Exception;
+
+	void verifyAndSearchMatchingReportsAsPerLFI(Long lostAndFoundId, String emailId) throws Exception;
+
 }

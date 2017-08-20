@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import edge.core.modules.common.EdgeEntity;
 
 @Entity
@@ -17,6 +19,7 @@ import edge.core.modules.common.EdgeEntity;
 		name = "TAGCREATIONS",
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"addressEmail"})}
 )
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TagCreation extends EdgeEntity{
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +33,9 @@ public class TagCreation extends EdgeEntity{
 	
 	@Column(nullable = true, length = 100)
 	private String addressLine1 = "";
+	
+	@Column(nullable = true, length = 10)
+	private String otp = "";
 
 	@Column(nullable = true, length = 100)
 	private String addressLine2 = "";
@@ -156,7 +162,9 @@ public class TagCreation extends EdgeEntity{
 	}
 
 	public void setAddressEmail(String addressEmail) {
-		this.addressEmail = addressEmail;
+		if(addressEmail != null){
+			this.addressEmail = addressEmail.trim().toLowerCase();
+		}
 	}
 
 	public Date getCreatedOn() {
@@ -191,12 +199,28 @@ public class TagCreation extends EdgeEntity{
 		this.transactionType = transactionType;
 	}
 
+	public void getMatchingKey(String matchingKey){
+		// NOTHING TO DO HERE
+	}
+	
 	public String getMatchingKey() {
 		return "Id: " + tagCreationId;
 	}
 
+	public void setDescription(String description){
+		// NOTHING TO DO HERE
+	}
+	
 	public String getDescription() {
 		return "Lost and Found Id: " + tagCreationId;
+	}
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
 	}
 	
 }

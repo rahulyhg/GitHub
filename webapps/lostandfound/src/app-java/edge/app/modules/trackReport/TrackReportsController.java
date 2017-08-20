@@ -12,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edge.app.modules.matchReport.MatchReportsService;
 import edge.core.config.CoreConstants;
@@ -35,11 +36,11 @@ public class TrackReportsController {
 	
 	@RequestMapping(value={"/unsecured/searchMatchingReqAsPerLRI"})
 	public EdgeResponse<String> searchMatchingReqAsPerLRI(
-			@RequestBody Long lostReportId	
+			@RequestParam Long lostReportId, @RequestParam String emailId	
 			) throws Exception{	
 		try{
-			matchReportsService.searchMatchingReports(lostReportId);
-			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
+			matchReportsService.verifyAndSearchMatchingReports(lostReportId, emailId);
+			return EdgeResponse.createDataResponse("", "Email sent successfully!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
@@ -51,11 +52,11 @@ public class TrackReportsController {
 
 	@RequestMapping(value={"/unsecured/searchMatchingReqAsPerLFI"})
 	public EdgeResponse<String> searchMatchingReqAsPerLFI(
-			@RequestBody Long lostAndFoundId	
+			@RequestParam Long lostAndFoundId, @RequestParam String emailId		
 			) throws Exception{	
 		try{
-			matchReportsService.searchMatchingReportsAsPerLFI(lostAndFoundId);
-			return EdgeResponse.createDataResponse("", "Mail sent successfully!");
+			matchReportsService.verifyAndSearchMatchingReportsAsPerLFI(lostAndFoundId, emailId);
+			return EdgeResponse.createDataResponse("", "Email sent successfully!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);

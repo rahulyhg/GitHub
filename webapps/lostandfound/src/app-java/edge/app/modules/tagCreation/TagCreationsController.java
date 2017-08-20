@@ -12,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
@@ -42,11 +43,44 @@ public class TagCreationsController {
 			) throws Exception{	
 		try{
 			TagCreation addTagCreation = tagCreationsService.saveTagCreation(tagCreation);
-			return EdgeResponse.createDataResponse(addTagCreation, "Lost And Found ID has been successfully created with ID : '" + addTagCreation.getTagCreationId() 
+			return EdgeResponse.createDataResponse(addTagCreation, "Lost And Found ID has been successfully saved with ID : '" + addTagCreation.getTagCreationId() 
 					+ "'. Please check email for further details. Thank You!");
 			
 		}catch(AppException ae){
 			return EdgeResponse.createExceptionResponse(ae);
+		}
+		
+	}
+	
+
+	@RequestMapping(value={"/unsecured/sendOTPForTagUpdate"})
+	public EdgeResponse<String> sendOTPForTagUpdate(
+				@RequestParam String emailId	
+			) throws Exception{	
+		try{
+			tagCreationsService.sendOTPForTagUpdate(emailId);
+			return EdgeResponse.createDataResponse("", "Please check email for OTP!");
+			
+		}catch(AppException ae){
+			return EdgeResponse.createExceptionResponse(ae);
+		}catch(Exception ae){
+			return EdgeResponse.createErrorResponse("","Some error while processing.",null,null);
+		}
+		
+	}
+
+	@RequestMapping(value={"/unsecured/verifyOTPForTagUpdate"})
+	public EdgeResponse<TagCreation> verifyOTPForTagUpdate(
+				@RequestParam String emailId, @RequestParam String otp
+			) throws Exception{	
+		try{
+			TagCreation tagCreation = tagCreationsService.verifyOTPForTagUpdate(emailId, otp);
+			return EdgeResponse.createDataResponse(tagCreation, "Verification successful! Please update and submit the form!");
+			
+		}catch(AppException ae){
+			return EdgeResponse.createExceptionResponse(ae);
+		}catch(Exception ae){
+			return EdgeResponse.createErrorResponse(null,"Some error while processing.",null,null);
 		}
 		
 	}

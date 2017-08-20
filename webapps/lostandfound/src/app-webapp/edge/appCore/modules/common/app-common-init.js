@@ -12,12 +12,13 @@ function appInitVar($scope, $http, $modal, $log, $sce){
 
 var appOnLoad = function($scope, $http, $modal, $log, $sce){
 	
-	// http://localhost:8080/contextRoot/#/?searchById=FETWP1WO
+	$scope.es.lostAndFoundId = $scope.es.location.search().found;
 	
-	$scope.es.searchId = $scope.es.location.search().searchById;
-	if($scope.es.searchId){
-		$scope.es.selectedPage = menuMap["3FOUND"];
-		$scope.es.searchById($scope, $http);
+	if($scope.es.lostAndFoundId){
+		$scope.es.selectedPage = $scope.es.menuMap['3FOUND'];
+		$scope.es.foundReport = {};
+		$scope.es.foundReport.idType = "LOST_AND_FOUND_ID";
+		$scope.es.foundReport.lostAndFoundId=$scope.es.lostAndFoundId;
+		alert("Please fill up below details and submit the form. Thank You!");
 	}
-	
 };

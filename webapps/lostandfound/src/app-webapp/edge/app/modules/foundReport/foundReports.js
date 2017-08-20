@@ -1,8 +1,6 @@
 
 var initFoundReports = function initFoundReports($scope, $http){
-	initializeFoundReportsGrid($scope, $http);
 	$scope.es.foundReport = {};
-	$scope.es.loadFoundReports();
 };
 
 var initializeFoundReportsGrid = function initializeClientGrid($scope, $http){	

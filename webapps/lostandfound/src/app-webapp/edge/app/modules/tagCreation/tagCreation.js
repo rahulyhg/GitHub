@@ -16,3 +16,33 @@ var saveTagCreation = function saveTagCreation($scope, $http){
     	handleAjaxError('SAVE_TAG_CREATION', $scope, data, status, headers, config);
     });
 };
+
+
+var sendOTPForTagUpdate = function sendOTPForTagUpdate($scope, $http){	
+	startAjax('SEND_OTP_FOR_TAG_UPDATE', $scope);
+
+	var params = "?emailId=" + $scope.es.tagUpdate.emailId;
+	
+	$http.post('server/unsecured/sendOTPForTagUpdate.json' + params ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('SEND_OTP_FOR_TAG_UPDATE', $scope, data, status, headers, config);
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('SEND_OTP_FOR_TAG_UPDATE', $scope, data, status, headers, config);
+    });
+};
+
+var verifyOTPForTagUpdate = function sendOTPForTagUpdate($scope, $http){	
+	startAjax('VERIFY_OTP_FOR_TAG_UPDATE', $scope);
+
+	var params = "?emailId=" + $scope.es.tagUpdate.emailId + "&otp=" + $scope.es.tagUpdate.otp;
+	
+	$http.post('server/unsecured/verifyOTPForTagUpdate.json' + params ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('VERIFY_OTP_FOR_TAG_UPDATE', $scope, data, status, headers, config);
+    	$scope.es.tagCreation = data.edgeResponse.responseData;
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('VERIFY_OTP_FOR_TAG_UPDATE', $scope, data, status, headers, config);
+    });
+};

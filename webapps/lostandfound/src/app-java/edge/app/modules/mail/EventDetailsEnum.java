@@ -6,8 +6,14 @@ public class EventDetailsEnum {
 	
 	public static EventDetails TAG_CREATION_SAVED =
 			new EventDetails(
-					"Congratulations! Your Lost And Found ID has been successfully Created!. :)",
+					"Congratulations! Your Lost And Found ID has been successfully Saved!. :)",
 					"TagCreationSaved.html"
+					);
+	
+	public static EventDetails TAG_UPDATE_OTP =
+			new EventDetails(
+					"One Time Password for Tag Update!.",
+					"TagUpdateOtp.html"
 					);
 	
 	public static EventDetails LOST_REPORT_SAVED =

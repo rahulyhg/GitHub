@@ -213,4 +213,35 @@ public class MatchReportsServiceImpl implements MatchReportsService {
 		String query = " update FoundReport set status = '"+ReportStatusEnum.MATCHED.name()+"' where lostAndFoundId = '" + lostAndFoundId + "'";
 		int bulkUpdate = commonHibernateDao.getHibernateTemplate().bulkUpdate(query);
 	}
+
+	@Override
+	public void verifyAndSearchMatchingReports(Long lostReportId, String emailId) throws Exception {
+		if(emailId!= null){
+			emailId = emailId.trim().toLowerCase();
+		}
+		
+		LostReport lostReport = lostReportsService.getLostReport(lostReportId);
+		
+		if(lostReport == null){
+			throw new AppException(null, "No such report exists!");
+		}else if(!lostReport.getAddressEmail().equals(emailId)){
+			throw new AppException(null, "Email Id does not match!");
+		}
+		searchMatchingReports(lostReportId);
+	}
+
+	@Override
+	public void verifyAndSearchMatchingReportsAsPerLFI(Long lostAndFoundId, String emailId) throws Exception {
+		if(emailId!= null){
+			emailId = emailId.trim().toLowerCase();
+		}
+		TagCreation tagCreation = tagCreationsService.getTagCreation(lostAndFoundId);
+		
+		if(tagCreation == null){
+			throw new AppException(null, "No such ID exists!");
+		}else if(!tagCreation.getAddressEmail().equals(emailId)){
+			throw new AppException(null, "Email Id does not match");
+		}
+		searchMatchingReportsAsPerLFI(lostAndFoundId);
+	}
 }

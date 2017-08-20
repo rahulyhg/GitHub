@@ -8,4 +8,8 @@ public interface TagCreationsService {
 
 	TagCreation getTagCreationByEmail(String addressEmail);
 
+	void sendOTPForTagUpdate(String emailId) throws Exception;
+
+	TagCreation verifyOTPForTagUpdate(String emailId, String otp);
+
 }

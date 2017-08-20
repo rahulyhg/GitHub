@@ -2,18 +2,20 @@ package edge.app.modules.tagCreation;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jws.WebService;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import edge.app.modules.common.Utils;
 import edge.app.modules.foundReport.FoundReportsService;
 import edge.app.modules.mail.EventDetailsEnum;
+import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.mailSender.AppMailSender;
@@ -32,17 +34,31 @@ public class TagCreationsServiceImpl implements TagCreationsService {
 	@Transactional
 	public TagCreation saveTagCreation(TagCreation tagCreation) throws Exception {
 		try{
-			
+			String otp = tagCreation.getOtp();
 			Date current = new Date();
-			tagCreation.setCreatedOn(current);
-			tagCreation.setUpdatedOn(current);
 			
-			commonHibernateDao.save(tagCreation);
-			
+			if(otp != null && otp.trim().length() != 0){
+				// UPDATE CASE
+				
+				tagCreation.setUpdatedOn(current);
+				tagCreation.setOtp("");
+				commonHibernateDao.update(tagCreation);
+				
+			}else{
+				
+				// NEW CASE
+				tagCreation.setCreatedOn(current);
+				tagCreation.setUpdatedOn(current);
+				
+				commonHibernateDao.save(tagCreation);
+				
+			}
+
 			Map<String, Object> dataObject = new HashMap<String, Object>();
 			dataObject.put("tagCreation", tagCreation);
 			
 			AppMailSender.sendEmail(String.valueOf("ID: " + tagCreation.getTagCreationId()), tagCreation.getAddressEmail(), dataObject , EventDetailsEnum.TAG_CREATION_SAVED);
+			
 			
 		}catch(DataIntegrityViolationException ex){
 			ex.printStackTrace();
@@ -62,7 +78,11 @@ public class TagCreationsServiceImpl implements TagCreationsService {
 
 	@Override
 	public TagCreation getTagCreationByEmail(String addressEmail) {
-		return (TagCreation) commonHibernateDao.getHibernateTemplate().find(" from TagCreation where addressEmail = '" + addressEmail + "'").get(0);
+		List tagCreations = commonHibernateDao.getHibernateTemplate().find(" from TagCreation where addressEmail = '" + addressEmail + "'");
+		if(tagCreations != null && tagCreations.size() == 1){
+			return (TagCreation) tagCreations.get(0);
+		}
+		return null;
 	}
 
 	public FoundReportsService getFoundReportsService() {
@@ -71,6 +91,36 @@ public class TagCreationsServiceImpl implements TagCreationsService {
 
 	public void setFoundReportsService(FoundReportsService foundReportsService) {
 		this.foundReportsService = foundReportsService;
+	}
+
+	@Override
+	public void sendOTPForTagUpdate(String emailId) throws Exception {
+		
+		TagCreation tagCreation = getTagCreationByEmail(emailId);
+		
+		if(tagCreation == null){
+			throw new AppException(null, "Invalid Email Address.");
+		}
+		
+		String otp = RandomStringUtils.randomAlphanumeric(CoreConstants.PROFILE_ID_SIZE).toUpperCase();
+		tagCreation.setOtp(otp);
+		commonHibernateDao.update(tagCreation);
+		
+		Map<String, Object> dataObject = new HashMap<String, Object>();
+		dataObject.put("tagCreation", tagCreation);
+		
+		AppMailSender.sendEmail("OTP: " + otp, tagCreation.getAddressEmail(), dataObject , EventDetailsEnum.TAG_UPDATE_OTP);
+		
+	}
+
+	@Override
+	public TagCreation verifyOTPForTagUpdate(String emailId, String otp) {
+
+		TagCreation tagCreationByEmail = getTagCreationByEmail(emailId);
+		if(tagCreationByEmail == null || !tagCreationByEmail.getOtp().equals(otp)){
+			throw new AppException(null, "Invalid OTP Entered");
+		}
+		return tagCreationByEmail;
 	}
 	
 }

@@ -5,7 +5,10 @@ var initFoundReports = function initFoundReports($scope, $http){
 
 var searchMatchingReqAsPerLRI = function searchMatchingReqAsPerLRI($scope, $http){	
 	startAjax('MATCHING_REPORT_LRI', $scope);
-	$http.post('server/unsecured/searchMatchingReqAsPerLRI.json', $scope.es.search.lostReportId ).
+
+	var params = "?lostReportId=" + $scope.es.search.lostReportId + "&emailId=" + $scope.es.search.emailId;
+	
+	$http.post('server/unsecured/searchMatchingReqAsPerLRI.json' + params ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('MATCHING_REPORT_LRI', $scope, data, status, headers, config);
     }).
@@ -16,7 +19,10 @@ var searchMatchingReqAsPerLRI = function searchMatchingReqAsPerLRI($scope, $http
 
 var searchMatchingReqAsPerLFI = function searchMatchingReqAsPerLFI($scope, $http){	
 	startAjax('MATCHING_REPORT_LFI', $scope);
-	$http.post('server/unsecured/searchMatchingReqAsPerLFI.json', $scope.es.search.lostAndFoundId ).
+	
+	var params = "?lostAndFoundId=" + $scope.es.search.lostAndFoundId + "&emailId=" + $scope.es.search.emailId;
+	
+	$http.post('server/unsecured/searchMatchingReqAsPerLFI.json' + params ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('MATCHING_REPORT_LFI', $scope, data, status, headers, config);
     }).

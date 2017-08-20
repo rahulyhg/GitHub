@@ -7,26 +7,41 @@
 <body>
 	<div class="tagCreationDiv padding5px">
 		
-		<form action="/contextRoot/unsecured/lost" method="post" name="myForm">
+		<form action="/unsecured/tag" method="post" name="myForm">
   	
 		   	<div>
-				<h3>Lost and Found ID Creation:
+				<h3>Lost and Found ID Creation / Update:
 				</h3>
 			</div>
 			
 			<div>
-				<br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I><B>Never lose anything hence on!</B></I> Secure all your belongings with us! 
-				This is a <B>free</B> service. 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="purple"><i>"Secure all your belongings with us and make sure that you don't lose anything hence on!"</i></font>
 				<br><br>
-				All you need to do is to fill up below form to create your 'Lost and Found Id' <i>(takes less than a minute)</i> and add a visible note to all of your belongings which would say: 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To Secure, all you need to do is to fill up below form to create your 'Lost and Found Id' <i>(takes less than a minute)</i> and add a visible note to all of your belongings which would say: 
 				<br><br>			
-				<div style="text-align: center; border: 1px dotted purple; border-radius: 5px; "><I>If you find me, please report it on <font color="green">"http://lostandfound.report/found=YOUR_ID"</I></font></div>
+				<div style="text-align: center; border: 1px dotted purple; border-radius: 5px; "><I>If you find me, please report it on <font color="green">"http://lostandfound.report/#/?found=YOUR_ID"</I></font></div>
 				<br><br>
 			</div>
 
 			<div>
 				<i><B>Please submit below form.. </B></i><br><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span class="edgeLink">
+					<input type="checkbox" ng-model="es.tagUpdateChk"> <i> Check this to update existing Tag </i></input>
+				</span><br><br>
+				
+			</div>
+			
+			<div ng-show="es.tagUpdateChk" style="border: 1px dotted purple; border-radius:5px; padding: 5px">
+				<input class="formInput" placeholder="Enter Email Id" size="40" ng-minlength="3" maxlength="100" ng-maxlength="100" type="email" ng-model="es.tagUpdate.emailId" title="~ Email Id ~" />
+				<input class="btn btn-info" name="Send OTP" type="button" value="Send OTP" ng-click="es.sendOTPForTagUpdate()"/>
+				<input class="formInput" placeholder="Enter OTP" size="15" ng-minlength="3" maxlength="15" ng-maxlength="15" type="text" ng-model="es.tagUpdate.otp" title="~ One Time Password ~" />
+				<input class="btn btn-info" name="Verify OTP" type="button" value="Verify OTP" ng-click="es.verifyOTPForTagUpdate()"/>
+				<br><br>
+			</div>
+			
+			<div>	
+				
 				<div class="leftSection">Name</div>
 				<div class="rightSection">
 					<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="100" ng-maxlength="100" type="text" ng-model="es.tagCreation.fullName" title="~ Full Name ~" >

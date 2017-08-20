@@ -61,26 +61,26 @@ public class LostReport extends EdgeEntity{
 	@Column(nullable = false, length = 50)
 	private String status = ReportStatusEnum.UNMATCHED.name();
 
-	@Column(nullable = false, length = 100)
-	private String addressLine1;
+	@Column(nullable = true, length = 100)
+	private String addressLine1 = "";
 
-	@Column(nullable = false, length = 100)
-	private String addressLine2;
+	@Column(nullable = true, length = 100)
+	private String addressLine2 = "";
 
-	@Column(nullable = false, length = 30)
-	private String addressCity;
+	@Column(nullable = true, length = 30)
+	private String addressCity = "";
 	
-	@Column(nullable = false, length = 10)
-	private String addressZip;
+	@Column(nullable = true, length = 10)
+	private String addressZip = "";
 	
-	@Column(nullable = false, length = 30)
-	private String addressState;
+	@Column(nullable = true, length = 30)
+	private String addressState = "";
 
-	@Column(nullable = false, length = 30)
-	private String addressCountry;
+	@Column(nullable = true, length = 30)
+	private String addressCountry = "";
 
-	@Column(nullable = false, length = 10)
-	private String addressPhone;
+	@Column(nullable = true, length = 10)
+	private String addressPhone = "";
 	
 	@Column(nullable = true, length = 10)
 	private String addressAltPhone = "";
