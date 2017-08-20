@@ -66,7 +66,7 @@ public class TagCreation extends EdgeEntity{
 	
 	@Column(nullable = true)
 	private Date updatedOn;
-
+	
 	public Long getTagCreationId() {
 		return tagCreationId;
 	}
@@ -189,6 +189,14 @@ public class TagCreation extends EdgeEntity{
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+	}
+
+	public String getMatchingKey() {
+		return "Id: " + tagCreationId;
+	}
+
+	public String getDescription() {
+		return "Lost and Found Id: " + tagCreationId;
 	}
 	
 }

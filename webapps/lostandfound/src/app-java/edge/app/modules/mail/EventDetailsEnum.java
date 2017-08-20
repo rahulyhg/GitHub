@@ -27,24 +27,18 @@ public class EventDetailsEnum {
 			"Hurray!! Cogratulations.. We have found a match :). Here are the details.",
 			"MatchFound.html"
 			);
-	
-	public static EventDetails MATCH_FOUND_LFI =
-			new EventDetails(
-					"Hurray!! Cogratulations.. We have found a match :). Here are the details.",
-					"MatchFoundLFI.html"
-					);
-	
+		
 
+	public static EventDetails PROBABLE_MATCH_FOUND =
+			new EventDetails(
+			"We have found a probable match :). Please review.",
+			"ProbableMatchFound.html"
+			);
+		
 	public static EventDetails MATCH_NOT_FOUND =
 			new EventDetails(
 			"We apologies but there is no 'Found' report submitted yet! :( We would inform you as soon as we find one.",
 			"MatchNotFound.html"
 			);
 
-
-	public static EventDetails MATCH_NOT_FOUND_LFI =
-			new EventDetails(
-			"We apologies but there is no 'Found' report submitted yet! :( We would inform you as soon as we find one.",
-			"MatchNotFoundLFI.html"
-			);
 }

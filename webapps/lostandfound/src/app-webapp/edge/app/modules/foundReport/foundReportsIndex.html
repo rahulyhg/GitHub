@@ -39,7 +39,7 @@
 					<input required="required" type="radio" ng-model="es.foundReport.idType" title="~Type~" value="UNIQUE_ID" 
 					  ng-click="
 					  es.foundReport.uniqueId=''; es.foundReport.uniqueIdType='';
-					  es.foundReport.lostAndFoundId='NONE';
+					  es.foundReport.lostAndFoundId='0';
 					  es.foundReport.description='NONE';es.foundReport.city='NONE';es.foundReport.month=1;es.foundReport.year=3000;es.foundReport.brandName='NONE';
 					  "
 					>
@@ -57,7 +57,7 @@
 					<input required="required" type="radio" ng-model="es.foundReport.idType" title="~Type~" value="NONE" 
 						ng-click="
 						  es.foundReport.uniqueId='NONE'; es.foundReport.uniqueIdType='NONE';
-						  es.foundReport.lostAndFoundId='NONE';
+						  es.foundReport.lostAndFoundId='0';
 						  es.foundReport.description='';es.foundReport.city='';es.foundReport.month=0;es.foundReport.year=0;es.foundReport.brandName='';
 						  "
 					>
@@ -96,7 +96,7 @@
 					<div>
 						<div class="leftSection">LOST AND FOUND ID</div>
 						<div class="rightSection">
-							<input class="formInput" required="required" size="70" ng-minlength="3" maxlength="50" ng-maxlength="50" type="text" ng-model="es.foundReport.lostAndFoundId" title="~Lost And Found Id~" >
+							<input class="formInput" required="required" size="70" ng-minlength="1" maxlength="30" ng-maxlength="30" type="text" ng-model="es.foundReport.lostAndFoundId" title="~Lost And Found Id~" >
 						</div>
 					</div>
 						

@@ -38,16 +38,17 @@
 					
 					<input required="required" type="radio" ng-model="es.lostReport.idType" title="~Type~" value="LOST_AND_FOUND_ID" 
 					 ng-click="
-					 es.lostReport.uniqueId=''; es.lostReport.uniqueIdType='';
+					 es.lostReport.uniqueIdType='';es.lostReport.uniqueId=''; 
 					 es.lostReport.description='';es.lostReport.city='';es.lostReport.month=0;es.lostReport.year=0;es.lostReport.brandName='';
 					 
 					 "
 					>
+					<!-- uniqueIdType is purposely kept blank to not allow submit for Lost and Found Id-->
 					It has "LOST AND FOUND TAG" attached <a href="">What is this?</a><br><br>
 					
 					<input required="required" type="radio" ng-model="es.lostReport.idType" title="~Type~" value="NONE" 
 						ng-click="
-						  es.lostReport.uniqueId='NONE'; es.lostReport.uniqueIdType='NONE';
+						  es.lostReport.uniqueIdType='NONE'; es.lostReport.uniqueId='NONE'; 
 						  es.lostReport.description='';es.lostReport.city='';es.lostReport.month=0;es.lostReport.year=0;es.lostReport.brandName='';
 					 
 					    "

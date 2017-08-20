@@ -15,4 +15,10 @@ public interface MatchReportsService {
 
 	List<FoundReport> searchMatchingReportsAsPerLFI(Long lostAndFoundId) throws Exception;
 
+	List<FoundReport> searchMatchingReportsAsPerUnique(LostReport lostReport) throws Exception;
+
+	List<LostReport> searchMatchingReportsAsPerUnique(FoundReport foundReport) throws Exception;
+
+	void searchMatchingReportsAsPerNone(String matchingKey) throws Exception;
+
 }

@@ -2,6 +2,7 @@ package edge.app.modules.foundReport;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.jws.WebService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.common.Utils;
+import edge.app.modules.lostReport.LostReport;
 import edge.app.modules.mail.EventDetailsEnum;
 import edge.app.modules.matchReport.MatchReportsService;
 import edge.core.exception.AppException;
@@ -43,9 +45,9 @@ public class FoundReportsServiceImpl implements FoundReportsService {
 			Map<String, Object> dataObject = new HashMap<String, Object>();
 			dataObject.put("foundReport", foundReport);
 			
-			AppMailSender.sendEmail(String.valueOf("ID: " + foundReport.getFoundReportId()), foundReport.getAddressEmail(), dataObject , EventDetailsEnum.FOUND_REPORT_SAVED);
+			List<LostReport> lostReports = matchReportsService.searchMatchingReports(foundReport);
 			
-			matchReportsService.searchMatchingReports(foundReport);
+			AppMailSender.sendEmail(String.valueOf("ID: " + foundReport.getFoundReportId()), foundReport.getAddressEmail(), dataObject , EventDetailsEnum.FOUND_REPORT_SAVED);
 			
 		}catch(DataIntegrityViolationException ex){
 			ex.printStackTrace();

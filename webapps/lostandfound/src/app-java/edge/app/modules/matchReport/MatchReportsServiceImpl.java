@@ -16,6 +16,7 @@ import edge.app.modules.lostReport.LostReportsService;
 import edge.app.modules.mail.EventDetailsEnum;
 import edge.app.modules.tagCreation.TagCreation;
 import edge.app.modules.tagCreation.TagCreationsService;
+import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.mailSender.AppMailSender;
 
@@ -31,80 +32,148 @@ public class MatchReportsServiceImpl implements MatchReportsService {
 	
 	@Autowired
 	private TagCreationsService tagCreationsService;
+
+	////////////////////////////////////////////////////////////////////////////////////
 	
 	@Override
 	public List<FoundReport> searchMatchingReports(Long lostReportId) throws Exception {
 		return searchMatchingReports(lostReportsService.getLostReport(lostReportId));
 	}
-
+	
 	@Override
 	public List<FoundReport> searchMatchingReports(LostReport lostReport) throws Exception {
 
-		String query = " from MatchReport where matchingKey = '" + lostReport.getMatchingKey() + "' and status = '" + lostReport.getStatus().name() + "'";
-		List<FoundReport> matchReports = commonHibernateDao.getHibernateTemplate().find(query);
+		List<FoundReport> foundReports = null;
 		
 		switch(lostReport.getIdType()){
 		case UNIQUE_ID:
-		case LOST_AND_FOUND_ID:
-			if(matchReports != null && matchReports.size() == 1){
-				matchFound(lostReport, matchReports.get(0));
-			}else{
-				Map<String, Object> dataObject = new HashMap<String, Object>();
-				dataObject.put("lostReport", lostReport);
-				
-				AppMailSender.sendEmail("" + lostReport.getLostReportId(),lostReport.getAddressEmail(), dataObject, EventDetailsEnum.MATCH_NOT_FOUND);
-			}
+			searchMatchingReportsAsPerUnique(lostReport);
 			break;
 		case NONE:
+			searchMatchingReportsAsPerNone(lostReport.getMatchingKey());
 			break;
+		case LOST_AND_FOUND_ID:
+			throw new AppException(null, "Lost Request with Lost and Found Id can not be submitted!");
 		}
 		
-		return matchReports;
+		return foundReports;
 	}
 
 	@Override
-	public List<LostReport> searchMatchingReports(FoundReport matchReport) throws Exception {
-
-		String query = " from LostReport where matchingKey = '" + matchReport.getMatchingKey() + "' and status = '" + matchReport.getStatus().name() + "'";
-		List<LostReport> lostReports = commonHibernateDao.getHibernateTemplate().find(query);
-		
-		switch(matchReport.getIdType()){
+	public List<LostReport> searchMatchingReports(FoundReport foundReport) throws Exception {
+		List<LostReport> lostReports = null;
+		switch(foundReport.getIdType()){
 		case UNIQUE_ID:
-		case LOST_AND_FOUND_ID:
-			if(lostReports != null && lostReports.size() == 1){
-				matchFound(lostReports.get(0), matchReport);
-			}
+			lostReports = searchMatchingReportsAsPerUnique(foundReport);
 			break;
 		case NONE:
+			searchMatchingReportsAsPerNone(foundReport.getMatchingKey());
 			break;
+		case LOST_AND_FOUND_ID:
+			searchMatchingReportsAsPerLFI(foundReport.getLostAndFoundId());
+		}
+		return lostReports;
+	}
+
+	/////////////////////////////////// NONE ////////////////////////////////////////////////////////////////
+	
+	@Override
+	public void searchMatchingReportsAsPerNone(String matchingKey) throws Exception {
+
+		String lostQuery = " from LostReport where matchingKey = '" + matchingKey + "'";
+		List<LostReport> lostReports = commonHibernateDao.getHibernateTemplate().find(lostQuery);
+
+		String foundQuery = " from FoundReport where matchingKey = '" + matchingKey + "'";
+		List<FoundReport> foundReports = commonHibernateDao.getHibernateTemplate().find(foundQuery);
+		
+		if(lostReports != null && lostReports.size() > 0){
+			
+			for (LostReport lostReport : lostReports) {
+				if(foundReports != null && foundReports.size() > 0){
+					for (FoundReport foundReport : foundReports) {
+						Map<String, Object> dataObject = new HashMap<String, Object>();
+						dataObject.put("owner", lostReport);
+						dataObject.put("foundReport", foundReport);
+						
+						AppMailSender.sendEmail("Lost Id: " + lostReport.getLostReportId() + " : Found Id" + foundReport.getFoundReportId(),
+								new String[]{lostReport.getAddressEmail()}, 
+								dataObject, EventDetailsEnum.PROBABLE_MATCH_FOUND);
+					}
+				}
+			}
+		}
+	}
+	
+	/////////////////////////////////// UNIQUE ID ///////////////////////////////////////////////////////////
+	
+	@Override
+	public List<LostReport> searchMatchingReportsAsPerUnique(FoundReport foundReport) throws Exception {
+
+		String query = " from LostReport where matchingKey = '" + foundReport.getMatchingKey() + "'";
+		List<LostReport> lostReports = commonHibernateDao.getHibernateTemplate().find(query);
+		
+		if(lostReports != null && lostReports.size() > 0){
+			
+			updateDatabaseAsPerUnique(foundReport.getMatchingKey());
+
+			for (LostReport lostReport : lostReports) {
+				Map<String, Object> dataObject = new HashMap<String, Object>();
+				dataObject.put("owner", lostReport);
+				dataObject.put("foundReport", foundReport);
+				
+				AppMailSender.sendEmail("Lost Id: " + lostReport.getLostReportId() + " : Found Id" + foundReport.getFoundReportId(),
+						new String[]{lostReport.getAddressEmail(),foundReport.getAddressEmail()}, 
+						dataObject, EventDetailsEnum.MATCH_FOUND);
+			}
+			
 		}
 		
 		return lostReports;
 	}
 
-	private void matchFound(LostReport lostReport, FoundReport foundReport) throws Exception {
+	@Override
+	public List<FoundReport> searchMatchingReportsAsPerUnique(LostReport lostReport) throws Exception {
+
+		String query = " from FoundReport where matchingKey = '" + lostReport.getMatchingKey() + "'";
+		List<FoundReport> foundReports = commonHibernateDao.getHibernateTemplate().find(query);
 		
-		lostReport.setFoundReportId(foundReport.getFoundReportId());
-		lostReport.setStatus(ReportStatusEnum.MATCHED);
+		if(foundReports != null && foundReports.size() > 0){
+			
+			updateDatabaseAsPerUnique(lostReport.getMatchingKey());
+
+			for (FoundReport foundReport : foundReports) {
+				Map<String, Object> dataObject = new HashMap<String, Object>();
+				dataObject.put("owner", lostReport);
+				dataObject.put("foundReport", foundReport);
+				
+				AppMailSender.sendEmail("Lost Id: " + lostReport.getLostReportId() + " : Found Id" + foundReport.getFoundReportId(),
+						new String[]{lostReport.getAddressEmail(),foundReport.getAddressEmail()}, 
+						dataObject, EventDetailsEnum.MATCH_FOUND);
+			}
+			
+		}else{
+			
+			Map<String, Object> dataObject = new HashMap<String, Object>();
+			dataObject.put("owner", lostReport);
+			
+			AppMailSender.sendEmail("Lost ID: " + lostReport, 
+					lostReport.getAddressEmail(), 
+					dataObject, EventDetailsEnum.MATCH_NOT_FOUND);
+		}
 		
-		foundReport.setLostReportId(lostReport.getLostReportId());
-		foundReport.setStatus(ReportStatusEnum.MATCHED);
-		
-		commonHibernateDao.update(lostReport);
-		commonHibernateDao.update(foundReport);
-		
-		Map<String, Object> dataObject = new HashMap<String, Object>();
-		dataObject.put("lostReport", lostReport);
-		dataObject.put("matchReport", foundReport);
-		
-		AppMailSender.sendEmail("" + lostReport.getLostReportId() +  " - " + foundReport.getFoundReportId(), 
-				new String[]{lostReport.getAddressEmail(), foundReport.getAddressEmail()}, dataObject, EventDetailsEnum.MATCH_FOUND);
+		return foundReports;
 	}
 	
+	private void updateDatabaseAsPerUnique(String matchingKey) {
+		String query = " update FoundReport set status = '"+ReportStatusEnum.MATCHED.name()+"' where matchingKey = '" + matchingKey + "'";
+		int bulkUpdate = commonHibernateDao.getHibernateTemplate().bulkUpdate(query);
+		
+		query = " update LostReport set status = '"+ReportStatusEnum.MATCHED.name()+"' where matchingKey = '" + matchingKey + "'";
+		bulkUpdate = commonHibernateDao.getHibernateTemplate().bulkUpdate(query);
+	}
 	
-	/////////////////////////////////// LOST AND MATCH ID ///////////////////////////////////////////////////////////
+	/////////////////////////////////// LOST AND FOUND ID ///////////////////////////////////////////////////////////
 	
-
 	@Override
 	public List<FoundReport> searchMatchingReportsAsPerLFI(Long lostAndFoundId) throws Exception {
 
@@ -115,29 +184,33 @@ public class MatchReportsServiceImpl implements MatchReportsService {
 		
 		if(foundReports != null && foundReports.size() > 0){
 			
-			matchFoundAsPerLFI(tagCreation, foundReports);
+			updateDatabaseAsPerLfi(tagCreation.getTagCreationId(), foundReports);
 
-			Map<String, Object> dataObject = new HashMap<String, Object>();
-			dataObject.put("tagCreation", tagCreation);
-			dataObject.put("matchReports", foundReports);
-			
-			AppMailSender.sendEmail("ID: " + tagCreation.getTagCreationId(),tagCreation.getAddressEmail(), dataObject, EventDetailsEnum.MATCH_FOUND_LFI);
+			for (FoundReport foundReport : foundReports) {
+				Map<String, Object> dataObject = new HashMap<String, Object>();
+				dataObject.put("owner", tagCreation);
+				dataObject.put("foundReport", foundReport);
+				
+				AppMailSender.sendEmail("LandF ID: " + tagCreation.getTagCreationId(),
+						new String[]{tagCreation.getAddressEmail(),foundReport.getAddressEmail()}, 
+						dataObject, EventDetailsEnum.MATCH_FOUND);
+			}
 			
 		}else{
 			
 			Map<String, Object> dataObject = new HashMap<String, Object>();
-			dataObject.put("tagCreation", tagCreation);
+			dataObject.put("owner", tagCreation);
 			
-			AppMailSender.sendEmail("ID: " + lostAndFoundId,tagCreation.getAddressEmail(), dataObject, EventDetailsEnum.MATCH_NOT_FOUND_LFI);
+			AppMailSender.sendEmail("ID: " + lostAndFoundId, 
+					tagCreation.getAddressEmail(), 
+					dataObject, EventDetailsEnum.MATCH_NOT_FOUND);
 		}
 		
 		return foundReports;
 	}
 
-	private void matchFoundAsPerLFI(TagCreation tagCreation, List<FoundReport> foundReports) {
-		String query = " update FoundReport set status = '"+ReportStatusEnum.MATCHED.name()+"' where lostAndFoundId = '" + tagCreation.getTagCreationId() + "'";
+	private void updateDatabaseAsPerLfi(Long lostAndFoundId, List<FoundReport> foundReports) {
+		String query = " update FoundReport set status = '"+ReportStatusEnum.MATCHED.name()+"' where lostAndFoundId = '" + lostAndFoundId + "'";
 		int bulkUpdate = commonHibernateDao.getHibernateTemplate().bulkUpdate(query);
 	}
-
-	
 }

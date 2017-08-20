@@ -21,7 +21,7 @@ public class Utils {
 		String returnValue = "";
 		switch(foundReport.getIdType()){
 		case UNIQUE_ID: returnValue = foundReport.getUniqueIdType() + "-" + foundReport.getUniqueId(); break;
-		case LOST_AND_FOUND_ID: returnValue = foundReport.getLostAndFoundId(); break;
+		case LOST_AND_FOUND_ID: returnValue = "" + foundReport.getLostAndFoundId(); break;
 		case NONE:
 				returnValue = foundReport.getCity()  + "-" + foundReport.getMonth() + "-" + foundReport.getYear() + "-" + foundReport.getBrandName();
 				break;

@@ -38,7 +38,7 @@ public class FoundReport extends EdgeEntity{
 	private String uniqueIdType;
 	
 	@Column(nullable = false, length = 50)
-	private String lostAndFoundId;
+	private Long lostAndFoundId;
 	
 	@Column(nullable = false, length = 50)
 	private String uniqueId;
@@ -213,11 +213,11 @@ public class FoundReport extends EdgeEntity{
 		this.brandName = brandName;
 	}
 
-	public String getLostAndFoundId() {
+	public Long getLostAndFoundId() {
 		return lostAndFoundId;
 	}
 
-	public void setLostAndFoundId(String lostAndFoundId) {
+	public void setLostAndFoundId(Long lostAndFoundId) {
 		this.lostAndFoundId = lostAndFoundId;
 	}
 

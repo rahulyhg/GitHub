@@ -43,9 +43,9 @@ public class LostReportsServiceImpl implements LostReportsService {
 			Map<String, Object> dataObject = new HashMap<String, Object>();
 			dataObject.put("lostReport", lostReport);
 			
-			AppMailSender.sendEmail(String.valueOf("ID: " + lostReport.getLostReportId()), lostReport.getAddressEmail(), dataObject , EventDetailsEnum.LOST_REPORT_SAVED);
-			
 			matchReportsService.searchMatchingReports(lostReport);
+			
+			AppMailSender.sendEmail(String.valueOf("ID: " + lostReport.getLostReportId()), lostReport.getAddressEmail(), dataObject , EventDetailsEnum.LOST_REPORT_SAVED);
 			
 		}catch(DataIntegrityViolationException ex){
 			ex.printStackTrace();

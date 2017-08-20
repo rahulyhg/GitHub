@@ -1,50 +1,48 @@
 <html>
-<body style="font-size: medium; line-height: 14px;">
+<body style="font-size: medium; line-height: 15px;">
 <pre>
 <div>
 Hi,
 
-Hurray!! We have found a match. We are happy that we could help you find the missing item.
+We have found a probable match.
 
-You two may contact each other and decide how do you want the item to be transferred.
+You two may contact each other and check if this is a perfect match.
 
-In case you two decide to opt for the courier, then let courier service know that this is from 'LostAndFound' service and the <B>receiver (One who submitted Lost Report)</B> would pay for this delivery.
-
-In case receiver denies to pay, it will be responsibility of 'LostAndFound' to pay for the charges.
+If it is perfect macth, and in case you two decide to opt for the courier, then let courier service know that this is from 'LostAndFound' service and the <B>receiver (One who submitted Lost Report)</B> would pay for this delivery.
 
 <hr>
 
 Here are the details to facilitate easier communication:
-<H3><B><i>Lost Report Details:</i></B></H3>
+<H3><B><i>Owner Details:</i></B></H3>
 	
-	Name: ${lostReport.fullName}
+	Name: ${owner.fullName}
 	
 	Description : 
-		${lostReport.matchingKey}
-		${lostReport.description}
+		${owner.matchingKey}
+		${owner.description}
 	
-	Phone Number: ${lostReport.addressPhone}
+	Phone Number: ${owner.addressPhone}
 	
-	Alternate Phone Number: ${lostReport.addressAltPhone}
+	Alternate Phone Number: ${owner.addressAltPhone}
 	
-	Email Address: ${lostReport.addressEmail}
+	Email Address: ${owner.addressEmail}
 	
 	Address:
 	
-		Line 1 		: ${lostReport.addressLine1}
-		Line 2 		: ${lostReport.addressLine2}
-		City   		: ${lostReport.addressCity}
-		Zip/Pin 	: ${lostReport.addressZip}
-		State  		: ${lostReport.addressState}
-		Country  	: ${lostReport.addressCountry}
+		Line 1 		: ${owner.addressLine1}
+		Line 2 		: ${owner.addressLine2}
+		City   		: ${owner.addressCity}
+		Zip/Pin 	: ${owner.addressZip}
+		State  		: ${owner.addressState}
+		Country  	: ${owner.addressCountry}
 		
 <H3><B><i>Found Report Details:</i></B></H3>
 
 	Name: ${foundReport.fullName}
 	
 	Description : 
-		${lostReport.matchingKey}
-		${lostReport.description}
+		${owner.matchingKey}
+		${owner.description}
 	
 	Phone Number: ${foundReport.addressPhone}
 	
