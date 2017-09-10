@@ -1,0 +1,148 @@
+
+/* <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'> */
+
+.edgeApp {
+	/* font: 27px Tangerine; */
+	font: 16px candara;
+	line-height: 1.4em;
+	color: rgb(26, 26, 26);
+	
+}
+
+.home_circle_wrapper{
+	padding-left: 50px;
+}
+
+.headerStripOuterClass {
+	top: 0px;
+}
+
+.headerStripClass {
+	width: 100%;
+}
+
+.headerClass{
+	width: 100%;
+}
+
+.headerStripMenuItem{
+	/*color: #DBCBBB;*/	
+}
+
+.headerStripMenuItem a{
+	/*color: #DBCBBB;*/	
+}
+
+.bodyOuterClass {
+	position: absolute;
+	top: 200px;
+	width: 100%;
+}
+
+.bodyClass {
+	/* padding: 10px; */
+    width: 100%;
+}
+
+#homePageContent{
+	text-align: center;
+	display: inline-block;
+	width: 100%;
+}
+
+#homePageImage{
+	width: 100%;
+	border-radius: 0px;
+}
+
+.menuTrigger{
+	/* width: 100px; */
+	display: block;
+	position: absolute; 
+	top: 2px;
+}
+
+.menuInnerClass {
+	position: absolute; 
+	top: 0px;
+	width: 60%;
+	float: right;
+	z-index: 99;
+	border: 1px dotted;	
+	min-height:700px;
+	opacity: 0.90;
+	font: 25px;
+	line-height: 27px;
+	color: green;
+	background-color: white;
+}
+
+.menuItem {
+	width: 100%;
+	/* padding: 27px; */
+	vertical-align: middle;
+}
+
+.siteLogoWrapper {
+	top: 5px;
+	text-align: center;
+	background-color: #181818;
+}
+
+.siteLogo{
+
+}
+
+.mobileFooter{
+	width: 100%;
+	background-color: #787878;
+	color: white;
+}
+
+.leftSection{
+	/* padding-top: 27px; */
+	width: 100%;
+	display: block;
+	margin-left: 0%;
+	font-style: normal;
+}
+
+.rightSectionSub{
+	display: block;
+}
+
+.rightSection{
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.formInput{
+ 	width: 90%;
+ 	border-bottom: 1px dotted;
+ 	/* margin: 20px; */
+}
+
+.shortInput{
+	max-width: 50px;
+ 	min-width: 50px;
+}
+
+.popupDiv{
+	width: 100%;	
+}
+
+.formButton{
+	border-radius: 10px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+	background-color: #947353;
+	border: 0px none;
+	cursor: pointer;
+	display: inline-block;
+	padding: 3%;
+	padding-left: 5%; padding-right: 5%;
+}
+
+.criteriaLink:hover{
+	color: #DBCBBB;
+}

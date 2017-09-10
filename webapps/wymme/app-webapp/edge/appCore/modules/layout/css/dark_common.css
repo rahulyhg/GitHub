@@ -1,0 +1,215 @@
+
+hr{
+	border-top:1px dotted;
+	color: #947353;
+}
+
+.edgeApp {
+	margin: 0;
+	background-color: #8B0000;
+	color: #DBCBBB;
+	font: 19px monotype corsiva;
+}
+
+.padding5px{
+	padding: 5px;	
+}
+
+.padding10px{
+	padding: 10px;	
+}
+
+.padding15px{
+	padding: 15px;	
+}
+
+.headerStripOuterClass {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+}
+
+.headerStripClass {
+	padding-top: 15px;
+	z-index: 1;
+}
+
+.headerStripLeft {
+	float: left;
+	color: #947353;
+}
+
+.headerStripMenu {
+	color: #947353;
+	float: right;
+	cursor: pointer;
+}
+
+.headerStripMenuItem a{
+	color: #947353;
+}
+
+.headerStripMenuItem:hover {
+	color: #DBCBBB;
+}
+
+.headerOuterClass {
+	position: absolute;
+	top: 50px;
+	width: 100%;
+}
+
+.headerClass {
+	z-index: 1;
+}
+
+.menuItem {
+	cursor: pointer;
+	display: inline-block;
+	padding-top: 15px;
+	min-width: 160px;
+	min-height: 40px;
+	text-align: center;
+	border-top: 1px solid;
+	border-color: #DBCBBB;	
+	color: #B8A38F;
+	font: 75% sans-serif;
+}
+
+.menuItem:hover {
+	border-top: 4px solid;
+	color: #947353;
+	padding-top: 12px;
+}
+
+.activeMenu {
+	border-top: 4px solid;
+	color: #DBCBBB;
+	padding-top: 12px;
+}
+
+.criteriaLink{
+	cursor: pointer;
+	color: #947353;
+}
+
+.criteriaLink:hover{
+	color: #EA8220;
+}
+
+.bodyOuterClass {
+	position: absolute;
+	top: 150px;
+	width: 100%;
+}
+
+.bodyClass {
+	min-height: 700px;
+	z-index: 1;
+}
+
+.footerOuterClass {
+	width: 100%;
+	border-top-style: dotted;
+	border-color: white;
+	border-width: 1px;
+	background-color: black;
+}
+
+.registerTitle{
+	color: #EA8220;
+	cursor: pointer;
+}
+
+.registerTitle:hover{
+	color: #DBCBBB;
+}
+
+.registrationForm{
+	
+}
+
+.formInput{	
+    border: 0px;
+    background-color: #8B0000;
+    border-bottom: dotted 1px #B8A38F;
+    padding: 5px;
+    margin: 2px 10px 7px;
+}
+
+.formLabel{
+	display: inline-block;
+}
+
+.formButton{
+	border-radius: 5px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+	background-color: #947353;
+	border: 0px none;
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: top;
+}
+
+H3{
+	font-size: 135%;
+}
+
+h5{
+	font-size: 85%;
+}
+
+.registrationDiv{
+/* 	text-align: center; */
+}
+
+.commonDiv{
+	border-radius: 5px;
+	margin: 0 auto;
+	padding: 15px;
+	z-index: 1;
+}
+
+.signInDiv{
+	border: 1px dotted;	
+}
+
+select{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.leftSection{
+	margin-left: 3%;
+	width: 14%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.rightSection{
+	width: 70%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.rightSectionSub{
+	white-space:nowrap;
+	display: inline-block;
+}
+
+.popupDiv{
+ 	padding: 20px; 
+ 	border-radius: 10px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);	
+}
+
+input.ng-invalid {
+    color: red;
+}
+
+.savedSearchLink{
+	cursor: pointer;	
+}

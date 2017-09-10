@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="wymme">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/core-java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/core-resources"/>
+        <wb-resource deploy-path="/" source-path="/core-webapp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/app-java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/app-resources"/>
+        <wb-resource deploy-path="/" source-path="/app-webapp"/>
+        <property name="context-root" value="wymme"/>
+        <property name="java-output-path" value="/wymme/target/classes"/>
+    </wb-module>
+</project-modules>
