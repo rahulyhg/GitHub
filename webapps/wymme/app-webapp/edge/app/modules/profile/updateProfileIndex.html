@@ -8,16 +8,17 @@
 	<div class="registrationDiv padding5px">
 		<form name="updateForm">
 			
+		    <h3><U>Profile Preview:</U></h3>
+			<div>
+				<profile-non-secure profile="es.editProfile" />
+			</div>								
+		    <div><br></div>
+		    
 			<div>
 				<profile-secure profile="es.editProfile" />
 			</div>								
 		    <div><br></div>
 			
-			<div>
-				<profile-non-secure profile="es.editProfile" />
-			</div>								
-		    <div><br></div>
-
 		   	<div>
 				<div ng-include="'edge/app/modules/partials/personal_edit.html'" />
 			</div>								
@@ -46,7 +47,8 @@
 		    </div>
 
 		    <div><br><br></div>
-		    <div><br><br></div>		    
+		    <div><br><br></div>	
+		    	    
 		</form>
 	</div>
 </body>
