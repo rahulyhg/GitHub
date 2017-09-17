@@ -10,6 +10,17 @@ hr{
 	font: 19px candara;
 }
 
+.ajax-loading{
+   		text-align: center;
+   		background-color: gray;
+   		vertical-align: middle;
+        opacity: 0.3;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index:2000;
+}
+
 h1, h2, h3, h4, h5{
 	color: #8B0000;	
 }
