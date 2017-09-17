@@ -7,6 +7,17 @@
 <body>
 	<div class="registrationDiv padding5px">
 		<form name="updateForm">
+			
+			<div>
+				<profile-secure profile="es.editProfile" />
+			</div>								
+		    <div><br></div>
+			
+			<div>
+				<profile-non-secure profile="es.editProfile" />
+			</div>								
+		    <div><br></div>
+
 		   	<div>
 				<div ng-include="'edge/app/modules/partials/personal_edit.html'" />
 			</div>								

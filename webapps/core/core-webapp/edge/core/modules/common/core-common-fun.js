@@ -14,7 +14,6 @@ edgeApp.controller("edgeController", function($scope, $http, $modal, $log, $sce,
 	
 });
 
-
 function coreInitFun($scope, $http, $modal, $log, $sce){
 	
 	$scope.es.addAlertNative = function(type, heading, messages, errorHtml){

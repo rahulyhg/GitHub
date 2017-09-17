@@ -1,4 +1,26 @@
 
+// Define App Specific Directives Here
+
+edgeApp.directive('profileSecure', function() {
+  return {
+    scope: {
+    	profile: '=profile'
+    },
+    templateUrl: 'edge/app/modules/templates/profile_secure.html'
+  };
+});
+
+edgeApp.directive('profileNonSecure', function() {
+  return {
+    scope: {
+    	profile: '=profile'
+    },
+    templateUrl: 'edge/app/modules/templates/profile_non_secure.html'
+  };
+});
+
+// Other Functions
+
 function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.register = function () {
 		register($scope, $http);

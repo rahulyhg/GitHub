@@ -14,6 +14,9 @@ h1, h2, h3, h4, h5{
 	color: #8B0000;	
 }
 
+.lableInput{
+	color: #8B0000;	
+}
 
 .siteLogo {
 	border-radius: 20px;
@@ -224,4 +227,11 @@ input.ng-invalid {
 
 .savedSearchLink{
 	cursor: pointer;	
+}
+
+.profileDisplay{
+	border: #8B0000;
+	padding: 20px; 
+ 	border-radius: 10px;
+	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);	
 }
