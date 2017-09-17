@@ -11,10 +11,9 @@
 	</div>
 	<div class="headerStripMenu">
 		<div ng-show="es.loggedInUserId">
-			<!-- <span class="headerStripMenuItem"> Welcome {{es.loggedInUserId}} ! </span> <font color="gray">|</font> -->
-			<!-- <span class="headerStripMenuItem" ng-click="es.openPopup('FORGOT_PWD_POP_UP')"> Change Password </span> <font color="gray">|</font> -->
-			<span class="headerStripMenuItem" ng-click="es.openMyProfile()"> My Profile<!--  <img src="edge/appCore/modules/layout/images/person.png" class="icon"/> --></span> <font color="gray">|</font>
-			<span class="headerStripMenuItem"> <a href="logout"> Sign Out<!--  <img src="edge/appCore/modules/layout/images/signout.png" class="icon"/>  --></a> </span>
+			<span class="headerStripMenuItem" ng-click="es.openMyProfile()"> {{es.loggedInUserId}} </span> <font color="gray">|</font> 
+			<span class="headerStripMenuItem" ng-click="es.setSelectedMenuRaw('WALL_CRITERIA');"> Wall Criteria </span> <font color="gray">|</font> 
+			<span class="headerStripMenuItem"> <a href="logout"> Sign Out</a> </span>
 			<span>&nbsp;&nbsp;</span>
 		</div>
 		<div ng-hide="es.loggedInUserId">

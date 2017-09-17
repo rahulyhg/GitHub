@@ -103,7 +103,7 @@ function coreInitFun($scope, $http, $modal, $log, $sce){
 	    	handleAjaxSuccess(null, $scope, data, status, headers, config);
 	    	if(data.edgeResponse){	    		
 	    		$scope.es.loggedInUser = data.edgeResponse.responseData;
-	    		$scope.es.loggedInUserId=$scope.es.loggedInUser.userName;
+	    		$scope.es.loggedInUserId=$scope.es.loggedInUser.profileId;
 	    	}
 	    }).
 	    error(function(data, status, headers, config) {

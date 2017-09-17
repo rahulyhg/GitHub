@@ -35,6 +35,13 @@ var extendedMenuMap = {
 			title : "Update Profile",
 			templateUrl : "edge/app/modules/profile/updateProfileIndex.html",
 			icon : ""
+		},
+
+		"WALL_CRITERIA" : {
+			id : "WALL_CRITERIA",
+			title : "Update Wall Criteria",
+			templateUrl : "edge/app/modules/wall/wallCriteriaIndex.html",
+			icon : ""
 		}
 };
 
