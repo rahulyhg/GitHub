@@ -1,7 +1,7 @@
 
 function appInitVar($scope, $http, $modal, $log, $sce){
 	
-	$scope.es.selectedPage = menuMap["2REGISTER"];
+	$scope.es.selectedPage = menuMap["1HOME"];
 	$scope.es.showSearch = 'C';
 	$scope.es.searchedProfiles = {};
 	$scope.es.editProfile = {};
@@ -16,7 +16,7 @@ var appOnLoad = function($scope, $http, $modal, $log, $sce){
 	
 	$scope.es.searchId = $scope.es.location.search().searchById;
 	if($scope.es.searchId){
-		$scope.es.selectedPage = menuMap["2REGISTER"];
+		$scope.es.selectedPage = menuMap["1HOME"];
 		$scope.es.searchById($scope, $http);
 	}
 	

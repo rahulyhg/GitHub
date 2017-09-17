@@ -37,6 +37,14 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.searchById = function () {
 		searchById($scope, $http);
 	};
+	
+	// WALL FUNCTIONS
+
+	$scope.es.initializeWall = function () {
+		initializeWall($scope, $http);
+	};
+	
+	
 };	
 	
 var openMyProfile = function($scope, $http){

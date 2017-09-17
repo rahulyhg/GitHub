@@ -4,8 +4,13 @@
 		<B>{{profile.profileId}}</B>
 	</div>
     <div class="rightSection">
-		<B>{{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} {{profile.signUpEntity.gender}} </B> - {{profile.bloodGroup}}, {{profile.bodyType}}, {{profile.skinColor}}, 
-  		{{profile.heightFt}} Ft {{profile.heightInch}} Inch, {{profile.weight}} kg  
+		<B>{{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} {{profile.signUpEntity.gender}} </B> 
+		- {{profile.bloodGroup}}, {{profile.bodyType}}, {{profile.skinColor}}, {{profile.heightFt}} Ft {{profile.heightInch}} Inch, {{profile.weight}} kg
+		
+		<br>
+		<B>
+		{{profile.degreeType}}, Residing at {{profile.residingAtCity}} earning {{profile.earning | currency:'&#8377; '}} per annum
+	   	</B>
 	   	
 	   	<br>
 	   	Born on 
@@ -25,7 +30,7 @@
   		Academic - <span class="lableInput">{{profile.degreeDetails}} ({{profile.degreeType}})</span>
   		
   		<br>
-  		Working with <span class="lableInput">{{profile.company}} as {{profile.designation}} Earning {{profile.earning | currency:''}} per annum</span>
+  		Working with <span class="lableInput">{{profile.company}} as {{profile.designation}} Earning {{profile.earning | currency:'&#8377; '}} per annum</span>
   		
   		<br>
   		Family residing at <span class="lableInput">{{profile.familyResidingAtCity}}, {{profile.familyResidingAtState}}</span> 
@@ -57,5 +62,5 @@
     <br>
     
 </div>
-
+<div><br></div>
  

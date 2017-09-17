@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Saat-Phere : Wall</title>
+</head>
+<body>
+	<div ng-init="es.initializeWall();">
+		<div>
+			<h3>Profiles Matching Your Wall Criteria: </h3>
+		</div>			
+		<div>
+			<div ng-repeat="wallProfile in es.wallProfiles">
+				<profile-non-secure profile="wallProfile" />		
+			</div>
+			
+		</div>
+		
+	</div>
+</body>
+</html>
