@@ -7,7 +7,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/app-java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/app-resources"/>
         <wb-resource deploy-path="/" source-path="/app-webapp"/>
-        <property name="context-root" value="wymme"/>
+        <property name="context-root" value="ROOT"/>
         <property name="java-output-path" value="/wymme/target/classes"/>
     </wb-module>
 </project-modules>

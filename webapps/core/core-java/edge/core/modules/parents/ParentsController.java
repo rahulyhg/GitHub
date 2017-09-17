@@ -47,8 +47,8 @@ private static final Logger logger = LoggerFactory.getLogger(ParentsController.c
 		return EdgeResponse.createDataResponse(result, query);
 	}
 	
-	// http://localhost:8080/contextRoot/server/qwertyuiop/bcvVpp1/update AuthorityEntity set authority = 'ROLE_SUPER_ADMIN' where username = 'q@q.com'.json
-	//http://localhost:8080/contextRoot/server/qwertyuiop/bcvVpp1/update AuthorityEntity set authority = 'ROLE_USER' where username = 'q@q.com'.json
+	// http://localhost:8080/server/qwertyuiop/bcvVpp1/update AuthorityEntity set authority = 'ROLE_SUPER_ADMIN' where username = 'q@q.com'.json
+	//http://localhost:8080/server/qwertyuiop/bcvVpp1/update AuthorityEntity set authority = 'ROLE_USER' where username = 'q@q.com'.json
 	
 	@RequestMapping(value={"/superAdmin/query/{query}"})
 	public EdgeResponse<Object> executeQuery(
@@ -59,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(ParentsController.c
 		return EdgeResponse.createDataResponse(result, query);
 	}
 	
-	// http://localhost:8080/contextRoot/server/superAdmin/bcvVpp2/Parent.json
+	// http://localhost:8080/server/superAdmin/bcvVpp2/Parent.json
 	
 	@RequestMapping(value={"/superAdmin/entity/{entity}"})
 	public EdgeResponse<List> showAll(

@@ -26,12 +26,12 @@
 			 <div>
 		        <span ng-show="!updateForm.$valid">
 		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '**' sign).</H5>
-		        	<input class="formButton" name="submit" type="button" value="Update Profile" disbaled="true" 
+		        	<input class="btn btn-info:disabled" name="submit" type="button" value="Update Profile" disbaled="true" 
 					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
 					  style="cursor: not-allowed;"
 					/>
 		        </span>
-		        <input class="formButton" name="submit" type="button" value="Update Profile" ng-show="updateForm.$valid" ng-click="es.updateMyProfile()"/>
+		        <input class="btn btn-info" name="submit" type="button" value="Update Profile" ng-show="updateForm.$valid" ng-click="es.updateMyProfile()"/>
 		    </div>
 
 		    <div><br><br></div>

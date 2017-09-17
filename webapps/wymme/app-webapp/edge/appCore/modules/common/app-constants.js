@@ -1,5 +1,5 @@
 
-var contextRoot = 'wymme';
+var contextRoot = 'ROOT';
 
 var menuMap = {
 	"1HOME" : {

@@ -6,9 +6,10 @@
 <hibernate-configuration>
     <session-factory>
     	<!-- Core Entities -->
-       <mapping class="edge.core.modules.auth.SignUpEntity" />
-       <mapping class="edge.core.modules.auth.AuthorityEntity" />
-       <mapping class="edge.app.modules.profile.ProfileDetails" />
-       <mapping class="edge.app.modules.profile.SecureProfileDetails" />
+    	<mapping class="edge.core.modules.parents.Parent" />
+       	<mapping class="edge.core.modules.auth.SignUpEntity" />
+       	<mapping class="edge.core.modules.auth.AuthorityEntity" />
+       	<mapping class="edge.app.modules.profile.ProfileDetails" />
+       	<mapping class="edge.app.modules.profile.SecureProfileDetails" />
     </session-factory> 
 </hibernate-configuration>
