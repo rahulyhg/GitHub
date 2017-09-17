@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 
 import edge.app.modules.common.AppConstants;
 import edge.app.modules.profile.ProfileDetails;
+import edge.core.modules.auth.SignUpEntity;
 import edge.core.modules.common.CommonHibernateDao;
-import edge.core.modules.common.EdgeResponse;
 
 @Controller
 public class WallServiceImpl implements WallService {
@@ -25,22 +25,50 @@ public class WallServiceImpl implements WallService {
 	 * @see edge.app.modules.wall.WallService#loadWallProfiles()
 	 */
 	@Override
-	public EdgeResponse<List<ProfileDetails>> loadWallProfiles(String userName){			
+	public List<ProfileDetails> loadWallProfiles(String userName){
+		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
+		String profileId = signUpEntity.getProfileId();
+		
 		HibernateTemplate hibernateTemplate = commonHibernateDao.getHibernateTemplate();
 		hibernateTemplate.setMaxResults(AppConstants.MAX_WALL_SIZE);
 		
-		List<ProfileDetails> searchedProfiles = hibernateTemplate.find(getWallQuery(userName));
-
-		if(searchedProfiles == null || searchedProfiles.size() == 0){
-			return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
-		}else{
-			return EdgeResponse.createDataResponse(searchedProfiles, "");			
-		}
-
+		return hibernateTemplate.find(getWallQuery(profileId));
 	}
 
-	private String getWallQuery(String userName) {
-		return " from ProfileDetails ";
+	private String getWallQuery(String profileId) {
+		String basicQuery = " from ProfileDetails where 1=1 ";
+		String removedProfilesClause = " and profileId Not In (" + getRemovedProfiles(profileId) + ")";
+		
+		return basicQuery + removedProfilesClause;
+	}
+
+	private String getRemovedProfiles(String profileId) {
+		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
+		if(profileWallInfo == null){
+			return "";
+		}else{
+			return profileWallInfo.getRemovedProfiles();
+		}
+	}
+
+	@Override
+	public void removeFromWall(String userName, String toRemove) {
+		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
+		String profileId = signUpEntity.getProfileId();
+		
+		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
+		if(profileWallInfo == null){
+			profileWallInfo = new ProfileWallInfo();
+			profileWallInfo.setProfileId(profileId);
+			profileWallInfo.setRemovedProfiles("'" + toRemove +"'");
+		}else{
+			String removedProfiles = profileWallInfo.getRemovedProfiles();
+			if(!removedProfiles.contains(toRemove)){
+				removedProfiles += ",'" + toRemove +"'";
+			}
+			profileWallInfo.setRemovedProfiles(removedProfiles);
+		}
+		commonHibernateDao.saveOrUpdate(profileWallInfo);
 	}
 
 }

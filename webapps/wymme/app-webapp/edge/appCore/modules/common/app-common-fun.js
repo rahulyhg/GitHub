@@ -13,7 +13,8 @@ edgeApp.directive('profileSecure', function() {
 edgeApp.directive('profileNonSecure', function() {
   return {
     scope: {
-    	profile: '=profile'
+    	profile: '=profile',
+    	es: '=es'
     },
     templateUrl: 'edge/app/modules/templates/profile_non_secure.html'
   };
@@ -44,6 +45,9 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		initializeWall($scope, $http);
 	};
 	
+	$scope.es.removeFromWall = function (toRemove) {
+		if (confirm("This Profile will be permanently removed from your Wall, Are you sure to continue?")) removeFromWall($scope, $http, toRemove);
+	};
 	
 };	
 	

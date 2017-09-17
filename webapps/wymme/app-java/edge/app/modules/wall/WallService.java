@@ -7,6 +7,8 @@ import edge.core.modules.common.EdgeResponse;
 
 public interface WallService {
 
-	public EdgeResponse<List<ProfileDetails>> loadWallProfiles(String userName);
+	public List<ProfileDetails> loadWallProfiles(String userName);
+
+	public void removeFromWall(String userName, String toRemove);
 
 }
