@@ -46,7 +46,17 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	};
 	
 	$scope.es.removeFromWall = function (toRemove) {
-		if (confirm("This Profile will be permanently removed from your Wall, Are you sure to continue?")) removeFromWall($scope, $http, toRemove);
+		if (confirm("This Profile '" + toRemove + "' will be permanently removed from your Wall, Are you sure to continue?")) removeFromWall($scope, $http, toRemove);
+	};
+	
+	// SEARCH FUNCTIONS
+
+	$scope.es.loadRemovedProfiles = function () {
+		loadRemovedProfiles($scope, $http);
+	};
+	
+	$scope.es.undoRemoveFromWall = function (toAdd) {
+		if (confirm("This Profile '" + toAdd + "' will be added back to your Wall, Are you sure to continue?")) undoRemoveFromWall($scope, $http, toAdd);
 	};
 	
 };	

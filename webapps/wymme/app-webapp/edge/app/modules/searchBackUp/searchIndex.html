@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search Partners</title>
+</head>
+<body>
+	<div class="padding5px">
+		<!-- <button class="formButton" type="button" ng-click="es.hideCriteria = !es.hideCriteria" ng-show="!es.hideCriteria && es.searched">Back to Results</button>
+		<button class="formButton" type="button" ng-click="es.hideCriteria = !es.hideCriteria" ng-show="es.hideCriteria">Back to Criteria </button> -->
+		
+		<span class="criteriaLink" ng-click="es.showSearch = 'C'" > Search Criteria </span>
+		<span class="criteriaLink" ng-click="es.showSearch = 'R'" ng-show="es.searched" >&gt; {{es.currSearchType}} </span>
+		<span class="criteriaLink" ng-click="es.showSearch = 'P'" ng-show="es.profileOpened" >&gt; {{es.editProfile.profileId}} </span>
+	</div>
+	<div>
+		<div class="searchCriteriaDiv padding5px" ng-show="es.showSearch == 'C'">
+			<div ng-include="'edge/app/modules/search/searchCriteria.html'" />
+		</div>
+	</div>
+	<div>
+		<div class="searchResultsDiv" ng-show="es.showSearch == 'R'">
+			<div ng-include="'edge/app/modules/search/searchResults.html'" />
+		</div>
+	</div>
+	<div>
+		<div class="searchProfileDiv" ng-show="es.showSearch == 'P'">
+			<div ng-include="'edge/app/modules/search/searchProfile.html'" />
+		</div>
+	</div>
+</body>
+</html>

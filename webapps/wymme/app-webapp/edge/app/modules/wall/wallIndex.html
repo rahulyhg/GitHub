@@ -10,9 +10,23 @@
 			<h3>Profiles Matching Your Wall Criteria: </h3>
 		</div>			
 		<div>
-			<div ng-repeat="wallProfile in es.wallProfiles">
-				<profile-non-secure profile="wallProfile" es="es" />		
-				
+			<div ng-repeat="profile in es.wallProfiles">
+				<div class="profileDisplay">
+					<div>
+						<profile-non-secure profile="profile" es="es" />		
+					</div>
+					
+					<div class="leftSection">
+					 	<input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum()"/>
+					</div>
+					
+					<div class="rightSection">
+						 <input class="btn btn-success" title="Send Connection Request, if accepted, you can see each other's contact details!" type="button" value="Send Connection Request" ng-click="es.sendContactShowRequest()"/>
+						 <input class="btn btn-danger" title="Remove from My Wall, I do not want to see this profile again!" type="button" value="Remove From My Wall" ng-click="es.removeFromWall(profile.profileId)"/>
+						 <!-- <input class="btn btn-default" title="Show the Contact Details!" type="button" value="Show Contact Details" ng-click="es.showContactDetails()"/> -->
+					</div>
+				</div>
+				<div><br></div>
 			</div>
 			
 		</div>

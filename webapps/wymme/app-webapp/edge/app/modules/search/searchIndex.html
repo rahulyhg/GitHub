@@ -2,31 +2,44 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Search Partners</title>
+<title>Saat-Phere : Search Profiles</title>
 </head>
 <body>
-	<div class="padding5px">
-		<!-- <button class="formButton" type="button" ng-click="es.hideCriteria = !es.hideCriteria" ng-show="!es.hideCriteria && es.searched">Back to Results</button>
-		<button class="formButton" type="button" ng-click="es.hideCriteria = !es.hideCriteria" ng-show="es.hideCriteria">Back to Criteria </button> -->
+	<div>
+		<div>
+			Show Me Profiles &nbsp;
+			<span class="lableInput">
+				&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="Connected" title="Profiles with connection accepted by both"> Accepted By Both </input>
+				&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="Requested" title="Profiles whom I have sent Connection Request"> I Requested Connection </input>
+				&nbsp;&nbsp;<input type="radio" ng-click="es.loadRemovedProfiles();" ng-model="es.search.type" value="Removed" title="Profiles I removed from wall"> I Removed from Wall </input>
+			</span>
+		</div>
 		
-		<span class="criteriaLink" ng-click="es.showSearch = 'C'" > Search Criteria </span>
-		<span class="criteriaLink" ng-click="es.showSearch = 'R'" ng-show="es.searched" >&gt; {{es.currSearchType}} </span>
-		<span class="criteriaLink" ng-click="es.showSearch = 'P'" ng-show="es.profileOpened" >&gt; {{es.editProfile.profileId}} </span>
-	</div>
-	<div>
-		<div class="searchCriteriaDiv padding5px" ng-show="es.showSearch == 'C'">
-			<div ng-include="'edge/app/modules/search/searchCriteria.html'" />
+		<div><br></div>
+				
+		<div>
+			<div ng-repeat="profile in es.searchedProfiles">
+				<div class="profileDisplay">
+					<div>
+						<profile-non-secure profile="profile" es="es" />		
+					</div>
+					
+					<div class="leftSection">
+					 	<input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum()"/>
+					</div>
+					
+					<div class="rightSection">
+						<div ng-show="es.search.type == 'Removed'">
+							<input class="btn btn-danger" title="Undo-Remove from My Wall, I accidently removed this profile!" type="button" value="Undo - Remove From My Wall" ng-click="es.undoRemoveFromWall(profile.profileId)"/>
+						</div>
+						 <!-- <input class="btn btn-default" title="Show the Contact Details!" type="button" value="Show Contact Details" ng-click="es.showContactDetails()"/> -->
+					</div>
+				</div>
+				<div><br></div>
+			</div>
+			
 		</div>
-	</div>
-	<div>
-		<div class="searchResultsDiv" ng-show="es.showSearch == 'R'">
-			<div ng-include="'edge/app/modules/search/searchResults.html'" />
-		</div>
-	</div>
-	<div>
-		<div class="searchProfileDiv" ng-show="es.showSearch == 'P'">
-			<div ng-include="'edge/app/modules/search/searchProfile.html'" />
-		</div>
+		
 	</div>
 </body>
 </html>
