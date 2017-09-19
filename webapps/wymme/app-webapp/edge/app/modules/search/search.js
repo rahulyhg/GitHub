@@ -23,3 +23,16 @@ var undoRemoveFromWall = function undoRemoveFromWall($scope, $http, toAdd){
     	handleAjaxError('UNREMOVE_FROM_WALL', $scope, data, status, headers, config);
     });
 };
+
+
+var searchProfiles = function searchProfiles($scope, $http, toAdd){
+	startAjax('SEARCH_PROFILES', $scope);
+	$http.post('server/secured/undoRemoveFromWall.json', toAdd ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('SEARCH_PROFILES', $scope, data, status, headers, config);
+    	loadRemovedProfiles($scope, $http);
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('SEARCH_PROFILES', $scope, data, status, headers, config);
+    });
+};

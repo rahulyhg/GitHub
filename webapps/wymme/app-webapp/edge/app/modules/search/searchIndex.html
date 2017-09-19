@@ -7,12 +7,25 @@
 <body>
 	<div>
 		<div>
-			Show Me Profiles &nbsp;
-			<span class="lableInput">
-				&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="Connected" title="Profiles with connection accepted by both"> Accepted By Both </input>
-				&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="Requested" title="Profiles whom I have sent Connection Request"> I Requested Connection </input>
-				&nbsp;&nbsp;<input type="radio" ng-click="es.loadRemovedProfiles();" ng-model="es.search.type" value="Removed" title="Profiles I removed from wall"> I Removed from Wall </input>
-			</span>
+				<h3>Show Me Profiles :</h3>
+				&nbsp;&nbsp;<input type="radio" ng-click="es.loadRemovedProfiles();" ng-model="es.search.type" value="IRemoved" title="Profiles I removed from wall"> I Removed from Wall </input>
+				<br>
+				<div style="display: inline-block; color: orange">
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRequested" title="Profiles whom I have sent Connection Request"> I Requested Connection </input>
+					<br>
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRequested" title="Profiles who have sent Connection Request to me"> They Requested Connection </input>
+				</div>
+				<div style="display: inline-block; color: green">
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IAccepted" title="Profiles whose Connection Request is Accepted by me"> I Accepted Connection </input>
+					<br>
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyAccepted" title="Profiles who Accepted Connection Request from Me"> They Accepted Connection </input>
+				</div>
+				<div style="display: inline-block; color: red">
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRejected" title="Profiles whose Connection Request is Rejected by me"> I Rejected Connection </input>
+					<br>
+					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRejected" title="Profiles who Rejected Connection Request from Me"> They Rejected Connection </input>
+				</div>
+
 		</div>
 		
 		<div><br></div>
@@ -29,7 +42,7 @@
 					</div>
 					
 					<div class="rightSection">
-						<div ng-show="es.search.type == 'Removed'">
+						<div ng-show="es.search.type == 'IRemoved'">
 							<input class="btn btn-danger" title="Undo-Remove from My Wall, I accidently removed this profile!" type="button" value="Undo - Remove From My Wall" ng-click="es.undoRemoveFromWall(profile.profileId)"/>
 						</div>
 						 <!-- <input class="btn btn-default" title="Show the Contact Details!" type="button" value="Show Contact Details" ng-click="es.showContactDetails()"/> -->

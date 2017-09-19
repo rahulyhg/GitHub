@@ -1,4 +1,4 @@
-package edge.app.modules.wall;
+package edge.app.modules.profileWallInfo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +13,11 @@ public class ProfileWallInfo {
 	@Column(nullable = false, length = 50)
 	private String profileId;
 
-	@Column(name = "REMOVED", length = 65535)
-	private String removedProfiles;
+	@Column(name = "REMOVED_PROFILES", length = 65535)
+	private String removedProfiles = "";
+
+	@Column(name = "READ_PROFILES", length = 65535)
+	private String readProfiles = "";
 	
 	public String getProfileId() {
 		return profileId;
@@ -31,6 +34,13 @@ public class ProfileWallInfo {
 	public void setRemovedProfiles(String removedProfiles) {
 		this.removedProfiles = removedProfiles;
 	}
-	
+
+	public String getReadProfiles() {
+		return readProfiles;
+	}
+
+	public void setReadProfiles(String readProfiles) {
+		this.readProfiles = readProfiles;
+	}
 
 }

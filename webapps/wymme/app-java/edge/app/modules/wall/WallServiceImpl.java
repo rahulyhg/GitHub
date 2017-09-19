@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import edge.app.modules.common.AppConstants;
 import edge.app.modules.profile.ProfileDetails;
+import edge.app.modules.profileWallInfo.ProfileWallInfoService;
 import edge.core.modules.auth.SignUpEntity;
 import edge.core.modules.common.CommonHibernateDao;
 
@@ -17,6 +18,9 @@ import edge.core.modules.common.CommonHibernateDao;
 public class WallServiceImpl implements WallService {
 
 	private static final Logger logger = LoggerFactory.getLogger(WallServiceImpl.class);
+	
+	@Autowired
+	private ProfileWallInfoService profileWallInfoService;
 	
 	@Autowired
 	private CommonHibernateDao commonHibernateDao;
@@ -37,38 +41,19 @@ public class WallServiceImpl implements WallService {
 
 	private String getWallQuery(String profileId) {
 		String basicQuery = " from ProfileDetails where 1=1 ";
-		String removedProfilesClause = " and profileId Not In (" + getRemovedProfiles(profileId) + ")";
+		String removedProfilesClause = " and profileId Not In (" + profileWallInfoService.getRemovedProfiles(profileId, null) + ")";
+		String readProfilesClause = " and profileId Not In (" + profileWallInfoService.getReadProfiles(profileId) + ")";
 		
-		return basicQuery + removedProfilesClause;
-	}
-
-	private String getRemovedProfiles(String profileId) {
-		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
-		if(profileWallInfo == null){
-			return "";
-		}else{
-			return profileWallInfo.getRemovedProfiles();
-		}
+		return basicQuery + removedProfilesClause + readProfilesClause;
 	}
 
 	@Override
 	public void removeFromWall(String userName, String toRemove) {
+		
 		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
 		String profileId = signUpEntity.getProfileId();
+		profileWallInfoService.removeFromWall(profileId, toRemove);
 		
-		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
-		if(profileWallInfo == null){
-			profileWallInfo = new ProfileWallInfo();
-			profileWallInfo.setProfileId(profileId);
-			profileWallInfo.setRemovedProfiles("'" + toRemove +"'");
-		}else{
-			String removedProfiles = profileWallInfo.getRemovedProfiles();
-			if(!removedProfiles.contains(toRemove)){
-				removedProfiles = "'" + toRemove +"'," + removedProfiles;
-			}
-			profileWallInfo.setRemovedProfiles(removedProfiles);
-		}
-		commonHibernateDao.saveOrUpdate(profileWallInfo);
 	}
 
 }

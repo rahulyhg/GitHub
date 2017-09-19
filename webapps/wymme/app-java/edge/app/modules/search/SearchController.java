@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edge.app.modules.profile.ProfileDetails;
+import edge.app.modules.profileConnection.ProfileConnectionService;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -27,6 +28,9 @@ public class SearchController {
 	
 	@Autowired
 	private SearchService searchService;
+
+	@Autowired
+	private ProfileConnectionService profileConnectionService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -68,9 +72,9 @@ public class SearchController {
 		try{
 			String userName = principal.getName();
 			searchService.undoRemoveFromWall(userName, toAdd);
-			return EdgeResponse.createDataResponse("", "Profile Added Back Successfully.");
-		}catch (Exception ex) {
-			return EdgeResponse.createExceptionResponse(ex.getMessage(), new AppException(ex, ""));
+			return EdgeResponse.createDataResponse("", "'" + toAdd + "' Profile Added Back Successfully to your wall.");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
 }

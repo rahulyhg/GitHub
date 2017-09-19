@@ -27,3 +27,15 @@ var removeFromWall = function removeFromWall($scope, $http, toRemove){
     	handleAjaxError('REMOVE_FROM_WALL', $scope, data, status, headers, config);
     });
 };
+
+var sendConnectionRequest = function sendConnectionRequest($scope, $http, profileTo){
+	startAjax('SEND_CONNECTION_REQUEST', $scope);
+	$http.post('server/secured/sendConnectionRequest.json', profileTo ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('SEND_CONNECTION_REQUEST', $scope, data, status, headers, config);
+    	loadWallProfiles($scope, $http);
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('SEND_CONNECTION_REQUEST', $scope, data, status, headers, config);
+    });
+};

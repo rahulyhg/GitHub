@@ -48,6 +48,10 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.removeFromWall = function (toRemove) {
 		if (confirm("This Profile '" + toRemove + "' will be permanently removed from your Wall, Are you sure to continue?")) removeFromWall($scope, $http, toRemove);
 	};
+
+	$scope.es.sendConnectionRequest = function (profileTo) {
+		if (confirm("This Profile '" + profileTo + "' will be sent connection request, if accepeted, you both can see each other's contact details, Are you sure to continue?")) sendConnectionRequest($scope, $http, profileTo);
+	};
 	
 	// SEARCH FUNCTIONS
 

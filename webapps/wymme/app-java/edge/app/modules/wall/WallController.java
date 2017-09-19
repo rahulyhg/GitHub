@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edge.app.modules.profile.ProfileDetails;
+import edge.app.modules.profileConnection.ProfileConnectionService;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
@@ -27,6 +28,9 @@ public class WallController {
 	
 	@Autowired
 	private WallService wallService;
+	
+	@Autowired
+	private ProfileConnectionService profileConnectionService;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -53,9 +57,22 @@ public class WallController {
 		try{
 			String userName = principal.getName();
 			wallService.removeFromWall(userName, toRemove);
-			return EdgeResponse.createDataResponse("", "Profile Removed Successfully.");
-		}catch (Exception ex) {
-			return EdgeResponse.createExceptionResponse(ex.getMessage(), new AppException(ex, ""));
+			return EdgeResponse.createDataResponse("", "'" + toRemove + "' Profile Removed Successfully from your wall.");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+	}
+	
+
+	@RequestMapping(value={"/secured/sendConnectionRequest"})
+	public EdgeResponse<String> sendConnectionRequest(Principal principal, 
+			@RequestBody String profileTo){
+		try{
+			String userName = principal.getName();
+			profileConnectionService.sendConnectionRequest(userName, profileTo);
+			return EdgeResponse.createDataResponse("", "Profile Connection Request Sent Successfully To Profile '" + profileTo + "'.");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
 	
