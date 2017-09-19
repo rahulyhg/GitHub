@@ -36,11 +36,11 @@ public class WallServiceImpl implements WallService {
 		HibernateTemplate hibernateTemplate = commonHibernateDao.getHibernateTemplate();
 		hibernateTemplate.setMaxResults(AppConstants.MAX_WALL_SIZE);
 		
-		return hibernateTemplate.find(getWallQuery(profileId));
+		return hibernateTemplate.find(getWallQuery(profileId, signUpEntity.getGender()));
 	}
 
-	private String getWallQuery(String profileId) {
-		String basicQuery = " from ProfileDetails where 1=1 ";
+	private String getWallQuery(String profileId, String gender) {
+		String basicQuery = " from ProfileDetails where gender != '" + gender + "'";
 		String removedProfilesClause = " and profileId Not In (" + profileWallInfoService.getRemovedProfiles(profileId, null) + ")";
 		String readProfilesClause = " and profileId Not In (" + profileWallInfoService.getReadProfiles(profileId) + ")";
 		

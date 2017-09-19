@@ -25,12 +25,12 @@ var undoRemoveFromWall = function undoRemoveFromWall($scope, $http, toAdd){
 };
 
 
-var searchProfiles = function searchProfiles($scope, $http, toAdd){
+var searchProfiles = function searchProfiles($scope, $http){
 	startAjax('SEARCH_PROFILES', $scope);
-	$http.post('server/secured/undoRemoveFromWall.json', toAdd ).
+	$http.post('server/secured/searchProfiles.json', $scope.es.search.type ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('SEARCH_PROFILES', $scope, data, status, headers, config);
-    	loadRemovedProfiles($scope, $http);
+    	$scope.es.searchedProfiles = data.edgeResponse.responseData;
     }).
     error(function(data, status, headers, config) {
     	handleAjaxError('SEARCH_PROFILES', $scope, data, status, headers, config);

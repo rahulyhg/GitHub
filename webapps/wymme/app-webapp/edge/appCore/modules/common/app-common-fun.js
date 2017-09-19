@@ -62,6 +62,10 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.undoRemoveFromWall = function (toAdd) {
 		if (confirm("This Profile '" + toAdd + "' will be added back to your Wall, Are you sure to continue?")) undoRemoveFromWall($scope, $http, toAdd);
 	};
+
+	$scope.es.searchProfiles = function () {
+		searchProfiles($scope, $http);
+	};
 	
 };	
 	

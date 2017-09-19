@@ -57,7 +57,7 @@ public class WallController {
 		try{
 			String userName = principal.getName();
 			wallService.removeFromWall(userName, toRemove);
-			return EdgeResponse.createDataResponse("", "'" + toRemove + "' Profile Removed Successfully from your wall.");
+			return EdgeResponse.createDataResponse("", " Profile '" + toRemove + "' has been Removed successfully from your wall.");
 		}catch (AppException ex) {
 			return EdgeResponse.createExceptionResponse(ex);
 		}

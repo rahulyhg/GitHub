@@ -64,7 +64,6 @@ public class SearchController {
 			return EdgeResponse.createDataResponse(searchedProfiles, "");			
 		}
 	}
-	
 
 	@RequestMapping(value={"/secured/undoRemoveFromWall"})
 	public EdgeResponse<String> undoRemoveFromWall(Principal principal, 
@@ -73,6 +72,24 @@ public class SearchController {
 			String userName = principal.getName();
 			searchService.undoRemoveFromWall(userName, toAdd);
 			return EdgeResponse.createDataResponse("", "'" + toAdd + "' Profile Added Back Successfully to your wall.");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+	}
+
+	@RequestMapping(value={"/secured/searchProfiles"})
+	public EdgeResponse<List<ProfileDetails>> searchProfiles(Principal principal, 
+			@RequestBody String searchType){
+		try{
+			String userName = principal.getName();
+			List<ProfileDetails> searchedProfiles = profileConnectionService.searchProfiles(userName, searchType);
+			
+			if(searchedProfiles == null || searchedProfiles.size() == 0){
+				return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
+			}else{
+				return EdgeResponse.createDataResponse(searchedProfiles, "");			
+			}
+			
 		}catch (AppException ex) {
 			return EdgeResponse.createExceptionResponse(ex);
 		}

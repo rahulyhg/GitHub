@@ -246,3 +246,16 @@ input.ng-invalid {
  	border-radius: 10px;
 	box-shadow: 0px 1px 4px olive;	
 }
+
+.Requested{
+	color: orange;	
+}
+
+.Accepted{
+	color: green;
+}
+
+.Rejected{
+	color: red;
+}
+	

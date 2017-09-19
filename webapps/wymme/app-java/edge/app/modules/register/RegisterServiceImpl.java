@@ -37,6 +37,7 @@ public class RegisterServiceImpl implements RegisterService{
 		
 		if(response.isSuccess()){
 			profileDetails.setProfileId(profileDetails.getSignUpEntity().getProfileId());
+			profileDetails.setGender(profileDetails.getSignUpEntity().getGender());
 			profileDetails.getSecure().setEmail(profileDetails.getSignUpEntity().getEmailId());
 			
 			List<String> errors = profileDetails.validate();

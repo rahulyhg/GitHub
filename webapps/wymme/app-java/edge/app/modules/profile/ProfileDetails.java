@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import edge.app.modules.profileConnection.ProfileConnection;
 import edge.core.modules.auth.SignUpEntity;
 import edge.core.modules.common.EdgeEntity;
 
@@ -19,9 +20,11 @@ public class ProfileDetails extends EdgeEntity{
 	private SignUpEntity signUpEntity;
 	
 	@Id
-	
 	@Column(nullable = false, length = 50)
 	private String profileId;
+	
+	@Column(nullable = false, length = 10)
+	private String gender;
 	
 	@Column(nullable = false)
 	private Integer heightFt;
@@ -154,6 +157,9 @@ public class ProfileDetails extends EdgeEntity{
 
 	@Transient
 	private SecureProfileDetails secure;
+	
+	@Transient
+	private ProfileConnection profileConnection;
 
 	public SignUpEntity getSignUpEntity() {
 		return signUpEntity;
@@ -522,6 +528,22 @@ public class ProfileDetails extends EdgeEntity{
 
 	public void setDegreeDetails(String degreeDetails) {
 		this.degreeDetails = degreeDetails;
+	}
+
+	public ProfileConnection getProfileConnection() {
+		return profileConnection;
+	}
+
+	public void setProfileConnection(ProfileConnection profileConnection) {
+		this.profileConnection = profileConnection;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }

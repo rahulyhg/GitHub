@@ -25,10 +25,10 @@ public class ProfileConnection {
 	private Date requestedOn;
 	
 	@Column(nullable = true)
-	private Date acceptedOn;
+	private Date actionedOn;
 	
 	@Column(nullable = false, length = 50)
-	private String connectionStatus = ConnectionStatusEnum.REQUESTED.name();
+	private String connectionStatus = ConnectionStatusEnum.Requested.name();
 
 	public String getConnectionId() {
 		return connectionId;
@@ -44,14 +44,6 @@ public class ProfileConnection {
 
 	public void setRequestedOn(Date requestedOn) {
 		this.requestedOn = requestedOn;
-	}
-
-	public Date getAcceptedOn() {
-		return acceptedOn;
-	}
-
-	public void setAcceptedOn(Date acceptedOn) {
-		this.acceptedOn = acceptedOn;
 	}
 
 	public String getConnectionStatus() {
@@ -85,6 +77,14 @@ public class ProfileConnection {
 		}else{
 			this.connectionId = profileTo + "-" + profileFrom;
 		}
+	}
+
+	public Date getActionedOn() {
+		return actionedOn;
+	}
+
+	public void setActionedOn(Date actionedOn) {
+		this.actionedOn = actionedOn;
 	}
 	
 }
