@@ -124,6 +124,10 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	$scope.es.searchProfiles = function () {
 		searchProfiles($scope, $http);
 	};
+
+	$scope.es.showContactDetails = function (profileId) {
+		showContactDetails($scope, $http, profileId);
+	};
 	
 	$scope.es.actionRequest = function (profileId, connectionStatus) {
 		var message="";

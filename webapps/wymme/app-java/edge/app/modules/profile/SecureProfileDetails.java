@@ -14,7 +14,7 @@ public class SecureProfileDetails {
 	
 	@Column(nullable = false, length = 100)	
 	private String name;
-	
+
 	@Column(nullable = false, length = 100)
 	private String cell;
 	
@@ -76,6 +76,9 @@ public class SecureProfileDetails {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getEmailId() {
+		return email;
 	}
 	
 }

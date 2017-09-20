@@ -46,8 +46,8 @@ public class ProfileConnection {
 		this.requestedOn = requestedOn;
 	}
 
-	public String getConnectionStatus() {
-		return connectionStatus;
+	public ConnectionStatusEnum getConnectionStatus() {
+		return ConnectionStatusEnum.valueOf(connectionStatus);
 	}
 
 	public void setConnectionStatus(ConnectionStatusEnum connectionStatus) {
@@ -70,12 +70,18 @@ public class ProfileConnection {
 		this.profileTo = profileTo;
 	}
 
-	public void setConnectionId(String profileFrom, String profileTo) {
+	public void setConnectionId(String profile1, String profile2) {
 
-		if(profileFrom.startsWith("F")){
-			this.connectionId = profileFrom + "-" + profileTo;
+		String connectionId = ProfileConnection.getConnectionId(profile1, profile2);
+		this.connectionId = connectionId;
+		
+	}
+
+	public static String getConnectionId(String profile1, String profile2) {
+		if(profile1.startsWith("F")){
+			return profile1 + "-" + profile2;
 		}else{
-			this.connectionId = profileTo + "-" + profileFrom;
+			return profile2 + "-" + profile1;
 		}
 	}
 

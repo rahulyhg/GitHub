@@ -13,4 +13,8 @@ public interface ProfileConnectionService {
 
 	void actionRequest(String userName, ConnectionAction connectionAction);
 
+	ProfileDetails showContactDetails(String userName, String profileId);
+
+	boolean checkIfConnectionStatus(String profile1, String profile2, ConnectionStatusEnum status);
+
 }

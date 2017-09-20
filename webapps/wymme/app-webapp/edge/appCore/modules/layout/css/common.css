@@ -229,7 +229,7 @@ select{
 .popupDiv{
  	padding: 20px; 
  	border-radius: 10px;
- 	border: 1px solid rgba(0, 0, 0, 0.6);
+ 	/* border: 1px solid rgba(0, 0, 0, 0.6); */
 	box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);	
 }
 

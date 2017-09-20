@@ -110,4 +110,17 @@ public class SearchController {
 			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
+	
+	@RequestMapping(value={"/secured/showContactDetails"})
+	public EdgeResponse<ProfileDetails> showContactDetails(Principal principal, 
+			@RequestBody String profileId){
+		try{
+			String userName = principal.getName();
+			ProfileDetails profileDetails = profileConnectionService.showContactDetails(userName, profileId);
+			return EdgeResponse.createDataResponse(profileDetails, "");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+	}
+	
 }

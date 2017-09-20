@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.profile.ProfileDetails;
+import edge.app.modules.profile.SecureProfileDetails;
 import edge.app.modules.profileWallInfo.ProfileWallInfoService;
 import edge.app.modules.search.ConnectionAction;
 import edge.core.exception.AppException;
@@ -124,7 +125,6 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 		
 		List<Object[]> searchedProfiles = commonHibernateDao.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).list();
 		
-		
 		for(Object[] obj : searchedProfiles){
 			ProfileDetails profileDetails = (ProfileDetails) obj[0];
 			profileDetails.setProfileConnection( (ProfileConnection) obj[1]);
@@ -154,6 +154,29 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 			throw new AppException(null, "There is no such connection!");
 		}
 		
+	}
+
+	@Override
+	public ProfileDetails showContactDetails(String userName, String profileId) {
+		ProfileDetails profileDetails = null;
+		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
+		String IProfileId = signUpEntity.getProfileId();
+		
+		if(checkIfConnectionStatus(IProfileId, profileId, ConnectionStatusEnum.Accepted)){
+			profileDetails = commonHibernateDao.getEntityById(ProfileDetails.class, profileId);
+			profileDetails.setSecure(commonHibernateDao.getEntityById(SecureProfileDetails.class, profileId));
+		}else{
+			throw new AppException(null, "Only accepted connections can see each other's contact details. Please send the connection request first.");
+		}
+		profileDetails.setSignUpEntity(null);
+		return profileDetails;
+	}
+
+	@Override
+	public boolean checkIfConnectionStatus(String profile1, String profile2, ConnectionStatusEnum status) {
+		String connectionId = ProfileConnection.getConnectionId(profile1, profile2);
+		ProfileConnection profileConnection = commonHibernateDao.getEntityById(ProfileConnection.class, connectionId);
+		return profileConnection!= null && profileConnection.getConnectionStatus() == status;
 	}
 
 }

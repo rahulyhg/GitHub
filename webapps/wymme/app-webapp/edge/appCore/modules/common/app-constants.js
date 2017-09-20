@@ -73,5 +73,12 @@ var popupMap = {
 		templateUrl : "edge/app/modules/profile/enlargedProfilePopup.html",
 		size : "lg",
 		controller : "edgeController"
+	},
+	"SECURE_PROFILE_POPUP" : {
+		id : "SECURE_PROFILE_POPUP",
+		title : "Profile - Contact Details",
+		templateUrl : "edge/app/modules/profile/secureProfilePopup.html",
+		/*size : "sm",*/
+		controller : "edgeController"
 	}
 };

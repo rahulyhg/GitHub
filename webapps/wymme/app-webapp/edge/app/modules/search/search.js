@@ -77,3 +77,19 @@ var actionRequest = function actionRequest($scope, $http, profileId, connectionS
     	handleAjaxError('ACTION_REQUEST', $scope, data, status, headers, config);
     });
 };
+
+
+var showContactDetails = function undoRemoveFromWall($scope, $http, profileId){
+	startAjax('SHOW_CONTACT_DETAILS', $scope);
+	$http.post('server/secured/showContactDetails.json', profileId ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('SHOW_CONTACT_DETAILS', $scope, data, status, headers, config);
+    	$scope.es.showProfile=data.edgeResponse.responseData;
+    	$scope.es.openPopup('SECURE_PROFILE_POPUP');
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('SHOW_CONTACT_DETAILS', $scope, data, status, headers, config);
+    });
+};
+
+
