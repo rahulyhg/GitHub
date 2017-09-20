@@ -98,4 +98,16 @@ public class SearchController {
 			return EdgeResponse.createExceptionResponse(ex);
 		}
 	}
+	
+	@RequestMapping(value={"/secured/actionRequest"})
+	public EdgeResponse<String> actionRequest(Principal principal, 
+			@RequestBody ConnectionAction connectionAction){
+		try{
+			String userName = principal.getName();
+			profileConnectionService.actionRequest(userName, connectionAction);
+			return EdgeResponse.createDataResponse("", "Request from profile '" + connectionAction.getProfileId() + "' has been successfully " + connectionAction.getConnectionStatus().name() + ".");
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+	}
 }
