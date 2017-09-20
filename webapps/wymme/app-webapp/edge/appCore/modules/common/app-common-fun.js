@@ -125,6 +125,16 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		searchProfiles($scope, $http);
 	};
 	
+	$scope.es.actionRequest = function (profileId, connectionStatus) {
+		var message="";
+		if(connectionStatus == 'Accepted'){
+			message="Both you and this profile '" + profileId + "' would be able to see each others Contact Details, Are you sure to continue?";
+		}else if(connectionStatus == 'Rejected'){
+			message="None of you would be able to connect with each other hence on, Are you sure to continue?";
+		};
+		if (confirm(message)) actionRequest($scope, $http, profileId, connectionStatus);
+	};
+	
 };	
 	
 var openMyProfile = function($scope, $http){

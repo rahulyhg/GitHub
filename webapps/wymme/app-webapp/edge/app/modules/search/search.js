@@ -60,3 +60,20 @@ var searchById = function($scope, $http){
 	}
 	
 };
+
+var actionRequest = function actionRequest($scope, $http, profileId, connectionStatus){
+	startAjax('ACTION_REQUEST', $scope);
+	
+	$scope.es.action={};
+	$scope.es.action.profileId=profileId;
+	$scope.es.action.connectionStatus=connectionStatus;
+	
+	$http.post('server/secured/actionRequest.json', $scope.es.action ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('ACTION_REQUEST', $scope, data, status, headers, config);
+    	searchProfiles($scope, $http);
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('ACTION_REQUEST', $scope, data, status, headers, config);
+    });
+};
