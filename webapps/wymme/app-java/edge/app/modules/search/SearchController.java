@@ -48,7 +48,7 @@ public class SearchController {
 		ProfileDetails profileDetails = searchService.searchById(profileId.toUpperCase());
 
 		if(profileDetails == null){
-			return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
+			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Criteria!", null, null);
 		}else{
 			List<ProfileDetails> profileDetailsList = new ArrayList<ProfileDetails>();
 			profileDetailsList.add(profileDetails);
@@ -63,7 +63,7 @@ public class SearchController {
 		List<ProfileDetails> searchedProfiles = searchService.loadRemovedProfiles(userName);
 
 		if(searchedProfiles == null || searchedProfiles.size() == 0){
-			return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
+			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Criteria!", null, null);
 		}else{
 			return EdgeResponse.createDataResponse(searchedProfiles, "");			
 		}
@@ -89,7 +89,7 @@ public class SearchController {
 			List<ProfileDetails> searchedProfiles = profileConnectionService.searchProfiles(userName, searchType);
 			
 			if(searchedProfiles == null || searchedProfiles.size() == 0){
-				return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
+				return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Criteria!", null, null);
 			}else{
 				return EdgeResponse.createDataResponse(searchedProfiles, "");			
 			}
