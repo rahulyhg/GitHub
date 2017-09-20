@@ -69,6 +69,9 @@
 						<div ng-show="es.search.type == 'TheyAccepted'">
 							<input class="btn btn-success" title="Show the Contact Details!" type="button" value="Show Contact Details" ng-click="es.showContactDetails(profile.profileId)"/>
 						</div>
+						<div ng-show="es.search.type == 'IRejected'">
+							<input class="btn btn-success" title="Click here to Accept the request, Once Accepted, You both can see each others Contact Details!" type="button" value="Accept Request" ng-click="es.actionRequest(profile.profileId, 'Accepted')"/>
+						</div>
 					</div>
 					
 				</div>

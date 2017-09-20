@@ -7,32 +7,37 @@
 	
 </div>
 
-<div class="rightSection">
-
-   	<br>
-   	Email Id :
-   	<span class="lableInput">{{profile.secure.emailId}}</span>
-	
-	<br>
-	Cell (Self): 
-	<span class="lableInput">{{profile.secure.cell}}</span>
-	
-   	<br>
-	Cell (Parent):
-	<span class="lableInput">{{profile.secure.cellParents}}</span>
-	
-   	<br>
-	Facebook:
-	<span class="lableInput">{{profile.secure.facebook}}</span>
-	
-   	<br>
-	Twitter:
-	<span class="lableInput">{{profile.secure.twitter}}</span>
-	
-   	<br>
-	LinkedIn:
-	<span class="lableInput">{{profile.secure.linkedIn}}</span>
-	
+<div>
+	<div class="rightSection" ng-show="profile.secure">
+	   	<br>
+	   	Email Id :
+	   	<span class="lableInput">{{profile.secure.emailId}}</span>
+		
+		<br>
+		Cell (Self): 
+		<span class="lableInput">{{profile.secure.cell}}</span>
+		
+	   	<br>
+		Cell (Parent):
+		<span class="lableInput">{{profile.secure.cellParents}}</span>
+		
+	   	<br>
+		Facebook:
+		<span class="lableInput">{{profile.secure.facebook}}</span>
+		
+	   	<br>
+		Twitter:
+		<span class="lableInput">{{profile.secure.twitter}}</span>
+		
+	   	<br>
+		LinkedIn:
+		<span class="lableInput">{{profile.secure.linkedIn}}</span>
+		
+	</div>
 </div>
+
+<div class="rightSection" style="color: red" ng-hide="profile.secure">
+
+	Only accepted connections can see each other's contact details. Please send the connection request first.
 
 <div><br></div>

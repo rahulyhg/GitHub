@@ -142,7 +142,10 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 		@SuppressWarnings("unchecked")
 		List<ProfileConnection> searchedConnections = commonHibernateDao.getHibernateTemplate().find(
 				" from ProfileConnection where profileTo = '" + IProfileId + "' and profileFrom = '" + connectionAction.getProfileId() + "'" +
-				" and  connectionStatus = '" +  ConnectionStatusEnum.Requested.name() + "'");
+				" and  ( 	connectionStatus = '" +  ConnectionStatusEnum.Requested.name() + "' " +
+				"        OR connectionStatus = '" +  ConnectionStatusEnum.Rejected.name() + "'" +
+				"       ) "
+				);
 		
 		if(searchedConnections!= null && searchedConnections.size() == 1){
 			Date today = new Date();
