@@ -1,5 +1,6 @@
 
 var initializeSearch = function initializeSearch($scope, $http){
+	$scope.es.search = {};
 	$scope.es.search.type = "";
 	$scope.es.searchedProfiles = {};
 };

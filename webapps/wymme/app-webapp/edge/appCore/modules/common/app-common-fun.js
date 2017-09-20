@@ -35,6 +35,17 @@ edgeApp.directive('secureEdit', function() {
 });
 
 
+edgeApp.directive('profileConnection', function() {
+  return {
+    scope: {
+    	profile: '=profile',
+    	es: '=es'
+    },
+    templateUrl: 'edge/app/modules/templates/profile_connection.html'
+  };
+});
+
+
 edgeApp.directive('profileSecure', function() {
   return {
     scope: {
@@ -73,8 +84,8 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		searchById($scope, $http);
 	};
 	
-	$scope.es.showEnlraged = function (showProfile) {
-		showEnlraged($scope, $http, showProfile);
+	$scope.es.showEnlarged = function (showProfile) {
+		showEnlarged($scope, $http, showProfile);
 	};
 	
 	
@@ -130,7 +141,7 @@ var openMyProfile = function($scope, $http){
 };
 
 
-var showEnlraged = function showEnlraged($scope, $http, showProfile){
+var showEnlarged = function showEnlarged($scope, $http, showProfile){
 	$scope.es.showProfile = showProfile;
 	$scope.es.openPopup('ENLARGED_PROFILE_POPUP');
 };

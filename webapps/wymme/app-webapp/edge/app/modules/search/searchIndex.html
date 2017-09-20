@@ -46,20 +46,7 @@
 		<div>
 			<div ng-repeat="profile in es.searchedProfiles">
 				<div class="profileDisplay">
-					
-					<div style="text-align: right; width: 100%" ng-class="profile.profileConnection.connectionStatus">
-						<div ng-show="profile.profileConnection">
-							{{profile.profileConnection.profileFrom}} sent request to {{profile.profileConnection.profileTo}} on {{profile.profileConnection.requestedOn | date}}
-							<div ng-show="profile.profileConnection.actionedOn">
-								'{{profile.profileConnection.connectionStatus}} on {{profile.profileConnection.actionedOn | date}}'
-							</div>
-							<div ng-hide="profile.profileConnection.actionedOn">
-								'This is yet to be actioned'
-							</div>
-						</div>
-					</div>
-					<div><br></div>
-					
+
 					<div>
 						<profile-non-secure profile="profile" es="es" />		
 					</div>
