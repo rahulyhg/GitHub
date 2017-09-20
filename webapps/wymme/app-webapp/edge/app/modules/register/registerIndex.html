@@ -12,27 +12,28 @@
 		<form action="/unsecured/register" method="post" name="myForm">
  
 		   	<div>
-				<div ng-include="'edge/app/modules/partials/personal_edit.html'" />
+		   		<personal-edit profile="es.editProfile" es="es" />	
 			</div>								
 		    <div><br></div>
 		    
 		    <div>
-				<div ng-include="'edge/app/modules/partials/family_edit.html'" />
+		    	<family-edit profile="es.editProfile" es="es" />	
 			</div>
 		    <div><br></div>
 		    
 		    <div>
-				<div ng-include="'edge/app/modules/partials/secure_edit.html'" />
+				<secure-edit profile="es.editProfile" es="es" />	
 			</div>
+		    
 		    <div><br></div>
 		     	
 		    <h3><U>Profile Preview:</U></h3>
-			<div>
+			<div class="profileDisplay">
 				<profile-non-secure profile="es.editProfile" />
 			</div>								
 		    <div><br></div>
 		    
-			<div>
+			<div class="profileDisplay">
 				<profile-secure profile="es.editProfile" />
 			</div>								
 		    <div><br></div>

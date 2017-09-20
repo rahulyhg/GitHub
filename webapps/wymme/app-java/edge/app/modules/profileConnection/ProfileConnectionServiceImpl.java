@@ -75,9 +75,6 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 			break;
 			
 		case TheyRequested:
-			/*query = " from ProfileDetails where profileId In ( " +
-					" select profileTo from ProfileConnection where profileFrom = '" + profileFrom + "' and connectionStatus = '" + ConnectionStatusEnum.REQUESTED + "'" +
-					" ) ";*/
 			query = " Select pd, pc " +
 					" from ProfileDetails pd, ProfileConnection pc" +
 					" where  pc.profileTo = '" + IProfileId + "'" +

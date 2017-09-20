@@ -5,31 +5,44 @@
 <title>Saat-Phere : Search Profiles</title>
 </head>
 <body>
-	<div>
+	<div ng-init="es.initializeSearch()">
 		<div>
-				<h3>Show Me Profiles :</h3>
-				&nbsp;&nbsp;<input type="radio" ng-click="es.loadRemovedProfiles();" ng-model="es.search.type" value="IRemoved" title="Profiles I removed from wall"> I Removed from Wall </input>
-				<br>
-				<div style="display: inline-block; color: orange">
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRequested" title="Profiles whom I have sent Connection Request"> I Requested Connection </input>
-					<br>
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRequested" title="Profiles who have sent Connection Request to me"> They Requested Connection </input>
-				</div>
-				<div style="display: inline-block; color: green">
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IAccepted" title="Profiles whose Connection Request is Accepted by me"> I Accepted Connection </input>
-					<br>
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyAccepted" title="Profiles who Accepted Connection Request from Me"> They Accepted Connection </input>
-				</div>
-				<div style="display: inline-block; color: red">
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRejected" title="Profiles whose Connection Request is Rejected by me"> I Rejected Connection </input>
-					<br>
-					&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRejected" title="Profiles who Rejected Connection Request from Me"> They Rejected Connection </input>
-				</div>
-
+			<div ng-hide="es.search.type">
+				<h3>Search By Id : </h3>
+				<input type="text" ng-model="es.searchId" placeholder="Profile Id" class="formInput"/> 
+				<button class="btn btn-info" type="button" ng-click="es.searchById()">Search</button>
+			</div>
+		</div>
+		<div>
+			<div ng-show="es.loggedInUserId">
+					
+					<h3>Show Me Profiles : </h3>
+					 
+					<div style="display: inline-block; color: orange">
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRequested" title="Profiles whom I have sent Connection Request"> Requested By Me </input>
+						<br>
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRequested" title="Profiles who have sent Connection Request to me"> Requested By Them </input>
+					</div>
+					<div style="display: inline-block; color: green">
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IAccepted" title="Profiles whose Connection Request is Accepted by me"> Accepted By Me </input>
+						<br>
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyAccepted" title="Profiles who Accepted Connection Request from Me"> Accepted By Them </input>
+					</div>
+					<div style="display: inline-block; color: red">
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRejected" title="Profiles whose Connection Request is Rejected by me"> Rejected By Me </input>
+						<br>
+						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRejected" title="Profiles who Rejected Connection Request from Me"> Rejected By Them </input>
+					</div>
+					<div style="display: inline-block;">
+						<input type="radio" ng-click="es.loadRemovedProfiles();" ng-model="es.search.type" value="IRemoved" title="Profiles I removed from wall"> I Removed from Wall </input>
+						<br>
+						<br>
+					</div>
+			</div>
 		</div>
 		
-		<div><br></div>
-				
+		<div><hr class="thinHr"></div>
+		
 		<div>
 			<div ng-repeat="profile in es.searchedProfiles">
 				<div class="profileDisplay">
@@ -38,10 +51,10 @@
 						<div ng-show="profile.profileConnection">
 							{{profile.profileConnection.profileFrom}} sent request to {{profile.profileConnection.profileTo}} on {{profile.profileConnection.requestedOn | date}}
 							<div ng-show="profile.profileConnection.actionedOn">
-								{{profile.profileConnection.connectionStatus}} on {{profile.profileConnection.actionedOn | date}}
+								'{{profile.profileConnection.connectionStatus}} on {{profile.profileConnection.actionedOn | date}}'
 							</div>
 							<div ng-hide="profile.profileConnection.actionedOn">
-								This is yet to be actioned
+								'This is yet to be actioned'
 							</div>
 						</div>
 					</div>

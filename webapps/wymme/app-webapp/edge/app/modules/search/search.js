@@ -1,4 +1,9 @@
 
+var initializeSearch = function initializeSearch($scope, $http){
+	$scope.es.search.type = "";
+	$scope.es.searchedProfiles = {};
+};
+
 var loadRemovedProfiles = function loadRemovedProfiles($scope, $http){	
 	startAjax('LOAD_REMOVED_PROFILES', $scope);
 	$http.post('server/secured/loadRemovedProfiles.json', $scope.es.editProfile ).
@@ -35,4 +40,22 @@ var searchProfiles = function searchProfiles($scope, $http){
     error(function(data, status, headers, config) {
     	handleAjaxError('SEARCH_PROFILES', $scope, data, status, headers, config);
     });
+};
+
+var searchById = function($scope, $http){
+	
+	if($scope.es.searchId){
+		startAjax('SEARCH_BY_ID', $scope);
+		$http.post('server/unsecured/searchById.json',$scope.es.searchId).
+	    success(function(data, status, headers, config) {
+	    	
+	    	handleAjaxSuccess('SEARCH_BY_ID', $scope, data, status, headers, config);
+	    	$scope.es.searchedProfiles = data.edgeResponse.responseData;
+	    	
+	    }).
+	    error(function(data, status, headers, config) {
+	    	handleAjaxError('SEARCH_BY_ID', $scope, data, status, headers, config);
+	    });
+	}
+	
 };

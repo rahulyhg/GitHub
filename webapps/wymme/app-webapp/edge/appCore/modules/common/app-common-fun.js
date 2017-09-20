@@ -1,6 +1,40 @@
 
 // Define App Specific Directives Here
 
+
+edgeApp.directive('personalEdit', function() {
+  return {
+    scope: {
+    	profile: '=profile',
+    	es: '=es'
+    },
+    templateUrl: 'edge/app/modules/templates/personal_edit.html'
+  };
+});
+
+
+edgeApp.directive('familyEdit', function() {
+  return {
+    scope: {
+    	profile: '=profile',
+    	es: '=es'
+    },
+    templateUrl: 'edge/app/modules/templates/family_edit.html'
+  };
+});
+
+
+edgeApp.directive('secureEdit', function() {
+  return {
+    scope: {
+    	profile: '=profile',
+    	es: '=es'
+    },
+    templateUrl: 'edge/app/modules/templates/secure_edit.html'
+  };
+});
+
+
 edgeApp.directive('profileSecure', function() {
   return {
     scope: {
@@ -39,6 +73,11 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		searchById($scope, $http);
 	};
 	
+	$scope.es.showEnlraged = function (showProfile) {
+		showEnlraged($scope, $http, showProfile);
+	};
+	
+	
 	// WALL FUNCTIONS
 
 	$scope.es.initializeWall = function () {
@@ -55,6 +94,14 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	
 	// SEARCH FUNCTIONS
 
+	$scope.es.initializeSearch = function () {
+		initializeSearch($scope, $http);
+	};
+	
+	$scope.es.searchById = function () {
+		searchById($scope, $http);
+	};
+	
 	$scope.es.loadRemovedProfiles = function () {
 		loadRemovedProfiles($scope, $http);
 	};
@@ -80,4 +127,10 @@ var openMyProfile = function($scope, $http){
     error(function(data, status, headers, config) {
     	handleAjaxError('MYPROFILE', $scope, data, status, headers, config);
     });
+};
+
+
+var showEnlraged = function showEnlraged($scope, $http, showProfile){
+	$scope.es.showProfile = showProfile;
+	$scope.es.openPopup('ENLARGED_PROFILE_POPUP');
 };

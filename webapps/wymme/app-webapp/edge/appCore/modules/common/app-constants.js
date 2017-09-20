@@ -66,5 +66,12 @@ var popupMap = {
 		templateUrl : "edge/core/modules/auth/forgotPasswordPopup.html",
 		/*size : "sm",*/
 		controller : "edgeController"
+	},
+	"ENLARGED_PROFILE_POPUP" : {
+		id : "ENLARGED_PROFILE_POPUP",
+		title : "Enlarged Profile",
+		templateUrl : "edge/app/modules/profile/enlargedProfilePopup.html",
+		size : "lg",
+		controller : "edgeController"
 	}
 };

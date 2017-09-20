@@ -2,6 +2,7 @@ package edge.app.modules.search;
 
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,16 +41,19 @@ public class SearchController {
     }
 	
 	@RequestMapping(value={"/unsecured/searchById"})
-	public EdgeResponse<ProfileDetails> searchById(
+	public EdgeResponse<List<ProfileDetails>> searchById(
 				@RequestBody String profileId
-			){			
+			){
 		
 		ProfileDetails profileDetails = searchService.searchById(profileId.toUpperCase());
 
 		if(profileDetails == null){
 			return EdgeResponse.createErrorResponse(null,"There is no such profile!", null, null);
 		}else{
-			return EdgeResponse.createDataResponse(profileDetails, "");			
+			List<ProfileDetails> profileDetailsList = new ArrayList<ProfileDetails>();
+			profileDetailsList.add(profileDetails);
+			
+			return EdgeResponse.createDataResponse(profileDetailsList, "");			
 		}
 	}
 
