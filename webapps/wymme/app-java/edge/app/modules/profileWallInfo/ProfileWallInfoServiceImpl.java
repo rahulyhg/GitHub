@@ -41,6 +41,9 @@ public class ProfileWallInfoServiceImpl implements ProfileWallInfoService {
 				String val = "'" + toAdd +"',";
 				removedProfiles = removedProfiles.replace(val, "");
 				
+				val = ",'" + toAdd +"'";
+				removedProfiles = removedProfiles.replace(val, "");
+
 				val = "'" + toAdd +"'";
 				removedProfiles = removedProfiles.replace(val, "");
 			}

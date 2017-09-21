@@ -45,7 +45,7 @@ public class WallController {
 		List<ProfileDetails> searchedProfiles = wallService.loadWallProfiles(userName);
 
 		if(searchedProfiles == null || searchedProfiles.size() == 0){
-			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Criteria!", null, null);
+			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Filter!", null, null);
 		}else{
 			return EdgeResponse.createDataResponse(searchedProfiles, "");			
 		}
