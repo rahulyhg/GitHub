@@ -45,7 +45,7 @@
 		
 		<div>
 			<div ng-repeat="profile in es.searchedProfiles">
-				<div class="profileDisplay">
+				<div class="profileDisplay {{profile.profileConnection.connectionStatus}}Bg " >
 
 					<div>
 						<profile-non-secure profile="profile" es="es" />		

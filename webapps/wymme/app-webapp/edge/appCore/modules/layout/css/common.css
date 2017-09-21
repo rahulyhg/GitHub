@@ -252,14 +252,29 @@ input.ng-invalid {
 	color: orange;	
 }
 
+.RequestedBg{
+	border: orange;
+	box-shadow: 0px 1px 4px orange;	
+}
+
 .Accepted{
 	color: green;
+}
+
+.AcceptedBg{
+	border: green;
+	box-shadow: 0px 1px 4px green;	
 }
 
 .Rejected{
 	color: red;
 }
-	
+
+.RejectedBg{
+	border: red;
+	box-shadow: 0px 1px 4px red;	
+}
+
 .rightAligned{
 	width: 100%;
 	text-align: right;
