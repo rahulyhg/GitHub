@@ -253,8 +253,8 @@ input.ng-invalid {
 }
 
 .RequestedBg{
-	border: orange;
-	box-shadow: 0px 1px 4px orange;	
+	border: DarkOrange;
+	box-shadow: 0px 2px 20px DarkOrange;	
 }
 
 .Accepted{
@@ -262,8 +262,8 @@ input.ng-invalid {
 }
 
 .AcceptedBg{
-	border: green;
-	box-shadow: 0px 1px 4px green;	
+	border: DarkGreen ;
+	box-shadow: 0px 2px 20px DarkGreen;	
 }
 
 .Rejected{
@@ -271,8 +271,8 @@ input.ng-invalid {
 }
 
 .RejectedBg{
-	border: red;
-	box-shadow: 0px 1px 4px red;	
+	border: DarkRed;
+	box-shadow: 0px 2px 20px DarkRed;	
 }
 
 .rightAligned{
