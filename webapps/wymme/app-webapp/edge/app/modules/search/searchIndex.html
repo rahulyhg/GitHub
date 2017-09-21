@@ -18,17 +18,17 @@
 					
 					<h3>Search By Filter : </h3>
 					 
-					<div style="display: inline-block; color: orange">
+					<div style="display: inline-block;" class="Requested">
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRequested" title="Profiles whom I have sent Connection Request"> Requests Sent </input>
 						<br>
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRequested" title="Profiles who have sent Connection Request to me"> Requests Received </input>
 					</div>
-					<div style="display: inline-block; color: green">
+					<div style="display: inline-block;" class="Accepted">
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IAccepted" title="Profiles whose Connection Request is Accepted by me"> Accepted By Me </input>
 						<br>
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyAccepted" title="Profiles who Accepted Connection Request from Me"> Accepted By Them </input>
 					</div>
-					<div style="display: inline-block; color: red">
+					<div style="display: inline-block" class="Rejected">
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="IRejected" title="Profiles whose Connection Request is Rejected by me"> Rejected By Me </input>
 						<br>
 						&nbsp;&nbsp;<input type="radio" ng-click="es.searchProfiles();" ng-model="es.search.type" value="TheyRejected" title="Profiles who Rejected Connection Request from Me"> Rejected By Them </input>
