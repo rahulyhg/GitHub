@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import edge.core.utils.CoreDateUtils;
+
 @Entity
 @Table(name = "PROFILE_CONNECTION")
 public class ProfileConnection {
@@ -91,6 +93,22 @@ public class ProfileConnection {
 
 	public void setActionedOn(Date actionedOn) {
 		this.actionedOn = actionedOn;
+	}
+
+	public String getText() {
+		String retValue="";
+		switch(getConnectionStatus()){
+		case Requested: 
+			retValue = " Congratulations! You have received a connection request from Profile '" + profileFrom + "' on " + CoreDateUtils.dateToStandardSting(requestedOn);
+			break;
+		case Accepted:
+			retValue = " Hurray, Your connection request has been 'Accepted' by Profile '" + profileTo + "' on " + CoreDateUtils.dateToStandardSting(actionedOn) + ". Good Luck!";
+			break;
+		case Rejected:
+			retValue = " Ooh, Your connection request has been 'Rejected' by Profile '" + profileTo + "' on " + CoreDateUtils.dateToStandardSting(actionedOn) + ". Never Mind, We would help you get better match!";
+			break;
+		}
+		return retValue;
 	}
 	
 }

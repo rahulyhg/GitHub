@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edge.app.modules.notification.Notification;
+import edge.app.modules.notification.NotificationService;
 import edge.app.modules.profile.ProfileDetails;
 import edge.app.modules.profileConnection.ProfileConnectionService;
 import edge.core.config.CoreConstants;
@@ -32,13 +34,16 @@ public class WallController {
 	@Autowired
 	private ProfileConnectionService profileConnectionService;
 	
+	@Autowired
+	private NotificationService notificationService;
+	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(CoreConstants.DEFAULT_DATE_FORMAT);
         dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));        
     }
-	
+
 	@RequestMapping(value={"/secured/loadWallProfiles"})
 	public EdgeResponse<List<ProfileDetails>> loadWallProfiles(Principal principal){
 		String userName = principal.getName();
@@ -48,6 +53,23 @@ public class WallController {
 			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Filter!", null, null);
 		}else{
 			return EdgeResponse.createDataResponse(searchedProfiles, "");			
+		}
+	}
+	
+	@RequestMapping(value={"/secured/loadUnreadNotifications"})
+	public EdgeResponse<String> loadUnreadNotifications(Principal principal){
+		
+		String userName = principal.getName();
+		List<Notification> notifications = notificationService.loadUnreadNotifications(userName);
+		
+		if(notifications == null || notifications.size() == 0){
+			return EdgeResponse.createErrorResponse(null,"", null, null);
+		}else{
+			EdgeResponse<String> edgeResponse = EdgeResponse.createInfoResponse("", "You have " + notifications.size() + " unread notification(s) : ");
+			for(Notification notification : notifications){
+				edgeResponse.addMessage(notification.getNotificationText());
+			}
+			return edgeResponse;			
 		}
 	}
 	

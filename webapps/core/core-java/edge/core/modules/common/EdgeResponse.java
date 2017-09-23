@@ -38,6 +38,12 @@ public class EdgeResponse<T> {
 		return createSuccessResponse(responseData, successHeader, null, null);
 	}
 	
+	public static <T> EdgeResponse<T> createInfoResponse (T responseData, String successHeader){
+		 EdgeResponse<T> edgeResponse = createSuccessResponse(responseData, successHeader, null, null);
+		 edgeResponse.setType("info");
+		 return edgeResponse;
+	}
+	
 	public static <T> EdgeResponse<T> createSuccessResponse (T responseData, String successHeader, String successFooter, List<String> messages){
 		
 		EdgeResponse<T> edgeResponse = new EdgeResponse<T>();

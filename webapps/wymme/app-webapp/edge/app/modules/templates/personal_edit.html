@@ -7,10 +7,10 @@
   	
   	<div class="leftSection">Basic: </div>	
   	<div class="rightSection">
-  		<div class="rightSectionSub" ng-show="profile.secure"> 
+  		<div class="rightSectionSub"> 
   			Name: <input ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="50" />
   		</div>
-  		<div class="rightSectionSub" ng-show="profile.secure"> Gender: 
+  		<div class="rightSectionSub"> Gender: 
 			<select required class="formInput" ng-model="profile.signUpEntity.gender" title="~Gender~" 
 			  ng-options = "values for values in es.genderList">
 			</select> 

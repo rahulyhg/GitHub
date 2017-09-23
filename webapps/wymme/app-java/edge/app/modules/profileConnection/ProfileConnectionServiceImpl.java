@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import edge.app.modules.notification.NotificationService;
 import edge.app.modules.profile.ProfileDetails;
 import edge.app.modules.profile.SecureProfileDetails;
 import edge.app.modules.profileWallInfo.ProfileWallInfoService;
@@ -25,6 +26,9 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 	
 	@Autowired
 	private ProfileWallInfoService profileWallInfoService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	@Override
 	public void sendConnectionRequest(String userName, String profileTo) {
@@ -44,6 +48,8 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 			commonHibernateDao.save(profileConnection);
 			
 			profileWallInfoService.addToReadProfiles(profileFrom, profileTo);
+			
+			notificationService.addNotificationForAction(profileConnection);
 			
 		}catch (DataIntegrityViolationException deve){
 			throw new AppException(deve, "There is already a connection request with this combination.");
@@ -153,10 +159,10 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 			connection.setActionedOn(today);
 			connection.setConnectionStatus(connectionAction.getConnectionStatus());
 			commonHibernateDao.update(connection);
+			notificationService.addNotificationForAction(connection);
 		}else{
 			throw new AppException(null, "There is no such connection!");
 		}
-		
 	}
 
 	@Override

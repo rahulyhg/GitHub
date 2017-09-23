@@ -7,14 +7,15 @@
 <body>
 	<div ng-init="es.initializeSearch()">
 		<div>
-			<div ng-hide="es.search.type">
+			<div ng-hide="es.search.type" class="profileDisplay">
 				<h3>Search By Id : </h3>
 				<input type="text" ng-model="es.searchId" placeholder="Profile Id" class="formInput"/> 
 				<button class="btn btn-info" type="button" ng-click="es.searchById()">Search</button>
 			</div>
 		</div>
+		<div><br></div>
 		<div>
-			<div ng-show="es.loggedInUserId">
+			<div ng-show="es.loggedInUserId" class="profileDisplay">
 					
 					<h3>Search By Filter : </h3>
 					 

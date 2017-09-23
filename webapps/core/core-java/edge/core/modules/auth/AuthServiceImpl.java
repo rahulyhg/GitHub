@@ -91,9 +91,9 @@ public class AuthServiceImpl implements AuthService{
 					String password = RandomStringUtils.randomAlphanumeric(CoreConstants.PROFILE_ID_SIZE).toUpperCase();
 					if(userName.contains("@test.com")){
 						password = "123456";
+						signUpEntity.setConfirmPwd(password);
 					}
 					signUpEntity.setPwd(SpringSecurityUtil.encodePassword(password, null));
-					signUpEntity.setConfirmPwd(password);
 					
 					commonHibernateDao.save(signUpEntity);
 					
@@ -190,7 +190,11 @@ public class AuthServiceImpl implements AuthService{
 		 }
 		 
 		 entityById.setPwd(SpringSecurityUtil.encodePassword(uiEntity.getPwd(), null));
-		 entityById.setConfirmPwd(uiEntity.getPwd());
+		 if (uiEntity.getUserName().contains("@test.com")) {
+			 entityById.setConfirmPwd(uiEntity.getPwd());
+		 }else{
+			 entityById.setConfirmPwd("");
+		 }
 		 entityById.setVerificationCode(null);
 			 
 		 commonHibernateDao.update(entityById);	 

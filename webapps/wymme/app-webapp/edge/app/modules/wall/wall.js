@@ -1,6 +1,9 @@
 
 var initializeWall = function  initializeWall($scope, $http){
-	loadWallProfiles($scope, $http);
+	if($scope.es.loggedInUserId){
+		loadWallProfiles($scope, $http);
+		loadUnreadNotifications($scope, $http);
+	}
 };
 
 var loadWallProfiles = function loadWallProfiles($scope, $http){	
@@ -12,6 +15,17 @@ var loadWallProfiles = function loadWallProfiles($scope, $http){
     }).
     error(function(data, status, headers, config) {
     	handleAjaxError('LOAD_WALL_PROFILES', $scope, data, status, headers, config);
+    });
+};
+
+var loadUnreadNotifications = function loadWallProfiles($scope, $http){	
+	startAjax('LOAD_UNREAD_NOTIFICATIONS', $scope);
+	$http.post('server/secured/loadUnreadNotifications.json', $scope.es.editProfile ).
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('LOAD_UNREAD_NOTIFICATIONS', $scope, data, status, headers, config);
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('LOAD_UNREAD_NOTIFICATIONS', $scope, data, status, headers, config);
     });
 };
 

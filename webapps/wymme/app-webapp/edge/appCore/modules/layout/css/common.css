@@ -230,7 +230,7 @@ select{
  	padding: 20px; 
  	border-radius: 10px;
  	/* border: 1px solid rgba(0, 0, 0, 0.6); */
-	box-shadow: 0px 2px 20px black;	
+	box-shadow: 0px 2px 20px #11023B;	
 }
 
 input.ng-invalid {

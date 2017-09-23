@@ -13,5 +13,6 @@
        	<mapping class="edge.app.modules.profile.SecureProfileDetails" />
        	<mapping class="edge.app.modules.profileWallInfo.ProfileWallInfo" />
        	<mapping class="edge.app.modules.profileConnection.ProfileConnection" />
+       	<mapping class="edge.app.modules.notification.Notification" />
     </session-factory> 
 </hibernate-configuration>
