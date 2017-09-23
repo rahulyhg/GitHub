@@ -7,7 +7,7 @@
 <body>
 	<div ng-init="es.initializeSearch()">
 		<div>
-			<div ng-hide="es.search.type" class="profileDisplay">
+			<div ng-hide="es.search.type" class="boxDisplay">
 				<h3>Search By Id : </h3>
 				<input type="text" ng-model="es.searchId" placeholder="Profile Id" class="formInput"/> 
 				<button class="btn btn-info" type="button" ng-click="es.searchById()">Search</button>
@@ -15,7 +15,7 @@
 		</div>
 		<div><br></div>
 		<div>
-			<div ng-show="es.loggedInUserId" class="profileDisplay">
+			<div ng-show="es.loggedInUserId" class="boxDisplay">
 					
 					<h3>Search By Filter : </h3>
 					 
@@ -46,7 +46,7 @@
 		
 		<div>
 			<div ng-repeat="profile in es.searchedProfiles">
-				<div class="profileDisplay {{profile.profileConnection.connectionStatus}}Bg " >
+				<div class="boxDisplay {{profile.profileConnection.connectionStatus}}Bg " >
 
 					<div>
 						<profile-non-secure profile="profile" es="es" />		

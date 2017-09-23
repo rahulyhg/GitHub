@@ -77,7 +77,7 @@ public class NotificationServiceImpl implements NotificationService {
 		String profileId = signUpEntity.getProfileId();
 		
 		Notification notification = commonHibernateDao.getEntityById(Notification.class, notificationId);
-		if(notification.getProfileId().equals(profileId)){
+		if(notification.getProfileId().equals(profileId) && notification.getNotificationStatus() != NotificationStatusEnum.Read){
 			notification.setActionedOn(new Date());
 			notification.setNotificationStatus(NotificationStatusEnum.Read);
 			commonHibernateDao.update(notification);

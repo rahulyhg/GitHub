@@ -230,7 +230,7 @@ select{
  	padding: 20px; 
  	border-radius: 10px;
  	/* border: 1px solid rgba(0, 0, 0, 0.6); */
-	box-shadow: 0px 2px 20px #11023B;	
+	box-shadow: 0px 2px 10px #11023B;	
 }
 
 input.ng-invalid {
@@ -241,7 +241,7 @@ input.ng-invalid {
 	cursor: pointer;	
 }
 
-.profileDisplay{
+.boxDisplay{
 	border: #8B0000;
 	padding: 20px; 
  	border-radius: 10px;
@@ -254,12 +254,12 @@ input.ng-invalid {
 
 .RequestedBg{
 	border: DarkOrange;
-	box-shadow: 0px 2px 20px DarkOrange;	
+	box-shadow: 0px 2px 10px DarkOrange;	
 }
 
 .RequestedUnread{
 	border: DarkOrange;
-	box-shadow: 0px 2px 20px DarkOrange;	
+	box-shadow: 0px 2px 10px DarkOrange;	
 }
 
 .Accepted{
@@ -268,12 +268,12 @@ input.ng-invalid {
 
 .AcceptedBg{
 	border: DarkGreen ;
-	box-shadow: 0px 2px 20px DarkGreen;	
+	box-shadow: 0px 2px 10px DarkGreen;	
 }
 
 .AcceptedUnread{
 	border: DarkGreen ;
-	box-shadow: 0px 2px 20px DarkGreen;	
+	box-shadow: 0px 2px 10px DarkGreen;	
 }
 
 
@@ -283,12 +283,12 @@ input.ng-invalid {
 
 .RejectedBg{
 	border: DarkRed;
-	box-shadow: 0px 2px 20px DarkRed;	
+	box-shadow: 0px 2px 10px DarkRed;	
 }
 
 .RejectedUnread{
 	border: DarkRed;
-	box-shadow: 0px 2px 20px DarkRed;
+	box-shadow: 0px 2px 10px DarkRed;
 }
 
 

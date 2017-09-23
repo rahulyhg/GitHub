@@ -9,16 +9,23 @@
 				
 		<div>
 			<div ng-repeat="notification in es.notifications">
-				<div class="profileDisplay {{notification.connectionStatus}} {{notification.connectionStatus}}{{notification.notificationStatus}} " >
+				<div class="boxDisplay {{notification.connectionStatus}} {{notification.connectionStatus}}{{notification.notificationStatus}} " >
 
 					<div>
 						{{notification.notificationText}}		
 					</div>
-					<div><br></div>
-					<div class="rightAligned" style="width: 95%">
-						 <input class="btn btn-info" title="Mark Notification As Read!" type="button" value="Mark as Read" ng-click="es.markNotificationAsRead(notification.notificationId)"/>
+					<div class="rightAligned" style="width: 95%" ng-show="notification.notificationStatus != 'Read'">
+						<div><br></div>
+						<div>
+							<input class="btn btn-info" title="Mark Notification As Read!" type="button" value="Mark as Read" ng-click="es.markNotificationAsRead(notification.notificationId)"/>
+						</div>
 					</div>
-					
+					<div class="rightAligned" style="width: 95%" ng-show="notification.notificationStatus == 'Read'">
+						<div><br></div>
+						<div>
+							<span style="font-size: medium; color: #428bca " >Read On {{notification.actionedOn | date}}</span>
+						</div>
+					</div>
 				</div>
 				<div><br></div>
 			</div>
