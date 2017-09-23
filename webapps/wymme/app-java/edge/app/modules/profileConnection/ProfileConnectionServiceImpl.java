@@ -49,7 +49,7 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 			
 			profileWallInfoService.addToReadProfiles(profileFrom, profileTo);
 			
-			notificationService.addNotificationForAction(profileConnection);
+			notificationService.addNotificationForRequest(profileConnection);
 			
 		}catch (DataIntegrityViolationException deve){
 			throw new AppException(deve, "There is already a connection request with this combination.");

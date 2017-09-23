@@ -1,11 +1,15 @@
 package edge.app.modules.notification;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import edge.app.modules.profileConnection.ConnectionStatusEnum;
 
 @Entity
 @Table(name = "NOTIFICATION")
@@ -29,6 +33,15 @@ public class Notification {
 	
 	@Column(nullable = false, length = 20)
 	private String notificationStatus = NotificationStatusEnum.Unread.name();
+
+	@Column(nullable = true, length = 20)
+	private String connectionStatus = "";
+
+	@Column(nullable = false, updatable=false)
+	private Date raisedOn = new Date();
+	
+	@Column(nullable = true)
+	private Date actionedOn;
 
 	public Long getNotificationId() {
 		return notificationId;
@@ -76,6 +89,30 @@ public class Notification {
 
 	public void setProfileOther(String profileOther) {
 		this.profileOther = profileOther;
+	}
+
+	public Date getRaisedOn() {
+		return raisedOn;
+	}
+
+	public void setRaisedOn(Date raisedOn) {
+		this.raisedOn = raisedOn;
+	}
+
+	public Date getActionedOn() {
+		return actionedOn;
+	}
+
+	public void setActionedOn(Date actionedOn) {
+		this.actionedOn = actionedOn;
+	}
+
+	public ConnectionStatusEnum getConnectionStatus() {
+		return ConnectionStatusEnum.valueOf(connectionStatus);
+	}
+
+	public void setConnectionStatus(ConnectionStatusEnum connectionStatus) {
+		this.connectionStatus = connectionStatus.name();
 	}
 	
 }

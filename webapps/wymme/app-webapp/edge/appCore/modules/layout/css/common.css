@@ -257,6 +257,11 @@ input.ng-invalid {
 	box-shadow: 0px 2px 20px DarkOrange;	
 }
 
+.RequestedUnread{
+	border: DarkOrange;
+	box-shadow: 0px 2px 20px DarkOrange;	
+}
+
 .Accepted{
 	color: green;
 }
@@ -266,6 +271,12 @@ input.ng-invalid {
 	box-shadow: 0px 2px 20px DarkGreen;	
 }
 
+.AcceptedUnread{
+	border: DarkGreen ;
+	box-shadow: 0px 2px 20px DarkGreen;	
+}
+
+
 .Rejected{
 	color: red;
 }
@@ -274,6 +285,12 @@ input.ng-invalid {
 	border: DarkRed;
 	box-shadow: 0px 2px 20px DarkRed;	
 }
+
+.RejectedUnread{
+	border: DarkRed;
+	box-shadow: 0px 2px 20px DarkRed;
+}
+
 
 .rightAligned{
 	width: 100%;

@@ -139,6 +139,16 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		if (confirm(message)) actionRequest($scope, $http, profileId, connectionStatus);
 	};
 	
+	// NOTIFICATIONS
+	
+	$scope.es.initializeNotifications = function () {
+		initializeNotifications($scope, $http);
+	};
+	
+	$scope.es.markNotificationAsRead = function (notificationId) {
+		markNotificationAsRead($scope, $http, notificationId);
+	};
+	
 };	
 	
 var openMyProfile = function($scope, $http){

@@ -99,7 +99,7 @@ public class ProfileConnection {
 		String retValue="";
 		switch(getConnectionStatus()){
 		case Requested: 
-			retValue = " Congratulations! You have received a connection request from Profile '" + profileFrom + "' on " + CoreDateUtils.dateToStandardSting(requestedOn);
+			retValue = " Congratulations! You have received a connection request from Profile '" + profileFrom + "' on " + CoreDateUtils.dateToStandardSting(requestedOn) + ".";
 			break;
 		case Accepted:
 			retValue = " Hurray, Your connection request has been 'Accepted' by Profile '" + profileTo + "' on " + CoreDateUtils.dateToStandardSting(actionedOn) + ". Good Luck!";

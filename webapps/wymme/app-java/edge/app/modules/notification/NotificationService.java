@@ -12,4 +12,8 @@ public interface NotificationService {
 
 	List<Notification> loadUnreadNotifications(String userName);
 
+	List<Notification> loadNotifications(String userName);
+
+	void markNotificationAsRead(String userName, Long notificationId);
+
 }

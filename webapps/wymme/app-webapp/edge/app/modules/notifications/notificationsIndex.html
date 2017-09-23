@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Saat-Phere : Notifications</title>
+</head>
+<body>
+	<div ng-init="es.initializeNotifications()">
+				
+		<div>
+			<div ng-repeat="notification in es.notifications">
+				<div class="profileDisplay {{notification.connectionStatus}} {{notification.connectionStatus}}{{notification.notificationStatus}} " >
+
+					<div>
+						{{notification.notificationText}}		
+					</div>
+					<div><br></div>
+					<div class="rightAligned" style="width: 95%">
+						 <input class="btn btn-info" title="Mark Notification As Read!" type="button" value="Mark as Read" ng-click="es.markNotificationAsRead(notification.notificationId)"/>
+					</div>
+					
+				</div>
+				<div><br></div>
+			</div>
+			
+		</div>
+		
+	</div>
+</body>
+</html>

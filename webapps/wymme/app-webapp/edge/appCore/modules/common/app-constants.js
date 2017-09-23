@@ -20,12 +20,18 @@ var menuMap = {
 		templateUrl : "edge/app/modules/search/searchIndex.html",
 		icon : "edge/appCore/modules/layout/images/proposal.png"
 	},
-	"4EVENTS" : {
+	"4NOTIFICATIONS" : {
+		id : "4NOTIFICATIONS",
+		title : "Notifications",
+		templateUrl : "edge/app/modules/notifications/notificationsIndex.html",
+		icon : ""
+	}
+	/*"4EVENTS" : {
 		id : "EVENTS",
 		title : "Events",
 		templateUrl : "edge/app/modules/events/eventsIndex.html",
 		icon : ""
-	}
+	}*/
 };
 
 
