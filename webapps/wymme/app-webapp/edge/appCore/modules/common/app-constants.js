@@ -1,5 +1,5 @@
 
-var contextRoot = 'ROOT';
+var contextRoot = 'rootPage';
 
 var menuMap = {
 	"1HOME" : {
