@@ -23,6 +23,7 @@ var loadUnreadNotifications = function loadWallProfiles($scope, $http){
 	$http.post('server/secured/loadUnreadNotifications.json', $scope.es.editProfile ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('LOAD_UNREAD_NOTIFICATIONS', $scope, data, status, headers, config);
+    	$scope.es.unreadNotificationsCount=data.edgeResponse.messages.length;
     }).
     error(function(data, status, headers, config) {
     	handleAjaxError('LOAD_UNREAD_NOTIFICATIONS', $scope, data, status, headers, config);

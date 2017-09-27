@@ -156,6 +156,10 @@ function startAjax(popupId, $scope){
 	$scope.es.ajaxCount = $scope.es.ajaxCount + 1;	
 }
 
+function handleAjaxSilent (popupId, $scope, data, status, headers, config){
+	$scope.es.ajaxCount = $scope.es.ajaxCount - 1;
+};
+
 function handleAjaxSuccess (popupId, $scope, data, status, headers, config){
 
 	$scope.es.ajaxCount = $scope.es.ajaxCount - 1;
