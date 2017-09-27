@@ -16,7 +16,7 @@
 				    <i class="fa fa-user"></i>
 				</div>
 			</span> <font color="gray">|</font> 
-			<span class="headerStripMenuItem"> 
+			<span class="headerStripMenuItem" ng-click="es.setSelectedMenuRaw('NOTIFICATIONS');" title="Notifications"> 
 				<div class="fa-icon">
 				    <i class="fa fa-bell"></i>
 				    <span class="fa-icon-badge" ng-show="es.unreadNotificationsCount != 0">{{es.unreadNotificationsCount}}</span>
@@ -24,7 +24,7 @@
 			</span><font color="gray">|</font> 
 			<span class="headerStripMenuItem" ng-click="es.setSelectedMenuRaw('WALL_CRITERIA');" title="Set Wall Criteria"> 
 				<div class="fa-icon">
-				    <i class="fa fa-cog"></i>
+				    <i class="fa fa-search"></i>
 				</div>
 			</span> <font color="gray">|</font>
 			<span class="headerStripMenuItem" ng-click="es.openPopup('FORGOT_PWD_POP_UP')" title="Change / Reset Password">

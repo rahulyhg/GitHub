@@ -6,8 +6,14 @@
 <body>	
 	<div class="menuInnerClass">
 	<span ng-repeat="menuItem in es.menuMap">		
-			<!-- <span ng-show="menuItem.icon"><img ng-src="{{menuItem.icon}}" class="icon"/>&nbsp;</span> -->
-			<span class="menuItem" ng-class="{activeMenu : es.isSelectedMenu(menuItem)}" ng-click="es.setSelectedMenu(menuItem)">{{menuItem.title}}</span>
+			<span class="menuItem" ng-class="{activeMenu : es.isSelectedMenu(menuItem)}" ng-click="es.setSelectedMenu(menuItem)">
+				{{menuItem.title}}
+				<span ng-show="menuItem.icon">
+					<div class="fa-icon">
+					    <i class="fa {{menuItem.icon}}"></i>
+					</div>
+				</span> 
+			</span>
 		
 	</span>
 	</div>

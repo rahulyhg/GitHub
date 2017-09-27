@@ -6,32 +6,27 @@ var menuMap = {
 		id : "HOME",
 		title : "Home",
 		templateUrl : "edge/app/modules/home/homeIndex.html",
-		icon : "edge/appCore/modules/layout/images/home_icon.gif"
+		icon : "fa-home"
 	},
 	"2REGISTER" : {
 		id : "REGISTER",
 		title : "Register",
 		templateUrl : "edge/app/modules/register/registerIndex.html",
-		icon : ""
+		icon : "fa-user"
 	},
 	"3SEARCH" : {
 		id : "SEARCH",
 		title : "Search",
 		templateUrl : "edge/app/modules/search/searchIndex.html",
-		icon : "edge/appCore/modules/layout/images/proposal.png"
+		icon : "fa-search"
 	},
-	"4NOTIFICATIONS" : {
-		id : "4NOTIFICATIONS",
-		title : "Notifications",
-		templateUrl : "edge/app/modules/notifications/notificationsIndex.html",
-		icon : ""
+	"4TESTIMONIALS" : {
+		id : "TESTIMONIALS",
+		title : "Testimonials",
+		templateUrl : "edge/app/modules/testimonials/testimonialsIndex.html",
+		icon : "fa-comments-o"
 	}
-	/*"4EVENTS" : {
-		id : "EVENTS",
-		title : "Events",
-		templateUrl : "edge/app/modules/events/eventsIndex.html",
-		icon : ""
-	}*/
+	
 };
 
 
@@ -47,6 +42,20 @@ var extendedMenuMap = {
 			id : "WALL_CRITERIA",
 			title : "Update Wall Criteria",
 			templateUrl : "edge/app/modules/wall/wallCriteriaIndex.html",
+			icon : ""
+		},
+		
+		"NOTIFICATIONS" : {
+			id : "NOTIFICATIONS",
+			title : "Notifications",
+			templateUrl : "edge/app/modules/notifications/notificationsIndex.html",
+			icon : ""
+		},
+		
+		"EVENTS" : {
+			id : "EVENTS",
+			title : "Events",
+			templateUrl : "edge/app/modules/events/eventsIndex.html",
 			icon : ""
 		}
 };
