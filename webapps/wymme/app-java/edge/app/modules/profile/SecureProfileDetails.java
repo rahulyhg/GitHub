@@ -18,7 +18,7 @@ public class SecureProfileDetails {
 	@Column(nullable = false, length = 100)
 	private String cell;
 	
-	@Column(nullable = false, length = 100)
+	@Column(nullable = true, length = 100)
 	private String cellParents;
 	
 	@Column(nullable = false, length = 100)

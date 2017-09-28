@@ -3,17 +3,17 @@
 
  	<div class="leftSection">Email Id: </div>			  	
   	<div class="rightSection">
-  		<input ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="email" ng-model="profile.signUpEntity.emailId" title="~Email Address~" size="70" />
+  		<input required ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="email" ng-model="profile.signUpEntity.emailId" title="~Email Address~" size="70" />
   	</div>
 		  	
   	<div class="leftSection">Cell (Self): </div>			  	
   	<div class="rightSection">
-  		<input ng-minlength="10" maxlength="100" ng-maxlength="100"  class="formInput" type="tel" ng-model="profile.secure.cell" title="~Phone Number (Candidate)~" size="70" />
+  		<input required ng-minlength="10" maxlength="100" ng-maxlength="100"  class="formInput" type="tel" ng-model="profile.secure.cell" title="~Phone Number (Candidate)~" size="70" />
   	</div>
  	
   	<div class="leftSection">Cell (Parent): </div>			  	
   	<div class="rightSection">
-  		<input ng-minlength="10" maxlength="100" ng-maxlength="100"  class="formInput" type="tel" ng-model="profile.secure.cellParents" title="~Phone Number (Parents)~" size="70" />
+  		<input placeholder="~Optional~" ng-minlength="10" maxlength="100" ng-maxlength="100"  class="formInput" type="tel" ng-model="profile.secure.cellParents" title="~Phone Number (Parents)~" size="70" />
   	</div>
   	
 </div>
@@ -23,17 +23,17 @@
   	
   	<div class="leftSection">Facebook: </div>			  	
   	<div class="rightSection">
-  		<input class="formInput" type="url" ng-model="profile.secure.facebook" title="~Facebook~" size="70" />
+  		<input placeholder="~Optional~" class="formInput" type="url" ng-model="profile.secure.facebook" title="~Facebook~" size="70" />
   	</div>
   	
   	<div class="leftSection">Twitter: </div>			  	
   	<div class="rightSection">
-  		<input class="formInput" type="url" ng-model="profile.secure.twitter" title="~Twitter~" size="70" />
+  		<input placeholder="~Optional~" class="formInput" type="url" ng-model="profile.secure.twitter" title="~Twitter~" size="70" />
   	</div>
   	
   	<div class="leftSection">LinkedIn: </div>			  	
   	<div class="rightSection">
-  		<input class="formInput" type="url" ng-model="profile.secure.linkedIn" title="~LinkedIn~" size="70" />
+  		<input placeholder="~Optional~" class="formInput" type="url" ng-model="profile.secure.linkedIn" title="~LinkedIn~" size="70" />
   	</div>
   	
  </div>
