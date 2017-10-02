@@ -95,5 +95,14 @@ var popupMap = {
 		templateUrl : "edge/app/modules/profile/secureProfilePopup.html",
 		/*size : "sm",*/
 		controller : "edgeController"
+	},
+	"SLIDESHOW_POPUP" : {
+		id : "SLIDESHOW_POPUP",
+		title : "Slideshow",
+		templateUrl : "edge/core/modules/utilities/slideshowPopup.html",
+		/*size : "sm",*/
+		controller : "edgeController"
 	}
+	
+	
 };

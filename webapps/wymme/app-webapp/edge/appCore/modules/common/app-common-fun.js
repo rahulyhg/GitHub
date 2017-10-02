@@ -105,6 +105,10 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	
 	// SEARCH FUNCTIONS
 
+	$scope.es.showAlbum = function (profile) {
+		showAlbum($scope, $http, profile);
+	};
+	
 	$scope.es.initializeSearch = function () {
 		initializeSearch($scope, $http);
 	};

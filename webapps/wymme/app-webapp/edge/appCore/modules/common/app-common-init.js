@@ -20,4 +20,24 @@ var appOnLoad = function($scope, $http, $modal, $log, $sce){
 		$scope.es.searchById($scope, $http);
 	}
 	
+	
+	// TEST
+	$scope.es.slideshow = {};
+	$scope.es.slideshow.title = "Demo Title";
+	$scope.es.slideshow.interval = 3000;
+	$scope.es.slideshow.slides = [
+	    {
+	      image: 'http://lorempixel.com/400/200/'
+	    },
+	    {
+	      image: 'http://lorempixel.com/400/200/food'
+	    },
+	    {
+	      image: 'http://lorempixel.com/400/200/sports'
+	    },
+	    {
+	      image: 'http://lorempixel.com/400/200/people'
+	    }
+	  ];
+	
 };

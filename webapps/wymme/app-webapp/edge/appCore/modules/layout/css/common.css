@@ -322,3 +322,13 @@ input.ng-invalid {
   top: 0;
   right: 0;
 }
+
+
+.slideshowImage{
+  margin:auto;
+  width: 700px;
+}
+
+.slideshowDiv {
+
+}
