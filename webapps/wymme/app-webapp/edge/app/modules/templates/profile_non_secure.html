@@ -5,6 +5,11 @@
 			
 <div class="leftSection">
 	<B>{{profile.profileId}}</B>
+	<br>
+	<div ng-if="profile.profilePic != 'NA'">
+		<img src="{{profile.profileThumbnail}}" class="profileThumbnail" />
+	</div>
+
 </div>
 <div class="rightSection">
 	<B>{{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} - {{profile.gender}} </B> 

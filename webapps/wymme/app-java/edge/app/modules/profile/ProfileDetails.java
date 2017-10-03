@@ -161,13 +161,13 @@ public class ProfileDetails extends EdgeEntity{
 	private String profilePic="NA";
 	
 	@Column(nullable = false, length = 30)
-	private String albumImg1="NA";
+	private String albumImg1="";
 
 	@Column(nullable = false, length = 30)
-	private String albumImg2="NA";
+	private String albumImg2="";
 
 	@Column(nullable = false, length = 30)
-	private String albumImg3="NA";
+	private String albumImg3="";
 
 	@Transient
 	private SecureProfileDetails secure;
@@ -592,6 +592,13 @@ public class ProfileDetails extends EdgeEntity{
 		this.albumImg3 = albumImg3;
 	}
 	
+	public String getProfileThumbnail(){
+		if(profilePic == null || profilePic.trim().length() == 0){
+			profilePic = "NA";
+		}
+		return "server/secured/getImage/profilePic/" + profileId +"/" + profilePic;
+	}
+	
 	public List<String> getProfileImages (){
 		List<String> images = new ArrayList<String>();
 		addImagesPath(images,"profilePic",profilePic);
@@ -602,7 +609,7 @@ public class ProfileDetails extends EdgeEntity{
 	}
 
 	private void addImagesPath(List<String> images, String key, String value) {
-		if(value != null){
+		if(value != null && value.trim().length() != 0){
 			images.add("server/secured/getImage/"+ key +"/" + profileId +"/" + value);
 		}
 	}

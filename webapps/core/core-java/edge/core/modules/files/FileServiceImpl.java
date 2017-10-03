@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edge.app.modules.common.AppConstants;
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
 import edge.core.modules.auth.SecurityRoles;
@@ -119,6 +120,9 @@ public class FileServiceImpl implements FileService{
 	}
 
 	public String getFilePath(int parentId, String entityId, String storageColumn,  String fileName) {
+		if(fileName == null || fileName.equals("NA") || fileName.trim().length() == 0){
+			return baseDirectory + File.separatorChar + "NA.jpg" ;
+		}
 		return getBasePath(parentId, entityId, storageColumn) + File.separatorChar + fileName;
 	}
 	
