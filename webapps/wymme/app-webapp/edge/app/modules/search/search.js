@@ -91,9 +91,3 @@ var showContactDetails = function undoRemoveFromWall($scope, $http, profileId){
     	handleAjaxError('SHOW_CONTACT_DETAILS', $scope, data, status, headers, config);
     });
 };
-
-
-var showAlbum = function showAlbum($scope, $http, profile){
-	$scope.es.slideshow.title = " Album : " + profile.profileId;
-	$scope.es.openPopup('SLIDESHOW_POPUP');
-};

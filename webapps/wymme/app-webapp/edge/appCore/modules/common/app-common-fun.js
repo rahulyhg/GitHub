@@ -65,6 +65,21 @@ edgeApp.directive('profileNonSecure', function() {
   };
 });
 
+edgeApp.directive('file', function () {
+    return {
+        scope: {
+            file: '='
+        },
+        link: function (scope, el, attrs) {
+            el.bind('change', function (event) {
+                var file = event.target.files[0];
+                scope.file = file ? file : undefined;
+                scope.$apply();
+            });
+        }
+    };
+});
+
 // Other Functions
 
 function appInitFun($scope, $http, $modal, $log, $sce){
@@ -88,6 +103,15 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 		showEnlarged($scope, $http, showProfile);
 	};
 	
+	// COMMON
+	
+	$scope.es.showAlbum = function (profile) {
+		showAlbum($scope, $http, profile);
+	};
+
+	$scope.es.uploadImage = function (imageType) {
+		uploadImage($scope, $http, imageType);
+	};
 	
 	// WALL FUNCTIONS
 
@@ -105,10 +129,6 @@ function appInitFun($scope, $http, $modal, $log, $sce){
 	
 	// SEARCH FUNCTIONS
 
-	$scope.es.showAlbum = function (profile) {
-		showAlbum($scope, $http, profile);
-	};
-	
 	$scope.es.initializeSearch = function () {
 		initializeSearch($scope, $http);
 	};
@@ -172,4 +192,9 @@ var openMyProfile = function($scope, $http){
 var showEnlarged = function showEnlarged($scope, $http, showProfile){
 	$scope.es.showProfile = showProfile;
 	$scope.es.openPopup('ENLARGED_PROFILE_POPUP');
+};
+
+var showAlbum = function showAlbum($scope, $http, profile){
+	$scope.es.slideshow.title = " Album : " + profile.profileId;
+	$scope.es.openPopup('SLIDESHOW_POPUP');
 };

@@ -3,16 +3,16 @@
   
   	<div class="leftSection">Residence: </div>
     <div class="rightSection">
-		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCity" placeholder="~City~" size="20"  />
-		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtState" placeholder="~State~" size="20"  />
-		<input ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCountry" placeholder="~Country~" size="20" />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCity" placeholder="~City~" size="20"  />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtState" placeholder="~State~" size="20"  />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCountry" placeholder="~Country~" size="20" />
    	</div>
    		
    	<div class="leftSection">Native Place: </div>
     <div class="rightSection">
-		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeCity" placeholder="~City~" size="20"  />
-		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeState" placeholder="~State~" size="20"  />
-		<input maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeCountry" placeholder="~Country~" size="20" />
+		<input required maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeCity" placeholder="~City~" size="20"  />
+		<input required maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeState" placeholder="~State~" size="20"  />
+		<input required maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.nativeCountry" placeholder="~Country~" size="20" />
    	</div>
  
  	<div class="leftSection">Siblings: </div>
@@ -21,30 +21,30 @@
     		Brothers: 
     		<select required class="formInput shortInput" ng-model="profile.brothers"
 			  ng-options = "values for values in es.siblingsList">
-			</select> 
+			<option></option></select> 
     		
     		(Married: 
 			<select required class="formInput shortInput" ng-model="profile.marriedBrothers"
 			  ng-options = "values for values in es.siblingsList">
-			</select> 
+			<option></option></select> 
 			)
     	</div>
     	<div class="rightSectionSub">	
     		Sisters: 
     		<select required class="formInput shortInput" ng-model="profile.sisters"
 			  ng-options = "values for values in es.siblingsList">
-			</select> 
+			<option></option></select> 
     		
     		(Married: 
 			<select required class="formInput shortInput" ng-model="profile.marriedSisters"
 			  ng-options = "values for values in es.siblingsList">
-			</select> 
+			<option></option></select> 
 			)
     	</div>
     </div>
  
     <div class="leftSection">Wealth: </div>			  	
   	<div class="rightSection">
-  		<input maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.wealth" title="Wealth" size="70" />
+  		<input required maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.wealth" title="Wealth" size="70" />
   	</div>
 </div>

@@ -6,12 +6,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import edge.core.config.CoreConstants;
+import edge.core.exception.AppException;
 import edge.core.modules.auth.SecurityRoles;
 import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.parents.ParentsService;
@@ -49,42 +53,70 @@ public class FileServiceImpl implements FileService{
 	    }
 	}
 
-	private int updateEntity(Integer entityId, String entityName, String columnName, int parentId, String fileName) throws Exception {
-		String query= " update " + entityName + " set " + columnName + " = '" + fileName + "'"
-					+ " where parentId = " + parentId 
-					+ " and " + entityName.toLowerCase() + "Id = " + entityId; 
+	private int updateEntity(String entityName, String idColumn, String storageColumn, String entityId, String fileName, Integer parentId) throws Exception {
+		
+		String query = "";
+		
+		if(parentsService.isParentServiceEnabled()){
+			query = " update " + entityName + " set " + storageColumn + " = '" + fileName + "'"
+					+ " where parentId = '" + parentId + "'"
+					+ " and " + idColumn + " = '" + entityId + "'"; 
+		}else{
+			query = " update " + entityName + " set " + storageColumn + " = '" + fileName + "'"
+					+ " where " + idColumn + " = '" + entityId+ "'"; 
+			
+		}
 		
 		return commonHibernateDao.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).executeUpdate();
 	}
 
 	@Override
 	@Transactional
-	public void uploadFile(Integer entityId, String entityName, String columnName, MultipartFile file, String loggedInId) throws Exception {
-		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
-		String filePath = baseDirectory + File.separatorChar + parentId + File.separatorChar + columnName + File.separatorChar + entityId + "." + getFileExtension(file);
+	public void uploadFile(String entityName, String idColumn, String storageColumn, String entityId, MultipartFile file, String loggedInId) throws Exception {
+		int parentId = 0;
+		if(parentsService.isParentServiceEnabled()){
+			parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		}
+		String fileName = RandomStringUtils.randomAlphanumeric(CoreConstants.PROFILE_ID_SIZE).toUpperCase() + "." + getFileExtension(file); 
+		
+		String basePath = baseDirectory + File.separatorChar + parentId + File.separatorChar + storageColumn;
+		String filePath = basePath + File.separatorChar + fileName ;
 		Path path = Paths.get(filePath);
 		Path parentDir = path.getParent();
-		if (!Files.exists(parentDir)){
-		    Files.createDirectories(parentDir);
-		}
+		FileUtils.deleteDirectory(new File(basePath));
+		Files.createDirectories(parentDir);
 		Files.write(path, file.getBytes());
-		updateEntity(entityId, entityName, columnName, parentId, entityId + "." + getFileExtension(file));
+		updateEntity(entityName, idColumn, storageColumn, entityId, fileName, parentId);
 	}
 	
 	@Override
 	@Transactional
-	public File getFile(String entityName, String columnName, Integer entityId, String loggedInId) {
-		int parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+	public File getFile(String entityName, String idColumn, String storageColumn, String entityId, String fileName, String loggedInId) {
 		
-		String query= " select " + columnName + " from "+ entityName 
-				+ " where parentId = " + parentId 
-				+ " and " + entityName.toLowerCase() + "Id = " + entityId; 
+		String query = "";
+		int parentId = 0;
+		
+		if(parentsService.isParentServiceEnabled()){
+			parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+			
+			query= " select " + storageColumn + " from "+ entityName 
+					+ " where parentId = '" + parentId + "'"
+					+ " and " + idColumn + " = '" + entityId + "'"; 
+		} else{
+			query= " select " + storageColumn + " from "+ entityName 
+					+ " where " + idColumn + " = '" + entityId + "'"; 
+		}
 		
 		List list = commonHibernateDao.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(query).list();
-		String fileName = "";
+
 		if(list != null && list.size() == 1){
 			fileName = (String) list.get(0);
+		}else{
+			throw new AppException(null, "No such file exists!");
 		}
-		return new File(baseDirectory + File.separatorChar + parentId + File.separatorChar + columnName + File.separatorChar + fileName);
+		
+		return new File(baseDirectory + File.separatorChar + parentId + File.separatorChar + storageColumn + File.separatorChar + fileName);
 	}
 }
+
+

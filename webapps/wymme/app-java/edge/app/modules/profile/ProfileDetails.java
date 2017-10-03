@@ -154,6 +154,15 @@ public class ProfileDetails extends EdgeEntity{
 	
 	@Column(nullable = true, length = 100)
 	private String wealth;
+	
+	@Column(nullable = false, length = 200)
+	private String profilePic="NotAvailable";
+	
+	@Column(nullable = false, length = 200)
+	private String albumImg1="NotAvailable";
+
+	@Column(nullable = false, length = 200)
+	private String albumImg2="NotAvailable";
 
 	@Transient
 	private SecureProfileDetails secure;
@@ -544,6 +553,30 @@ public class ProfileDetails extends EdgeEntity{
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
+
+	public String getAlbumImg1() {
+		return albumImg1;
+	}
+
+	public void setAlbumImg1(String albumImg1) {
+		this.albumImg1 = albumImg1;
+	}
+
+	public String getAlbumImg2() {
+		return albumImg2;
+	}
+
+	public void setAlbumImg2(String albumImg2) {
+		this.albumImg2 = albumImg2;
 	}
 	
 }

@@ -6,32 +6,10 @@
 </head>
 <body>
 	<div class="registrationDiv padding5px">
-		<form name="updateForm">
+
+		<form method="post" id="updateForm" ng-submit="es.updateMyProfile()">
 			
-		    <h3><U>Profile Preview:</U></h3>
-		    
-		    <div class="boxDisplay">
-				<div>
-					<profile-non-secure profile="es.editProfile" es="es" />
-				</div>
-				<div class="leftSection">
-				 	<input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum()"/>
-				</div>
-				
-				<div class="rightSection">
-				</div>
-			</div>
-										
-		    <div><br></div>
-		    
-		    <div>
-				<div class="boxDisplay">
-					<profile-secure profile="es.editProfile" es="es" />
-				</div>							
-		    </div>
-		    
-		    <div><br></div>
-			
+			<h3>Update Profile:</h3>
 		   	<div>
 		   		<personal-edit profile="es.editProfile" es="es" />	
 			</div>								
@@ -45,24 +23,72 @@
 		    <div>
 				<secure-edit profile="es.editProfile" es="es" />	
 			</div>
-		    
-		    <div><br><br></div>
+
+			<div><br></div>
 			
 			 <div>
-		        <span ng-show="!updateForm.$valid">
+		        <!-- <span ng-show="!updateForm.$valid">
 		        	<H5> *** Some input values are missing or invalid. (Marked with red text or '**' sign).</H5>
 		        	<input class="btn btn-info:disabled" name="submit" type="button" value="Update Profile" disbaled="true" 
 					  title="Some input values are missing or invalid. (Marked with red text or '*' sign)"
 					  style="cursor: not-allowed;"
 					/>
-		        </span>
-		        <input class="btn btn-info" name="submit" type="button" value="Update Profile" ng-show="updateForm.$valid" ng-click="es.updateMyProfile()"/>
+		        </span> 
+		        <input class="btn btn-info" name="submit" type="button" value="" ng-show="updateForm.$valid" ng-click=""/>-->
+		        
+		        <button type="submit" class="btn btn-info" >Update Profile</button>
+		        
 		    </div>
 
 		    <div><br><br></div>
-		    <div><br><br></div>	
 		    	    
 		</form>
 	</div>
+	
+	<div><hr class="thinHr"></div>
+	<h3><U>UploadSection:</U></h3>
+	<div>
+		<div>
+			<form method="POST" ng-submit="es.uploadImage('profilePic')" id="fileUploadForm" enctype="multipart/form-data">
+				<div class="rightSection" ng-hide="true">
+					<input class="formInput" type="text" name="imageType" value="profilePic" />
+				</div>		    
+				<div class="leftSection">Profile Pic :</div>
+				<div class="rightSection">
+					<span>
+						<input class="formInput" type="file" file="es.uploadFile" title="~File~" size="30" />
+						<button type="submit" class="btn btn-info">Submit</button>
+					</span>
+				</div>	
+			</form>
+		</div>	
+	</div>
+	
+		
+	<div><hr class="thinHr"></div>
+	<h3><U>Profile Preview:</U></h3>
+		    
+    <div class="boxDisplay">
+		<div>
+			<profile-non-secure profile="es.editProfile" es="es" />
+		</div>
+		<div class="leftSection">
+		 	<input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum()"/>
+		</div>
+		
+		<div class="rightSection">
+		</div>
+	</div>
+								
+    <div><br></div>
+    
+    <div>
+		<div class="boxDisplay">
+			<profile-secure profile="es.editProfile" es="es" />
+		</div>							
+    </div>
+    
+    <div><br></div>
+			
 </body>
 </html>

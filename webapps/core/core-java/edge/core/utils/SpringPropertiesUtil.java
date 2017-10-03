@@ -32,8 +32,12 @@ public class SpringPropertiesUtil extends PropertyPlaceholderConfigurer {
         }
     }
 
-    public static String getProperty(String name) {
-        return propertiesMap.get(name).toString();
+    public static String getProperty(String name, String defaultValue) {
+    	if(propertiesMap.containsKey(name)){
+    		return propertiesMap.get(name);
+    	}else{
+    		return defaultValue;
+    	}
     }
 
 }

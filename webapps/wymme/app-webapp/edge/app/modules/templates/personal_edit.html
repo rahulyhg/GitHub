@@ -8,31 +8,31 @@
   	<div class="leftSection">Basic: </div>	
   	<div class="rightSection">
   		<div class="rightSectionSub"> 
-  			Name: <input ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="50" />
+  			Name: <input required ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="50" />
   		</div>
   		<div class="rightSectionSub"> Gender: 
 			<select required class="formInput" ng-model="profile.signUpEntity.gender" title="~Gender~" 
 			  ng-options = "values for values in es.genderList">
-			</select> 
+			<option></option></select> 
 			  <!-- ng-options = "item.server as item.client group by item.group for item in es.genderList" : Worked --> 
 		</div>
 		<div class="rightSectionSub"> 
 			Blood Group: 
 			<select required class="formInput" ng-model="profile.bloodGroup" title="~Blood Group~" 
 			  ng-options = "values for values in es.bloodGroupList">
-			</select> 
+			<option></option></select> 
 		</div>
 		<div class="rightSectionSub"> 
 			Height:  
 			<select required class="formInput shortInput" ng-model="profile.heightFt" title="~Feet~" 
 			  ng-options = "values for values in es.heightFtList">
-			</select> Ft  
+			<option></option></select> Ft  
 	        <select required class="formInput shortInput" ng-model="profile.heightInch" title="~Inches~" 
 			  ng-options = "values for values in es.heightInchList">
-			</select> Inch, 
+			<option></option></select> Inch, 
 	    </div>
 	    <div class="rightSectionSub">
-	    	Weight:  <input ng-minlength="2" maxlength="3" ng-maxlength="3" class="formInput shortInput" type="number" ng-model="profile.weight" title="Weight" size="3" min="30" max="150" /> kg,  
+	    	Weight:  <input required ng-minlength="2" maxlength="3" ng-maxlength="3" class="formInput shortInput" type="number" ng-model="profile.weight" title="Weight" size="3" min="30" max="150" /> kg,  
 	    </div>
 	    <div class="rightSectionSub">
 	    	Body Type: 
@@ -74,7 +74,7 @@
 		<div class="rightSection">
 			<div class="rightSectionSub">
 				Date: 
-				<input datepicker-popup is-open="es.birthDtOpened" 
+				<input required datepicker-popup is-open="es.birthDtOpened" 
 				     ng-click="es.birthDtOpened = true"  class="formInput" type="text" 
 				     ng-model="profile.birthDate" />
 			</div>
@@ -82,10 +82,10 @@
 	 			Time: 
 	 			<select required class="formInput shortInput" ng-model="profile.birthHr" title="~Hour~" 
 				  ng-options = "values for values in es.birthHrList">
-				</select> : 
+				<option></option></select> : 
 				<select required class="formInput shortInput" ng-model="profile.birthMin" title="~Minutes~" 
 				  ng-options = "values for values in es.birthMinList">
-				</select> 
+				<option></option></select> 
 				<select required class="formInput shortInput" ng-model="profile.birthAP" title="~Time~" 
 				  ng-options = "values for values in es.birthAPList">
 				</select>
@@ -94,16 +94,16 @@
 	
 	<div class="leftSection">Birth Place: </div>
     <div class="rightSection">
-		<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthCity" placeholder="~City~" size="20" />
-   	 	<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthState" placeholder="~State~" size="20"  />
-   		<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthCountry" placeholder="~Country~" size="20" />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthCity" placeholder="~City~" size="20" />
+   	 	<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthState" placeholder="~State~" size="20"  />
+   		<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthCountry" placeholder="~Country~" size="20" />
 		</div>	
     
     <div class="leftSection">Residence: </div>
     <div class="rightSection">
-		<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCity" placeholder="~City~" size="20"  />
- 				<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtState" placeholder="~State~" size="20"  />
- 				<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCountry" placeholder="~Country~" size="20" />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCity" placeholder="~City~" size="20"  />
+ 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtState" placeholder="~State~" size="20"  />
+ 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCountry" placeholder="~Country~" size="20" />
  				<div class="rightSectionSub">
   			With 
   			<select required class="formInput" ng-model="profile.residingWith" title="~Residing With~" 
@@ -115,10 +115,10 @@
     <div class="leftSection">Kundali: </div>
     <div class="rightSection">
 			<div class="rightSectionSub">
-  				Ras: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliRas" title="~Ras~" title="~Ras~" size="20" />
+  				Ras: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliRas" title="~Ras~" title="~Ras~" size="20" />
   			</div>
   			<div class="rightSectionSub">
-  				Nakshatra: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliNakshatra" title="~Nakshatra~" size="30" />
+  				Nakshatra: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliNakshatra" title="~Nakshatra~" size="30" />
   			</div>		   			
   			<div class="rightSectionSub">
 	   			Nadi: 
@@ -139,10 +139,10 @@
 				</select>
   			</div>
   			<div class="rightSectionSub">
-  				Gotra: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliGotr" title="~Gotr~" size="20" />
+  				Gotra: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliGotr" title="~Gotr~" size="20" />
   			</div>
   			<div class="rightSectionSub">
-  				Devak: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliDevak" title="~Devak~" size="20" />
+  				Devak: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliDevak" title="~Devak~" size="20" />
   			</div>
   		</div>
   	
@@ -156,19 +156,19 @@
 			</div>
 			<div class="rightSectionSub">
 	        	Details:
-				<input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.degreeDetails" title="~Degree Details~" size="30"/>
+				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.degreeDetails" title="~Degree Details~" size="30"/>
 			</div>
   		</div>
   		<div class="leftSection">Professional: </div>
     	<div class="rightSection">
 	    	<div class="rightSectionSub">
-	   			Working with <input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Company Name~" size="30"/> 
+	   			Working with <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Company Name~" size="30"/> 
 	   		</div>
 	   		<div class="rightSectionSub">
-	   			as <input ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.designation" title="~Designation~" size="50" />
+	   			as <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.designation" title="~Designation~" size="50" />
 	   		</div>
 	   		<div class="rightSectionSub">
-	   			Earning <input ng-minlength="5" maxlength="8" ng-maxlength="8" class="formInput" type="number" ng-model="profile.earning" title="~Per Annum Pkg~" placeholder="~Per Annum Pkg~" size="30" />
+	   			Earning <input required ng-minlength="5" maxlength="8" ng-maxlength="8" class="formInput" type="number" ng-model="profile.earning" title="~Per Annum Pkg~" placeholder="~Per Annum Pkg~" size="30" />
 	   		</div>
   		</div>
 </div>  

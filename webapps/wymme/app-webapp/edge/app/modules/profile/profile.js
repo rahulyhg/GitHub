@@ -10,3 +10,42 @@ var updateMyProfile = function updateMyProfile($scope, $http){
     	handleAjaxError('UPDATE_PROFILE', $scope, data, status, headers, config);
     });
 };
+
+var uploadImage = function uploadImage($scope, $http, imageType){
+	startAjax('UPLOAD_IMAGE', $scope);
+	
+	var formData = new FormData();
+	formData.append("file",$scope.es.uploadFile);
+	formData.append("imageType",imageType);
+	
+	$http({
+        method: 'POST',
+        url: 'server/secured/uploadImage.json',
+        headers: {
+            'Content-Type': undefined
+        },
+        data: formData,
+        transformRequest: function(data, headersGetterFunction) {
+            return data; // do nothing! FormData is very good!
+        }
+        /*transformRequest: function (data, headersGetter) {
+            var formData = new FormData();
+            angular.forEach(data, function (value, key) {
+                formData.append(key, value);
+            });
+
+            var headers = headersGetter();
+            delete headers['Content-Type'];
+
+            return formData;
+        }*/
+    })
+    .success(function(data, status, headers, config) {
+    	handleAjaxSuccess('UPLOAD_IMAGE', $scope, data, status, headers, config);
+    })
+    .error(function(data, status, headers, config) {
+    	handleAjaxError('UPLOAD_IMAGE', $scope, data, status, headers, config);
+    });
+	
+};
+

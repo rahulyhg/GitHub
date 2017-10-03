@@ -21,14 +21,15 @@ public class FileController {
 	@RequestMapping(value={"/secured/uploadFile"})
 	@ResponseBody
 	public String uploadFile(
-			@RequestParam("entityId") String entityId,
 			@RequestParam("entityName") String entityName,
-			@RequestParam("columnName") String columnName,
+			@RequestParam("idColumn") String idColumn,
+			@RequestParam("storageColumn") String storageColumn,
+			@RequestParam("entityId") String entityId,
 			@RequestParam("file") MultipartFile file,
 			Principal principal) {
 	
 		try {
-			fileService.uploadFile(Integer.valueOf(entityId),entityName,columnName, file, principal.getName());
+			fileService.uploadFile(entityName, idColumn, storageColumn, entityId, file, principal.getName());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,15 +55,18 @@ public class FileController {
 		}
 		return EdgeResponse.createDataResponse("Success", " File uploaded Succcesfully " );
 	}*/
-	
-	@RequestMapping(value = "/secured/files/{entityName}/{columnName}/{entityId}", method = RequestMethod.GET)
+
+
+	@RequestMapping(value = "/secured/files/{entityName}/{idColumn}/{storageColumn}/{entityId}/{fileName}", method = RequestMethod.GET)
 	@ResponseBody
 	public FileSystemResource getFile(
 			@PathVariable("entityName") String entityName,
-			@PathVariable("columnName") String columnName,
+			@PathVariable("idColumn") String idColumn,
+			@PathVariable("storageColumn") String storageColumn,
 			@PathVariable("entityId") String entityId,
+			@PathVariable("fileName") String fileName,
 			Principal principal) {
-	    return new FileSystemResource(fileService.getFile(entityName, columnName, Integer.valueOf(entityId), principal.getName())); 
+	    return new FileSystemResource(fileService.getFile(entityName, idColumn, storageColumn, entityId, fileName, principal.getName()));
 	}
 
 }

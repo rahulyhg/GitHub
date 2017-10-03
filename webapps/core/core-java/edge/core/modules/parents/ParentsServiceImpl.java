@@ -9,6 +9,7 @@ import javax.jws.WebService;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class ParentsServiceImpl implements ParentsService {
 	
 	@Autowired
 	private AuthService authService;
+
+	@Value(value = "${property.parentServiceEnabled}")
+	private boolean isParentServiceEnabled;
 	
 	@Override
 	@Transactional
@@ -103,7 +107,6 @@ public class ParentsServiceImpl implements ParentsService {
 		
 		return parents.get(0).getParentId();
 	}
-	
 
 	@Override
 	public String getRole(String loggedInId) {
@@ -130,5 +133,10 @@ public class ParentsServiceImpl implements ParentsService {
 	@Override
 	public List showAll(String entity) {
 		return commonHibernateDao.getHibernateTemplate().find(" from " + entity);
+	}
+
+	@Override
+	public Boolean isParentServiceEnabled() {
+		return isParentServiceEnabled;
 	}
 }

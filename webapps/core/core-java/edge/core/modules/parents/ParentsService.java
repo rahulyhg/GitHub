@@ -22,4 +22,5 @@ public interface ParentsService {
 
 	String getRole(String loggedInId);
 
+	public Boolean isParentServiceEnabled();
 }
