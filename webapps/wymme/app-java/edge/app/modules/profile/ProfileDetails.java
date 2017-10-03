@@ -1,6 +1,8 @@
 package edge.app.modules.profile;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -155,14 +157,17 @@ public class ProfileDetails extends EdgeEntity{
 	@Column(nullable = true, length = 100)
 	private String wealth;
 	
-	@Column(nullable = false, length = 200)
-	private String profilePic="NotAvailable";
+	@Column(nullable = false, length = 30)
+	private String profilePic="NA";
 	
-	@Column(nullable = false, length = 200)
-	private String albumImg1="NotAvailable";
+	@Column(nullable = false, length = 30)
+	private String albumImg1="NA";
 
-	@Column(nullable = false, length = 200)
-	private String albumImg2="NotAvailable";
+	@Column(nullable = false, length = 30)
+	private String albumImg2="NA";
+
+	@Column(nullable = false, length = 30)
+	private String albumImg3="NA";
 
 	@Transient
 	private SecureProfileDetails secure;
@@ -578,5 +583,27 @@ public class ProfileDetails extends EdgeEntity{
 	public void setAlbumImg2(String albumImg2) {
 		this.albumImg2 = albumImg2;
 	}
+
+	public String getAlbumImg3() {
+		return albumImg3;
+	}
+
+	public void setAlbumImg3(String albumImg3) {
+		this.albumImg3 = albumImg3;
+	}
 	
+	public List<String> getProfileImages (){
+		List<String> images = new ArrayList<String>();
+		addImagesPath(images,"profilePic",profilePic);
+		addImagesPath(images,"albumImg1",albumImg1);
+		addImagesPath(images,"albumImg2",albumImg2);
+		addImagesPath(images,"albumImg3",albumImg3);
+		return images;
+	}
+
+	private void addImagesPath(List<String> images, String key, String value) {
+		if(value != null){
+			images.add("server/secured/getImage/"+ key +"/" + profileId +"/" + value);
+		}
+	}
 }

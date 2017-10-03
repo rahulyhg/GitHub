@@ -1,5 +1,6 @@
 
-var contextRoot = 'rootPage';
+var siteBaseUrl  = 'http://localhost:8080/rootPage';
+var contextRoot = 'rootPage/';
 
 var menuMap = {
 	"1HOME" : {

@@ -196,5 +196,6 @@ var showEnlarged = function showEnlarged($scope, $http, showProfile){
 
 var showAlbum = function showAlbum($scope, $http, profile){
 	$scope.es.slideshow.title = " Album : " + profile.profileId;
+	$scope.es.slideshow.slides = profile.profileImages;
 	$scope.es.openPopup('SLIDESHOW_POPUP');
 };

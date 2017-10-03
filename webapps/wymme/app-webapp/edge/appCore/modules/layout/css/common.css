@@ -215,8 +215,22 @@ select{
 	vertical-align: top;
 }
 
+
+.docRightSection{
+	margin-left: 3%;
+	width: 14%;
+	display: inline-block;
+	vertical-align: top;
+}
+
 .rightSection{
 	width: 75%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.docLeftSection{
+	width: 40%;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -330,5 +344,10 @@ input.ng-invalid {
 }
 
 .slideshowDiv {
+
+}
+
+/****** CODE ******/
+input[type=file]{
 
 }

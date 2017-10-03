@@ -79,11 +79,11 @@ public class FileServiceImpl implements FileService{
 		}
 		String fileName = RandomStringUtils.randomAlphanumeric(CoreConstants.PROFILE_ID_SIZE).toUpperCase() + "." + getFileExtension(file); 
 		
-		String basePath = baseDirectory + File.separatorChar + parentId + File.separatorChar + storageColumn;
-		String filePath = basePath + File.separatorChar + fileName ;
+		String filePath = getFilePath(parentId, entityId, storageColumn, fileName);
+		
 		Path path = Paths.get(filePath);
 		Path parentDir = path.getParent();
-		FileUtils.deleteDirectory(new File(basePath));
+		FileUtils.deleteDirectory(new File(getBasePath(parentId, entityId, storageColumn)));
 		Files.createDirectories(parentDir);
 		Files.write(path, file.getBytes());
 		updateEntity(entityName, idColumn, storageColumn, entityId, fileName, parentId);
@@ -115,7 +115,15 @@ public class FileServiceImpl implements FileService{
 			throw new AppException(null, "No such file exists!");
 		}
 		
-		return new File(baseDirectory + File.separatorChar + parentId + File.separatorChar + storageColumn + File.separatorChar + fileName);
+		return new File(getFilePath(parentId, entityId, storageColumn, fileName));
+	}
+
+	public String getFilePath(int parentId, String entityId, String storageColumn,  String fileName) {
+		return getBasePath(parentId, entityId, storageColumn) + File.separatorChar + fileName;
+	}
+	
+	public String getBasePath(int parentId, String entityId, String storageColumn) {
+		return baseDirectory + File.separatorChar + parentId + File.separatorChar + entityId + File.separatorChar + storageColumn;
 	}
 }
 

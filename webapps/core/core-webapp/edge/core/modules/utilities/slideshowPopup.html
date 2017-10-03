@@ -10,8 +10,8 @@
 		</h3>		
 		<div class="slideshowDiv">
 			<carousel interval="es.slideshow.interval"> 
-				<slide ng-repeat="slide in es.slideshow.slides" active="slide.active"> 
-					<img class="slideshowImage" ng-src="{{slide.image}}">
+				<slide ng-repeat="slide in es.slideshow.slides"> 
+					<img class="slideshowImage" ng-src="{{es.siteBaseUrl}}/{{slide}}">
 					<div class="carousel-caption" >
 						<h4 style="color: white;">Image {{$index+1}}</h4>
 					</div>

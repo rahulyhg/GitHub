@@ -27,16 +27,16 @@ var appOnLoad = function($scope, $http, $modal, $log, $sce){
 	$scope.es.slideshow.interval = 3000;
 	$scope.es.slideshow.slides = [
 	    {
-	      image: 'http://lorempixel.com/400/200/'
+	    	image: 'http://lorempixel.com/400/200/people'
 	    },
 	    {
-	      image: 'http://lorempixel.com/400/200/food'
+	    	image: 'http://localhost:8080/rootPage/server/secured/getImage/profilePic/FXWGTH61/07FH8EW.png'
+		},
+	    {
+	      image: '/server/secured/getImage/profilePic/FXWGTH61/07FH8EW.png'
 	    },
 	    {
-	      image: 'http://lorempixel.com/400/200/sports'
-	    },
-	    {
-	      image: 'http://lorempixel.com/400/200/people'
+	      image: '/server/secured/getImage/albumImg1/FXWGTH61/DTLRMDB.png'
 	    }
 	  ];
 	
