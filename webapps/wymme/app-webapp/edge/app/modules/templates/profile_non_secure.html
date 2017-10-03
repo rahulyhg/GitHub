@@ -9,6 +9,9 @@
 	<div ng-if="profile.profilePic != 'NA'">
 		<img src="{{profile.profileThumbnail}}" class="profileThumbnail" />
 	</div>
+	<div ng-if="profile.profilePic == 'NA'">
+		<img src="edge/appCore/modules/layout/images/{{profile.gender}}.jpg" class="profileThumbnail" />
+	</div>
 
 </div>
 <div class="rightSection">
