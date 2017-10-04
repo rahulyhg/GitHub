@@ -20,10 +20,27 @@
 					 	<!-- <input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum(profile)"/> -->
 					</div>
 					
-					<div class="rightSection">
-						 <input class="btn btn-success" title="Send Connection Request, if accepted, you can see each other's contact details!" type="button" value="Send Connection Request" ng-click="es.sendConnectionRequest(profile.profileId)"/>
-						 <input class="btn btn-danger" title="Remove from My Wall, I do not want to see this profile again!" type="button" value="Remove From My Wall" ng-click="es.removeFromWall(profile.profileId)"/>
-						 <input class="btn btn-default" title="Show the Contact Details!" type="button" value="View Contact Details" ng-click="es.showContactDetails(profile.profileId)"/>
+					<div class="rightSection buttonSection">
+						 <div style="display: inline-block; text-align: center;">
+							 <button class="btn btn-success" title="Send Connection Request, if accepted, you can see each other's contact details!" 
+									ng-click="es.sendConnectionRequest(profile.profileId)">
+							 	Connect &nbsp; <i class="fa fa-users"></i>
+							 </button>
+						 </div>
+						 
+						<div style="display: inline-block; text-align: center;">
+							 <button class="btn btn-danger" title="Remove from My Wall, I do not want to see this profile again!"
+									ng-click="es.removeFromWall(profile.profileId)" >
+							 	Remove &nbsp; <i class="fa fa-times"></i>
+							 </button>
+						 </div>
+						 
+						 <div style="display: inline-block; text-align: center;">
+							 <button class="btn btn-default" title="Show the Contact Details!" value="Show Contacts" 
+									ng-click="es.showContactDetails(profile.profileId)" >
+							 	Contacts &nbsp; <i class="fa fa-phone"></i>
+							 </button>
+						 </div>
 					</div>
 				</div>
 				<div><br></div>

@@ -8,11 +8,16 @@
 		<div><B>{{profile.profileId}}</B></div>
 		<br>
 		<div ng-if="profile.profilePic != 'NA'">
-			<i><img src="{{profile.profileThumbnail}}" class="profileThumbnail" alt='"Once Above form is Submitted, Your Profile Id and Profile Pic would appear Here...!"'/></i>
+			<i>
+				<img src="{{profile.profileThumbnail}}" class="profileThumbnail" alt='"Once Above form is Submitted, Your Profile Id and Profile Pic would appear Here...!"'
+					ng-click="es.showAlbum(profile)"
+				/>
+			</i>
 		</div>
 		<div ng-if="profile.profilePic == 'NA'">
 			<img src="edge/appCore/modules/layout/images/{{profile.gender}}.jpg" class="profileThumbnail" />
 		</div>
+		<div><br></div>
 	</div>
 </div>
 <div class="rightSection">
@@ -49,8 +54,8 @@
 	Native at <span class="lableInput">{{profile.nativeCity}}, {{profile.nativeState}}</span>
 	
 	<br>
-	Siblings: <span class="lableInput">Has {{profile.brothers}} Brothers ( {{profile.marriedBrothers}} Married )
-	and {{profile.sisters}} Sisters ( {{profile.marriedSisters}} Married )</span>
+	Siblings: <span class="lableInput">Has {{profile.brothers}} Brother(s) ( {{profile.marriedBrothers}} Married )
+	and {{profile.sisters}} Sister(s) ( {{profile.marriedSisters}} Married )</span>
 	
 	<br>
 	Family Wealth <span class="lableInput">{{profile.wealth}}</span>
@@ -59,12 +64,10 @@
 	
 </div>
 
-<div><br></div>
-
 <div class="leftSection">
-	<div style="text-align: right; width: 100%" > 
+	<!-- <div style="text-align: right; width: 100%" > 
 		<input class="btn btn-link" type="button" value=" View Album..." ng-click="es.showAlbum(profile)"/>
-	</div>
+	</div> -->
 </div>
 <div class="rightSection">
 	<div style="text-align: right; width: 100%">

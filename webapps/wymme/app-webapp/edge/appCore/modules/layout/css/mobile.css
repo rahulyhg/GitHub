@@ -6,7 +6,7 @@
 	font: 16px candara;
 	line-height: 1.4em;
 	color: rgb(26, 26, 26);
-	
+	width: 100%;
 }
 
 .home_circle_wrapper{
@@ -35,7 +35,7 @@
 
 .bodyOuterClass {
 	position: absolute;
-	top: 200px;
+	top: 10px;
 	width: 100%;
 }
 
@@ -90,13 +90,17 @@
 }
 
 .siteLogo{
-
+	display: none;
 }
 
 .mobileFooter{
 	width: 100%;
 	background-color: #787878;
 	color: white;
+}
+
+.footerOuterClass{
+	text-align: center;
 }
 
 .leftSection{
@@ -146,3 +150,10 @@
 .criteriaLink:hover{
 	color: #DBCBBB;
 }
+
+.boxDisplay{
+	margin-left: 10px;
+	margin-right: 10px;		
+}
+
+
