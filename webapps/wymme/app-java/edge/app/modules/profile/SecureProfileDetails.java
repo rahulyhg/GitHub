@@ -22,7 +22,7 @@ public class SecureProfileDetails {
 	private String cellParents;
 	
 	@Column(nullable = false, length = 100)
-	private String email;
+	private String emailId;
 	
 	private String facebook;
 	private String twitter;
@@ -41,11 +41,11 @@ public class SecureProfileDetails {
 	public void setCellParents(String cellParents) {
 		this.cellParents = cellParents;
 	}
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public String getFacebook() {
 		return facebook;
@@ -77,8 +77,4 @@ public class SecureProfileDetails {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmailId() {
-		return email;
-	}
-	
 }

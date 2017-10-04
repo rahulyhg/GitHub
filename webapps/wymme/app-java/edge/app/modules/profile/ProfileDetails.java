@@ -599,18 +599,52 @@ public class ProfileDetails extends EdgeEntity{
 		return "server/secured/getImage/profilePic/" + profileId +"/" + profilePic;
 	}
 	
-	public List<String> getProfileImages (){
-		List<String> images = new ArrayList<String>();
-		addImagesPath(images,"albumImg1",albumImg1);
-		addImagesPath(images,"albumImg2",albumImg2);
-		addImagesPath(images,"albumImg3",albumImg3);
-		addImagesPath(images,"profilePic",profilePic);
+	private void setProfileThumbnail(String str) {
+		// Nothing to do here -- Added for UI
+	}
+	
+	public List<ImageDetails> getProfileImages (){
+		List<ImageDetails> images = new ArrayList<ImageDetails>();
+		addImagesPath(images,"Profile Pic","profilePic",profilePic);
+		addImagesPath(images,"Image 1","albumImg1",albumImg1);
+		addImagesPath(images,"Image 2","albumImg2",albumImg2);
+		addImagesPath(images,"Image 3","albumImg3",albumImg3);
 		return images;
 	}
 
-	private void addImagesPath(List<String> images, String key, String value) {
+	private void addImagesPath(List<ImageDetails> images, String caption, String key, String value) {
 		if(value != null && value.trim().length() != 0){
-			images.add("server/secured/getImage/"+ key +"/" + profileId +"/" + value);
+			images.add(new ImageDetails("server/secured/getImage/"+ key +"/" + profileId +"/" + value, caption));
 		}
 	}
 }
+
+class ImageDetails{
+	private String image;
+	private String caption;
+	
+	public ImageDetails() {
+		// Nothing to do here -- Added for UI
+	}
+	
+	public ImageDetails(String image, String caption) {
+		this.image = image;
+		this.caption = caption;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getCaption() {
+		return caption;
+	}
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+	
+	
+}
+
