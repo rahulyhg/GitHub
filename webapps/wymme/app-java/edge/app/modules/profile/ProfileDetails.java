@@ -601,10 +601,10 @@ public class ProfileDetails extends EdgeEntity{
 	
 	public List<String> getProfileImages (){
 		List<String> images = new ArrayList<String>();
-		addImagesPath(images,"profilePic",profilePic);
 		addImagesPath(images,"albumImg1",albumImg1);
 		addImagesPath(images,"albumImg2",albumImg2);
 		addImagesPath(images,"albumImg3",albumImg3);
+		addImagesPath(images,"profilePic",profilePic);
 		return images;
 	}
 

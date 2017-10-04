@@ -47,55 +47,23 @@
 	
 	<div><hr class="thinHr"></div>
 	<h3><U>Upload Section:</U></h3>
-	<div>
-		<div>
-			<form method="POST" ng-submit="es.uploadImage('profilePic')" id="fileUploadForm" enctype="multipart/form-data">
-				<div class="docLeftSection">
-					<span>
-						<input class="formInput" type="file" file="es.uploadFile" title="~File~" size="60"  />
-					</span>
-				</div>	
-				<div class="docRightSection"><button type="submit" class="btn btn-info">Upload Profile Pic</button></div>
-			</form>
-		</div>	
-	</div>
-	<div>
-		<div>
-			<form method="POST" ng-submit="es.uploadImage('albumImg1')" id="fileUploadForm" enctype="multipart/form-data">
-				<div class="docLeftSection">
-					<span>
-						<input class="formInput" type="file" file="es.uploadFile" title="~File~" size="60"  />
-					</span>
-				</div>	
-				<div class="docRightSection"><button type="submit" class="btn btn-info">Upload Image 1</button></div>
-			</form>
-		</div>	
-	</div>
-	<div>
-		<div>
-			<form method="POST" ng-submit="es.uploadImage('albumImg2')" id="fileUploadForm" enctype="multipart/form-data">
-				<div class="docLeftSection">
-					<span>
-						<input class="formInput" type="file" file="es.uploadFile" title="~File~" size="60"  />
-					</span>
-				</div>	
-				<div class="docRightSection"><button type="submit" class="btn btn-info">Upload Image 2</button></div>
-			</form>
-		</div>	
-	</div>
-	<div>
-		<div>
-			<form method="POST" ng-submit="es.uploadImage('albumImg3')" id="fileUploadForm" enctype="multipart/form-data">
-				<div class="docLeftSection">
-					<span>
-						<input class="formInput" type="file" file="es.uploadFile" title="~File~" size="60"  />
-					</span>
-				</div>	
-				<div class="docRightSection"><button type="submit" class="btn btn-info">Upload Image 3</button></div>
-			</form>
-		</div>	
-	</div>
-		
+	<div><br></div>
+	<div class="boxDisplay">
+		<div class="leftSection">Browse Image: </div>
+    	<div class="rightSection">    
+			<input type="file" file="es.uploadFile" title="~File~" size="70" accept="image/*" />
+		</div>
+		<div><br></div>
+		<div class="leftSection">Upload As: </div>
+    	<div class="rightSection">    
+			<div> 
+				<button ng-click="es.uploadImage('profilePic')" class="btn btn-info">Profile Pic</button>
+				<button ng-click="es.uploadImage('albumImg1')" class="btn btn-info">Image 1</button>
+				<button ng-click="es.uploadImage('albumImg2')" class="btn btn-info">Image 2</button>
+				<button ng-click="es.uploadImage('albumImg3')" class="btn btn-info">Image 3</button>
+			</div>
+		</div>
+	</div>		
 	<div><hr class="thinHr"></div>
 	<h3><U>Profile Preview:</U></h3>
 		    

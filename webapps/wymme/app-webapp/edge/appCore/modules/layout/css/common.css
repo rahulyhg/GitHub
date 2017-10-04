@@ -210,29 +210,14 @@ select{
 
 .leftSection{
 	margin-left: 3%;
-	width: 17%;
-	display: inline-block;
-	vertical-align: top;
-}
-
-
-.docRightSection{
-	margin-left: 3%;
-	width: 14%;
+	width: 15%;
 	display: inline-block;
 	vertical-align: top;
 }
 
 .rightSection{
 	margin-left: 3%;
-	width: 70%;
-	display: inline-block;
-	vertical-align: top;
-}
-
-.docLeftSection{
-	margin-left: 3%;
-	width: 40%;
+	width: 75%;
 	display: inline-block;
 	vertical-align: top;
 }

@@ -1,3 +1,16 @@
+	
+var openMyProfile = function($scope, $http){
+	startAjax('MY_PROFILE', $scope);
+	$http.post('server/secured/profile/openMyProfile.json',"").
+    success(function(data, status, headers, config) {
+    	handleAjaxSuccess('MY_PROFILE', $scope, data, status, headers, config);
+    	$scope.es.editProfile = data.edgeResponse.responseData;
+    	$scope.es.selectedPage = extendedMenuMap["UPDATE_PROFILE"];    	
+    }).
+    error(function(data, status, headers, config) {
+    	handleAjaxError('MY_PROFILE', $scope, data, status, headers, config);
+    });
+};
 
 
 var updateMyProfile = function updateMyProfile($scope, $http){
@@ -5,6 +18,7 @@ var updateMyProfile = function updateMyProfile($scope, $http){
 	$http.post('server/secured/profile/updateMyProfile.json', $scope.es.editProfile ).
     success(function(data, status, headers, config) {
     	handleAjaxSuccess('UPDATE_PROFILE', $scope, data, status, headers, config);
+    	openMyProfile($scope, $http);
     }).
     error(function(data, status, headers, config) {
     	handleAjaxError('UPDATE_PROFILE', $scope, data, status, headers, config);
@@ -42,6 +56,7 @@ var uploadImage = function uploadImage($scope, $http, imageType){
     })
     .success(function(data, status, headers, config) {
     	handleAjaxSuccess('UPLOAD_IMAGE', $scope, data, status, headers, config);
+    	openMyProfile($scope, $http);
     })
     .error(function(data, status, headers, config) {
     	handleAjaxError('UPLOAD_IMAGE', $scope, data, status, headers, config);
