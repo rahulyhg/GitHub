@@ -13,7 +13,6 @@
 		<div ng-if="profile.profilePic == 'NA'">
 			<img src="edge/appCore/modules/layout/images/{{profile.gender}}.jpg" class="profileThumbnail" />
 		</div>
-	
 	</div>
 </div>
 <div class="rightSection">
@@ -62,8 +61,15 @@
 
 <div><br></div>
 
-<div style="text-align: right; width: 90%">
-	<input class="btn btn-link" type="button" value="Show Enlarged..." ng-click="es.showEnlarged(profile)"/>
+<div class="leftSection">
+	<div style="text-align: right; width: 100%" > 
+		<input class="btn btn-link" type="button" value=" View Album..." ng-click="es.showAlbum(profile)"/>
+	</div>
+</div>
+<div class="rightSection">
+	<div style="text-align: right; width: 100%">
+		<input class="btn btn-link" type="button" value="Show Enlarged..." ng-click="es.showEnlarged(profile)"/>
+	</div>
 </div>
 
  
