@@ -8,7 +8,7 @@
   	<div class="leftSection">Basic: </div>	
   	<div class="rightSection">
   		<div class="rightSectionSub"> 
-  			Name: <input required ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="65" />
+  			Name: <input required ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="59" />
   		</div>
   		<div class="rightSectionSub"> Gender: 
 			<select required class="formInput" ng-model="profile.signUpEntity.gender" title="~Gender~" 
@@ -156,16 +156,22 @@
 			</div>
 			<div class="rightSectionSub">
 	        	Details:
-				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.degreeDetails" title="~Degree Details~" size="30"/>
+				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.degreeDetails" title="~Degree Details~" size="30"
+					placeholder="eg. BE in Information Technology"
+				/>
 			</div>
   		</div>
   		<div class="leftSection">Professional: </div>
     	<div class="rightSection">
 	    	<div class="rightSectionSub">
-	   			Working with <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Company Name~" size="30"/> 
+	   			Working with <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Company Name~" size="30"
+	   							placeholder="eg. Infosys Technologies Limited"
+	   						/> 
 	   		</div>
 	   		<div class="rightSectionSub">
-	   			as <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.designation" title="~Designation~" size="50" />
+	   			as <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.designation" title="~Designation~" size="50" 
+ 							placeholder="eg. Senior Manager"
+ 				    /> 
 	   		</div>
 	   		<div class="rightSectionSub">
 	   			Earning <input required ng-minlength="5" maxlength="8" ng-maxlength="8" class="formInput" type="number" ng-model="profile.earning" title="~Per Annum Pkg~" placeholder="~Per Annum Pkg~" size="30" />

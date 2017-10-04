@@ -5,7 +5,6 @@ function appInitVar($scope, $http, $modal, $log, $sce){
 	$scope.es.showSearch = 'C';
 	$scope.es.searchedProfiles = {};
 	$scope.es.editProfile = {};
-	
 	appOnLoad ($scope, $http, $modal, $log, $sce);
 }
 

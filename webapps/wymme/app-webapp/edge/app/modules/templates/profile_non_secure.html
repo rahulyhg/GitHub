@@ -8,10 +8,10 @@
 		<div><B>{{profile.profileId}}</B></div>
 		<br>
 		<div ng-if="profile.profilePic != 'NA'">
-			<img src="{{profile.profileThumbnail}}" class="profileThumbnail" />
+			<i><img src="{{profile.profileThumbnail}}" class="profileThumbnail" alt='"Once Above form is Submitted, Your Profile Id and Profile Pic would appear Here...!"'/></i>
 		</div>
 		<div ng-if="profile.profilePic == 'NA'">
-			<img src="edge/appCore/modules/layout/images/{{profile.gender}}.jpg" class="profileThumbnail" />
+			<img src="edge/appCore/modules/layout/images/Male.jpg" class="profileThumbnail" />
 		</div>
 	</div>
 </div>
