@@ -8,7 +8,10 @@
 	<div ng-init="es.initializeWall();">
 		<div>
 			<h3>Profiles Matching Your Wall Criteria: </h3>
-		</div>			
+		</div>	
+		<h5 class="rightAligned"><font color="grey"> <i> Click Profile Pic To View The Album </i> </font></h5>
+		<div><br></div>
+					
 		<div>
 			<div ng-repeat="profile in es.wallProfiles">
 				<div class="boxDisplay">
@@ -20,22 +23,16 @@
 					 	<!-- <input class="btn btn-info" title="Show Album" type="button" value="Show Album" ng-click="es.showAlbum(profile)"/> -->
 					</div>
 					
-					<div class="rightSection buttonSection">
+					<div class="rightSection">
 						 <div style="display: inline-block; text-align: center;">
 							 <button class="btn btn-success" title="Send Connection Request, if accepted, you can see each other's contact details!" 
 									ng-click="es.sendConnectionRequest(profile.profileId)">
 							 	Connect &nbsp; <i class="fa fa-users"></i>
 							 </button>
-						 </div>
-						 
-						<div style="display: inline-block; text-align: center;">
 							 <button class="btn btn-danger" title="Remove from My Wall, I do not want to see this profile again!"
 									ng-click="es.removeFromWall(profile.profileId)" >
-							 	Remove &nbsp; <i class="fa fa-times"></i>
+							 	Remove &nbsp; <i class="fa fa-trash-o"></i>
 							 </button>
-						 </div>
-						 
-						 <div style="display: inline-block; text-align: center;">
 							 <button class="btn btn-default" title="Show the Contact Details!" value="Show Contacts" 
 									ng-click="es.showContactDetails(profile.profileId)" >
 							 	Contacts &nbsp; <i class="fa fa-phone"></i>
