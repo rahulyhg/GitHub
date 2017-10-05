@@ -155,3 +155,8 @@
 	margin-left: 10px;
 	margin-right: 10px;		
 }
+
+.buttonSection{
+	display: inlineblock; 
+	text-align: center;
+}
