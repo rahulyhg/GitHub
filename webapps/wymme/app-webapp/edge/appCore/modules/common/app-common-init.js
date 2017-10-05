@@ -1,11 +1,20 @@
 
 function appInitVar($scope, $http, $modal, $log, $sce){
 	
+	if (isMobile()) {
+		// Mobile - On Launch Do not show Menu 
+		$scope.es.showMenu=false;
+	}else{
+		$scope.es.showMenu=true;
+	}
+	
 	$scope.es.selectedPage = menuMap["1HOME"];
 	$scope.es.showSearch = 'C';
 	$scope.es.searchedProfiles = {};
 	$scope.es.editProfile = {};
 	appOnLoad ($scope, $http, $modal, $log, $sce);
+	
+	//setTimeout(function() {$scope.es.setSelectedMenuRaw("1HOME"); }, 3000);
 }
 
 

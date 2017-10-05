@@ -35,12 +35,12 @@ function coreInitFun($scope, $http, $modal, $log, $sce){
 		if(!$scope.es.selectedPage){
 			$scope.es.selectedPage = extendedMenuMap[setSelectedMenuRaw];
 		}
-		$scope.es.hideMenuFn();
+		$scope.es.manageMenuOnSelection();
 	};
 	
 	$scope.es.setSelectedMenu = function(setSelectedMenu) {	
 		$scope.es.selectedPage = setSelectedMenu;
-		$scope.es.hideMenuFn();
+		$scope.es.manageMenuOnSelection();
 	};
 	
 	$scope.es.isSelectedMenu = function(setSelectedMenu) {	
@@ -132,9 +132,12 @@ function coreInitFun($scope, $http, $modal, $log, $sce){
 	    });
 	};
 	
-	$scope.es.hideMenuFn = function () {
-		if(document.getElementById('menuTriggerId').offsetHeight != 0){
-			$scope.es.hideMenu=true;
+	$scope.es.manageMenuOnSelection = function () {
+		if (isMobile()) {
+			// Mobile
+			$scope.es.showMenu=false;
+		}else{
+			$scope.es.showMenu=true;
 		}
 	};
 	
@@ -187,3 +190,11 @@ function handleAjaxError (popupId, $scope, data, status, headers, config){
 	}	
 };
 
+function isMobile(){
+	if (window.matchMedia('(max-device-width: 960px)').matches) {
+		// Mobile
+		return true;
+	}else{
+		return false;
+	}
+};
