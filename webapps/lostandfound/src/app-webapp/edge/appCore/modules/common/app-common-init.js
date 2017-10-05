@@ -1,5 +1,12 @@
 
 function appInitVar($scope, $http, $modal, $log, $sce){
+
+	if (isMobile()) {
+		// Mobile - On Launch Do not show Menu 
+		$scope.es.showMenu=false;
+	}else{
+		$scope.es.showMenu=true;
+	}
 	
 	$scope.es.selectedPage = menuMap["1HOME"];
 	$scope.es.showFound = 'C';

@@ -1,4 +1,9 @@
 
+//var siteBaseUrl  = 'http://localhost:8080/rootPage';
+
+// SERVERSIDE
+var siteBaseUrl  = 'http://app4gym.in/';
+
 var contextRoot = 'contextRoot';
 
 var menuMap = {

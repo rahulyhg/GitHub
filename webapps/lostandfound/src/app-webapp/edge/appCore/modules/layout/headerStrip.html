@@ -7,7 +7,11 @@
 	<div class="headerStripLeft">
 		<!-- <img src="edge/appCore/modules/layout/images/om.png" class="omImage"/> -->
 		<!-- <img src="edge/appCore/modules/layout/images/krishna.jpg" class="krishnaImage"/> -->
-		<span><img src="edge/appCore/modules/layout/images/menuTrigger.png" class="menuTrigger" id="menuTriggerId" ng-click="es.hideMenu = ! es.hideMenu"/></span> 
+		<span>
+			<span class="menuTrigger" id="menuTriggerId" ng-click="es.showMenu = ! es.showMenu" style="color: #947353;">
+				&nbsp;<i class="fa fa-align-justify fa-2x"></i>
+			</span>
+		</span> 
 	</div>
 	<div class="headerStripMenu">
 		<div ng-show="es.loggedInUserId">
