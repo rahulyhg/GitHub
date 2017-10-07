@@ -1,9 +1,4 @@
 
-//var siteBaseUrl  = 'http://localhost:8080/rootPage';
-
-// SERVERSIDE
-var siteBaseUrl  = 'http://app4gym.in/wymme/';
-
 var menuMap = {
 	"1HOME" : {
 		id : "HOME",

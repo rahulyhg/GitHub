@@ -15,7 +15,6 @@ function coreInitVar ($scope, $http, $modal, $log, $sce){
 	$scope.es.signUpForm = {};	
 	$scope.es.signInForm = {};
 	$scope.es.signUpForm.emailId = 'a@a.com';
-	$scope.es.siteBaseUrl = siteBaseUrl;
 	
 	initDropDowns($scope);
 	
