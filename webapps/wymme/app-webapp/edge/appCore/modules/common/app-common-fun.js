@@ -83,16 +83,16 @@ edgeApp.directive('file', function () {
 // Other Functions
 
 function appInitFun($scope, $http, $modal, $log, $sce){
-	$scope.es.register = function () {
-		register($scope, $http);
+	$scope.es.register = function (registerForm) {
+		register($scope, $http, registerForm);
 	};
 	
 	$scope.es.openMyProfile = function () {
 		openMyProfile($scope, $http);
 	};
 	
-	$scope.es.updateMyProfile = function () {
-		updateMyProfile($scope, $http);
+	$scope.es.updateMyProfile = function (updateForm) {
+		updateMyProfile($scope, $http, updateForm);
 	};
 	
 	$scope.es.searchById = function () {

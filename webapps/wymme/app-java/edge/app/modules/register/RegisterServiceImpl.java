@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.profile.ProfileDetails;
 import edge.appCore.modules.mailSender.EventDetailsEnum;
@@ -31,14 +32,28 @@ public class RegisterServiceImpl implements RegisterService{
 	private CommonHibernateDao commonHibernateDao;
 		
 	@Override
+	@Transactional
 	public EdgeResponse<ProfileDetails> register(ProfileDetails profileDetails) throws Exception {
-				
+		
+		// For Cloning profile
+		String emailId = profileDetails.getSecure().getEmailId();
+		if(emailId == null || emailId.contains("@test.com")){
+			profileDetails.setProfileId(null);
+			profileDetails.getSecure().setProfileId(null);
+		}
+		
+		SignUpEntity signUpEntity = new SignUpEntity();
+		signUpEntity.setGender(profileDetails.getGender());
+		signUpEntity.setEmailId(profileDetails.getSecure().getEmailId());
+		profileDetails.setSignUpEntity(signUpEntity);
+		
 		EdgeResponse<SignUpEntity> response = authService.signUp(profileDetails.getSignUpEntity());
 		
 		if(response.isSuccess()){
-			profileDetails.setProfileId(profileDetails.getSignUpEntity().getProfileId());
-			profileDetails.setGender(profileDetails.getSignUpEntity().getGender());
-			profileDetails.getSecure().setEmailId(profileDetails.getSignUpEntity().getEmailId());
+			
+			String profileId = profileDetails.getSignUpEntity().getProfileId();
+			profileDetails.setProfileId(profileId);
+			profileDetails.getSecure().setProfileId(profileId);
 			
 			List<String> errors = profileDetails.validate();
 			if(errors == null || errors.size() ==0){

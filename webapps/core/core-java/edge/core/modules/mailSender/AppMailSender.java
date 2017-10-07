@@ -115,6 +115,10 @@ public class AppMailSender implements InitializingBean{
 	}
 	
 	public static void sendEmail(final String identifier, final String emailId, final Map<String, Object> dataObject, final EventDetails eventDetails) throws Exception {
+		if(emailId == null || emailId.contains("@test.com")){
+			// No need to drop mails for Test Parent
+			return;
+		}
 		sendEmail(identifier, new String[]{emailId}, dataObject, eventDetails);
 	}
 	

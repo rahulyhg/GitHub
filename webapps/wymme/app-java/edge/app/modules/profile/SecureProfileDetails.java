@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class SecureProfileDetails {
 
 	@Id
+	@Column(updatable=false)	
 	private String profileId;
 	
 	@Column(nullable = false, length = 100)	
@@ -21,7 +22,7 @@ public class SecureProfileDetails {
 	@Column(nullable = true, length = 100)
 	private String cellParents;
 	
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, updatable=false, length = 100)
 	private String emailId;
 	
 	private String facebook;

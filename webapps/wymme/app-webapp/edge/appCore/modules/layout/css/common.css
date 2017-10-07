@@ -380,3 +380,8 @@ input[type=file]{
 .buttonSection{
 	display: inlineblock; 
 }
+
+form.submitted .ng-invalid
+{
+    border:1px solid #f00;
+}

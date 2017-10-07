@@ -21,12 +21,12 @@
 	</div>
 </div>
 <div class="rightSection">
-	<B>{{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} - {{profile.gender}} </B> 
-	- {{profile.bloodGroup}}, {{profile.bodyType}}, {{profile.skinColor}}, {{profile.heightFt}} Ft {{profile.heightInch}} Inch, {{profile.weight}} kg
-	
+	<B>{{profile.maritalStatus}}, {{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} - {{profile.gender}} </B> 
+	- {{profile.bloodGroup}}, {{profile.bodyType}}, {{profile.skinColor}}, {{profile.heightFt}} Ft {{profile.heightInch}} Inch, {{profile.weight}} kg, 
+	{{profile.physicalStatus}}, {{profile.manglikStatus}} Mangal
 	<br>
 	<B>
-	{{profile.degreeType}}, Residing at {{profile.residingAtCity}} earning {{profile.earning | currency:'&#8377; '}} per annum
+	{{profile.degreeType}}, {{profile.professionalType}} at {{profile.workCity}} earning {{profile.earning | currency:'&#8377; '}} per annum
    	</B>
    	
    	<br>
@@ -34,8 +34,8 @@
    	<span class="lableInput">{{profile.birthDate | date}}, at {{profile.birthHr}}:{{profile.birthMin}} {{profile.birthAP}} at {{profile.birthCity}}, {{profile.birthState}}</span>
  	
  	<br>
-  	Currently Residing at 
-  	<span class="lableInput">{{profile.residingAtCity}}, {{profile.residingAtState}} with {{profile.residingWith}}</span>
+  	Currently Working at 
+  	<span class="lableInput">{{profile.workCity}}, {{profile.workState}} with {{profile.residingWith}}</span>
   		
    	<br>
 	Kundali - 
@@ -47,10 +47,10 @@
 	Academic - <span class="lableInput">{{profile.degreeDetails}} ({{profile.degreeType}})</span>
 	
 	<br>
-	Working with <span class="lableInput">{{profile.company}} as {{profile.designation}} Earning {{profile.earning | currency:'&#8377; '}} per annum</span>
+	Profession - <span class="lableInput">{{profile.professionalType}} with {{profile.company}} as {{profile.designation}} Earning {{profile.earning | currency:'&#8377; '}} per annum</span>
   		
 	<br>
-	Family residing at <span class="lableInput">{{profile.familyResidingAtCity}}, {{profile.familyResidingAtState}}</span> 
+	Family residing at <span class="lableInput">{{profile.familyCity}}, {{profile.familyState}}</span> 
 	Native at <span class="lableInput">{{profile.nativeCity}}, {{profile.nativeState}}</span>
 	
 	<br>
@@ -58,7 +58,7 @@
 	and {{profile.sisters}} Sister(s) ( {{profile.marriedSisters}} Married )</span>
 	
 	<br>
-	Family Wealth <span class="lableInput">{{profile.wealth}}</span>
+	Family Wealth - <span class="lableInput">{{profile.wealth}}</span>
 	
 	<br>
 	

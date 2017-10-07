@@ -7,13 +7,19 @@ var initDropDowns = function($scope){
 	
 	$scope.es.bodyTypeList = ['Slim','Athletic','Average','Healthy'];
 	
-	$scope.es.skinColorList = ['Fair','Brown','Black'];
+	$scope.es.skinColorList = ['Very Fair','Fair','Brown','Dark Brown','Black'];
 	
-	$scope.es.residingWithList = ['Family','Friends','Relatives','Others'];
+	$scope.es.maritalStatusList = ['Never Married','Divorced','Widow','Others'];
+	
+	$scope.es.physicalStatusList = ['Abled','Differently Abled'];
+	
+	$scope.es.manglikStatusList = ['Strong', 'Medium', 'Low', 'No'];
+	
+	$scope.es.residingWithList = ['Family','Friends','Relatives','Self','Others'];
 	
 	$scope.es.kundaliNadiList = ['Adya','Madhya','Antya'];
 	
-	$scope.es.kundaliCharanList = [1,2,3,4];
+	$scope.es.kundaliCharanList = ['1','2','3','4'];
 	
 	$scope.es.kundaliGanList =  ['Dev','Manushya','Rakshas'];
 	
@@ -29,9 +35,11 @@ var initDropDowns = function($scope){
 	
 	$scope.es.siblingsList = [0,1,2,3,4,5,6];
 	
+	$scope.es.professionalTypeList = ['Service','Business','Student','Other Profession'];
+	
 	$scope.es.religionList = ['Buddhist','Christian','Hindu','Jain','Muslim','Sikh','Others'];
 	
-	$scope.es.castList = ['Brahmins','Kshatriyas','Pariah/Harijans','Sudras','Vaisyas','Others'];
+	$scope.es.castList = ['Brahmins','Kshatriyas','Pariah-Harijans','Sudras','Vaisyas','Others'];
 	
 	$scope.es.motherTongueList =  [
         'Adi','Angami','Ao','Assamese','Bengali','Bhili/Bhilodi','Bodo','Coorgi/Kodagu','Dimasa',
@@ -44,7 +52,7 @@ var initDropDowns = function($scope){
 	$scope.es.degreeTypeList = [
 	     { server: 'Diploma', client:'Diploma' },
 	     { server: 'Graduate', client:'Graduate - eg. BA/BCom/BSc' },
-	     { server: 'Engineer', client:'Engineer - eg. BE/BE-MBA' },
+	     { server: 'Engineer', client:'Engineer - eg. BE/BE-MBA/BTech/BTech-MBA/MS' },
 	     { server: 'Doctor', client:'Doctor - eg. MD/MBBS/MS/BD/BAMS/BHMS' },
 	     { server: 'Finance', client:'Finance - eg. CA/MBA' },
 	     { server: 'PostGraduate', client:'Post Graduate - eg. MBA/MCA' },

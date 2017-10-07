@@ -31,6 +31,7 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 	private NotificationService notificationService;
 	
 	@Override
+	@Transactional
 	public void sendConnectionRequest(String userName, String profileTo) {
 		try{
 			SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
@@ -141,6 +142,7 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 	}
 
 	@Override
+	@Transactional
 	public void actionRequest(String userName, ConnectionAction connectionAction) {
 		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
 		String IProfileId = signUpEntity.getProfileId();
@@ -171,7 +173,7 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
 		String IProfileId = signUpEntity.getProfileId();
 		
-		if(checkIfConnectionStatus(IProfileId, profileId, ConnectionStatusEnum.Accepted)){
+		if(checkIfConnectionExists(IProfileId, profileId, ConnectionStatusEnum.Accepted)){
 			profileDetails = commonHibernateDao.getEntityById(ProfileDetails.class, profileId);
 			profileDetails.setSecure(commonHibernateDao.getEntityById(SecureProfileDetails.class, profileId));
 		}else{
@@ -182,7 +184,7 @@ public class ProfileConnectionServiceImpl implements ProfileConnectionService {
 	}
 
 	@Override
-	public boolean checkIfConnectionStatus(String profile1, String profile2, ConnectionStatusEnum status) {
+	public boolean checkIfConnectionExists(String profile1, String profile2, ConnectionStatusEnum status) {
 		String connectionId = ProfileConnection.getConnectionId(profile1, profile2);
 		ProfileConnection profileConnection = commonHibernateDao.getEntityById(ProfileConnection.class, connectionId);
 		return profileConnection!= null && profileConnection.getConnectionStatus() == status;

@@ -13,7 +13,13 @@ var openMyProfile = function($scope, $http){
 };
 
 
-var updateMyProfile = function updateMyProfile($scope, $http){
+var updateMyProfile = function updateMyProfile($scope, $http,updateForm){
+	
+	if(updateForm.$invalid){
+		alert("Some input values are missing or invalid. Marked with red text or '**' sign. Please correct them and submit the form again.");
+		return;
+	}
+	
 	startAjax('UPDATE_PROFILE', $scope);
 	$http.post('server/secured/profile/updateMyProfile.json', $scope.es.editProfile ).
     success(function(data, status, headers, config) {

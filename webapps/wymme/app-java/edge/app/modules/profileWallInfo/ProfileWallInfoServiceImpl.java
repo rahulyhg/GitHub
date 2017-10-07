@@ -2,6 +2,7 @@ package edge.app.modules.profileWallInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import edge.core.modules.common.CommonHibernateDao;
 
@@ -30,6 +31,7 @@ public class ProfileWallInfoServiceImpl implements ProfileWallInfoService {
 	}
 	
 	@Override
+	@Transactional
 	public void undoRemoveFromWall(String profileId, String toAdd) {
 		
 		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
@@ -53,6 +55,7 @@ public class ProfileWallInfoServiceImpl implements ProfileWallInfoService {
 	}
 	
 	@Override
+	@Transactional
 	public void removeFromWall(String profileId, String toRemove) {
 		
 		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileId);
@@ -88,6 +91,7 @@ public class ProfileWallInfoServiceImpl implements ProfileWallInfoService {
 	}
 	
 	@Override
+	@Transactional
 	public void addToReadProfiles(String profileFrom, String profileTo) {
 
 		ProfileWallInfo profileWallInfo = commonHibernateDao.getEntityById(ProfileWallInfo.class, profileFrom);

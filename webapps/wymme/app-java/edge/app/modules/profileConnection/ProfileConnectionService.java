@@ -15,6 +15,6 @@ public interface ProfileConnectionService {
 
 	ProfileDetails showContactDetails(String userName, String profileId);
 
-	boolean checkIfConnectionStatus(String profile1, String profile2, ConnectionStatusEnum status);
+	boolean checkIfConnectionExists(String profile1, String profile2, ConnectionStatusEnum status);
 
 }

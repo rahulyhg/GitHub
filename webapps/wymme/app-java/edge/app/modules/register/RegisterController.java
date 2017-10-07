@@ -30,7 +30,7 @@ public class RegisterController {
     }
 	
 	@Autowired
-	private RegisterServiceImpl registerService;
+	private RegisterService registerService;
 	
 	@RequestMapping(value={"/unsecured/register"})
 	public EdgeResponse<ProfileDetails> register(
@@ -40,11 +40,11 @@ public class RegisterController {
 		
 	}
 
-	public RegisterServiceImpl getRegisterService() {
+	public RegisterService getRegisterService() {
 		return registerService;
 	}
 
-	public void setRegisterService(RegisterServiceImpl registerService) {
+	public void setRegisterService(RegisterService registerService) {
 		this.registerService = registerService;
 	}
 }

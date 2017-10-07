@@ -9,7 +9,7 @@
 		<!-- <div>
 			<H3> <span class="registerTitle"> Registration Form </span> </H3><br>
 		</div> -->
-		<form method="post" id="registerForm" ng-submit="es.register()">
+		<form method="post" id="registerForm" name="registerForm" ng-submit="es.register(registerForm)">
  
 		   	<div>
 		   		<personal-edit profile="es.editProfile" es="es" />	

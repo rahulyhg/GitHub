@@ -1,11 +1,22 @@
 <div>
   <h3><U>Family:</U></h3>
   
+  
+    <div class="leftSection">Father Occupation: </div>			  	
+  	<div class="rightSection">
+  		<input placeholder="~Optional~" maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.fatherOccupation" title="Father Occupation" size="65" />
+  	</div>
+  	
+  	<div class="leftSection">Mother Occupation: </div>			  	
+  	<div class="rightSection">
+  		<input placeholder="~Optional~" maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.motherOccupation" title="Mother Occupation" size="65" />
+  	</div>
+  	
   	<div class="leftSection">Residence: </div>
     <div class="rightSection">
-		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCity" placeholder="~City~" size="18"  />
-		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtState" placeholder="~State~" size="18"  />
-		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyResidingAtCountry" placeholder="~Country~" size="18" />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyCity" placeholder="~City~" size="18"  />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyState" placeholder="~State~" size="18"  />
+		<input required ng-minlength="3" maxlength="50" ng-maxlength="50"  class="formInput" type="text" ng-model="profile.familyCountry" placeholder="~Country~" size="18" />
    	</div>
    		
    	<div class="leftSection">Native Place: </div>
@@ -45,6 +56,6 @@
  
     <div class="leftSection">Wealth: </div>			  	
   	<div class="rightSection">
-  		<input required maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.wealth" title="Wealth" size="65" />
+  		<input required maxlength="100" ng-maxlength="100"  class="formInput" type="text" ng-model="profile.wealth" title="Wealth" size="65" placeholder="eg. Car/Flat/Bunglow" />
   	</div>
 </div>

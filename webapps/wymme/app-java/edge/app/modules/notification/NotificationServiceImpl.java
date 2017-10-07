@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.common.AppConstants;
 import edge.app.modules.profileConnection.ProfileConnection;
@@ -24,6 +25,7 @@ public class NotificationServiceImpl implements NotificationService {
 	private CommonHibernateDao commonHibernateDao;
 
 	@Override
+	@Transactional
 	public void addNotificationForAction(ProfileConnection connection) {
 		Notification notification = new Notification();
 		notification.setConnectionStatus(connection.getConnectionStatus());
@@ -37,6 +39,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 	
 	@Override
+	@Transactional
 	public void addNotificationForRequest(ProfileConnection connection) {
 		Notification notification = new Notification();
 		notification.setConnectionStatus(connection.getConnectionStatus());
@@ -72,6 +75,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
+	@Transactional
 	public void markNotificationAsRead(String userName, Long notificationId) {
 		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, userName);
 		String profileId = signUpEntity.getProfileId();

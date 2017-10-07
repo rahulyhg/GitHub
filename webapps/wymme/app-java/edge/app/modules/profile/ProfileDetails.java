@@ -22,7 +22,7 @@ public class ProfileDetails extends EdgeEntity{
 	private SignUpEntity signUpEntity;
 	
 	@Id
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, updatable=false, length = 50)
 	private String profileId;
 	
 	@Column(nullable = false, length = 10)
@@ -76,11 +76,23 @@ public class ProfileDetails extends EdgeEntity{
 	@Column(nullable = false, length = 50)
 	private String birthCountry;
 	
+	@Column(nullable = false, length = 20)
+	private String maritalStatus;
+	
+	@Column(nullable = false, length = 20)
+	private String manglikStatus;
+
+	@Column(nullable = false, length = 20)
+	private String physicalStatus;
+	
 	@Column(nullable = false, length = 50)
 	private String degreeType;
 	
 	@Column(nullable = false, length = 50)
 	private String degreeDetails;
+
+	@Column(nullable = false, length = 50)
+	private String professionalType;
 	
 	@Column(nullable = false, length = 50)
 	private String company;
@@ -92,47 +104,23 @@ public class ProfileDetails extends EdgeEntity{
 	private Integer earning;
 	
 	@Column(nullable = false, length = 50)
-	private String residingAtCity;
+	private String workCity;
 	
 	@Column(nullable = false, length = 50)
-	private String residingAtState;
+	private String workState;
 	
 	@Column(nullable = false, length = 50)
-	private String residingAtCountry;
-	
-	@Column(nullable = false, length = 20)
-	private String residingWith;
-	
-	@Column(nullable = false, length = 30)
-	private String kundaliRas;
-	
-	@Column(nullable = false, length = 30)
-	private String kundaliNakshatra;
-	
-	@Column(nullable = false, length = 10)
-	private String kundaliNadi;
-	
-	@Column(nullable = false)
-	private Integer kundaliCharan;
-	
-	@Column(nullable = false, length = 10)
-	private String kundaliGan;
-	
-	@Column(nullable = false, length = 30)
-	private String kundaliGotr;
-	
-	@Column(nullable = false, length = 30)
-	private String kundaliDevak;
+	private String workCountry;
+
+	@Column(nullable = false, length = 50)
+	private String familyCity;
 	
 	@Column(nullable = false, length = 50)
-	private String familyResidingAtCity;
+	private String familyState;
 	
 	@Column(nullable = false, length = 50)
-	private String familyResidingAtState;
-	
-	@Column(nullable = false, length = 50)
-	private String familyResidingAtCountry;
-	
+	private String familyCountry;
+
 	@Column(nullable = true, length = 50)
 	private String nativeCity;
 	
@@ -141,7 +129,37 @@ public class ProfileDetails extends EdgeEntity{
 	
 	@Column(nullable = true, length = 50)
 	private String nativeCountry;
+	
+	@Column(nullable = false, length = 20)
+	private String residingWith;
+	
+	@Column(nullable = false, length = 30)
+	private String kundaliRas="";
+	
+	@Column(nullable = false, length = 30)
+	private String kundaliNakshatra="";
+	
+	@Column(nullable = false, length = 10)
+	private String kundaliNadi="";
+	
+	@Column(nullable = false, length = 5)
+	private String kundaliCharan="";
+	
+	@Column(nullable = false, length = 10)
+	private String kundaliGan="";
+	
+	@Column(nullable = false, length = 30)
+	private String kundaliGotr="";
+	
+	@Column(nullable = false, length = 30)
+	private String kundaliDevak="";
 
+	@Column(nullable = true, length = 100)
+	private String fatherOccupation;
+
+	@Column(nullable = true, length = 100)
+	private String motherOccupation;
+	
 	@Column(nullable = false)
 	private Integer brothers;
 
@@ -189,7 +207,6 @@ public class ProfileDetails extends EdgeEntity{
 
 	public void setProfileId(String profileId) {
 		this.profileId = profileId;
-		secure.setProfileId(profileId);
 	}
 
 	public Integer getHeightFt() {
@@ -320,30 +337,6 @@ public class ProfileDetails extends EdgeEntity{
 		this.earning = earning;
 	}
 
-	public String getResidingAtCity() {
-		return residingAtCity;
-	}
-
-	public void setResidingAtCity(String residingAtCity) {
-		this.residingAtCity = residingAtCity;
-	}
-
-	public String getResidingAtState() {
-		return residingAtState;
-	}
-
-	public void setResidingAtState(String residingAtState) {
-		this.residingAtState = residingAtState;
-	}
-
-	public String getResidingAtCountry() {
-		return residingAtCountry;
-	}
-
-	public void setResidingAtCountry(String residingAtCountry) {
-		this.residingAtCountry = residingAtCountry;
-	}
-
 	public String getResidingWith() {
 		return residingWith;
 	}
@@ -376,11 +369,11 @@ public class ProfileDetails extends EdgeEntity{
 		this.kundaliNadi = kundaliNadi;
 	}
 
-	public Integer getKundaliCharan() {
+	public String getKundaliCharan() {
 		return kundaliCharan;
 	}
 
-	public void setKundaliCharan(Integer kundaliCharan) {
+	public void setKundaliCharan(String kundaliCharan) {
 		this.kundaliCharan = kundaliCharan;
 	}
 
@@ -406,30 +399,6 @@ public class ProfileDetails extends EdgeEntity{
 
 	public void setKundaliDevak(String kundaliDevak) {
 		this.kundaliDevak = kundaliDevak;
-	}
-
-	public String getFamilyResidingAtCity() {
-		return familyResidingAtCity;
-	}
-
-	public void setFamilyResidingAtCity(String familyResidingAtCity) {
-		this.familyResidingAtCity = familyResidingAtCity;
-	}
-
-	public String getFamilyResidingAtState() {
-		return familyResidingAtState;
-	}
-
-	public void setFamilyResidingAtState(String familyResidingAtState) {
-		this.familyResidingAtState = familyResidingAtState;
-	}
-
-	public String getFamilyResidingAtCountry() {
-		return familyResidingAtCountry;
-	}
-
-	public void setFamilyResidingAtCountry(String familyResidingAtCountry) {
-		this.familyResidingAtCountry = familyResidingAtCountry;
 	}
 
 	public String getNativeCity() {
@@ -617,6 +586,102 @@ public class ProfileDetails extends EdgeEntity{
 			images.add(new ImageDetails("server/secured/getImage/"+ key +"/" + profileId +"/" + value, caption));
 		}
 	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+
+	public String getWorkCity() {
+		return workCity;
+	}
+
+	public void setWorkCity(String workCity) {
+		this.workCity = workCity;
+	}
+
+	public String getWorkState() {
+		return workState;
+	}
+
+	public void setWorkState(String workState) {
+		this.workState = workState;
+	}
+
+	public String getWorkCountry() {
+		return workCountry;
+	}
+
+	public void setWorkCountry(String workCountry) {
+		this.workCountry = workCountry;
+	}
+
+	public String getFamilyCity() {
+		return familyCity;
+	}
+
+	public void setFamilyCity(String familyCity) {
+		this.familyCity = familyCity;
+	}
+
+	public String getFamilyState() {
+		return familyState;
+	}
+
+	public void setFamilyState(String familyState) {
+		this.familyState = familyState;
+	}
+
+	public String getFamilyCountry() {
+		return familyCountry;
+	}
+
+	public void setFamilyCountry(String familyCountry) {
+		this.familyCountry = familyCountry;
+	}
+
+	public String getFatherOccupation() {
+		return fatherOccupation;
+	}
+
+	public void setFatherOccupation(String fatherOccupation) {
+		this.fatherOccupation = fatherOccupation;
+	}
+
+	public String getMotherOccupation() {
+		return motherOccupation;
+	}
+
+	public void setMotherOccupation(String motherOccupation) {
+		this.motherOccupation = motherOccupation;
+	}
+
+	public String getPhysicalStatus() {
+		return physicalStatus;
+	}
+
+	public void setPhysicalStatus(String physicalStatus) {
+		this.physicalStatus = physicalStatus;
+	}
+
+	public String getManglikStatus() {
+		return manglikStatus;
+	}
+
+	public void setManglikStatus(String manglikStatus) {
+		this.manglikStatus = manglikStatus;
+	}
+
+	public String getProfessionalType() {
+		return professionalType;
+	}
+
+	public void setProfessionalType(String professionalType) {
+		this.professionalType = professionalType;
+	}
 }
 
 class ImageDetails{
@@ -644,6 +709,7 @@ class ImageDetails{
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
+	
 	
 	
 }

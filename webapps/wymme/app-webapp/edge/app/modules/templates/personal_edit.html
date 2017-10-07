@@ -11,10 +11,9 @@
   			Name: <input required ng-minlength="3" maxlength="100" ng-maxlength="100" class="formInput" type="text" ng-model="profile.secure.name" title="~Full Name~" size="59" />
   		</div>
   		<div class="rightSectionSub"> Gender: 
-			<select required class="formInput" ng-model="profile.signUpEntity.gender" title="~Gender~" 
+			<select required class="formInput" ng-model="profile.gender" title="~Gender~" 
 			  ng-options = "values for values in es.genderList">
 			<option></option></select> 
-			  <!-- ng-options = "item.server as item.client group by item.group for item in es.genderList" : Worked --> 
 		</div>
 		<div class="rightSectionSub"> 
 			Blood Group: 
@@ -38,13 +37,31 @@
 	    	Body Type: 
 	    	<select required class="formInput" ng-model="profile.bodyType" title="~Body Type~" 
 			  ng-options = "values for values in es.bodyTypeList">
-			</select>
+			<option></option></select>
    		</div>
    		<div class="rightSectionSub">
    			Skin Color: 
    			<select required class="formInput" ng-model="profile.skinColor" title="~Skin Color~" 
 			  ng-options = "values for values in es.skinColorList">
-			</select>
+			<option></option></select>
+   		</div>
+   		<div class="rightSectionSub">
+   			Marital Status: 
+   			<select required class="formInput" ng-model="profile.maritalStatus" title="~Marital Status~" 
+			  ng-options = "values for values in es.maritalStatusList">
+			<option></option></select>
+   		</div>
+   		<div class="rightSectionSub">
+   			Physical Status: 
+   			<select required class="formInput" ng-model="profile.physicalStatus" title="~Physical Status~" 
+			  ng-options = "values for values in es.physicalStatusList">
+			<option></option></select>
+   		</div>
+   		<div class="rightSectionSub">
+   			Manglik Status: 
+   			<select required class="formInput" ng-model="profile.manglikStatus" title="Manglik Status~" 
+			  ng-options = "values for values in es.manglikStatusList">
+			<option></option></select>
    		</div>
   	</div>
   	
@@ -54,19 +71,19 @@
 				Religion: 
 				<select required class="formInput" ng-model="profile.religion" title="~Religion~" 
 				  ng-options = "values for values in es.religionList">
-				</select>
+				<option></option></select>
 			</div>
 			<div class="rightSectionSub">
 				Cast: 
 				<select required class="formInput" ng-model="profile.cast" title="~Cast~" 
 				  ng-options = "values for values in es.castList">
-				</select>
+				<option></option></select>
 			</div>
 			<div class="rightSectionSub">
 				Mother Tongue: 
 				<select required class="formInput" ng-model="profile.motherTongue" title="~Mother Tongue~" 
 				  ng-options = "values for values in es.motherTongueList">
-				</select>
+				<option></option></select>
 			</div>
 		</div>
 				
@@ -88,7 +105,7 @@
 				<option></option></select> 
 				<select required class="formInput shortInput" ng-model="profile.birthAP" title="~Time~" 
 				  ng-options = "values for values in es.birthAPList">
-				</select>
+				<option></option></select>
 			</div>		 		
 		</div>
 	
@@ -99,50 +116,37 @@
    		<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.birthCountry" placeholder="~Country~" size="18" />
 		</div>	
     
-    <div class="leftSection">Residence: </div>
-    <div class="rightSection">
-		<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCity" placeholder="~City~" size="18"  />
- 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtState" placeholder="~State~" size="18"  />
- 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.residingAtCountry" placeholder="~Country~" size="18" />
- 				<div class="rightSectionSub">
-  			With 
-  			<select required class="formInput" ng-model="profile.residingWith" title="~Residing With~" 
-			  ng-options = "values for values in es.residingWithList">
-			</select>
-		 </div>
-   	</div>	
-    
-    <div class="leftSection">Kundali: </div>
+    <div class="leftSection">Kundali: (Optional) </div>
     <div class="rightSection">
 			<div class="rightSectionSub">
-  				Ras: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliRas" title="~Ras~" title="~Ras~" size="15" />
+  				Ras: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliRas" title="~Ras~" title="~Ras~" size="15" />
   			</div>
   			<div class="rightSectionSub">
-  				Nakshatra: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliNakshatra" title="~Nakshatra~" size="20" />
+  				Nakshatra: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliNakshatra" title="~Nakshatra~" size="20" />
   			</div>		   			
   			<div class="rightSectionSub">
 	   			Nadi: 
-	   			<select required class="formInput" ng-model="profile.kundaliNadi" title="~Nadi~" 
+	   			<select class="formInput" ng-model="profile.kundaliNadi" title="~Nadi~" 
 	   			  ng-options = "values for values in es.kundaliNadiList">
 				</select>
 			</div>		   			
   			<div class="rightSectionSub">
 	  	    	Charan: 
-	  	    	<select required class="formInput" ng-model="profile.kundaliCharan" title="~Charan~" 
+	  	    	<select class="formInput" ng-model="profile.kundaliCharan" title="~Charan~" 
 	  	    		ng-options = "values for values in es.kundaliCharanList">
 				</select>	  	    	
 	     	</div>
 			<div class="rightSectionSub">
 	   			Gan: 
-	   			<select required class="formInput" ng-model="profile.kundaliGan" title="~Gan~" 
+	   			<select class="formInput" ng-model="profile.kundaliGan" title="~Gan~" 
 	   			  ng-options = "values for values in es.kundaliGanList">
 				</select>
   			</div>
   			<div class="rightSectionSub">
-  				Gotra: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliGotr" title="~Gotr~" size="18" />
+  				Gotra: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliGotr" title="~Gotr~" size="18" />
   			</div>
   			<div class="rightSectionSub">
-  				Devak: <input required ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliDevak" title="~Devak~" size="18" />
+  				Devak: <input ng-minlength="3" maxlength="30" ng-maxlength="30" class="formInput" type="text" ng-model="profile.kundaliDevak" title="~Devak~" size="18" />
   			</div>
   		</div>
   	
@@ -152,7 +156,7 @@
 	        	Type:
 	        	<select required class="formInput" ng-model="profile.degreeType" title="~Academic Degree~" 
 		   			  ng-options = "item.server as item.client for item in es.degreeTypeList">
-				</select>
+				<option></option></select>
 			</div>
 			<div class="rightSectionSub">
 	        	Details:
@@ -163,18 +167,35 @@
   		</div>
   		<div class="leftSection">Professional: </div>
     	<div class="rightSection">
+    		<select required class="formInput" ng-model="profile.professionalType" title="~Choose Type~" 
+				  ng-options = "values for values in es.professionalTypeList">
+			<option></option></select>
 	    	<div class="rightSectionSub">
-	   			Working with <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Company Name~" size="30"
-	   							placeholder="eg. Infosys Technologies Limited"
+	   			at <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.company" title="~Your Business / Service Company Name~" size="50"
+	   							placeholder="Your Business / Company / School Name"
 	   						/> 
 	   		</div>
 	   		<div class="rightSectionSub">
 	   			as <input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.designation" title="~Designation~" size="50" 
- 							placeholder="eg. Senior Manager"
+ 							placeholder="eg. Owner / Senior Manager"
  				    /> 
 	   		</div>
 	   		<div class="rightSectionSub">
 	   			Earning <input required ng-minlength="5" maxlength="8" ng-maxlength="8" class="formInput" type="number" ng-model="profile.earning" title="~Per Annum Pkg~" placeholder="~Per Annum Pkg~" size="30" />
 	   		</div>
   		</div>
+  		
+	    <div class="leftSection">Work Location: </div>
+	    <div class="rightSection">
+			<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.workCity" placeholder="~City~" size="18"  />
+	 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.workState" placeholder="~State~" size="18"  />
+	 				<input required ng-minlength="3" maxlength="50" ng-maxlength="50" class="formInput" type="text" ng-model="profile.workCountry" placeholder="~Country~" size="18" />
+	 				<div class="rightSectionSub">
+	  			With 
+	  			<select required class="formInput" ng-model="profile.residingWith" title="~Residing With~" 
+				  ng-options = "values for values in es.residingWithList">
+				<option></option></select>
+			 </div>
+	   	</div>	
+	   	
 </div>  
