@@ -3,8 +3,6 @@ package edge.app.modules.profile;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +22,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import edge.core.config.CoreConstants;
 import edge.core.exception.AppException;
+import edge.core.modules.auth.AuthService;
 import edge.core.modules.auth.SignUpEntity;
-import edge.core.modules.common.CommonHibernateDao;
 import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.files.FileService;
 
@@ -36,8 +33,11 @@ public class ProfileController {
 	private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
 	
 	@Autowired
-	private CommonHibernateDao commonHibernateDao;
+	private ProfileService profileService;
 
+	@Autowired
+	private AuthService authService;
+	
 	@Autowired
 	private FileService fileService;
 	
@@ -57,7 +57,7 @@ public class ProfileController {
 		    MultipartFile file = request.getFile("file");
 		    String imageType = (String) request.getParameter("imageType");
 		    String emailId = principal.getName();
-			SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, emailId);
+		    SignUpEntity signUpEntity = authService.getSignUpEntity(emailId);
 			fileService.uploadFile("ProfileDetails", "profileId", imageType, signUpEntity.getProfileId(), file, principal.getName());
 			
 			return EdgeResponse.createDataResponse("", " Image Uploaded Successfully. ");
@@ -80,35 +80,20 @@ public class ProfileController {
 	public EdgeResponse<ProfileDetails> openMyProfile(
 			Principal principal
 			){			
-		String emailId = principal.getName();
-		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, emailId);
-		
-		ProfileDetails profileDetails = commonHibernateDao.getEntityById(ProfileDetails.class, signUpEntity.getProfileId());
-		profileDetails.setSecure(commonHibernateDao.getEntityById(SecureProfileDetails.class, signUpEntity.getProfileId()));
-		profileDetails.setSignUpEntity(signUpEntity);
-		
+		ProfileDetails profileDetails = profileService.getFullProfileDetails(principal.getName());		
 		return EdgeResponse.createDataResponse(profileDetails, null);
 	}
 	
 	@RequestMapping(value={"/secured/profile/updateMyProfile"})
-	@Transactional
 	public EdgeResponse<ProfileDetails> updateMyProfile(
 			Principal principal, @RequestBody ProfileDetails profileDetails
-			){			
-		String emailId = principal.getName();
-		SignUpEntity signUpEntity = commonHibernateDao.getEntityById(SignUpEntity.class, emailId);
-		
-		String profileId = signUpEntity.getProfileId();
-		profileDetails.setProfileId(profileId);
-		
-		List<String> errors = profileDetails.validate();
-		if(errors != null && errors.size() != 0){
-			return EdgeResponse.createErrorResponse(profileDetails, "There were below errors while processing your request", "Please try after some time.", errors);
-		}else{
-			commonHibernateDao.update(profileDetails);
-			commonHibernateDao.update(profileDetails.getSecure());
-			return EdgeResponse.createDataResponse(profileDetails, "Your profile has heen Successfully Updated!");			
+			){	
+		try {
+			profileDetails = profileService.getFullProfileDetails(principal.getName());
+			return EdgeResponse.createDataResponse(profileDetails, "Your profile has heen Successfully Updated!");	
+		}catch (AppException ex) {
+			return EdgeResponse.createExceptionResponse(ex);
 		}
-
+		
 	}
 }

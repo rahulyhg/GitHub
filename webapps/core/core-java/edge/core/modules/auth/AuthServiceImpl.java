@@ -17,8 +17,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import edge.core.config.CoreConstants;
+import edge.core.exception.AppException;
 import edge.core.modules.common.CommonHibernateDao;
-import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.mailSender.EventDetails;
 import edge.core.modules.parents.ParentsService;
@@ -37,13 +37,9 @@ public class AuthServiceImpl implements AuthService{
 	private ParentsService parentsService;
 	
 	@Override
-	public EdgeResponse<SignUpEntity> signUp(SignUpEntity signUpEntity) {
+	public SignUpEntity signUp(SignUpEntity signUpEntity) {
 		if (checkIfExistingUser(signUpEntity)) {
-					return EdgeResponse.createErrorResponse(
-							signUpEntity,
-							"This email Id is already registered with us! Please login using 'Log In' option. ",
-							null,
-							null);
+			throw new AppException(null, "This email Id is already registered with us! Please login using 'Log In' option." );
 		} else {
 
 			List<String> errors = new ArrayList<String>();
@@ -62,19 +58,15 @@ public class AuthServiceImpl implements AuthService{
 			}
 			
 			if (errors != null && errors.size() != 0){
-				return EdgeResponse.createErrorResponse(
-						signUpEntity,
-						"There were below error(s) while processing your request.",
-						"Please sign up again.",
-						errors);
+				throw new AppException(null, "There were below error(s) while processing your request", "Please sign up again.", errors);
 			} else {				
 				return signUpNewMember(signUpEntity);						
 			}
 		}
 	}
 
-	private EdgeResponse<SignUpEntity> signUpNewMember(SignUpEntity signUpEntity) {
-		EdgeResponse<SignUpEntity> edgeResponse = null;
+	private SignUpEntity signUpNewMember(SignUpEntity signUpEntity) {
+
 		String profileId = null;
 		try{
 			boolean success = false;
@@ -102,11 +94,6 @@ public class AuthServiceImpl implements AuthService{
 					authorityEntity.setUsername(userName);
 					commonHibernateDao.save(authorityEntity);
 					
-					edgeResponse = EdgeResponse.createDataResponse(
-													signUpEntity,
-													"Congratulations, Your account has been successfully created! " +
-													" Your Profile Id is : " + profileId + ". " +
-													" Please check mail for further details, Thank You!.");
 					success = true;
 					
 					Map<String, Object> dataObject = new HashMap<String, Object>();
@@ -116,22 +103,23 @@ public class AuthServiceImpl implements AuthService{
 							"NewAccountCreationSuccess.html"
 							));	
 					
+					
 				}catch (DataIntegrityViolationException e){
 					e.printStackTrace();
 					success = false;
 					attempt++;
 					if(attempt == CoreConstants.MAX_PROFILE_RETRY){
-						throw new Exception("There was an error while processing your request. We Apologize! Please try again!");
+						throw new AppException(null, "There was an error while processing your request. We Apologize! Please try again!");
 					}
 				}
 			}			
 			
-		}catch (Exception e){
-			e.printStackTrace();
-			return EdgeResponse.createErrorResponse(signUpEntity, "There was an error while processing your request. We Apologize! Please try again!", null, null);
+		}catch (Exception ex){
+			ex.printStackTrace();
+			throw new AppException(ex, "There was an error while processing your request. We Apologize! Please try again!");
 		}
 		
-		return edgeResponse;
+		return signUpEntity;
 	}
 	
 	private boolean checkIfExistingUser(SignUpEntity signUpEntity) {
@@ -156,25 +144,18 @@ public class AuthServiceImpl implements AuthService{
 	}
 
 	@Override
-	public EdgeResponse<SignUpEntity> resetPassword(SignUpEntity uiEntity) {
+	public SignUpEntity resetPassword(SignUpEntity uiEntity) {
 
-		 List<String> errors = uiEntity.validate();		 
+		 List<String> errors = uiEntity.validate();
+		 
 		 if (errors != null){
-				return EdgeResponse.createErrorResponse(
-						uiEntity,
-						"There were below error(s) while processing your request.",
-						"Please try again.",
-						errors);
+			 throw new AppException(null, "There were below error(s) while processing your request", "Please try again.", errors);
 		 }
 		 
 		 SignUpEntity entityById = commonHibernateDao.getEntityById(SignUpEntity.class, uiEntity.getEmailId());
 		 
 		 if(entityById == null){
-			 return EdgeResponse.createErrorResponse(
-						uiEntity,
-						"Invalid Email Address.",
-						"Please Register to continue.",
-						null);
+			throw new AppException(null, "Invalid Email Address. Please Register to continue.");
 		 }
 		 
 		 String dbCode = entityById.getVerificationCode();
@@ -182,11 +163,7 @@ public class AuthServiceImpl implements AuthService{
 		 logger.debug(" Inside ResetPassword {} {}", dbCode, uiCode );
 		 
 		 if(dbCode == null || ! dbCode.equals(uiCode)){
-			 return EdgeResponse.createErrorResponse(
-						uiEntity,
-						"Invalid Verification Code.",
-						"Please check mail or generate code again.",
-						null);
+			 throw new AppException(null, "Invalid Verification Code. Please check mail or generate code again.");
 		 }
 		 
 		 entityById.setPwd(SpringSecurityUtil.encodePassword(uiEntity.getPwd(), null));
@@ -199,9 +176,7 @@ public class AuthServiceImpl implements AuthService{
 			 
 		 commonHibernateDao.update(entityById);	 
 		
-		 return EdgeResponse.createDataResponse(
-				 	entityById,
-					"Password Updated Successfully.");
+		 return entityById;
 	}
 
 
@@ -247,6 +222,11 @@ public class AuthServiceImpl implements AuthService{
 				signUp(signUpEntity);
 			}
 		}
+	}
+	
+	@Override
+	public SignUpEntity getSignUpEntity(String emailId){
+		return commonHibernateDao.getEntityById(SignUpEntity.class, emailId);
 	}
 
 	public ParentsService getParentsService() {

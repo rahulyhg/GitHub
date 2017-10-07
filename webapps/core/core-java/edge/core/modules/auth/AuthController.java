@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 import edge.core.modules.mailSender.EventDetails;
@@ -32,8 +33,17 @@ public class AuthController {
 	@RequestMapping(value={"/unsecured/auth/signUp"})
 	public EdgeResponse<SignUpEntity> signUp(
 			@RequestBody SignUpEntity signUpEntity 			
-			){			
-		return authService.signUp(signUpEntity);
+			){
+		try{
+			signUpEntity = authService.signUp(signUpEntity);
+		}catch(AppException ex){
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+		return EdgeResponse.createDataResponse(
+				signUpEntity,
+				"Congratulations, Your account has been successfully created! " +
+				" Your Profile Id is : '" + signUpEntity.getProfileId() + "'. " +
+				" Please check mail for further details, Thank You!."); 
 		
 	}
 	
@@ -64,8 +74,15 @@ public class AuthController {
 	@RequestMapping(value={"/unsecured/auth/resetPassword"})
 	public EdgeResponse<SignUpEntity> resetPassword(
 			@RequestBody SignUpEntity signUpEntity 			
-			){			
-		return authService.resetPassword(signUpEntity);
+			){
+		try{
+			signUpEntity = authService.resetPassword(signUpEntity);
+		}catch(AppException ex){
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+		return EdgeResponse.createDataResponse(
+				signUpEntity,
+				"Password Updated Successfully.");
 		
 	}
 	

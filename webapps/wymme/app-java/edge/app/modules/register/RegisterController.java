@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import edge.app.modules.profile.ProfileDetails;
 import edge.core.config.CoreConstants;
+import edge.core.exception.AppException;
 import edge.core.modules.common.EdgeResponse;
 
 @Controller
@@ -35,8 +36,17 @@ public class RegisterController {
 	@RequestMapping(value={"/unsecured/register"})
 	public EdgeResponse<ProfileDetails> register(
 			@RequestBody ProfileDetails profileDetails 			
-			) throws Exception{			
-		return registerService.register(profileDetails);
+			) throws Exception{	
+		try{
+			profileDetails = registerService.register(profileDetails);
+		}catch(AppException ex){
+			return EdgeResponse.createExceptionResponse(ex);
+		}
+		return EdgeResponse.createDataResponse(
+				profileDetails,
+				"Congratulations, Your account has been successfully created! " +
+				" Your Profile Id is : '" + profileDetails.getProfileId() + "'. " +
+				" Please check mail for further details, Thank You!."); 
 		
 	}
 

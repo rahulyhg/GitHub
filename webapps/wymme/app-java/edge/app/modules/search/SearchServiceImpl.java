@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import edge.app.modules.common.AppConstants;
 import edge.app.modules.profile.ProfileDetails;
-import edge.app.modules.profileWallInfo.ProfileWallInfo;
 import edge.app.modules.profileWallInfo.ProfileWallInfoService;
 import edge.core.config.CoreConstants;
 import edge.core.modules.auth.SignUpEntity;

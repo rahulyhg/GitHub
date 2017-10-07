@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edge.app.modules.profile.ProfileDetails;
 import edge.appCore.modules.mailSender.EventDetailsEnum;
+import edge.core.exception.AppException;
 import edge.core.modules.auth.AuthService;
 import edge.core.modules.auth.SignUpEntity;
 import edge.core.modules.common.CommonHibernateDao;
-import edge.core.modules.common.EdgeResponse;
 import edge.core.modules.mailSender.AppMailSender;
 
 @WebService
@@ -33,7 +33,7 @@ public class RegisterServiceImpl implements RegisterService{
 		
 	@Override
 	@Transactional
-	public EdgeResponse<ProfileDetails> register(ProfileDetails profileDetails) throws Exception {
+	public ProfileDetails register(ProfileDetails profileDetails) throws Exception {
 		
 		// For Cloning profile
 		String emailId = profileDetails.getSecure().getEmailId();
@@ -47,33 +47,25 @@ public class RegisterServiceImpl implements RegisterService{
 		signUpEntity.setEmailId(profileDetails.getSecure().getEmailId());
 		profileDetails.setSignUpEntity(signUpEntity);
 		
-		EdgeResponse<SignUpEntity> response = authService.signUp(profileDetails.getSignUpEntity());
+		authService.signUp(profileDetails.getSignUpEntity());
 		
-		if(response.isSuccess()){
-			
-			String profileId = profileDetails.getSignUpEntity().getProfileId();
-			profileDetails.setProfileId(profileId);
-			profileDetails.getSecure().setProfileId(profileId);
-			
-			List<String> errors = profileDetails.validate();
-			if(errors == null || errors.size() ==0){
-				commonHibernateDao.save(profileDetails);
-				commonHibernateDao.save(profileDetails.getSecure());
-				HashMap<String, Object> params = new HashMap<String, Object>();
-				params.put("profileDetails", profileDetails);				
-				AppMailSender.sendEmail(profileDetails.getSignUpEntity(), params, EventDetailsEnum.NEW_ACCT_CREATION);
-				logger.debug("Account Successfully created for {} {}", profileDetails.getSignUpEntity().getEmailId(), profileDetails.getProfileId() );
-			}else{
-				return EdgeResponse.createErrorResponse(
-						profileDetails,
-						"There were below error(s) while processing your request.",
-						"Please sign up again.",
-						errors);
-			}
+		String profileId = profileDetails.getSignUpEntity().getProfileId();
+		profileDetails.setProfileId(profileId);
+		profileDetails.getSecure().setProfileId(profileId);
+		
+		List<String> errors = profileDetails.validate();
+		if(errors == null || errors.size() ==0){
+			commonHibernateDao.save(profileDetails);
+			commonHibernateDao.save(profileDetails.getSecure());
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			params.put("profileDetails", profileDetails);				
+			AppMailSender.sendEmail(profileDetails.getSignUpEntity(), params, EventDetailsEnum.NEW_ACCT_CREATION);
+			logger.debug("Account Successfully created for {} {}", profileDetails.getSignUpEntity().getEmailId(), profileDetails.getProfileId() );
 		}else{
-			return EdgeResponse.createErrorResponse(profileDetails, response.getHeader(), response.getFooter(), response.getErrors());
+			throw new AppException(null, "There were below error(s) while processing your request ", "Please sign up again.", errors);
 		}
-		return EdgeResponse.createSuccessResponse(profileDetails, response.getHeader(), response.getFooter(), response.getMessages());
+		
+		return profileDetails;
 	}
 
 	public AuthService getAuthService() {

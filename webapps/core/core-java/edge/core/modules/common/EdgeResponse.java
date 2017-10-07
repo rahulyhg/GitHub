@@ -68,7 +68,7 @@ public class EdgeResponse<T> {
 	
 	
 	public static EdgeResponse createExceptionResponse(AppException ex) {
-		return createErrorResponse(ex.getCustomMessage(), ex.getCustomMessage(), null, null);
+		return createErrorResponse(ex.getCustomMessage(), ex.getCustomMessage(), null, ex.getErrorMessages());
 	}
 	
 	public static <T> EdgeResponse<T> createErrorResponse (T responseData, String errorHeader, String errorFooter, List<String> errors){
