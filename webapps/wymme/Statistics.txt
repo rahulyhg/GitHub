@@ -1,0 +1,25 @@
+
+----------- Start: 
+
+Disk Space Usage:
+112MB / 250MB (45%)
+
+----------- Created 10000 Profiles :
+
+5000 Female profiles and  5000 Male profiles - DB Size: 5.2 MB
+4 Images per Customer - 125 KB ( with 600 compression in code) - 260 KB with (1000 in code)
+
+
+Disk Space Usage:
+113MB / 250MB (45%)
+
+------------ estimation for 1 lakh Customer : 
+
+DB Size : 10 MB
+Image Size: 
+
+125 kilobytes * 100 000 =
+12.5 gigabytes
+
+------------ 
+
