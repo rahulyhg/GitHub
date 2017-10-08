@@ -48,7 +48,7 @@ public class SearchController {
 		ProfileDetails profileDetails = searchService.searchById(profileId.toUpperCase());
 
 		if(profileDetails == null){
-			return EdgeResponse.createErrorResponse(null,"No Profile Found As Per Filter!", null, null);
+			return EdgeResponse.createErrorResponse(null,"No Profile Found With Given Id!", null, null);
 		}else{
 			List<ProfileDetails> profileDetailsList = new ArrayList<ProfileDetails>();
 			profileDetailsList.add(profileDetails);
