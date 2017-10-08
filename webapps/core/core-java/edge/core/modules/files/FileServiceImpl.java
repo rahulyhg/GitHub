@@ -1,13 +1,21 @@
 package edge.core.modules.files;
 
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.RandomStringUtils;
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Method;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,6 +33,9 @@ public class FileServiceImpl implements FileService{
 	
 	@Value(value = "${property.baseDirectory}")
 	private String baseDirectory;
+	
+	@Value(value = "${property.appName}")
+	private String appName;
 	
 	@Autowired
 	private ParentsService parentsService;
@@ -88,6 +99,36 @@ public class FileServiceImpl implements FileService{
 		Files.write(path, file.getBytes());
 		updateEntity(entityName, idColumn, storageColumn, entityId, fileName, parentId);
 	}
+
+	@Override
+	@Transactional
+	public void compressAndUploadImage(String entityName, String idColumn, String storageColumn, String entityId, MultipartFile file, int width, String loggedInId) throws Exception {
+		int parentId = 0;
+		if(parentsService.isParentServiceEnabled()){
+			parentId = parentsService.getParentId(loggedInId, SecurityRoles.PARENT_OPERATOR);
+		}
+		String fileName = RandomStringUtils.randomAlphanumeric(CoreConstants.PROFILE_ID_SIZE).toUpperCase() + "." + getFileExtension(file); 
+		
+		String filePath = getFilePath(parentId, entityId, storageColumn, fileName);
+		
+		Path path = Paths.get(filePath);
+		Path parentDir = path.getParent();
+		FileUtils.deleteDirectory(new File(getBasePath(parentId, entityId, storageColumn)));
+		Files.createDirectories(parentDir);
+		
+		// Retrieve image from the classpath.
+        InputStream is = file.getInputStream(); 
+
+        // Prepare buffered image.
+        BufferedImage image = ImageIO.read(is);
+        
+		ImageIO.write(Scalr.resize(image, Method.ULTRA_QUALITY, width, Scalr.OP_BRIGHTER), "JPG", new File(filePath));
+
+		//Files.write(path, file.getBytes());
+		updateEntity(entityName, idColumn, storageColumn, entityId, fileName, parentId);
+		
+		addWatermark(new File(filePath));
+	}
 	
 	@Override
 	@Transactional
@@ -128,6 +169,23 @@ public class FileServiceImpl implements FileService{
 	public String getBasePath(int parentId, String entityId, String storageColumn) {
 		return baseDirectory + File.separatorChar + parentId + File.separatorChar + entityId + File.separatorChar + storageColumn;
 	}
+	
+	private void addWatermark(File imageFile) {
+        try {
+        	BufferedImage image = ImageIO.read(imageFile);
+        	
+        	Graphics graphics = image.getGraphics();
+        	graphics.setFont(new Font("candara", Font.PLAIN, 20));
+        	String watermark = "\u00a9 " + appName;
+            // File watermarkFile = new File(getClass().getResource("/watermark.png").toURI());
+            // BufferedImage watermark = ImageIO.read(watermarkFile);
+            
+            graphics.drawString(watermark, image.getWidth()-180, image.getHeight()-20);
+            ImageIO.write(image, "jpg", imageFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
