@@ -380,3 +380,20 @@ input[type=file]{
 .buttonSection{
 	display: inlineblock; 
 }
+
+.closeButtonDiv{
+	width: 100%;
+	text-align: right;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.btn-close{
+	background-color: white;
+	color: lightgrey;	
+}
+
+.btn-close:hover{
+	color: red;	
+}

@@ -21,14 +21,14 @@
 	</div>
 </div>
 <div class="rightSection">
-	<B>{{profile.maritalStatus}}, {{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} - {{profile.gender}} </B> 
+	<B>{{profile.maritalStatus}}, {{profile.religion}}-{{profile.cast}}, {{profile.motherTongue}} </B> 
 	- {{profile.bloodGroup}}, {{profile.bodyType}}, {{profile.skinColor}}, {{profile.heightFt}} Ft {{profile.heightInch}} Inch, {{profile.weight}} kg, 
-	{{profile.physicalStatus}}, {{profile.manglikStatus}} Mangal
+	{{profile.manglikStatus}} Mangal, {{profile.physicalStatus}}, Education Degree: {{profile.degreeType}}
 	<br>
 	<B>
-	{{profile.degreeType}}, {{profile.professionalType}} at {{profile.workCity}} earning {{profile.earning | currency:'&#8377; '}} per annum
+	{{profile.professionalType}} at {{profile.workCity}} earning {{profile.earning | currency:'&#8377; '}} per annum
    	</B>
-   	
+   	<br>
    	<br>
    	Born on 
    	<span class="lableInput">{{profile.birthDate | date}}, at {{profile.birthHr}}:{{profile.birthMin}} {{profile.birthAP}} at {{profile.birthCity}}, {{profile.birthState}}</span>

@@ -58,7 +58,8 @@ public class ProfileController {
 		    String imageType = (String) request.getParameter("imageType");
 		    String emailId = principal.getName();
 		    SignUpEntity signUpEntity = authService.getSignUpEntity(emailId);
-			fileService.uploadFile("ProfileDetails", "profileId", imageType, signUpEntity.getProfileId(), file, principal.getName());
+		    
+			fileService.compressAndUploadImage("ProfileDetails", "profileId", imageType, signUpEntity.getProfileId(), file, 600, principal.getName());
 			
 			return EdgeResponse.createDataResponse("", " Image Uploaded Successfully. ");
 		}catch (AppException ex) {
